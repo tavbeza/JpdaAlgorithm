@@ -4,6 +4,27 @@
 #include "Vector.h"
 #include "Matrix.h"
 
+struct TrakerParams {
+	double m_SigmaVxs=0.1;
+	double m_SigmaVys = 0.1;
+	double m_SigmaVzs = 0.1;
+	double m_Sigma_r = 0.1;
+	double m_Sigma_rdot = 0.1;
+	double m_Sigma_az = 0.1;
+	double m_Sigma_el = 0.1;
+	double m_SigmaAxs = 0.1;
+	double m_SigmaAys = 0.1;
+	double m_SigmaAzs = 0.1;
+	double m_TouAcc = 0.1;
+	double m_Amax = 0.1;
+	double m_Pmax = 0.1;
+	double m_P0 = 0.1;
+	double m_SigmaManeuver2 = 0.1;
+	double m_SigmaMnvrCalcmtd = 0.1;
+
+
+};
+
 /// <summary>
 /// The Kalman class encapsulat the basic kalman filter algorithm. It contains 2D and 3D implementation.
 /// </summary>
@@ -54,7 +75,7 @@ public:
 	/// these estimates are updated using a weighted average, with more weight being given to estimates with higher certainty.
 	/// </summary>
 	Vector3f Predict(const double& dt);
-
+	
 	/// <summary>
 	/// The relative certainty of the measurements and current state estimate is an important consideration, 
 	/// and it is common to discuss the response of the filter in terms of the Kalman filter's gain. 

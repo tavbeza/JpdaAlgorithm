@@ -44,8 +44,7 @@ ExtendedKalman::ExtendedKalman(
 	x_predict.m_Data[7] = 0;
 	x_predict.m_Data[8] = 0;
 	
-	//TrakerParams *pTrakerParams = TrakerParams::GetInstance();
-	
+	TrakerParams *pTrakerParams;
 	//Xsensor=[Plat.PosEcef(1) Plat.VelEcef(1) 0 Plat.PosEcef(2) Plat.VelEcef(2) 0 Plat.PosEcef(3) Plat.VelEcef(3) 0]';
 	//Plat.PosEcef
 	//Plat.VelEcef
@@ -120,9 +119,9 @@ ExtendedKalman::ExtendedKalman(
 	m_P.m_Data[7][7] = pow(pTrakerParams->m_SigmaVzs, 2);
 	m_P.m_Data[8][8] = pow(pTrakerParams->m_SigmaAzs, 2);
 	//m_P.Print();
-		//SET TRANSITION MATRIX
-	    //SetF(dt, pTrakerParams->m_TauAcc, m_F);
-	    //SetQ(dt, pTrakerParams->m_TauAcc, pTrakerParams->m_Amax, pTrakerParams->m_Pmax, pTrakerParams->m_P0, pTrakerParams->m_SigmaManeuver2, pTrakerParams->m_SigmaMnvrCalcMtd, m_Q);
+	//SET TRANSITION MATRIX
+	//SetF(dt, pTrakerParams->m_TauAcc, m_F);
+	//SetQ(dt, pTrakerParams->m_TauAcc, pTrakerParams->m_Amax, pTrakerParams->m_Pmax, pTrakerParams->m_P0, pTrakerParams->m_SigmaManeuver2, pTrakerParams->m_SigmaMnvrCalcMtd, m_Q);
 
 	//process noise covariance matrix
 	//m_Q = R,
@@ -166,4 +165,47 @@ void ExtendedKalman::Init(
 	const float& vz,
 	const Matrix4d& R)
 {
+}
+
+Vector3f ExtendedKalman::Predict(const double& dt)
+{
+	if (m_IsFirst)
+	{
+		m_X_Predict.m_Data[0] = m_last_prediction.m_Data[0];
+		m_X_Predict.m_Data[1] = m_last_speed.m_Data[0];
+		m_X_Predict.m_Data[2] = 0;
+		m_X_Predict.m_Data[3] = m_last_prediction.m_Data[1];
+		m_X_Predict.m_Data[4] = m_last_speed.m_Data[1];
+		m_X_Predict.m_Data[5] = 0;
+		m_X_Predict.m_Data[6] = m_last_prediction.m_Data[2];
+		m_X_Predict.m_Data[7] = m_last_speed.m_Data[2];
+		m_X_Predict.m_Data[8] = 0;
+		m_IsFirst = false;
+	}
+	else
+	{
+		m_X_Predict = m_F * m_X;
+	}
+	//m_X.Print();
+	//m_X_Predict.Print();
+	//m_Q.Print();
+	//m_P.Print();
+	//Predicted (a priori) error covariance
+	   //Covariance Matrix predicted error
+	m_P_Predict = m_F * m_P * m_F.Transpose() + m_Q;
+	//m_P_Predict.Print();
+
+	//Predicted Measurement
+	Vector4d zPredict = m_H * m_X_Predict;
+	m_Z_Predict.m_Data[0] = zPredict.m_Data[0];
+	m_Z_Predict.m_Data[3] = zPredict.m_Data[1];
+	m_Z_Predict.m_Data[6] = zPredict.m_Data[2];
+
+
+	//Compute Entropy
+	m_Entropy = m_k + 0.5 * log10(m_P.Determinant());
+
+	m_last_prediction_eigen = m_Z_Predict;
+	m_last_prediction = Point3d(m_Z_Predict.m_Data[0], m_Z_Predict.m_Data[1], m_Z_Predict.m_Data[2]);
+	return m_last_prediction;
 }
