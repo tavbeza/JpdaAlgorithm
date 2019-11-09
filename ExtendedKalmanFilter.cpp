@@ -167,7 +167,7 @@ void ExtendedKalman::Init(
 {
 }
 
-Vector3f ExtendedKalman::Predict(const double& dt)
+Vector3d ExtendedKalman::Predict(const double& dt)
 {
 	if (m_IsFirst)
 	{
@@ -206,6 +206,25 @@ Vector3f ExtendedKalman::Predict(const double& dt)
 	m_Entropy = m_k + 0.5 * log10(m_P.Determinant());
 
 	m_last_prediction_eigen = m_Z_Predict;
-	m_last_prediction = Point3d(m_Z_Predict.m_Data[0], m_Z_Predict.m_Data[1], m_Z_Predict.m_Data[2]);
+	m_last_prediction = Vector3d(m_Z_Predict.m_Data[0], m_Z_Predict.m_Data[1], m_Z_Predict.m_Data[2]);
 	return m_last_prediction;
+}
+
+void ExtendedKalman::GainUpdate(const float& beta)
+{
+	// Innovation (or pre-fit residual) covariance
+	// Error Measurement Covariance Matrix
+	m_S = (m_H * (m_P_Predict * Transpose(m_H))) + m_R;
+	// Near-optimal Kalman gain
+	// Sets the optimal kalman gain
+	// 94 = 99 * (94*44)
+	// m_K = m_P *m_S'*m_H'
+	Matrix94d temp1 = Transpose(m_H);
+	m_K = m_P * (temp1 * m_S.Inverse());
+	// 99 = 94 * (44 * 49)
+	//m_K * m_S * m_K.Transpose()
+	Matrix49d temp2 = Transpose(m_K);
+	Matrix49d temp3 = m_S * temp2;
+	Matrix9d kskt = m_K * temp3;
+	m_P = m_P_Predict - kskt * (1 - beta);
 }

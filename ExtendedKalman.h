@@ -74,7 +74,7 @@ public:
 	/// Once the outcome of the next measurement (necessarily corrupted with some amount of error, including random noise) is observed, 
 	/// these estimates are updated using a weighted average, with more weight being given to estimates with higher certainty.
 	/// </summary>
-	Vector3f Predict(const double& dt);
+	Vector3d Predict(const double& dt);
 	
 	/// <summary>
 	/// The relative certainty of the measurements and current state estimate is an important consideration, 

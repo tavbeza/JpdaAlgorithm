@@ -450,6 +450,8 @@ public:
 		return temp;
 	}
 
+
+
 	/// <summary>
 	/// Return the transpose matrix
 	/// </summary>
@@ -552,6 +554,16 @@ Matrix24f Transpose(Matrix42f &matrix42f);
 Matrix42f Transpose(Matrix24f &matrix24f);
 
 /// <summary>
+/// Transpose Matrix49d
+/// </summary>
+Matrix94d Transpose(Matrix49d &matrix49d);
+
+/// <summary>
+/// Transpose Matrix94d
+/// </summary>
+Matrix49d Transpose(Matrix94d &matrix94f);
+
+/// <summary>
 /// Transpose Vector4f
 /// </summary>
 Matrix14f Transpose(Vector4f &vector4f);
@@ -620,6 +632,11 @@ Matrix94d operator *(Matrix94d &rhMatrix, const Matrix4d &other);
 /// multiply matrix on the right 21 = 24*41
 /// </summary>
 Vector2f operator *(Matrix24f &rhMatrix, const Vector4f &other);
+
+/// <summary>
+/// multiply matrix on the right 41 = 49*91
+/// </summary>
+Vector4d operator *(Matrix49d &rhMatrix, const Vector9d &other);
 
 /// <summary>
 /// multiply matrix on the right 41 = 42*21

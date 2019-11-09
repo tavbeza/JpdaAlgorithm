@@ -263,6 +263,22 @@ Vector2f operator *(Matrix24f &rhMatrix, const Vector4f &other)
 }
 
 /// <summary>
+/// multiply matrix on the right 41 = 49*91
+/// </summary>
+Vector4d operator *(Matrix49d &rhMatrix, const Vector9d &other)
+{
+	Vector4d temp;
+	for (int i = 0; i < 4; i++)
+	{
+		for (int k = 0; k < 9; k++)
+		{
+			temp.m_Data[i] += rhMatrix.m_Data[i][k] * other.m_Data[k];
+		}
+	}
+	return temp;
+}
+
+/// <summary>
 /// multiply matrix on the right 41 = 42*21
 /// </summary>
 Vector4f operator *(Matrix42f &rhMatrix, const Vector2f &other)
@@ -306,11 +322,37 @@ Matrix94f Transpose(Matrix49f &matrix49f)
 }
 
 /// <summary>
+/// Transpose Matrix49d
+/// </summary>
+Matrix94d Transpose(Matrix49d &matrix49d)
+{
+	Matrix94d temp;
+	for (int i = 0; i < 9; i++)
+		for (int j = 0; j < 4; j++)
+			temp.m_Data[i][j] = matrix49d.m_Data[j][i];
+
+	return temp;
+}
+
+/// <summary>
 /// Transpose Matrix94f
 /// </summary>
 Matrix49f Transpose(Matrix94f &matrix94f)
 {
 	Matrix49f temp;
+	for (int i = 0; i < 4; i++)
+		for (int j = 0; j < 9; j++)
+			temp.m_Data[i][j] = matrix94f.m_Data[j][i];
+
+	return temp;
+}
+
+/// <summary>
+/// Transpose Matrix94d
+/// </summary>
+Matrix49d Transpose(Matrix94d &matrix94f)
+{
+	Matrix49d temp;
 	for (int i = 0; i < 4; i++)
 		for (int j = 0; j < 9; j++)
 			temp.m_Data[i][j] = matrix94f.m_Data[j][i];
