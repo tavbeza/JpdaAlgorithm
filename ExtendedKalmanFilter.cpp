@@ -621,3 +621,191 @@ void ExtendedKalman::SetR_Ecef(double r,
 	R.m_Data[2][2] = r_ecef.m_Data[2][2];
 	R.m_Data[3][3] = pow(Sigma_rdot, 2);
 }
+
+
+/// <summary>
+/// Set measurement covariance matrix in ENU tracking axes
+/// </summary>
+void ExtendedKalman::SetR_Enu(int type,
+	double r,
+	double az,
+	double el,
+	Vector3d Vs,
+	double Sigma_r,
+	double Sigma_rdot,
+	double Sigma_az,
+	double Sigma_el,
+	Vector3d SigmaV,
+	Matrix4d &R)
+{
+	switch (type)
+	{
+	case 0://{lin,ext}
+	case 1:
+	{
+		/*
+		double Vxs = Vs.m_Data[0];
+		double Vys = Vs.m_Data[1];
+		double Vzs = Vs.m_Data[2];
+		double Sigma_Vxs = SigmaV.m_Data[0];
+		double Sigma_Vys = SigmaV.m_Data[1];
+		double Sigma_Vzs = SigmaV.m_Data[2];
+		*/
+		Matrix3d J;
+		GeodeticConverter::InitJ(r, az, el, J);
+
+		Matrix3d r_r;
+		r_r.Zero();
+		r_r.m_Data[0][0] = pow(Sigma_r, 2);
+		r_r.m_Data[1][1] = pow(Sigma_az, 2);
+		r_r.m_Data[2][2] = pow(Sigma_el, 2);
+		Matrix3d r_enu = J * r_r*J.Transpose();
+		//Matrix3d A;
+		//A(1)=cos(az)*cos(el)*Vxs-sin(az)*cos(el)*Vys;
+		//A(2)=-sin(az)*sin(el)*Vxs-cos(az)*sin(el)*Vys+cos(el)*Vzs;
+		//A=A';
+		Matrix3d Q;
+		Q.Zero();
+		Q.m_Data[0][0] = pow(Sigma_az, 2);
+		Q.m_Data[1][1] = pow(Sigma_el, 2);
+		double Sigma2_ref = pow(Sigma_rdot, 2);
+		R.Zero();
+		R.m_Data[0][0] = r_enu.m_Data[0][0];
+		R.m_Data[0][1] = r_enu.m_Data[0][1];
+		R.m_Data[0][2] = r_enu.m_Data[0][2];
+		R.m_Data[1][0] = r_enu.m_Data[1][0];
+		R.m_Data[1][1] = r_enu.m_Data[1][1];
+		R.m_Data[1][2] = r_enu.m_Data[1][2];
+		R.m_Data[2][0] = r_enu.m_Data[2][0];
+		R.m_Data[2][1] = r_enu.m_Data[2][1];
+		R.m_Data[2][2] = r_enu.m_Data[2][2];
+		R.m_Data[3][3] = Sigma2_ref;
+		break;
+	}
+	case 2://nonlin
+	{
+		R.Zero();
+		R.m_Data[0][0] = pow(Sigma_r, 2);
+		R.m_Data[1][1] = pow(Sigma_az, 2);
+		R.m_Data[2][2] = pow(Sigma_el, 2);
+		R.m_Data[3][3] = pow(Sigma_rdot, 2);
+		break;
+	}
+	}
+}
+
+
+/// <summary>
+/// Set measurement vector Z in ECEF coordinates
+/// </summary>
+void ExtendedKalman::SetZ_Ecef(const Vector4d &meas, Vector4d &z)
+{
+	z.m_Data[0] = meas.m_Data[0];
+	z.m_Data[1] = meas.m_Data[1];
+	z.m_Data[2] = meas.m_Data[2];
+	z.m_Data[3] = meas.m_Data[3];
+}
+
+/// <summary>
+/// Set measurment vector Z in ENU coordinates
+/// </summary>
+void ExtendedKalman::SetZ_Enu(const Vector3d &meas,
+	double velocity,
+	const Vector3d &velENU,
+	Vector4d &z)
+{
+	//case 'nonlin'
+	// Z=[Meas.enu_0.R; Meas.enu_0.Az; Meas.enu_0.El; Meas.enu_0.RR];
+	z.m_Data[0] = meas.m_Data[0];
+	z.m_Data[1] = meas.m_Data[1];
+	z.m_Data[2] = meas.m_Data[2];
+	z.m_Data[3] = velocity;
+}
+
+/// <summary>
+/// Initialize State Vector X and Covariance Matrix P
+/// </summary>
+void ExtendedKalman::InitXP(const DataPlot &plot,
+	const NavPlatStatusStruct &platData,
+	Vector9d &xInit,
+	Matrix9d &pInit)
+{
+	TrakerParams *pTrakerParams;
+
+	//case 'ENU'
+	//CovMat=SetR_enu(Params.H_Type,
+	//                Meas.enu_0.R,
+	//                Meas.enu_0.Az,
+	//                Meas.enu_0.El,
+	//                Plat.VelEnu,
+	//                Meas.s.RangeSigma,
+	//                Meas.s.RangeRateSigma,
+	//                Meas.s.AzSigma,
+	//                Meas.s.ElSigma,
+	//                [Params.SigmaVxs Params.SigmaVys Params.SigmaVzs]);
+	Vector3d vs;
+	vs.m_Data[0] = pTrakerParams->m_SigmaVxs;
+	vs.m_Data[1] = pTrakerParams->m_SigmaVys;
+	vs.m_Data[2] = pTrakerParams->m_SigmaVzs;
+	SetR_Enu(2,
+		plot.GetRange(),
+		plot.GetAzimuthAngle(),
+		plot.GetElevationAngle(),
+		vs,
+		plot.GetRangeAccuracy(),
+		plot.GetVelocityAccuracy(),
+		plot.GetAzimuthAccuracy(),
+		plot.GetElevationAccuracy(),
+		platData.velENU,
+		m_R);
+	//m_R.Print();
+		  //P_enu=CovMat([1:3],[1:3]);
+		  //P_init1=zeros(9,9);
+	Matrix9d pInit1;
+	pInit1.Zero();
+	//P_init1(1:3,1:3) =P_enu;
+	pInit1.m_Data[0][0] = m_R.m_Data[0][0];
+	pInit1.m_Data[0][1] = m_R.m_Data[0][1];
+	pInit1.m_Data[0][2] = m_R.m_Data[0][2];
+	pInit1.m_Data[1][0] = m_R.m_Data[1][0];
+	pInit1.m_Data[1][1] = m_R.m_Data[1][1];
+	pInit1.m_Data[1][2] = m_R.m_Data[1][2];
+	pInit1.m_Data[2][0] = m_R.m_Data[2][0];
+	pInit1.m_Data[2][1] = m_R.m_Data[2][1];
+	pInit1.m_Data[2][2] = m_R.m_Data[2][2];
+	//P_init1(4:6,4:6) =P_vel;
+	//P_vel=[Params.SigmaVxt^2         0                     0         ;
+	//    0             Params.SigmaVyt^2             0         ;
+	//    0                     0             Params.SigmaVzt^2];
+	pInit1.m_Data[3][3] = pow(pTrakerParams->m_SigmaVxt, 2);
+	pInit1.m_Data[4][4] = pow(pTrakerParams->m_SigmaVyt, 2);
+	pInit1.m_Data[5][5] = pow(pTrakerParams->m_SigmaVzt, 2);
+	//P_init1(7:9,7:9) =P_acc;
+	//P_acc=[Params.SigmaAxt^2         0                     0         ;
+	//    0             Params.SigmaAyt^2             0         ;
+	//    0                     0             Params.SigmaAzt^2];
+	pInit1.m_Data[6][6] = pow(pTrakerParams->m_SigmaAxt, 2);
+	pInit1.m_Data[7][7] = pow(pTrakerParams->m_SigmaAyt, 2);
+	pInit1.m_Data[8][8] = pow(pTrakerParams->m_SigmaAzt, 2);
+	//pInit1.Print();
+	Matrix9d kk;
+	kk.Zero();
+	kk.m_Data[0][0] = 1;
+	kk.m_Data[1][3] = 1;
+	kk.m_Data[2][6] = 1;
+	kk.m_Data[3][1] = 1;
+	kk.m_Data[4][4] = 1;
+	kk.m_Data[5][7] = 1;
+	kk.m_Data[6][2] = 1;
+	kk.m_Data[7][5] = 1;
+	kk.m_Data[8][8] = 1;
+	//kk.Print();
+	pInit = kk * pInit1*kk.Transpose();
+	//pInit.Print();
+		  // x Vx y Vy z Vz
+	//x_init=[Meas.enu_0.x;0;0;Meas.enu_0.y;0;0;Meas.enu_0.z;0;0];
+	xInit.SetZero();
+	xInit.m_Data[0] = plot.m_CartEnu0.m_Data[0];
+	xInit.m_Data[3] = plot.m_CartEnu0.m_Data[1];
+	xInit.m_Data[6] = plot.m_CartEnu0.m_Data[2];
+}
