@@ -39,9 +39,6 @@
     <ClCompile Include="ExtendedKalmanFilter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SrvDspMath.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TreeNode.h">
@@ -71,7 +68,7 @@
     <ClInclude Include="ExtendedKalman.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SrvDspMath.h">
+    <ClInclude Include="ns.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

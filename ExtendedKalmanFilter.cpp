@@ -1,9 +1,11 @@
 #include "ExtendedKalman.h"
+#include "ns.h"
 
 // test push
 //test push 2
 // test push 3
 
+using namespace SrvDspMath;
 
 float ExtendedKalman::m_k = 5.0620f; // n/2 * log(4*PI) where n is the state dimention (x, y, x', y')
 
