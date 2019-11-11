@@ -228,3 +228,106 @@ void ExtendedKalman::GainUpdate(const float& beta)
 	Matrix9d kskt = m_K * temp3;
 	m_P = m_P_Predict - kskt * (1 - beta);
 }
+
+/// <summary>
+/// Purpose:          Set process noise covariance matrix Q
+/// algorithm:        Based on Singer model
+/// Input:                                 (1) Dt - time interval [sec]
+///                                        (2) tau - Assumed maneuver time constant [1X3] for each dimension [sec]
+///                                        (3) SigmaM - Assumed maneuver time
+///                                        standard deviation [1X3] for each
+///                                        dimension [sec]
+///                                        (4) Amax - Maximal target
+///                                        accelaeration with probability
+///                                        Pmax [1X3] for each dimension
+///                                        (5) Pmax - Acceleration
+///                                        probability [1X3] for each dimension
+///                                        (6) P0 - Probability that the
+///                                        target has no acceleration [1X3] for each dimension
+///
+/// for i=1:3
+///     switch SigmaMnvrCalcMtd
+///         case 'Direct'
+///             SigMan2(i)=SigmaManeuver2(i);               /// Maneuver variance
+///         case 'AccProb'
+///             SigMan2(i)=Amax(i)^2/3*(1+4*Pmax(i)-P0(i)); /// Maneuver variance
+///     end
+/// q{i}=SetQ_Singer(Dt,tau(i),SigMan2(i));
+/// end
+/// z3=zeros(3);
+/// Q=[q{1} z3 z3;
+///     z3 q{2} z3;
+///     z3 z3 q{3}];
+/// </summary>
+void ExtendedKalman::SetQ(double Dt,
+	Matrix9d &Q)
+{
+	TrakerParams *pTrakerParams;
+	Matrix3d temp[3];
+	Vector3d sigMan2;
+	for (int i = 0; i < 3; i++)
+	{
+		if (0 == pTrakerParams->m_SigmaMnvrCalcMtd)
+		{
+			//Direct
+			//Maneuver variance
+			sigMan2.m_Data[i] = pTrakerParams->m_SigmaManeuver2.m_Data[i];
+		}
+		else
+		{
+			//AccProb
+			//Maneuver variance
+			sigMan2.m_Data[i] = pow(pTrakerParams->m_Amax.m_Data[i], 2) / 3 * (1 + 4 * pTrakerParams->m_Pmax.m_Data[i] - pTrakerParams->m_P0.m_Data[i]);
+		}
+		SetQ_Singer(Dt, pTrakerParams->m_TauAcc.m_Data[i], sigMan2.m_Data[i], temp[i]);
+	}
+	Q.Zero();
+	Q.m_Data[0][0] = temp[0].m_Data[0][0];
+	Q.m_Data[0][1] = temp[0].m_Data[0][1];
+	Q.m_Data[0][2] = temp[0].m_Data[0][2];
+	Q.m_Data[1][0] = temp[0].m_Data[1][0];
+	Q.m_Data[1][1] = temp[0].m_Data[1][1];
+	Q.m_Data[1][2] = temp[0].m_Data[1][2];
+	Q.m_Data[2][0] = temp[0].m_Data[2][0];
+	Q.m_Data[2][1] = temp[0].m_Data[2][1];
+	Q.m_Data[2][2] = temp[0].m_Data[2][2];
+	Q.m_Data[3][3] = temp[1].m_Data[0][0];
+	Q.m_Data[3][4] = temp[1].m_Data[0][1];
+	Q.m_Data[3][5] = temp[1].m_Data[0][2];
+	Q.m_Data[4][3] = temp[1].m_Data[1][0];
+	Q.m_Data[4][4] = temp[1].m_Data[1][1];
+	Q.m_Data[4][5] = temp[1].m_Data[1][2];
+	Q.m_Data[5][3] = temp[1].m_Data[2][0];
+	Q.m_Data[5][4] = temp[1].m_Data[2][1];
+	Q.m_Data[5][5] = temp[1].m_Data[2][2];
+	Q.m_Data[6][6] = temp[2].m_Data[0][0];
+	Q.m_Data[6][7] = temp[2].m_Data[0][1];
+	Q.m_Data[6][8] = temp[2].m_Data[0][2];
+	Q.m_Data[7][6] = temp[2].m_Data[1][0];
+	Q.m_Data[7][7] = temp[2].m_Data[1][1];
+	Q.m_Data[7][8] = temp[2].m_Data[1][2];
+	Q.m_Data[8][6] = temp[2].m_Data[2][0];
+	Q.m_Data[8][7] = temp[2].m_Data[2][1];
+	Q.m_Data[8][8] = temp[2].m_Data[2][2];
+}
+
+/// <summary>
+/// Set Singer Model Process Noise Covariance matrix for state vector:[x Vx Ax]';
+/// </summary>
+void ExtendedKalman::SetQ_Singer(double dt, double tau, double sigmaManeuver2, Matrix3d &q)
+{
+	q.Zero();
+	double beta = 1 / tau;
+	double rho = SrvDspMath::exp(-beta * dt);
+	double gama = beta * dt;
+	q.m_Data[0][0] = (1 - SrvDspMath::exp(-2 * gama) + 2 * gama + 2 * pow(gama, 3) / 3 - 2 * pow(gama, 2) - 4 * gama*SrvDspMath::exp(-gama)) / (2 * pow(beta, 5));
+	q.m_Data[0][1] = (SrvDspMath::exp(-2 * gama) + 1 - 2 * SrvDspMath::exp(-gama) + 2 * gama*SrvDspMath::exp(-gama) - 2 * gama + pow(gama, 2)) / (2 * pow(beta, 4));
+	q.m_Data[0][2] = (1 - SrvDspMath::exp(-2 * gama) - 2 * gama*SrvDspMath::exp(-gama)) / (2 * pow(beta, 3));
+	q.m_Data[1][0] = q.m_Data[0][1];
+	q.m_Data[1][1] = (4 * SrvDspMath::exp(-gama) - 3 - SrvDspMath::exp(-2 * gama) + 2 * gama) / (2 * pow(beta, 3));
+	q.m_Data[1][2] = (1 + SrvDspMath::exp(-2 * gama) - 2 * SrvDspMath::exp(-gama)) / (2 * pow(beta, 2));
+	q.m_Data[2][0] = q.m_Data[0][2];
+	q.m_Data[2][1] = q.m_Data[1][2];
+	q.m_Data[2][2] = (1 - SrvDspMath::exp(-2 * gama)) / (2 * beta);
+	q = q * 2 * sigmaManeuver2*beta;
+}

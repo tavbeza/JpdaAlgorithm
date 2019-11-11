@@ -15,12 +15,12 @@ struct TrakerParams {
 	double m_SigmaAxs = 0.1;
 	double m_SigmaAys = 0.1;
 	double m_SigmaAzs = 0.1;
-	double m_TouAcc = 0.1;
-	double m_Amax = 0.1;
-	double m_Pmax = 0.1;
-	double m_P0 = 0.1;
-	double m_SigmaManeuver2 = 0.1;
-	double m_SigmaMnvrCalcmtd = 0.1;
+	Vector3d m_TauAcc;
+	Vector3d m_Amax;
+	Vector3d m_Pmax;
+	Vector3d m_P0;
+	Vector3d m_SigmaManeuver2 ;
+	double m_SigmaMnvrCalcMtd = 0.1;
 
 
 };
@@ -87,6 +87,8 @@ public:
 	/// while low gain close to zero will smooth out noise but decrease the responsiveness.
 	/// </summary>
 	virtual void GainUpdate(const float& beta);
+
+	void SetQ(double Dt, Matrix9d &Q);
 
 public:
 	/// <summary>
