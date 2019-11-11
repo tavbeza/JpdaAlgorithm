@@ -5,7 +5,6 @@
 //test push 2
 // test push 3
 
-using namespace SrvDspMath;
 
 float ExtendedKalman::m_k = 5.0620f; // n/2 * log(4*PI) where n is the state dimention (x, y, x', y')
 
@@ -332,4 +331,293 @@ void ExtendedKalman::SetQ_Singer(double dt, double tau, double sigmaManeuver2, M
 	q.m_Data[2][1] = q.m_Data[1][2];
 	q.m_Data[2][2] = (1 - SrvDspMath::exp(-2 * gama)) / (2 * beta);
 	q = q * 2 * sigmaManeuver2*beta;
+}
+
+/// <summary>
+/// Set the matrix F
+/// </summary>
+void ExtendedKalman::SetF_Singer(double dt,
+	double tau,
+	Matrix3d &f)
+{
+	f.Zero();
+	double beta = 1 / tau;
+	double rho = SrvDspMath::exp(-beta * dt);
+	f.m_Data[0][0] = 1;
+	f.m_Data[0][1] = (double)dt;
+	f.m_Data[0][2] = 1 / SrvDspMath::pow(beta, 2)*(-1 + beta * dt + rho);
+	f.m_Data[1][1] = 1;
+	f.m_Data[1][2] = 1 / beta * (1 - rho);
+	f.m_Data[2][2] = rho;
+}
+
+/// <summary>
+/// Set the matrix F
+/// </summary>
+void ExtendedKalman::SetF(double dt,
+	Matrix9d &F)
+{
+	TrakerParams *pTrakerParams;
+	F.Zero();
+	Matrix3d fx, fy, fz;
+	SetF_Singer(dt, pTrakerParams->m_TauAcc.m_Data[0], fx);
+	SetF_Singer(dt, pTrakerParams->m_TauAcc.m_Data[1], fy);
+	SetF_Singer(dt, pTrakerParams->m_TauAcc.m_Data[2], fz);
+
+	F.m_Data[0][0] = fx.m_Data[0][0];
+	F.m_Data[0][1] = fx.m_Data[0][1];
+	F.m_Data[0][2] = fx.m_Data[0][2];
+	F.m_Data[1][0] = fx.m_Data[1][0];
+	F.m_Data[1][1] = fx.m_Data[1][1];
+	F.m_Data[1][2] = fx.m_Data[1][2];
+	F.m_Data[2][0] = fx.m_Data[2][0];
+	F.m_Data[2][1] = fx.m_Data[2][1];
+	F.m_Data[2][2] = fx.m_Data[2][2];
+	F.m_Data[3][3] = fy.m_Data[0][0];
+	F.m_Data[3][4] = fy.m_Data[0][1];
+	F.m_Data[3][5] = fy.m_Data[0][2];
+	F.m_Data[4][3] = fy.m_Data[1][0];
+	F.m_Data[4][4] = fy.m_Data[1][1];
+	F.m_Data[4][5] = fy.m_Data[1][2];
+	F.m_Data[5][3] = fy.m_Data[2][0];
+	F.m_Data[5][4] = fy.m_Data[2][1];
+	F.m_Data[5][5] = fy.m_Data[2][2];
+	F.m_Data[6][6] = fz.m_Data[0][0];
+	F.m_Data[6][7] = fz.m_Data[0][1];
+	F.m_Data[6][8] = fz.m_Data[0][2];
+	F.m_Data[7][6] = fz.m_Data[1][0];
+	F.m_Data[7][7] = fz.m_Data[1][1];
+	F.m_Data[7][8] = fz.m_Data[1][2];
+	F.m_Data[8][6] = fz.m_Data[2][0];
+	F.m_Data[8][7] = fz.m_Data[2][1];
+	F.m_Data[8][8] = fz.m_Data[2][2];
+}
+
+/// <summary>
+/// Set measurement matrix H in ECEF coordinate axes
+/// </summary>
+void ExtendedKalman::SetH_Ecef(Vector9d X_predict,
+	Vector9d X_sensor,
+	Matrix49d &H,
+	double &R_dot)
+{
+	Vector9d DX = X_predict - X_sensor;
+	double Dx = DX.m_Data[0];
+	double Dy = DX.m_Data[3];
+	double Dz = DX.m_Data[6];
+	double Dvx = DX.m_Data[1];
+	double Dvy = DX.m_Data[4];
+	double Dvz = DX.m_Data[7];
+	// Difference between state vector of target prediction to self
+	double D = Dx * Dvx + Dy * Dvy + Dz * Dvz;
+	double R = SrvDspMath::sqrt(Dx*Dx + Dy * Dy + Dz * Dz);
+	R_dot = D / R;
+	H.Zero();
+	H.m_Data[0][0] = 1;
+	H.m_Data[1][3] = 1;
+	H.m_Data[2][6] = 1;
+	H.m_Data[3][0] = (Dvx*R - D * Dx / R) / (SrvDspMath::pow(R, 2));
+	H.m_Data[3][1] = Dx / R;
+	H.m_Data[3][2] = 0;
+	H.m_Data[3][3] = Dvy / R - Dy * D / (SrvDspMath::pow(R, 3));
+	H.m_Data[3][4] = Dy / R;
+	H.m_Data[3][5] = 0;
+	H.m_Data[3][6] = Dvz / R - Dz * D / (SrvDspMath::pow(R, 3));
+	H.m_Data[3][7] = Dz / R;
+	H.m_Data[3][8] = 0;
+}
+
+/// <summary>
+/// Set measurement matrix H in ENU coordinate axes
+/// </summary>
+void ExtendedKalman::SetH_Enu(int type,
+	double az,
+	double el,
+	Vector3d pos_t,
+	Vector3d pos_s,
+	Vector3d vel_t,
+	Vector3d vel_s,
+	Matrix49d &H)
+{
+	H.Zero();
+	H.m_Data[0][0] = 1;
+	H.m_Data[1][3] = 1;
+	H.m_Data[2][6] = 1;
+	/*
+		switch (type)
+		{
+			case 0://lin
+			{
+				H.m_Data[3][1] = SrvDspMath::sin(az)*SrvDspMath::cos(el);
+				H.m_Data[3][4] = SrvDspMath::cos(az)*SrvDspMath::cos(el);
+				H.m_Data[3][7] = SrvDspMath::sin(el);
+				break;
+			}
+			case 1: //ext
+			{
+				double xs = pos_s.m_Data[0];
+				double ys = pos_s.m_Data[1];
+				double zs = pos_s.m_Data[2];
+				double xt = pos_t.m_Data[0];
+				double yt = pos_t.m_Data[1];
+				double zt = pos_t.m_Data[2];
+				double vxs = vel_s.m_Data[0];
+				double vys = vel_s.m_Data[1];
+				double vzs = vel_s.m_Data[2];
+				double vxt = vel_t.m_Data[0];
+				double vyt = vel_t.m_Data[1];
+				double vzt = vel_t.m_Data[2];
+				double Dx = xt-xs;
+				double Dy = yt-ys;
+				double Dz = zt-zs;
+				double Dvx = vxt-vxs;
+				double Dvy = vyt-vys;
+				double Dvz = vzt-vzs;
+				double R = SrvDspMath::sqrt(Dx*Dx+Dy*Dy+Dz*Dz);
+				double dRdx = Dx/R;
+				double dRdy = Dy/R;
+				double dRdz = Dz/R;
+				double D = Dx*Dvx + Dy*Dvy + Dz*Dvz;
+				H.m_Data[3][0] = (Dvx*R-D*dRdx)/pow(R,2);
+				H.m_Data[3][1] = Dx/R;
+				H.m_Data[3][3] = (Dvy*R-D*dRdy)/pow(R,2);
+				H.m_Data[3][4] = Dy/R;
+				H.m_Data[3][6] = (Dvz*R-D*dRdz)/pow(R,2);
+				H.m_Data[3][7] = Dz/R;
+				break;
+			}
+			case 2://nonlin
+			{
+	*/
+	double xs = pos_s.m_Data[0];
+	double ys = pos_s.m_Data[1];
+	double zs = pos_s.m_Data[2];
+	double xt = pos_t.m_Data[0];
+	double yt = pos_t.m_Data[1];
+	double zt = pos_t.m_Data[2];
+	double vxs = vel_s.m_Data[0];
+	double vys = vel_s.m_Data[1];
+	double vzs = vel_s.m_Data[2];
+	double vxt = vel_t.m_Data[0];
+	double vyt = vel_t.m_Data[1];
+	double vzt = vel_t.m_Data[2];
+	double dx = xt - xs;
+	double dy = yt - ys;
+	double dz = zt - zs;
+	double dvx = vxt - vxs;
+	double dvy = vyt - vys;
+	double dvz = vzt - vzs;
+	Vector9d X;
+	X.m_Data[0] = dx;
+	X.m_Data[1] = dvx;
+	X.m_Data[2] = 0;
+	X.m_Data[3] = dy;
+	X.m_Data[4] = dvy;
+	X.m_Data[5] = 0;
+	X.m_Data[6] = dz;
+	X.m_Data[7] = dvz;
+	X.m_Data[8] = 0;
+	Calc_H_Matrix_Cart2Pol(X, H);
+	/*            break;
+			}
+		}
+	*/
+	m_H = H;
+}
+
+/// <summary>
+/// New function that calculates H matrix between Cartesian state vector to nonlinear measurement Z
+/// </summary>
+void ExtendedKalman::Calc_H_Matrix_Cart2Pol(Vector9d X, Matrix49d &H)
+{
+	H.Zero();
+	double x = X.m_Data[0];
+	double vx = X.m_Data[1];
+	double y = X.m_Data[3];
+	double vy = X.m_Data[4];
+	double z = X.m_Data[6];
+	double vz = X.m_Data[7];
+
+	Vector3d vec1(x, y, z);
+	double R = vec1.Norm();;
+	double R2 = R * R;
+	double R3 = R2 * R;
+	double x2y2 = x * x + y * y;
+	H.m_Data[0][0] = x / R;
+	H.m_Data[0][3] = y / R;
+	H.m_Data[0][6] = z / R;
+	H.m_Data[1][0] = y / x2y2;
+	H.m_Data[1][3] = -x / x2y2;
+	H.m_Data[2][0] = -(x*z) / (SrvDspMath::sqrt(x2y2)*R2);
+	H.m_Data[2][3] = -(y*z) / (SrvDspMath::sqrt(x2y2)*R2);
+	H.m_Data[2][6] = SrvDspMath::sqrt(x2y2) / R2;
+	H.m_Data[3][0] = vx / R - (x*(vx*x + vy * y + vz * z)) / R3;
+	H.m_Data[3][1] = x / R;
+	H.m_Data[3][3] = vy / R - (y*(vx*x + vy * y + vz * z)) / R3;
+	H.m_Data[3][4] = y / R;
+	H.m_Data[3][6] = vz / R - (z*(vx*x + vy * y + vz * z)) / R3;
+	H.m_Data[3][7] = z / R;
+}
+
+void ExtendedKalman::SetR_Ecef(double r,
+	double az,
+	double el,
+	Vector3d Vs,
+	double Sigma_r,
+	double Sigma_rdot,
+	double Sigma_az,
+	double Sigma_el,
+	Vector3d SigmaV,
+	Matrix4d &R)
+{
+	TrakerParams *pTrakerParams;
+	Vector3d eulerSens;
+	eulerSens.m_Data[0] = pTrakerParams->m_Sensor_Theta;
+	eulerSens.m_Data[1] = pTrakerParams->m_Sensor_Psi;
+	eulerSens.m_Data[2] = pTrakerParams->m_Sensor_Phi;
+	double theta_sens = eulerSens.m_Data[0];
+	double psi_sens = eulerSens.m_Data[1];
+	double phi_sens = eulerSens.m_Data[2];
+	Matrix3d Js;
+	GeodeticConverter::InitJs1(r, az, el, Js);
+	Matrix3d r_r;
+	r_r.Zero();
+	r_r.m_Data[0][0] = pow(Sigma_r, 2);
+	r_r.m_Data[1][1] = pow(Sigma_az, 2);
+	r_r.m_Data[2][2] = pow(Sigma_el, 2);
+	Matrix3d Cs2b;
+	GeodeticConverter::InitTCb2p1(Cs2b, psi_sens, theta_sens, phi_sens, 1);
+	Matrix3d Cb2p;
+	/*
+		l_b=P.lever_b;
+		Xb=l_b+Cs2b*Xs;
+		Meas.b.x=Xb(1);
+		Meas.b.y=Xb(2);
+		Meas.b.z=Xb(3);
+		Meas.b.R=norm(Xb);
+		Meas.b.Az=atan2(Xb(2),Xb(1));
+		Meas.b.El=asin(-Xb(3)/Meas.b.R);
+		Meas.b.RR=Meas.s.RR;
+	*/
+	// From Body to P - use Euler Angles
+	double theta = 0;//Plat.ImuEuler(1);
+	double psi = 0;//Plat.ImuEuler(2);
+	double phi = 0;//Plat.ImuEuler(3);
+	GeodeticConverter::InitTCb2p1(Cb2p, theta, psi, phi, 1);
+
+	Matrix3d Cp2enu_p;//=C.p2enu_p;
+	Matrix3d Cenu_p2ecef;//=C.enu_p2ecef;
+	Matrix3d Cs2ecef = Cenu_p2ecef * Cp2enu_p*Cb2p*Cs2b;
+	Matrix3d r_ecef = Cs2ecef * Js*r_r*Js.Transpose()*Cs2ecef.Transpose();
+	R.Zero();
+	R.m_Data[0][0] = r_ecef.m_Data[0][0];
+	R.m_Data[0][1] = r_ecef.m_Data[0][1];
+	R.m_Data[0][2] = r_ecef.m_Data[0][2];
+	R.m_Data[1][0] = r_ecef.m_Data[1][0];
+	R.m_Data[1][1] = r_ecef.m_Data[1][1];
+	R.m_Data[1][2] = r_ecef.m_Data[1][2];
+	R.m_Data[2][0] = r_ecef.m_Data[2][0];
+	R.m_Data[2][1] = r_ecef.m_Data[2][1];
+	R.m_Data[2][2] = r_ecef.m_Data[2][2];
+	R.m_Data[3][3] = pow(Sigma_rdot, 2);
 }
