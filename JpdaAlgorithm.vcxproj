@@ -116,19 +116,23 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="DataPlot.cpp" />
     <ClCompile Include="ExtendedKalmanFilter.cpp" />
     <ClCompile Include="Kalman.cpp" />
     <ClCompile Include="KalmanTest.cpp" />
     <ClCompile Include="Matrix.cpp" />
+    <ClCompile Include="NavPlatStatusStruct.cpp" />
     <ClCompile Include="SrvTimeStampPC.cpp" />
     <ClCompile Include="TrackerJpda.cpp" />
     <ClCompile Include="Tracking_Hypothesis.cpp" />
     <ClCompile Include="TreeNode.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="DataPlot.h" />
     <ClInclude Include="ExtendedKalman.h" />
     <ClInclude Include="Kalman.h" />
     <ClInclude Include="Matrix.h" />
+    <ClInclude Include="NavPlatStatusStruct.h" />
     <ClInclude Include="ns.h" />
     <ClInclude Include="SrvTimeStamp.h" />
     <ClInclude Include="stdafx.h" />

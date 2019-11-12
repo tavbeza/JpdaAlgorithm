@@ -10,7 +10,7 @@
 #define FA 9
 using namespace std;
 bool matrix[MATRIX_SIZE][MATRIX_SIZE + 1];
-TreeNode pool[6000000];
+TreeNode pool[60000];
 int currentPoolSize = 0;
 
 // Generic function to display the matrix. We use it to display 

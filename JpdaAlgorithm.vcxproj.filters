@@ -39,6 +39,12 @@
     <ClCompile Include="ExtendedKalmanFilter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="DataPlot.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NavPlatStatusStruct.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TreeNode.h">
@@ -69,6 +75,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ns.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DataPlot.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NavPlatStatusStruct.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

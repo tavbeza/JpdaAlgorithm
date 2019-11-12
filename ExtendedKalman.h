@@ -1,8 +1,11 @@
 #ifndef _EXTENDED_KALMAN_H_
+#define _EXTENDED_KALMAN_H_
 
 #include <iostream>
 #include "Vector.h"
 #include "Matrix.h"
+#include "DataPlot.h"
+#include "NavPlatStatusStruct.h"
 
 struct TrakerParams {
 	double m_SigmaVxs=0.1;
@@ -15,6 +18,15 @@ struct TrakerParams {
 	double m_SigmaAxs = 0.1;
 	double m_SigmaAys = 0.1;
 	double m_SigmaAzs = 0.1;
+	double m_SigmaVxt = 0.1;
+	double m_SigmaVyt = 0.1;
+	double m_SigmaVzt = 0.1;
+	double m_SigmaAxt = 0.1;
+	double m_SigmaAyt = 0.1;
+	double m_SigmaAzt = 0.1;
+	double m_Sensor_Theta =0.1;
+	double m_Sensor_Psi = 0.1;
+	double  m_Sensor_Phi = 0.1;
 	Vector3d m_TauAcc;
 	Vector3d m_Amax;
 	Vector3d m_Pmax;
@@ -88,7 +100,6 @@ public:
 	/// </summary>
 	virtual void GainUpdate(const float& beta);
 
-	void SetQ(double Dt, Matrix9d &Q);
 
 public:
 	/// <summary>
@@ -247,12 +258,12 @@ public:
 	/// <summary>
 	/// Initialize State Vector X and Covariance Matrix P
 	/// </summary>
-	/*void InitXP(
+	void InitXP(
 		const DataPlot &plot,
 		const NavPlatStatusStruct &platData,
 		Vector9d &xInit,
 		Matrix9d &pInit
-	);*/
+	);
 
 public:
 	/// <summary>
@@ -339,4 +350,4 @@ protected:
 	static float m_k;
 
 };
-#endif _EXTENDED_KALMAN_H_
+#endif //_EXTENDED_KALMAN_H_

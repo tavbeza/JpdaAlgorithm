@@ -1,17 +1,23 @@
 #ifndef _NS_H
+#define _NS_H
+#include "stdafx.h"
+
 
 namespace SrvDspMath {
 	
 	double exp(double x)
 	{
-		double sum = 1.0 + x;
-		double term = x;                 // term for k = 1 is just x
-		for (int k = 2; k < 50; k++)
-		{
-			term = term * x / (double)k; // term[k] = term[k-1] * x / k
-			sum = sum + term;
-		}
-		return sum;
+		return ::exp(x);
+	}
+
+	float atan2(float a, float b)
+	{
+		return ::atan2(a,b);
+	}
+
+	float asin(float number)
+	{
+		return ::asin(number);
 	}
 
 	double pow(double x, int y)
@@ -44,4 +50,4 @@ namespace SrvDspMath {
 
 }
 
-#endif _NS_H
+#endif //_NS_H

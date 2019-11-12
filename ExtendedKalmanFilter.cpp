@@ -579,14 +579,16 @@ void ExtendedKalman::SetR_Ecef(double r,
 	double psi_sens = eulerSens.m_Data[1];
 	double phi_sens = eulerSens.m_Data[2];
 	Matrix3d Js;
-	GeodeticConverter::InitJs1(r, az, el, Js);
+	//TODO:
+	//GeodeticConverter::InitJs1(r, az, el, Js);
 	Matrix3d r_r;
 	r_r.Zero();
 	r_r.m_Data[0][0] = pow(Sigma_r, 2);
 	r_r.m_Data[1][1] = pow(Sigma_az, 2);
 	r_r.m_Data[2][2] = pow(Sigma_el, 2);
 	Matrix3d Cs2b;
-	GeodeticConverter::InitTCb2p1(Cs2b, psi_sens, theta_sens, phi_sens, 1);
+	//TODO:
+	//GeodeticConverter::InitTCb2p1(Cs2b, psi_sens, theta_sens, phi_sens, 1);
 	Matrix3d Cb2p;
 	/*
 		l_b=P.lever_b;
@@ -603,7 +605,8 @@ void ExtendedKalman::SetR_Ecef(double r,
 	double theta = 0;//Plat.ImuEuler(1);
 	double psi = 0;//Plat.ImuEuler(2);
 	double phi = 0;//Plat.ImuEuler(3);
-	GeodeticConverter::InitTCb2p1(Cb2p, theta, psi, phi, 1);
+	//TODO:
+	//GeodeticConverter::InitTCb2p1(Cb2p, theta, psi, phi, 1);
 
 	Matrix3d Cp2enu_p;//=C.p2enu_p;
 	Matrix3d Cenu_p2ecef;//=C.enu_p2ecef;
@@ -652,7 +655,8 @@ void ExtendedKalman::SetR_Enu(int type,
 		double Sigma_Vzs = SigmaV.m_Data[2];
 		*/
 		Matrix3d J;
-		GeodeticConverter::InitJ(r, az, el, J);
+		//TODO:
+		//GeodeticConverter::InitJ(r, az, el, J);
 
 		Matrix3d r_r;
 		r_r.Zero();
