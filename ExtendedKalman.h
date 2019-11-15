@@ -7,7 +7,7 @@
 #include "DataPlot.h"
 #include "NavPlatStatusStruct.h"
 
-struct TrakerParams {
+struct TrackerParams {
 	double m_SigmaVxs=0.1;
 	double m_SigmaVys = 0.1;
 	double m_SigmaVzs = 0.1;

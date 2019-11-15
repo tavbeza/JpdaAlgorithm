@@ -45,7 +45,7 @@ ExtendedKalman::ExtendedKalman(
 	x_predict.m_Data[7] = 0;
 	x_predict.m_Data[8] = 0;
 	
-	TrakerParams *pTrakerParams;
+	TrackerParams *pTrakerParams = new TrackerParams;
 	//Xsensor=[Plat.PosEcef(1) Plat.VelEcef(1) 0 Plat.PosEcef(2) Plat.VelEcef(2) 0 Plat.PosEcef(3) Plat.VelEcef(3) 0]';
 	//Plat.PosEcef
 	//Plat.VelEcef
@@ -263,7 +263,7 @@ void ExtendedKalman::GainUpdate(const float& beta)
 void ExtendedKalman::SetQ(double Dt,
 	Matrix9d &Q)
 {
-	TrakerParams *pTrakerParams;
+	TrackerParams *pTrakerParams = new TrackerParams;
 	Matrix3d temp[3];
 	Vector3d sigMan2;
 	for (int i = 0; i < 3; i++)
@@ -357,7 +357,7 @@ void ExtendedKalman::SetF_Singer(double dt,
 void ExtendedKalman::SetF(double dt,
 	Matrix9d &F)
 {
-	TrakerParams *pTrakerParams;
+	TrackerParams *pTrakerParams = new TrackerParams;
 	F.Zero();
 	Matrix3d fx, fy, fz;
 	SetF_Singer(dt, pTrakerParams->m_TauAcc.m_Data[0], fx);
@@ -570,7 +570,7 @@ void ExtendedKalman::SetR_Ecef(double r,
 	Vector3d SigmaV,
 	Matrix4d &R)
 {
-	TrakerParams *pTrakerParams;
+	TrackerParams *pTrakerParams = new TrackerParams;
 	Vector3d eulerSens;
 	eulerSens.m_Data[0] = pTrakerParams->m_Sensor_Theta;
 	eulerSens.m_Data[1] = pTrakerParams->m_Sensor_Psi;
@@ -734,7 +734,7 @@ void ExtendedKalman::InitXP(const DataPlot &plot,
 	Vector9d &xInit,
 	Matrix9d &pInit)
 {
-	TrakerParams *pTrakerParams;
+	TrackerParams *pTrakerParams = new TrackerParams;
 
 	//case 'ENU'
 	//CovMat=SetR_enu(Params.H_Type,
