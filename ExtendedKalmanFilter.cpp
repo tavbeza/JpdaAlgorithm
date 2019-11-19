@@ -46,7 +46,7 @@ ExtendedKalman::ExtendedKalman(
 	x_predict.m_Data[8] = 0;
 	
 	TrackerParams *pTrakerParams = new TrackerParams;
-	//Xsensor=[Plat.PosEcef(1) Plat.VelEcef(1) 0 Plat.PosEcef(2) Plat.VelEcef(2) 0 Plat.PosEcef(3) Plat.VelEcef(3) 0]';
+	//Xsensor=[Plat.PosEcef(1) Plat.Vel`Ecef(1) 0 Plat.PosEcef(2) Plat.VelEcef(2) 0 Plat.PosEcef(3) Plat.VelEcef(3) 0]';
 	//Plat.PosEcef
 	//Plat.VelEcef
 	Vector9d x_sensor;
@@ -151,6 +151,7 @@ ExtendedKalman::ExtendedKalman(
 
 ExtendedKalman::~ExtendedKalman()
 {
+
 }
 
 /// <summary>

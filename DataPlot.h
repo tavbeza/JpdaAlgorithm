@@ -35,8 +35,24 @@ private:
 
 
 public:
+	/// <summary>
+	/// empty constructor
+	/// </summary>
 	DataPlot();
+
+	/// <summary>
+	/// empty disconstructor
+	/// </summary>
 	~DataPlot();
+
+	/// <summary>
+	/// constructor with elements
+	/// </summary>
+	DataPlot::DataPlot(float m_range, float m_azimuth, float m_elevation, float m_velocity,
+		float m_rangeAccuricy, float m_azimuthAccuricy, float m_elevationAccuricy,
+		float m_velocityAccuricy, float m_SNR, float m_magnitot, unsigned int m_ID)
+	{
+	}
 	Vector3d m_CartEnu0;
 };
 
