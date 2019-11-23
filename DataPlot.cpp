@@ -12,7 +12,7 @@ DataPlot::DataPlot()
 /// </summary>
 DataPlot::DataPlot(float range, float azimuth, float elevation, float velocity,
 	float rangeAccuracy, float azimuthAccuracy, float elevationAccuracy,
-	float velocityAccuracy, float SNR, float magnitude, unsigned int ID)
+	float velocityAccuracy, float SNR, float magnitude, unsigned int seqNumber)
 {
 	m_range = range;
 	m_azimuth = azimuth;
@@ -24,7 +24,7 @@ DataPlot::DataPlot(float range, float azimuth, float elevation, float velocity,
 	m_velocityAccuracy = velocityAccuracy;
 	m_SNR = SNR;
 	m_magnitude = magnitude;
-	m_ID = ID;
+	m_seqNumber = seqNumber;
 }
 
 /// <summary>
@@ -37,7 +37,7 @@ DataPlot::~DataPlot()
 /// <summary>
 /// Get range of the plot
 /// </summary>
-float DataPlot::getRange() const 
+float DataPlot::GetRange() const 
 {
 	return m_range;
 }
@@ -45,7 +45,7 @@ float DataPlot::getRange() const
 /// <summary>
 /// Get	azimuth angle of the plot
 /// </summary>
-float DataPlot::getAzimuthAngle() const 
+float DataPlot::GetAzimuthAngle() const 
 {
 	return m_azimuth;
 }
@@ -53,7 +53,7 @@ float DataPlot::getAzimuthAngle() const
 /// <summary>
 /// Get	elevation angle of the plot
 /// </summary>
-float DataPlot::getElevationAngle()  const 
+float DataPlot::GetElevationAngle()  const 
 {
 	return m_elevation;
 }
@@ -61,7 +61,7 @@ float DataPlot::getElevationAngle()  const
 /// <summary>
 /// Get	range accuracy of the plot
 /// </summary>
-float DataPlot::getRangeAccuracy() const 
+float DataPlot::GetRangeAccuracy() const 
 {
 	return m_rangeAccuracy;
 }
@@ -69,7 +69,7 @@ float DataPlot::getRangeAccuracy() const
 /// <summary>
 /// Get	velocity accuracy of the plot
 /// </summary>
-float DataPlot::getVelocityAccuracy() const 
+float DataPlot::GetVelocityAccuracy() const 
 {
 	return m_velocityAccuracy;
 }
@@ -77,7 +77,7 @@ float DataPlot::getVelocityAccuracy() const
 /// <summary>
 /// Get	azimuth	accuracy of the plot
 /// </summary>
-float DataPlot::getAzimuthAccuracy() const 
+float DataPlot::GetAzimuthAccuracy() const 
 {
 	return m_azimuthAccuracy;
 }
@@ -85,7 +85,7 @@ float DataPlot::getAzimuthAccuracy() const
 /// <summary>
 /// Get	elevation accuracy of the plot
 /// </summary>
-float DataPlot::getElevationAccuracy() const 
+float DataPlot::GetElevationAccuracy() const 
 {
 	return m_elevationAccuracy;
 }

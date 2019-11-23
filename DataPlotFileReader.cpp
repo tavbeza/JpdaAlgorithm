@@ -8,14 +8,17 @@ DataPlotFileReader::DataPlotFileReader(std::string fileName)
 	m_pLastDataPlot = 0;
 	m_lastDwell = 0;
 	m_fileName = fileName;
+	
 	//Opens file.
 	m_fileStream.open(fileName);
+	
 	//Checks if file was opened correctly.
 	if (!m_fileStream.is_open())
 	{
 		printf("File was not opened");
 	}
 }
+
 DataPlotFileReader::~DataPlotFileReader()
 {
 	//Closes the file.

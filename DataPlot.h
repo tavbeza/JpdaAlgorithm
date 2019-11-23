@@ -25,37 +25,37 @@ public:
 	/// <summary>
 	/// Get range of the plot
 	/// </summary>
-	float getRange() const;
+	float GetRange() const;
 
 	/// <summary>
 	/// Get	azimuth angle of the plot
 	/// </summary>
-	float getAzimuthAngle() const;
+	float GetAzimuthAngle() const;
 
 	/// <summary>
 	/// Get	elevation angle of the plot
 	/// </summary>
-	float getElevationAngle() const;
+	float GetElevationAngle() const;
 
 	/// <summary>
 	/// Get	range accuracy of the plot
 	/// </summary>
-	float getRangeAccuracy() const;
+	float GetRangeAccuracy() const;
 
 	/// <summary>
 	/// Get	velocity accuracy of the plot
 	/// </summary>
-	float getVelocityAccuracy() const;
+	float GetVelocityAccuracy() const;
 
 	/// <summary>
 	/// Get	azimuth	accuracy of the plot
 	/// </summary>
-	float getAzimuthAccuracy() const;
+	float GetAzimuthAccuracy() const;
 	
 	/// <summary>
 	/// Get	elevation accuracy of the plot
 	/// </summary>
-	float getElevationAccuracy() const;
+	float GetElevationAccuracy() const;
 
 
 
@@ -70,7 +70,7 @@ private:
 	float m_velocityAccuracy;
 	float m_SNR;
 	float m_magnitude;
-	unsigned int m_ID;
+	unsigned int m_seqNumber;
 	
 	Vector3d m_CartEnu0;
 };

@@ -34,7 +34,7 @@ private:
 	string					m_fileName;
 	ifstream				m_fileStream;
 	bool					m_firstNavInDwell;
-	//NavPlatStatusStruct*	m_pLastDataNav;
+	NavPlatStatusStruct*	m_pLastDataNav;
 	int						m_lastDwell;
 
 
