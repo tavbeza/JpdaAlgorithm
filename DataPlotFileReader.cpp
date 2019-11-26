@@ -26,6 +26,23 @@ DataPlotFileReader::~DataPlotFileReader()
 }
 
 /// <summary>
+/// get m_fileStream
+/// </summary>
+int DataPlotFileReader::readNumberOfDwell()
+{
+	int numOfDwell = 0;
+	string curValue;
+	
+	if (m_fileStream.good())
+	{
+		getline(m_fileStream, curValue, '\n');
+		numOfDwell = (unsigned int)stoul(curValue);
+	}
+	
+	return numOfDwell;
+}
+
+/// <summary>
 /// fills a given plotList with plots read from a file located the FILE_NAME
 /// </summary>
 void DataPlotFileReader::ReadDataPlot(DataPlotList* plotList, int dwellToRead/*=0*/)

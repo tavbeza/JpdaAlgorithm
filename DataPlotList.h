@@ -20,6 +20,11 @@ public:
 	/// </summary>
 	void AddPlot(DataPlot* m_pLastDataPlot);
 
+	/// <summary>
+	/// Get m_dataPlotList
+	/// </summary>
+	std::list <DataPlot*> getDataPlotList();
+
 private:
 
 	std::list <DataPlot*> m_dataPlotList;

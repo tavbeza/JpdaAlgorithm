@@ -53,6 +53,12 @@ public:
 	// these estimates are updated using a weighted average, with more weight being given to estimates with higher certainty.
 	virtual Vector4f Update(const std::vector< Vector2f >& selected_detections, const Vector5f& beta, const float& last_beta);
 	//virtual Eigen::Vector4f Update(const std::vector< Eigen::Vector2f >& selected_detections, const Eigen::VectorXf& beta, const float& last_beta);
+
+	/// <sumary>
+	/// Test
+	/// <\summary>
+	void kalmanTest();
+
 public:
 	/// Returns the matrix S
 	inline const Matrix2f GetS() const //inline const Eigen::Matrix2f GetS() const

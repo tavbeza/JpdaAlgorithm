@@ -46,9 +46,7 @@ ExtendedKalman::ExtendedKalman(
 	x_predict.m_Data[8] = 0;
 	
 	TrackerParams *pTrakerParams = new TrackerParams;
-	//Xsensor=[Plat.PosEcef(1) Plat.Vel`Ecef(1) 0 Plat.PosEcef(2) Plat.VelEcef(2) 0 Plat.PosEcef(3) Plat.VelEcef(3) 0]';
-	//Plat.PosEcef
-	//Plat.VelEcef
+	
 	Vector9d x_sensor;
 	x_sensor.m_Data[0] = 0;
 	x_sensor.m_Data[1] = 0;
@@ -68,47 +66,8 @@ ExtendedKalman::ExtendedKalman(
 	Vector3d spherical;
 	spherical.ToSpherical(cartesian);
 	
-	// convert x y z to r el az
-	//double r = spherical.m_Data[0];
-	//double el = spherical.m_Data[1];
-	//double az = spherical.m_Data[2];
-	
-	/*
-	Vector3d vs;
-	vs.m_Data[0] = pTrakerParams->m_SigmaVxs;
-	vs.m_Data[1] = pTrakerParams->m_SigmaVys;
-	vs.m_Data[2] = pTrakerParams->m_SigmaVzs;
-
-	Vector3d velEnu;
-	//Plat.VelEnu
-	//TODO: 50114 Initialize the platform velocity
-	SetR_Ecef(r, az, el, vs,
-				pTrakerParams->m_Sigma_r,
-				pTrakerParams->m_Sigma_rdot,
-				pTrakerParams->m_Sigma_az,
-				pTrakerParams->m_Sigma_el,
-				velEnu,
-				m_R);
-	SetR_Enu(0, r, az, el, vs,
-				pTrakerParams->m_Sigma_r,
-				pTrakerParams->m_Sigma_rdot,
-				pTrakerParams->m_Sigma_az,
-				pTrakerParams->m_Sigma_el,
-				velEnu,
-				m_R);
-	*/
-	//TODO: 50114 set Z
 	Vector4d meas;
-	//SetZ_Ecef(meas, m_Z);
-	//TODO: 50114 called twice in algorithm code
-	//SetR_Ecef();
-	//INITIAL COVARIANCE MATRIX
-	//P_vel=[Params.SigmaVxs^2         0                     0  ;
-	//    0             Params.SigmaVys^2             0         ;
-	//    0                     0             Params.SigmaVzs^2];
-	//P_acc=[Params.SigmaAxs^2         0                     0  ;
-	//    0             Params.SigmaAys^2             0         ;
-	//    0                     0             Params.SigmaAzs^2];
+	
 	m_P.Zero();
 	m_P.m_Data[0][0] = m_R.m_Data[0][0];
 	m_P.m_Data[1][1] = pow(pTrakerParams->m_SigmaVxs, 2);

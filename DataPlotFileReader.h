@@ -26,6 +26,11 @@ public:
 	/// </summary>
 	void ReadDataPlot(DataPlotList* plotArr, int dwellToRead = 0);
 
+	/// <summary>
+	/// get m_fileStream
+	/// </summary>
+	int readNumberOfDwell();
+
 private:
 
 	string		m_fileName;

@@ -59,7 +59,7 @@ public:
 
 
 
-private:
+public:
 	float m_range;
 	float m_azimuth;
 	float m_elevation;
@@ -71,7 +71,6 @@ private:
 	float m_SNR;
 	float m_magnitude;
 	unsigned int m_seqNumber;
-	
 	Vector3d m_CartEnu0;
 };
 

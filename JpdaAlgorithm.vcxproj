@@ -116,13 +116,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="DataNavFileReader.cpp" />
     <ClCompile Include="DataPlot.cpp" />
     <ClCompile Include="DataPlotFileReader.cpp" />
     <ClCompile Include="DataPlotList.cpp" />
-    <ClCompile Include="ExtendedKalmanFilter.cpp" />
+    <ClCompile Include="ExtendedKalman.cpp" />
     <ClCompile Include="Kalman.cpp" />
-    <ClCompile Include="KalmanTest.cpp" />
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="Matrix.cpp" />
     <ClCompile Include="NavPlatStatusStruct.cpp" />
     <ClCompile Include="SrvTimeStampPC.cpp" />
@@ -131,7 +130,6 @@
     <ClCompile Include="TreeNode.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="DataNavFileReader.h" />
     <ClInclude Include="DataPlot.h" />
     <ClInclude Include="DataPlotFileReader.h" />
     <ClInclude Include="DataPlotList.h" />
