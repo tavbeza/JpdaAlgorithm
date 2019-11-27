@@ -10,9 +10,9 @@ DataPlot::DataPlot()
 /// <summary>
 /// constructor with elements
 /// </summary>
-DataPlot::DataPlot(float range, float azimuth, float elevation, float velocity,
-	float rangeAccuracy, float azimuthAccuracy, float elevationAccuracy,
-	float velocityAccuracy, float SNR, float magnitude, unsigned int seqNumber)
+DataPlot::DataPlot(float range, float rangeAccuracy, float velocity, float velocityAccuracy,
+	float azimuth, float azimuthAccuracy, float elevation,
+	float elevationAccuracy, float SNR, float magnitude, unsigned int seqNumber)
 {
 	m_range = range;
 	m_azimuth = azimuth;
@@ -40,6 +40,14 @@ DataPlot::~DataPlot()
 float DataPlot::GetRange() const 
 {
 	return m_range;
+}
+
+/// <summary>
+/// Get velocity of the plot
+/// </summary>
+float DataPlot::GetVelocity() const
+{
+	return m_velocity;
 }
 
 /// <summary>

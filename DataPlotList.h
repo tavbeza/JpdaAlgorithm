@@ -23,11 +23,11 @@ public:
 	/// <summary>
 	/// Get m_dataPlotList
 	/// </summary>
-	std::list <DataPlot*> getDataPlotList();
+	std::list<DataPlot*>* getDataPlotList();
 
 private:
 
-	std::list <DataPlot*> m_dataPlotList;
+	std::list<DataPlot*> m_dataPlotList;
 
 };
 

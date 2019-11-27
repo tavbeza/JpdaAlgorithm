@@ -100,6 +100,8 @@ public:
 	/// </summary>
 	virtual void GainUpdate(const float& beta);
 
+	virtual void Update(DataPlot* pPlot);
+
 
 public:
 	/// <summary>

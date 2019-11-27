@@ -23,7 +23,7 @@ void DataPlotList::AddPlot(DataPlot* m_pLastDataPlot)
 /// <summary>
 /// Get m_dataPlotList
 /// </summary>
-std::list<DataPlot*> DataPlotList::getDataPlotList()
+std::list<DataPlot*>* DataPlotList::getDataPlotList()
 {
-	return m_dataPlotList;
+	return &m_dataPlotList;
 }

@@ -634,6 +634,11 @@ Matrix94d operator *(Matrix94d &rhMatrix, const Matrix4d &other);
 Vector2f operator *(Matrix24f &rhMatrix, const Vector4f &other);
 
 /// <summary>
+/// multiply matrix on the right 91 = 94*41
+/// </summary>
+Vector9d operator *(Matrix94d &rhMatrix, const Vector4d &other);
+
+/// <summary>
 /// multiply matrix on the right 41 = 49*91
 /// </summary>
 Vector4d operator *(Matrix49d &rhMatrix, const Vector9d &other);

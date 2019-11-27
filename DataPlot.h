@@ -28,6 +28,11 @@ public:
 	float GetRange() const;
 
 	/// <summary>
+	/// Get velocity of the plot
+	/// </summary>
+	float GetVelocity() const;
+
+	/// <summary>
 	/// Get	azimuth angle of the plot
 	/// </summary>
 	float GetAzimuthAngle() const;

@@ -263,6 +263,22 @@ Vector2f operator *(Matrix24f &rhMatrix, const Vector4f &other)
 }
 
 /// <summary>
+/// multiply matrix on the right 91 = 94*41
+/// </summary>
+Vector9d operator *(Matrix94d &rhMatrix, const Vector4d &other)
+{
+	Vector9d temp;
+	for (int i = 0; i < 9; i++)
+	{
+		for (int k = 0; k < 4; k++)
+		{
+			temp.m_Data[i] += rhMatrix.m_Data[i][k] * other.m_Data[k];
+		}
+	}
+	return temp;
+}
+
+/// <summary>
 /// multiply matrix on the right 41 = 49*91
 /// </summary>
 Vector4d operator *(Matrix49d &rhMatrix, const Vector9d &other)

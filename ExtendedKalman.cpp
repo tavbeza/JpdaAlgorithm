@@ -164,11 +164,38 @@ Vector3d ExtendedKalman::Predict(const double& dt)
 
 
 	//Compute Entropy
-	m_Entropy = m_k + 0.5 * log10(m_P.Determinant());
+	//m_Entropy = m_k + 0.5 * log10(m_P.Determinant());
 
 	m_last_prediction_eigen = m_Z_Predict;
 	m_last_prediction = Vector3d(m_Z_Predict.m_Data[0], m_Z_Predict.m_Data[1], m_Z_Predict.m_Data[2]);
 	return m_last_prediction;
+}
+
+void ExtendedKalman::Update(DataPlot* pPlot)
+{
+	// Innovation (or pre-fit residual) covariance
+	// Error Measurement Covariance Matrix
+	m_S = (m_H * (m_P_Predict * Transpose(m_H))) + m_R;
+	// Near-optimal Kalman gain
+	// Sets the optimal kalman gain
+	// 94 = 99 * (94*44)
+	// m_K = m_P *m_S'*m_H'
+	Matrix94d temp1 = Transpose(m_H);
+	m_K = m_P * (temp1 * m_S.Inverse());
+	// Updated state estimate 
+	Vector4d Zk;
+	Zk.m_Data[0] = pPlot->GetRange();
+	Zk.m_Data[1] = pPlot->GetAzimuthAngle();
+	Zk.m_Data[2] = pPlot->GetElevationAngle();
+	Zk.m_Data[3] = pPlot->GetVelocity();
+	Vector4d zPredict = m_H * m_X_Predict; // To check the result zPredict = 0
+	m_X = m_Z_Predict + (m_K * (Zk - zPredict));
+	// 99 = 94 * (44 * 49)
+	//m_K * m_S * m_K.Transpose()
+	Matrix49d temp2 = Transpose(m_K);
+	Matrix49d temp3 = m_S * temp2;
+	Matrix9d kskt = m_K * temp3;
+	m_P = m_P_Predict - kskt * (1 - 0);
 }
 
 void ExtendedKalman::GainUpdate(const float& beta)
