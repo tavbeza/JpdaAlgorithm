@@ -189,13 +189,19 @@ void ExtendedKalman::Update(DataPlot* pPlot)
 	Zk.m_Data[2] = pPlot->GetElevationAngle();
 	Zk.m_Data[3] = pPlot->GetVelocity();
 	Vector4d zPredict = m_H * m_X_Predict; // To check the result zPredict = 0
+	
+	// (Zk - zPredict) = Yk
+	// m_Z_Predict = X(k,k-1)
 	m_X = m_Z_Predict + (m_K * (Zk - zPredict));
+	
 	// 99 = 94 * (44 * 49)
 	//m_K * m_S * m_K.Transpose()
 	Matrix49d temp2 = Transpose(m_K);
 	Matrix49d temp3 = m_S * temp2;
-	Matrix9d kskt = m_K * temp3;
-	m_P = m_P_Predict - kskt * (1 - 0);
+	Matrix9d kskt = m_K * temp3; // kskt =  m_K * m_S * Transpose(m_K)
+	
+	// m_P_Predict = P(k,k-1)
+	m_P = m_P_Predict - kskt * (1 - 0); // m_P = P(k,k-1) - ( m_K * m_S * Transpose(m_K) ) * ( 1-0 )
 }
 
 void ExtendedKalman::GainUpdate(const float& beta)
