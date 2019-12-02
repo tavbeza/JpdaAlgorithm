@@ -27,3 +27,11 @@ std::list<DataPlot*>* DataPlotList::getDataPlotList()
 {
 	return &m_dataPlotList;
 }
+
+/// <summary>
+/// clear m_dataPlotList
+/// </summary>
+void DataPlotList::clear()
+{
+	m_dataPlotList.clear();
+}

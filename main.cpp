@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <math.h>
+#include <sstream>
 
 #include "Kalman.h"
 #include "ExtendedKalman.h"
@@ -25,11 +26,15 @@ void main()
 	string fileName = "dataPlots.csv";
 	
 	// already created 
-	createCSVfile(); 
+	//createCSVfile(); 
 
 
 	// Test Extended Kalman Filter 3D.
 	ExtendedKalman extendedKalman;
+	std::ofstream m_kalmanFile;
+	std::stringstream path;
+	path << "C:\\Users\\tavbe\\Desktop\\KalmanParams.txt";
+	m_kalmanFile.open(path.str());
 	
 	// for InitXP()
 	NavPlatStatusStruct nav;
@@ -39,14 +44,13 @@ void main()
 	// for kalman constructor
 	float dt = 93.0/1000.0;
 	Matrix4d R;
-
 	DataPlotList plotsList;
 	DataPlotFileReader plotsReader(fileName);
 	
 	for (int i = 1; i < NUMBER_DWELL + 1; i++)
 	{
 		plotsReader.ReadDataPlot(&plotsList, i);
-		for (list<DataPlot*>::iterator &it = plotsList.getDataPlotList()->begin(); it != plotsList.getDataPlotList()->end(); ++it)
+		for (list<DataPlot*>::iterator &it = plotsList.getDataPlotList()->begin(); it != plotsList.getDataPlotList()->end(); it++)
 		{
 			DataPlot* pPlot = *it;
 			extendedKalman.InitXP(*pPlot, nav, xInit, pInit);
@@ -61,9 +65,19 @@ void main()
 		
 			extendedKalman.Predict(dt);
 			extendedKalman.Update(pPlot);
-		}
 
+			m_kalmanFile << "//m_X" << std::endl;
+			for (int x = 0; x < 9; x++)
+			{
+				m_kalmanFile << extendedKalman.m_X.m_Data[x] << std::endl;
+			}
+			m_kalmanFile << "//m_P" << std::endl;
+			extendedKalman.m_P.PrintToFile(m_kalmanFile);
+			m_kalmanFile << std::endl << std::endl;
+		}
+		plotsList.clear();
 	}
+	m_kalmanFile.close();
 }
 /*
 ExtendedKalman::ExtendedKalman(

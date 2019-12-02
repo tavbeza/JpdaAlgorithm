@@ -27,11 +27,11 @@ struct TrackerParams {
 	double m_Sensor_Theta =0.1;
 	double m_Sensor_Psi = 0.1;
 	double  m_Sensor_Phi = 0.1;
-	Vector3d m_TauAcc;
-	Vector3d m_Amax;
-	Vector3d m_Pmax;
-	Vector3d m_P0;
-	Vector3d m_SigmaManeuver2 ;
+	Vector3d m_TauAcc = Vector3d(0.1,0.1,0.1);
+	Vector3d m_Amax = Vector3d(0.1, 0.1, 0.1);
+	Vector3d m_Pmax = Vector3d(0.1, 0.1, 0.1);
+	Vector3d m_P0 = Vector3d(0.1, 0.1, 0.1);
+	Vector3d m_SigmaManeuver2 = Vector3d(0.1, 0.1, 0.1);
 	double m_SigmaMnvrCalcMtd = 0.1;
 
 

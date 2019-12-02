@@ -105,6 +105,8 @@ ExtendedKalman::ExtendedKalman(
 	m_R = R;
 
 	m_IsFirst = true;
+	SetF(dt, m_F);
+	SetQ(dt, m_Q);
 }
 
 
@@ -152,7 +154,7 @@ Vector3d ExtendedKalman::Predict(const double& dt)
 	//m_Q.Print();
 	//m_P.Print();
 	//Predicted (a priori) error covariance
-	   //Covariance Matrix predicted error
+	//Covariance Matrix predicted error
 	m_P_Predict = m_F * m_P * m_F.Transpose() + m_Q;
 	//m_P_Predict.Print();
 
@@ -192,7 +194,9 @@ void ExtendedKalman::Update(DataPlot* pPlot)
 	
 	// (Zk - zPredict) = Yk
 	// m_Z_Predict = X(k,k-1)
-	m_X = m_Z_Predict + (m_K * (Zk - zPredict));
+
+	// TODO: we changed m_Z_Predict to m_X_Predict because the velocity
+	m_X = m_X_Predict + (m_K * (Zk)); //m_X = m_Z_Predict + (m_K * (Zk - zPredict));
 	
 	// 99 = 94 * (44 * 49)
 	//m_K * m_S * m_K.Transpose()

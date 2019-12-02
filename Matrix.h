@@ -4,6 +4,7 @@
 //#include "ServiceLayer\SrvDspMath.h"
 #include "Vector.h"
 #include <iostream>
+#include <iomanip>
 
 
 template<class _T, unsigned int _Rows, unsigned int _Cols>
@@ -473,7 +474,7 @@ public:
 		{
 			for (int j = 0; j < _Cols; j++)
 			{
-				kalmanFile << m_Data[i][j] << " ";
+				kalmanFile << std::fixed << std::setprecision(8) << m_Data[i][j] << " ";
 			}
 			kalmanFile << std::endl;
 		}

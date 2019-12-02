@@ -25,6 +25,11 @@ public:
 	/// </summary>
 	std::list<DataPlot*>* getDataPlotList();
 
+	/// <summary>
+	/// clear m_dataPlotList
+	/// </summary>
+	void clear();
+
 private:
 
 	std::list<DataPlot*> m_dataPlotList;
