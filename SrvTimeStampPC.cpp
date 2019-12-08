@@ -24,7 +24,9 @@ SrvTimeStamp::~SrvTimeStamp()
 
 }
 
-
+/// <summary>
+/// Initialize the frequency of the timer
+/// </summary>
 void SrvTimeStamp::Init()
 {
 	if (SrvTimeStamp::m_Frequency == 0)
@@ -40,14 +42,17 @@ void SrvTimeStamp::Init()
 }
 
 
-/// 
+/// <summary>
 /// <param name="startTime"></param>
+/// </summary>
 long long SrvTimeStamp::getTimeDelta(long long startTime) {
 
 	return (Stop() - startTime);
 }
 
-
+/// <summary>
+/// Get the TimeStamp
+/// </summary>
 long long SrvTimeStamp::getTimeStamp() {
 
 	return Start();
@@ -61,6 +66,10 @@ void SrvTimeStamp::initService()
 {
 	Init();
 }
+
+/// <summary>
+/// Start the timer
+/// </summary>
 long long SrvTimeStamp::Start()
 {
 	if (SrvTimeStamp::m_Frequency == 0)
@@ -72,16 +81,25 @@ long long SrvTimeStamp::Start()
 	return li.QuadPart;
 }
 
+/// <summary>
+/// Get Current Time of timer
+/// </summary>
 long long SrvTimeStamp::GetCurrent()
 {
 	return Stop();
 }
 
+/// <summary>
+/// Stop the timer
+/// </summary>
 long long SrvTimeStamp::Stop()
 {
 	return Start();
 }
 
+/// <summary>
+/// Stop the timer and return the time difference
+/// </summary>
 double SrvTimeStamp::Stop(long long startTime)
 {
 	if (SrvTimeStamp::m_Frequency == 0)

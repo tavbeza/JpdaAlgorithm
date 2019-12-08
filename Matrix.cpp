@@ -229,23 +229,6 @@ Matrix42f operator *(Matrix42f &rhMatrix, const Matrix2f &other)
 	return temp;
 }
 
-/*
-/// <summary>
-/// multiply float with matrix 42 = f*42
-/// </summary>
-Matrix42f operator *(float f, const Matrix42f &other)
-{
-	Matrix42f temp;
-	for (int i = 0; i < 4; i++)
-	{
-		for (int j = 0; j < 2; j++)
-		{
-			temp.m_Data[i][j] += f * other.m_Data[i][j];
-		}
-	}
-	return temp;
-}*/
-
 /// <summary>
 /// multiply matrix on the right 21 = 24*41
 /// </summary>
@@ -415,6 +398,9 @@ Matrix14f Transpose(Vector4f &vector4f)
 	return temp;
 }
 
+/// <summary>
+/// Print matrix 4x2 
+/// </summary>
 void print42f(Matrix42f rhMatrix)
 {
 	for (int i = -0; i < 4; i++)

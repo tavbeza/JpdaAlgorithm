@@ -7,6 +7,16 @@
 
 static int numOfPrints = 0;
 
+/// <summary>
+/// Empty constructor
+/// </summary>
+Kalman::Kalman()
+{
+}
+
+/// <summary>
+/// 2D constructor
+/// </summary>
 Kalman::Kalman(const float& dt, const Vector2f &target_delta, const float& x, const float& y, const float& vx, const float& vy, const Matrix2f& R)
 {
 	static int counter = 0;
@@ -119,7 +129,12 @@ Kalman::Kalman(const float& dt, const Vector2f &target_delta, const float& x, co
 	m_first = true;
 }
 
-
+/// <summary>
+/// The algorithm works in a two-step process. 
+/// In the prediction step, the Kalman filter produces estimates of the current state variables, along with their uncertainties. 
+/// Once the outcome of the next measurement (necessarily corrupted with some amount of error, including random noise) is observed, 
+/// these estimates are updated using a weighted average, with more weight being given to estimates with higher certainty.
+/// </summary>
 Vector2f Kalman::Predict()
 {
 	if (m_first)
@@ -191,6 +206,16 @@ Vector2f Kalman::Predict()
 	return m_last_prediction;
 }
 
+/// <summary>
+/// The relative certainty of the measurements and current state estimate is an important consideration, 
+/// and it is common to discuss the response of the filter in terms of the Kalman filter's gain. 
+/// The Kalman gain is the relative weight given to the measurements and current state estimate, 
+/// and can be "tuned" to achieve particular performance. 
+/// With a high gain, the filter places more weight on the most recent measurements, and thus follows them more responsively. 
+/// With a low gain, the filter follows the model predictions more closely. 
+/// At the extremes, a high gain close to one will result in a more jumpy estimated trajectory, 
+/// while low gain close to zero will smooth out noise but decrease the responsiveness.
+/// </summary>
 void Kalman::GainUpdate(const float& beta)
 {
 	//Matrix24f m_H_T;
@@ -222,6 +247,12 @@ void Kalman::GainUpdate(const float& beta)
 	}
 }
 
+/// <summary>
+/// The algorithm works in a two-step process. 
+/// In the prediction step, the Kalman filter produces estimates of the current state variables, along with their uncertainties. 
+/// Once the outcome of the next measurement (necessarily corrupted with some amount of error, including random noise) is observed, 
+// these estimates are updated using a weighted average, with more weight being given to estimates with higher certainty.
+/// </summary>
 Vector4f Kalman::Update(const std::vector< Vector2f >& selected_detections, const Vector5f& beta, const float& last_beta)
 {
 	//static int numOfPrints = 0;

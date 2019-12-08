@@ -1,14 +1,14 @@
 #include "DataPlot.h"
 
 /// <summary>
-/// empty constructor
+/// Empty constructor
 /// </summary>
 DataPlot::DataPlot()
 {
 }
 
 /// <summary>
-/// constructor with elements
+/// Constructor with elements
 /// </summary>
 DataPlot::DataPlot(float range, float rangeAccuracy, float velocity, float velocityAccuracy,
 	float azimuth, float azimuthAccuracy, float elevation,

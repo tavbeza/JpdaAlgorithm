@@ -17,7 +17,9 @@ public:
 	/// </summary>
 	TreeNode();
 
+	/// <summary>
 	/// Copy constractor
+	/// </summary>
 	TreeNode(const TreeNode &old_obj);
 
 	/// <summary>
@@ -45,7 +47,9 @@ public:
 	/// </summary>
 	TreeNode* getParent();
 
-	///
+	/// <summary>
+	/// Check if the track is already exist: return true if exist, else return false
+	/// </summary>
 	bool hasTrackParent(TreeNode *pParent, int track);
 
 	/// <summary>

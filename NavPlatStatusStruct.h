@@ -2,10 +2,20 @@
 #define _NAV_PLAT_STATUS_STRUCT_H_
 #include "Vector.h"
 
+/// <summary>
+/// This class encapsulate the navigation parameters accepted by the platform navigation system
+/// </summary>
 class NavPlatStatusStruct
 {
 public:
+	/// <summary>
+	/// Empty constructor
+	/// </summary>
 	NavPlatStatusStruct();
+
+	/// <summary>
+	/// Destructor 
+	/// </summary>
 	~NavPlatStatusStruct();
 
 

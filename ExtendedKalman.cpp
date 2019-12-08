@@ -1,10 +1,6 @@
 #include "ExtendedKalman.h"
 #include "ns.h"
 
-// test push
-//test push 2
-// test push 3
-
 
 float ExtendedKalman::m_k = 5.0620f; // n/2 * log(4*PI) where n is the state dimention (x, y, x', y')
 
@@ -109,7 +105,9 @@ ExtendedKalman::ExtendedKalman(
 	SetQ(dt, m_Q);
 }
 
-
+/// <summary>
+/// Virtual kalman destructor
+/// </summary>
 ExtendedKalman::~ExtendedKalman()
 {
 
@@ -130,6 +128,12 @@ void ExtendedKalman::Init(
 {
 }
 
+/// <summary>
+/// The algorithm works in a two-step process. 
+/// In the prediction step, the Kalman filter produces estimates of the current state variables, along with their uncertainties. 
+/// Once the outcome of the next measurement (necessarily corrupted with some amount of error, including random noise) is observed, 
+/// these estimates are updated using a weighted average, with more weight being given to estimates with higher certainty.
+/// </summary>
 Vector3d ExtendedKalman::Predict(const double& dt)
 {
 	if (m_IsFirst)
@@ -173,6 +177,12 @@ Vector3d ExtendedKalman::Predict(const double& dt)
 	return m_last_prediction;
 }
 
+/// <summary>
+/// The algorithm works in a two-step process. 
+/// In the prediction step, the Kalman filter produces estimates of the current state variables, along with their uncertainties. 
+/// Once the outcome of the next measurement (necessarily corrupted with some amount of error, including random noise) is observed, 
+// these estimates are updated using a weighted average, with more weight being given to estimates with higher certainty.
+/// </summary>
 void ExtendedKalman::Update(DataPlot* pPlot)
 {
 	// Innovation (or pre-fit residual) covariance
@@ -208,6 +218,16 @@ void ExtendedKalman::Update(DataPlot* pPlot)
 	m_P = m_P_Predict - kskt * (1 - 0); // m_P = P(k,k-1) - ( m_K * m_S * Transpose(m_K) ) * ( 1-0 )
 }
 
+/// <summary>
+/// The relative certainty of the measurements and current state estimate is an important consideration, 
+/// and it is common to discuss the response of the filter in terms of the Kalman filter's gain. 
+/// The Kalman gain is the relative weight given to the measurements and current state estimate, 
+/// and can be "tuned" to achieve particular performance. 
+/// With a high gain, the filter places more weight on the most recent measurements, and thus follows them more responsively. 
+/// With a low gain, the filter follows the model predictions more closely. 
+/// At the extremes, a high gain close to one will result in a more jumpy estimated trajectory, 
+/// while low gain close to zero will smooth out noise but decrease the responsiveness.
+/// </summary>
 void ExtendedKalman::GainUpdate(const float& beta)
 {
 	// Innovation (or pre-fit residual) covariance
@@ -556,6 +576,9 @@ void ExtendedKalman::Calc_H_Matrix_Cart2Pol(Vector9d X, Matrix49d &H)
 	H.m_Data[3][7] = z / R;
 }
 
+/// <summary>
+/// Set measurement covariance matrix in ECEF tracking axes
+/// </summary>
 void ExtendedKalman::SetR_Ecef(double r,
 	double az,
 	double el,

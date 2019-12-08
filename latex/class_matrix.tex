@@ -1,0 +1,380 @@
+\hypertarget{class_matrix}{}\doxysection{Matrix$<$ \+\_\+T, \+\_\+\+Rows, \+\_\+\+Cols $>$ Class Template Reference}
+\label{class_matrix}\index{Matrix$<$ \_T, \_Rows, \_Cols $>$@{Matrix$<$ \_T, \_Rows, \_Cols $>$}}
+
+
+\mbox{\hyperlink{class_matrix}{Matrix}} Class  
+
+
+
+
+{\ttfamily \#include $<$Matrix.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_matrix_a6fd996473c4fe5c7e6bbecc573e081b2}{Matrix}} ()
+\begin{DoxyCompactList}\small\item\em Default matrix constructor \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_matrix_ab65af4bb6b351b3b0ee1587847e41867}{Matrix}} (const \mbox{\hyperlink{class_matrix}{Matrix}}$<$ \+\_\+T, \+\_\+\+Rows, \+\_\+\+Cols $>$ \&other)
+\begin{DoxyCompactList}\small\item\em Copy constructor \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_matrix_a948c9f18ff05e9f461987d8c12a114b4}{Matrix}} (\+\_\+T $\ast$p\+Data)
+\begin{DoxyCompactList}\small\item\em Constructor that accept 2x2 array \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_matrix_aff6756bf196d15ed00c593d19995f49c}{Init}} (\+\_\+T a11, \+\_\+T a12, \+\_\+T a21, \+\_\+T a22)
+\begin{DoxyCompactList}\small\item\em Initialize 2x2 matrix \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_matrix_a61f94483997b3d96eb33a72b6660ba84}{Init}} (\+\_\+T a11, \+\_\+T a12, \+\_\+T a13, \+\_\+T a14, \+\_\+T a21, \+\_\+T a22, \+\_\+T a23, \+\_\+T a24, \+\_\+T a31, \+\_\+T a32, \+\_\+T a33, \+\_\+T a34, \+\_\+T a41, \+\_\+T a42, \+\_\+T a43, \+\_\+T a44)
+\begin{DoxyCompactList}\small\item\em Initialize 3x3 matrix \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_matrix}{Matrix}}$<$ \+\_\+T, \+\_\+\+Rows, \+\_\+\+Cols $>$ \mbox{\hyperlink{class_matrix_a8ff1bcb659675241439c72bb33ed42bc}{Identity}} ()
+\begin{DoxyCompactList}\small\item\em Return Identity matrix \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_matrix}{Matrix}}$<$ \+\_\+T, \+\_\+\+Rows, \+\_\+\+Cols $>$ \mbox{\hyperlink{class_matrix_adf79b05a855beb57f2653e34c6350300}{Inverse}} ()
+\begin{DoxyCompactList}\small\item\em Return Identity matrix \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_matrix_a179987563e33475056d7a9115b4d0455}{Determinant}} () const
+\begin{DoxyCompactList}\small\item\em Return the determinant of the matrix \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_matrix_a709bc241ed7772ced4bfba8be0cf4fe5}{Print}} ()
+\begin{DoxyCompactList}\small\item\em Print matrix \end{DoxyCompactList}\item 
+\+\_\+T \mbox{\hyperlink{class_matrix_a60ce7200da09d9a84d16d526d2663f57}{get}} (int i, int j)
+\begin{DoxyCompactList}\small\item\em Returns element i,j \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_matrix_aab3d71a3499da995daf49f860467e0cf}{set}} (int i, int j, \+\_\+T e)
+\begin{DoxyCompactList}\small\item\em Sets element i,j \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_matrix}{Matrix}}$<$ \+\_\+T, \+\_\+\+Rows, \+\_\+\+Cols $>$ \mbox{\hyperlink{class_matrix_a1c176a339b877d40a0437bd344a42edd}{operator+}} (const \mbox{\hyperlink{class_matrix}{Matrix}}$<$ \+\_\+T, \+\_\+\+Rows, \+\_\+\+Cols $>$ \&other) const
+\begin{DoxyCompactList}\small\item\em overloading operator + \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_matrix}{Matrix}}$<$ \+\_\+T, \+\_\+\+Rows, \+\_\+\+Cols $>$ \mbox{\hyperlink{class_matrix_a494817407526a4481200a9ba17f8a129}{operator+=}} (const \mbox{\hyperlink{class_matrix}{Matrix}}$<$ \+\_\+T, \+\_\+\+Rows, \+\_\+\+Cols $>$ \&other)
+\begin{DoxyCompactList}\small\item\em overloading operator += \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_matrix}{Matrix}}$<$ \+\_\+T, \+\_\+\+Rows, \+\_\+\+Cols $>$ \mbox{\hyperlink{class_matrix_af68846dec1a11782ff7ae3f6a8bd48fc}{operator-\/}} (const \mbox{\hyperlink{class_matrix}{Matrix}}$<$ \+\_\+T, \+\_\+\+Rows, \+\_\+\+Cols $>$ \&other) const
+\begin{DoxyCompactList}\small\item\em overloading operator -\/ \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_matrix}{Matrix}}$<$ \+\_\+T, \+\_\+\+Rows, \+\_\+\+Cols $>$ \mbox{\hyperlink{class_matrix_a64b3d0d0d53e33e082de7b259b8f46a1}{operator-\/=}} (const \mbox{\hyperlink{class_matrix}{Matrix}}$<$ \+\_\+T, \+\_\+\+Rows, \+\_\+\+Cols $>$ \&other) const
+\begin{DoxyCompactList}\small\item\em overloading operator -\/= \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_matrix_acc9b9507d8a3f954d22cbb5e4099eea2}{operator=}} (const \mbox{\hyperlink{class_matrix}{Matrix}}$<$ \+\_\+T, \+\_\+\+Rows, \+\_\+\+Cols $>$ \&other)
+\begin{DoxyCompactList}\small\item\em overloading operator = \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_matrix}{Matrix}}$<$ \+\_\+T, \+\_\+\+Rows, \+\_\+\+Cols $>$ \mbox{\hyperlink{class_matrix_a5909a751e71016ce03eb176e071b8b83}{operator-\/}} () const
+\begin{DoxyCompactList}\small\item\em overloading operator -\/ \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_matrix}{Matrix}}$<$ \+\_\+T, \+\_\+\+Rows, \+\_\+\+Cols $>$ \mbox{\hyperlink{class_matrix_a7c3c220abe6a62fca3a1186d1a36da2e}{operator$\ast$}} (const \+\_\+T value) const
+\begin{DoxyCompactList}\small\item\em overloading operator $\ast$ \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_matrix}{Matrix}}$<$ \+\_\+T, \+\_\+\+Rows, \+\_\+\+Cols $>$ \mbox{\hyperlink{class_matrix_a21b532ec640b1c8b85c7fe52e7307f64}{operator$\ast$}} (const \mbox{\hyperlink{class_matrix}{Matrix}}$<$ \+\_\+T, \+\_\+\+Rows, \+\_\+\+Cols $>$ \&other) const
+\begin{DoxyCompactList}\small\item\em multiplay matrix on the right \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_vector}{Vector3d}} \mbox{\hyperlink{class_matrix_aee43783b9c717985e4cc8c0b48456be1}{operator$\ast$}} (const \mbox{\hyperlink{class_vector}{Vector3d}} \&v) const
+\begin{DoxyCompactList}\small\item\em multiplay matrix on the right \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_vector}{Vector4d}} \mbox{\hyperlink{class_matrix_a09fb767be0fafa640d20fd79264b443b}{operator$\ast$}} (const \mbox{\hyperlink{class_vector}{Vector4d}} \&v) const
+\begin{DoxyCompactList}\small\item\em multiplay matrix on the right \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_vector}{Vector4f}} \mbox{\hyperlink{class_matrix_ad5fab2f8ea4a5e0dafd2735bc6f6d258}{operator$\ast$}} (const \mbox{\hyperlink{class_vector}{Vector4f}} \&v) const
+\begin{DoxyCompactList}\small\item\em multiplay matrix on the right \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_vector}{Vector9d}} \mbox{\hyperlink{class_matrix_a351fa1c857cc513ed82760e8bdadaeec}{operator$\ast$}} (const \mbox{\hyperlink{class_vector}{Vector9d}} \&v) const
+\begin{DoxyCompactList}\small\item\em multiplay matrix on the right \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_matrix}{Matrix}}$<$ \+\_\+T, \+\_\+\+Rows, \+\_\+\+Cols $>$ \mbox{\hyperlink{class_matrix_a6910e9fa3e4792a754b329284d21353f}{Transpose}} ()
+\begin{DoxyCompactList}\small\item\em Return the transpose matrix \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_matrix_a83692f60038054762716fcc114f5a9f2}{Print\+To\+File}} (std\+::ofstream \&kalman\+File) const
+\begin{DoxyCompactList}\small\item\em Print matrix to file \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{class_matrix}{Matrix}}$<$ \+\_\+T, \+\_\+\+Rows, \+\_\+\+Cols $>$ \mbox{\hyperlink{class_matrix_a333fffc85445fb3cfda40f47c8c74f39}{Zero}} ()
+\begin{DoxyCompactList}\small\item\em Return Zero matrix \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_matrix_a58ed5aa185f1fb52d87fc17cc79399a0}\label{class_matrix_a58ed5aa185f1fb52d87fc17cc79399a0}} 
+\+\_\+T {\bfseries m\+\_\+\+Data} \mbox{[}\+\_\+\+Rows\mbox{]}\mbox{[}\+\_\+\+Cols\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class \+\_\+T, unsigned int \+\_\+\+Rows, unsigned int \+\_\+\+Cols$>$\newline
+class Matrix$<$ \+\_\+\+T, \+\_\+\+Rows, \+\_\+\+Cols $>$}
+
+\mbox{\hyperlink{class_matrix}{Matrix}} Class 
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_matrix_a6fd996473c4fe5c7e6bbecc573e081b2}\label{class_matrix_a6fd996473c4fe5c7e6bbecc573e081b2}} 
+\index{Matrix$<$ \_T, \_Rows, \_Cols $>$@{Matrix$<$ \_T, \_Rows, \_Cols $>$}!Matrix@{Matrix}}
+\index{Matrix@{Matrix}!Matrix$<$ \_T, \_Rows, \_Cols $>$@{Matrix$<$ \_T, \_Rows, \_Cols $>$}}
+\doxysubsubsection{\texorpdfstring{Matrix()}{Matrix()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily template$<$class \+\_\+T, unsigned int \+\_\+\+Rows, unsigned int \+\_\+\+Cols$>$ \\
+\mbox{\hyperlink{class_matrix}{Matrix}}$<$ \+\_\+T, \+\_\+\+Rows, \+\_\+\+Cols $>$\+::\mbox{\hyperlink{class_matrix}{Matrix}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Default matrix constructor 
+
+\mbox{\Hypertarget{class_matrix_ab65af4bb6b351b3b0ee1587847e41867}\label{class_matrix_ab65af4bb6b351b3b0ee1587847e41867}} 
+\index{Matrix$<$ \_T, \_Rows, \_Cols $>$@{Matrix$<$ \_T, \_Rows, \_Cols $>$}!Matrix@{Matrix}}
+\index{Matrix@{Matrix}!Matrix$<$ \_T, \_Rows, \_Cols $>$@{Matrix$<$ \_T, \_Rows, \_Cols $>$}}
+\doxysubsubsection{\texorpdfstring{Matrix()}{Matrix()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily template$<$class \+\_\+T, unsigned int \+\_\+\+Rows, unsigned int \+\_\+\+Cols$>$ \\
+\mbox{\hyperlink{class_matrix}{Matrix}}$<$ \+\_\+T, \+\_\+\+Rows, \+\_\+\+Cols $>$\+::\mbox{\hyperlink{class_matrix}{Matrix}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_matrix}{Matrix}}$<$ \+\_\+T, \+\_\+\+Rows, \+\_\+\+Cols $>$ \&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Copy constructor 
+
+\mbox{\Hypertarget{class_matrix_a948c9f18ff05e9f461987d8c12a114b4}\label{class_matrix_a948c9f18ff05e9f461987d8c12a114b4}} 
+\index{Matrix$<$ \_T, \_Rows, \_Cols $>$@{Matrix$<$ \_T, \_Rows, \_Cols $>$}!Matrix@{Matrix}}
+\index{Matrix@{Matrix}!Matrix$<$ \_T, \_Rows, \_Cols $>$@{Matrix$<$ \_T, \_Rows, \_Cols $>$}}
+\doxysubsubsection{\texorpdfstring{Matrix()}{Matrix()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily template$<$class \+\_\+T, unsigned int \+\_\+\+Rows, unsigned int \+\_\+\+Cols$>$ \\
+\mbox{\hyperlink{class_matrix}{Matrix}}$<$ \+\_\+T, \+\_\+\+Rows, \+\_\+\+Cols $>$\+::\mbox{\hyperlink{class_matrix}{Matrix}} (\begin{DoxyParamCaption}\item[{\+\_\+T $\ast$}]{p\+Data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor that accept 2x2 array 
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_matrix_a179987563e33475056d7a9115b4d0455}\label{class_matrix_a179987563e33475056d7a9115b4d0455}} 
+\index{Matrix$<$ \_T, \_Rows, \_Cols $>$@{Matrix$<$ \_T, \_Rows, \_Cols $>$}!Determinant@{Determinant}}
+\index{Determinant@{Determinant}!Matrix$<$ \_T, \_Rows, \_Cols $>$@{Matrix$<$ \_T, \_Rows, \_Cols $>$}}
+\doxysubsubsection{\texorpdfstring{Determinant()}{Determinant()}}
+{\footnotesize\ttfamily template$<$class \+\_\+T, unsigned int \+\_\+\+Rows, unsigned int \+\_\+\+Cols$>$ \\
+float \mbox{\hyperlink{class_matrix}{Matrix}}$<$ \+\_\+T, \+\_\+\+Rows, \+\_\+\+Cols $>$\+::Determinant (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the determinant of the matrix 
+
+\mbox{\Hypertarget{class_matrix_a60ce7200da09d9a84d16d526d2663f57}\label{class_matrix_a60ce7200da09d9a84d16d526d2663f57}} 
+\index{Matrix$<$ \_T, \_Rows, \_Cols $>$@{Matrix$<$ \_T, \_Rows, \_Cols $>$}!get@{get}}
+\index{get@{get}!Matrix$<$ \_T, \_Rows, \_Cols $>$@{Matrix$<$ \_T, \_Rows, \_Cols $>$}}
+\doxysubsubsection{\texorpdfstring{get()}{get()}}
+{\footnotesize\ttfamily template$<$class \+\_\+T, unsigned int \+\_\+\+Rows, unsigned int \+\_\+\+Cols$>$ \\
+\+\_\+T \mbox{\hyperlink{class_matrix}{Matrix}}$<$ \+\_\+T, \+\_\+\+Rows, \+\_\+\+Cols $>$\+::get (\begin{DoxyParamCaption}\item[{int}]{i,  }\item[{int}]{j }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns element i,j 
+
+\mbox{\Hypertarget{class_matrix_a8ff1bcb659675241439c72bb33ed42bc}\label{class_matrix_a8ff1bcb659675241439c72bb33ed42bc}} 
+\index{Matrix$<$ \_T, \_Rows, \_Cols $>$@{Matrix$<$ \_T, \_Rows, \_Cols $>$}!Identity@{Identity}}
+\index{Identity@{Identity}!Matrix$<$ \_T, \_Rows, \_Cols $>$@{Matrix$<$ \_T, \_Rows, \_Cols $>$}}
+\doxysubsubsection{\texorpdfstring{Identity()}{Identity()}}
+{\footnotesize\ttfamily template$<$class \+\_\+T, unsigned int \+\_\+\+Rows, unsigned int \+\_\+\+Cols$>$ \\
+\mbox{\hyperlink{class_matrix}{Matrix}}$<$\+\_\+T, \+\_\+\+Rows, \+\_\+\+Cols$>$ \mbox{\hyperlink{class_matrix}{Matrix}}$<$ \+\_\+T, \+\_\+\+Rows, \+\_\+\+Cols $>$\+::Identity (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return Identity matrix 
+
+\mbox{\Hypertarget{class_matrix_a61f94483997b3d96eb33a72b6660ba84}\label{class_matrix_a61f94483997b3d96eb33a72b6660ba84}} 
+\index{Matrix$<$ \_T, \_Rows, \_Cols $>$@{Matrix$<$ \_T, \_Rows, \_Cols $>$}!Init@{Init}}
+\index{Init@{Init}!Matrix$<$ \_T, \_Rows, \_Cols $>$@{Matrix$<$ \_T, \_Rows, \_Cols $>$}}
+\doxysubsubsection{\texorpdfstring{Init()}{Init()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class \+\_\+T, unsigned int \+\_\+\+Rows, unsigned int \+\_\+\+Cols$>$ \\
+void \mbox{\hyperlink{class_matrix}{Matrix}}$<$ \+\_\+T, \+\_\+\+Rows, \+\_\+\+Cols $>$\+::Init (\begin{DoxyParamCaption}\item[{\+\_\+T}]{a11,  }\item[{\+\_\+T}]{a12,  }\item[{\+\_\+T}]{a13,  }\item[{\+\_\+T}]{a14,  }\item[{\+\_\+T}]{a21,  }\item[{\+\_\+T}]{a22,  }\item[{\+\_\+T}]{a23,  }\item[{\+\_\+T}]{a24,  }\item[{\+\_\+T}]{a31,  }\item[{\+\_\+T}]{a32,  }\item[{\+\_\+T}]{a33,  }\item[{\+\_\+T}]{a34,  }\item[{\+\_\+T}]{a41,  }\item[{\+\_\+T}]{a42,  }\item[{\+\_\+T}]{a43,  }\item[{\+\_\+T}]{a44 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Initialize 3x3 matrix 
+
+Initialize 4x4 matrix\mbox{\Hypertarget{class_matrix_aff6756bf196d15ed00c593d19995f49c}\label{class_matrix_aff6756bf196d15ed00c593d19995f49c}} 
+\index{Matrix$<$ \_T, \_Rows, \_Cols $>$@{Matrix$<$ \_T, \_Rows, \_Cols $>$}!Init@{Init}}
+\index{Init@{Init}!Matrix$<$ \_T, \_Rows, \_Cols $>$@{Matrix$<$ \_T, \_Rows, \_Cols $>$}}
+\doxysubsubsection{\texorpdfstring{Init()}{Init()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class \+\_\+T, unsigned int \+\_\+\+Rows, unsigned int \+\_\+\+Cols$>$ \\
+void \mbox{\hyperlink{class_matrix}{Matrix}}$<$ \+\_\+T, \+\_\+\+Rows, \+\_\+\+Cols $>$\+::Init (\begin{DoxyParamCaption}\item[{\+\_\+T}]{a11,  }\item[{\+\_\+T}]{a12,  }\item[{\+\_\+T}]{a21,  }\item[{\+\_\+T}]{a22 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Initialize 2x2 matrix 
+
+\mbox{\Hypertarget{class_matrix_adf79b05a855beb57f2653e34c6350300}\label{class_matrix_adf79b05a855beb57f2653e34c6350300}} 
+\index{Matrix$<$ \_T, \_Rows, \_Cols $>$@{Matrix$<$ \_T, \_Rows, \_Cols $>$}!Inverse@{Inverse}}
+\index{Inverse@{Inverse}!Matrix$<$ \_T, \_Rows, \_Cols $>$@{Matrix$<$ \_T, \_Rows, \_Cols $>$}}
+\doxysubsubsection{\texorpdfstring{Inverse()}{Inverse()}}
+{\footnotesize\ttfamily template$<$class \+\_\+T, unsigned int \+\_\+\+Rows, unsigned int \+\_\+\+Cols$>$ \\
+\mbox{\hyperlink{class_matrix}{Matrix}}$<$\+\_\+T, \+\_\+\+Rows, \+\_\+\+Cols$>$ \mbox{\hyperlink{class_matrix}{Matrix}}$<$ \+\_\+T, \+\_\+\+Rows, \+\_\+\+Cols $>$\+::Inverse (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return Identity matrix 
+
+\mbox{\Hypertarget{class_matrix_a7c3c220abe6a62fca3a1186d1a36da2e}\label{class_matrix_a7c3c220abe6a62fca3a1186d1a36da2e}} 
+\index{Matrix$<$ \_T, \_Rows, \_Cols $>$@{Matrix$<$ \_T, \_Rows, \_Cols $>$}!operator$\ast$@{operator$\ast$}}
+\index{operator$\ast$@{operator$\ast$}!Matrix$<$ \_T, \_Rows, \_Cols $>$@{Matrix$<$ \_T, \_Rows, \_Cols $>$}}
+\doxysubsubsection{\texorpdfstring{operator$\ast$()}{operator*()}\hspace{0.1cm}{\footnotesize\ttfamily [1/6]}}
+{\footnotesize\ttfamily template$<$class \+\_\+T, unsigned int \+\_\+\+Rows, unsigned int \+\_\+\+Cols$>$ \\
+\mbox{\hyperlink{class_matrix}{Matrix}}$<$\+\_\+T, \+\_\+\+Rows, \+\_\+\+Cols$>$ \mbox{\hyperlink{class_matrix}{Matrix}}$<$ \+\_\+T, \+\_\+\+Rows, \+\_\+\+Cols $>$\+::operator$\ast$ (\begin{DoxyParamCaption}\item[{const \+\_\+T}]{value }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+overloading operator $\ast$ 
+
+\mbox{\Hypertarget{class_matrix_a21b532ec640b1c8b85c7fe52e7307f64}\label{class_matrix_a21b532ec640b1c8b85c7fe52e7307f64}} 
+\index{Matrix$<$ \_T, \_Rows, \_Cols $>$@{Matrix$<$ \_T, \_Rows, \_Cols $>$}!operator$\ast$@{operator$\ast$}}
+\index{operator$\ast$@{operator$\ast$}!Matrix$<$ \_T, \_Rows, \_Cols $>$@{Matrix$<$ \_T, \_Rows, \_Cols $>$}}
+\doxysubsubsection{\texorpdfstring{operator$\ast$()}{operator*()}\hspace{0.1cm}{\footnotesize\ttfamily [2/6]}}
+{\footnotesize\ttfamily template$<$class \+\_\+T, unsigned int \+\_\+\+Rows, unsigned int \+\_\+\+Cols$>$ \\
+\mbox{\hyperlink{class_matrix}{Matrix}}$<$\+\_\+T, \+\_\+\+Rows, \+\_\+\+Cols$>$ \mbox{\hyperlink{class_matrix}{Matrix}}$<$ \+\_\+T, \+\_\+\+Rows, \+\_\+\+Cols $>$\+::operator$\ast$ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_matrix}{Matrix}}$<$ \+\_\+T, \+\_\+\+Rows, \+\_\+\+Cols $>$ \&}]{other }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+multiplay matrix on the right 
+
+\mbox{\Hypertarget{class_matrix_aee43783b9c717985e4cc8c0b48456be1}\label{class_matrix_aee43783b9c717985e4cc8c0b48456be1}} 
+\index{Matrix$<$ \_T, \_Rows, \_Cols $>$@{Matrix$<$ \_T, \_Rows, \_Cols $>$}!operator$\ast$@{operator$\ast$}}
+\index{operator$\ast$@{operator$\ast$}!Matrix$<$ \_T, \_Rows, \_Cols $>$@{Matrix$<$ \_T, \_Rows, \_Cols $>$}}
+\doxysubsubsection{\texorpdfstring{operator$\ast$()}{operator*()}\hspace{0.1cm}{\footnotesize\ttfamily [3/6]}}
+{\footnotesize\ttfamily template$<$class \+\_\+T, unsigned int \+\_\+\+Rows, unsigned int \+\_\+\+Cols$>$ \\
+\mbox{\hyperlink{class_vector}{Vector3d}} \mbox{\hyperlink{class_matrix}{Matrix}}$<$ \+\_\+T, \+\_\+\+Rows, \+\_\+\+Cols $>$\+::operator$\ast$ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_vector}{Vector3d}} \&}]{v }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+multiplay matrix on the right 
+
+\mbox{\Hypertarget{class_matrix_a09fb767be0fafa640d20fd79264b443b}\label{class_matrix_a09fb767be0fafa640d20fd79264b443b}} 
+\index{Matrix$<$ \_T, \_Rows, \_Cols $>$@{Matrix$<$ \_T, \_Rows, \_Cols $>$}!operator$\ast$@{operator$\ast$}}
+\index{operator$\ast$@{operator$\ast$}!Matrix$<$ \_T, \_Rows, \_Cols $>$@{Matrix$<$ \_T, \_Rows, \_Cols $>$}}
+\doxysubsubsection{\texorpdfstring{operator$\ast$()}{operator*()}\hspace{0.1cm}{\footnotesize\ttfamily [4/6]}}
+{\footnotesize\ttfamily template$<$class \+\_\+T, unsigned int \+\_\+\+Rows, unsigned int \+\_\+\+Cols$>$ \\
+\mbox{\hyperlink{class_vector}{Vector4d}} \mbox{\hyperlink{class_matrix}{Matrix}}$<$ \+\_\+T, \+\_\+\+Rows, \+\_\+\+Cols $>$\+::operator$\ast$ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_vector}{Vector4d}} \&}]{v }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+multiplay matrix on the right 
+
+\mbox{\Hypertarget{class_matrix_ad5fab2f8ea4a5e0dafd2735bc6f6d258}\label{class_matrix_ad5fab2f8ea4a5e0dafd2735bc6f6d258}} 
+\index{Matrix$<$ \_T, \_Rows, \_Cols $>$@{Matrix$<$ \_T, \_Rows, \_Cols $>$}!operator$\ast$@{operator$\ast$}}
+\index{operator$\ast$@{operator$\ast$}!Matrix$<$ \_T, \_Rows, \_Cols $>$@{Matrix$<$ \_T, \_Rows, \_Cols $>$}}
+\doxysubsubsection{\texorpdfstring{operator$\ast$()}{operator*()}\hspace{0.1cm}{\footnotesize\ttfamily [5/6]}}
+{\footnotesize\ttfamily template$<$class \+\_\+T, unsigned int \+\_\+\+Rows, unsigned int \+\_\+\+Cols$>$ \\
+\mbox{\hyperlink{class_vector}{Vector4f}} \mbox{\hyperlink{class_matrix}{Matrix}}$<$ \+\_\+T, \+\_\+\+Rows, \+\_\+\+Cols $>$\+::operator$\ast$ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_vector}{Vector4f}} \&}]{v }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+multiplay matrix on the right 
+
+\mbox{\Hypertarget{class_matrix_a351fa1c857cc513ed82760e8bdadaeec}\label{class_matrix_a351fa1c857cc513ed82760e8bdadaeec}} 
+\index{Matrix$<$ \_T, \_Rows, \_Cols $>$@{Matrix$<$ \_T, \_Rows, \_Cols $>$}!operator$\ast$@{operator$\ast$}}
+\index{operator$\ast$@{operator$\ast$}!Matrix$<$ \_T, \_Rows, \_Cols $>$@{Matrix$<$ \_T, \_Rows, \_Cols $>$}}
+\doxysubsubsection{\texorpdfstring{operator$\ast$()}{operator*()}\hspace{0.1cm}{\footnotesize\ttfamily [6/6]}}
+{\footnotesize\ttfamily template$<$class \+\_\+T, unsigned int \+\_\+\+Rows, unsigned int \+\_\+\+Cols$>$ \\
+\mbox{\hyperlink{class_vector}{Vector9d}} \mbox{\hyperlink{class_matrix}{Matrix}}$<$ \+\_\+T, \+\_\+\+Rows, \+\_\+\+Cols $>$\+::operator$\ast$ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_vector}{Vector9d}} \&}]{v }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+multiplay matrix on the right 
+
+\mbox{\Hypertarget{class_matrix_a1c176a339b877d40a0437bd344a42edd}\label{class_matrix_a1c176a339b877d40a0437bd344a42edd}} 
+\index{Matrix$<$ \_T, \_Rows, \_Cols $>$@{Matrix$<$ \_T, \_Rows, \_Cols $>$}!operator+@{operator+}}
+\index{operator+@{operator+}!Matrix$<$ \_T, \_Rows, \_Cols $>$@{Matrix$<$ \_T, \_Rows, \_Cols $>$}}
+\doxysubsubsection{\texorpdfstring{operator+()}{operator+()}}
+{\footnotesize\ttfamily template$<$class \+\_\+T, unsigned int \+\_\+\+Rows, unsigned int \+\_\+\+Cols$>$ \\
+\mbox{\hyperlink{class_matrix}{Matrix}}$<$\+\_\+T, \+\_\+\+Rows, \+\_\+\+Cols$>$ \mbox{\hyperlink{class_matrix}{Matrix}}$<$ \+\_\+T, \+\_\+\+Rows, \+\_\+\+Cols $>$\+::operator+ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_matrix}{Matrix}}$<$ \+\_\+T, \+\_\+\+Rows, \+\_\+\+Cols $>$ \&}]{other }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+overloading operator + 
+
+\mbox{\Hypertarget{class_matrix_a494817407526a4481200a9ba17f8a129}\label{class_matrix_a494817407526a4481200a9ba17f8a129}} 
+\index{Matrix$<$ \_T, \_Rows, \_Cols $>$@{Matrix$<$ \_T, \_Rows, \_Cols $>$}!operator+=@{operator+=}}
+\index{operator+=@{operator+=}!Matrix$<$ \_T, \_Rows, \_Cols $>$@{Matrix$<$ \_T, \_Rows, \_Cols $>$}}
+\doxysubsubsection{\texorpdfstring{operator+=()}{operator+=()}}
+{\footnotesize\ttfamily template$<$class \+\_\+T, unsigned int \+\_\+\+Rows, unsigned int \+\_\+\+Cols$>$ \\
+\mbox{\hyperlink{class_matrix}{Matrix}}$<$\+\_\+T, \+\_\+\+Rows, \+\_\+\+Cols$>$ \mbox{\hyperlink{class_matrix}{Matrix}}$<$ \+\_\+T, \+\_\+\+Rows, \+\_\+\+Cols $>$\+::operator+= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_matrix}{Matrix}}$<$ \+\_\+T, \+\_\+\+Rows, \+\_\+\+Cols $>$ \&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+overloading operator += 
+
+\mbox{\Hypertarget{class_matrix_a5909a751e71016ce03eb176e071b8b83}\label{class_matrix_a5909a751e71016ce03eb176e071b8b83}} 
+\index{Matrix$<$ \_T, \_Rows, \_Cols $>$@{Matrix$<$ \_T, \_Rows, \_Cols $>$}!operator-\/@{operator-\/}}
+\index{operator-\/@{operator-\/}!Matrix$<$ \_T, \_Rows, \_Cols $>$@{Matrix$<$ \_T, \_Rows, \_Cols $>$}}
+\doxysubsubsection{\texorpdfstring{operator-\/()}{operator-()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class \+\_\+T, unsigned int \+\_\+\+Rows, unsigned int \+\_\+\+Cols$>$ \\
+\mbox{\hyperlink{class_matrix}{Matrix}}$<$\+\_\+T, \+\_\+\+Rows, \+\_\+\+Cols$>$ \mbox{\hyperlink{class_matrix}{Matrix}}$<$ \+\_\+T, \+\_\+\+Rows, \+\_\+\+Cols $>$\+::operator-\/ (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+overloading operator -\/ 
+
+\mbox{\Hypertarget{class_matrix_af68846dec1a11782ff7ae3f6a8bd48fc}\label{class_matrix_af68846dec1a11782ff7ae3f6a8bd48fc}} 
+\index{Matrix$<$ \_T, \_Rows, \_Cols $>$@{Matrix$<$ \_T, \_Rows, \_Cols $>$}!operator-\/@{operator-\/}}
+\index{operator-\/@{operator-\/}!Matrix$<$ \_T, \_Rows, \_Cols $>$@{Matrix$<$ \_T, \_Rows, \_Cols $>$}}
+\doxysubsubsection{\texorpdfstring{operator-\/()}{operator-()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class \+\_\+T, unsigned int \+\_\+\+Rows, unsigned int \+\_\+\+Cols$>$ \\
+\mbox{\hyperlink{class_matrix}{Matrix}}$<$\+\_\+T, \+\_\+\+Rows, \+\_\+\+Cols$>$ \mbox{\hyperlink{class_matrix}{Matrix}}$<$ \+\_\+T, \+\_\+\+Rows, \+\_\+\+Cols $>$\+::operator-\/ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_matrix}{Matrix}}$<$ \+\_\+T, \+\_\+\+Rows, \+\_\+\+Cols $>$ \&}]{other }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+overloading operator -\/ 
+
+\mbox{\Hypertarget{class_matrix_a64b3d0d0d53e33e082de7b259b8f46a1}\label{class_matrix_a64b3d0d0d53e33e082de7b259b8f46a1}} 
+\index{Matrix$<$ \_T, \_Rows, \_Cols $>$@{Matrix$<$ \_T, \_Rows, \_Cols $>$}!operator-\/=@{operator-\/=}}
+\index{operator-\/=@{operator-\/=}!Matrix$<$ \_T, \_Rows, \_Cols $>$@{Matrix$<$ \_T, \_Rows, \_Cols $>$}}
+\doxysubsubsection{\texorpdfstring{operator-\/=()}{operator-=()}}
+{\footnotesize\ttfamily template$<$class \+\_\+T, unsigned int \+\_\+\+Rows, unsigned int \+\_\+\+Cols$>$ \\
+\mbox{\hyperlink{class_matrix}{Matrix}}$<$\+\_\+T, \+\_\+\+Rows, \+\_\+\+Cols$>$ \mbox{\hyperlink{class_matrix}{Matrix}}$<$ \+\_\+T, \+\_\+\+Rows, \+\_\+\+Cols $>$\+::operator-\/= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_matrix}{Matrix}}$<$ \+\_\+T, \+\_\+\+Rows, \+\_\+\+Cols $>$ \&}]{other }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+overloading operator -\/= 
+
+\mbox{\Hypertarget{class_matrix_acc9b9507d8a3f954d22cbb5e4099eea2}\label{class_matrix_acc9b9507d8a3f954d22cbb5e4099eea2}} 
+\index{Matrix$<$ \_T, \_Rows, \_Cols $>$@{Matrix$<$ \_T, \_Rows, \_Cols $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!Matrix$<$ \_T, \_Rows, \_Cols $>$@{Matrix$<$ \_T, \_Rows, \_Cols $>$}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily template$<$class \+\_\+T, unsigned int \+\_\+\+Rows, unsigned int \+\_\+\+Cols$>$ \\
+void \mbox{\hyperlink{class_matrix}{Matrix}}$<$ \+\_\+T, \+\_\+\+Rows, \+\_\+\+Cols $>$\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_matrix}{Matrix}}$<$ \+\_\+T, \+\_\+\+Rows, \+\_\+\+Cols $>$ \&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+overloading operator = 
+
+\mbox{\Hypertarget{class_matrix_a709bc241ed7772ced4bfba8be0cf4fe5}\label{class_matrix_a709bc241ed7772ced4bfba8be0cf4fe5}} 
+\index{Matrix$<$ \_T, \_Rows, \_Cols $>$@{Matrix$<$ \_T, \_Rows, \_Cols $>$}!Print@{Print}}
+\index{Print@{Print}!Matrix$<$ \_T, \_Rows, \_Cols $>$@{Matrix$<$ \_T, \_Rows, \_Cols $>$}}
+\doxysubsubsection{\texorpdfstring{Print()}{Print()}}
+{\footnotesize\ttfamily template$<$class \+\_\+T, unsigned int \+\_\+\+Rows, unsigned int \+\_\+\+Cols$>$ \\
+void \mbox{\hyperlink{class_matrix}{Matrix}}$<$ \+\_\+T, \+\_\+\+Rows, \+\_\+\+Cols $>$\+::Print (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Print matrix 
+
+\mbox{\Hypertarget{class_matrix_a83692f60038054762716fcc114f5a9f2}\label{class_matrix_a83692f60038054762716fcc114f5a9f2}} 
+\index{Matrix$<$ \_T, \_Rows, \_Cols $>$@{Matrix$<$ \_T, \_Rows, \_Cols $>$}!PrintToFile@{PrintToFile}}
+\index{PrintToFile@{PrintToFile}!Matrix$<$ \_T, \_Rows, \_Cols $>$@{Matrix$<$ \_T, \_Rows, \_Cols $>$}}
+\doxysubsubsection{\texorpdfstring{PrintToFile()}{PrintToFile()}}
+{\footnotesize\ttfamily template$<$class \+\_\+T, unsigned int \+\_\+\+Rows, unsigned int \+\_\+\+Cols$>$ \\
+void \mbox{\hyperlink{class_matrix}{Matrix}}$<$ \+\_\+T, \+\_\+\+Rows, \+\_\+\+Cols $>$\+::Print\+To\+File (\begin{DoxyParamCaption}\item[{std\+::ofstream \&}]{kalman\+File }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Print matrix to file 
+
+\mbox{\Hypertarget{class_matrix_aab3d71a3499da995daf49f860467e0cf}\label{class_matrix_aab3d71a3499da995daf49f860467e0cf}} 
+\index{Matrix$<$ \_T, \_Rows, \_Cols $>$@{Matrix$<$ \_T, \_Rows, \_Cols $>$}!set@{set}}
+\index{set@{set}!Matrix$<$ \_T, \_Rows, \_Cols $>$@{Matrix$<$ \_T, \_Rows, \_Cols $>$}}
+\doxysubsubsection{\texorpdfstring{set()}{set()}}
+{\footnotesize\ttfamily template$<$class \+\_\+T, unsigned int \+\_\+\+Rows, unsigned int \+\_\+\+Cols$>$ \\
+void \mbox{\hyperlink{class_matrix}{Matrix}}$<$ \+\_\+T, \+\_\+\+Rows, \+\_\+\+Cols $>$\+::set (\begin{DoxyParamCaption}\item[{int}]{i,  }\item[{int}]{j,  }\item[{\+\_\+T}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Sets element i,j 
+
+\mbox{\Hypertarget{class_matrix_a6910e9fa3e4792a754b329284d21353f}\label{class_matrix_a6910e9fa3e4792a754b329284d21353f}} 
+\index{Matrix$<$ \_T, \_Rows, \_Cols $>$@{Matrix$<$ \_T, \_Rows, \_Cols $>$}!Transpose@{Transpose}}
+\index{Transpose@{Transpose}!Matrix$<$ \_T, \_Rows, \_Cols $>$@{Matrix$<$ \_T, \_Rows, \_Cols $>$}}
+\doxysubsubsection{\texorpdfstring{Transpose()}{Transpose()}}
+{\footnotesize\ttfamily template$<$class \+\_\+T, unsigned int \+\_\+\+Rows, unsigned int \+\_\+\+Cols$>$ \\
+\mbox{\hyperlink{class_matrix}{Matrix}}$<$\+\_\+T, \+\_\+\+Rows, \+\_\+\+Cols$>$ \mbox{\hyperlink{class_matrix}{Matrix}}$<$ \+\_\+T, \+\_\+\+Rows, \+\_\+\+Cols $>$\+::Transpose (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the transpose matrix 
+
+\mbox{\Hypertarget{class_matrix_a333fffc85445fb3cfda40f47c8c74f39}\label{class_matrix_a333fffc85445fb3cfda40f47c8c74f39}} 
+\index{Matrix$<$ \_T, \_Rows, \_Cols $>$@{Matrix$<$ \_T, \_Rows, \_Cols $>$}!Zero@{Zero}}
+\index{Zero@{Zero}!Matrix$<$ \_T, \_Rows, \_Cols $>$@{Matrix$<$ \_T, \_Rows, \_Cols $>$}}
+\doxysubsubsection{\texorpdfstring{Zero()}{Zero()}}
+{\footnotesize\ttfamily template$<$class \+\_\+T, unsigned int \+\_\+\+Rows, unsigned int \+\_\+\+Cols$>$ \\
+static \mbox{\hyperlink{class_matrix}{Matrix}}$<$\+\_\+T, \+\_\+\+Rows, \+\_\+\+Cols$>$ \mbox{\hyperlink{class_matrix}{Matrix}}$<$ \+\_\+T, \+\_\+\+Rows, \+\_\+\+Cols $>$\+::Zero (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Return Zero matrix 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Matrix.\+h\end{DoxyCompactItemize}

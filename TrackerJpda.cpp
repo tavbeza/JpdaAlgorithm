@@ -2,12 +2,14 @@
 
 
 /// <summary>
+/// Empty constructor
 /// </summary>
 TrackerJpda::TrackerJpda()
 {
 }
 
 /// <summary>
+/// Destructor 
 /// </summary>
 TrackerJpda::~TrackerJpda()
 {

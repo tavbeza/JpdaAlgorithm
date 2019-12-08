@@ -3,6 +3,10 @@
 #include <string>
 
 using namespace std;
+
+/// <summary>
+/// Constructor for data plot reader that get the file name
+/// </summary>
 DataPlotFileReader::DataPlotFileReader(std::string fileName)
 {
 	m_pLastDataPlot = 0;
@@ -19,6 +23,9 @@ DataPlotFileReader::DataPlotFileReader(std::string fileName)
 	}
 }
 
+/// <summary>
+/// Destructor for data plot reader
+/// </summary>
 DataPlotFileReader::~DataPlotFileReader()
 {
 	//Closes the file.

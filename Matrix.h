@@ -8,6 +8,9 @@
 
 
 template<class _T, unsigned int _Rows, unsigned int _Cols>
+/// <summary>
+/// Matrix Class
+/// </summary>
 class Matrix
 {
 public:
@@ -175,6 +178,7 @@ public:
 
 		return temp;
 	}
+	
 	/// <summary>
 	/// Return the determinant of the matrix
 	/// </summary>
@@ -423,6 +427,9 @@ public:
 		return temp;
 	}
 
+	/// <summary>
+	/// multiplay matrix on the right
+	/// </summary>
 	Vector4f  operator *(const Vector4f &v) const
 	{
 		Vector4f temp;
@@ -451,8 +458,6 @@ public:
 		return temp;
 	}
 
-
-
 	/// <summary>
 	/// Return the transpose matrix
 	/// </summary>
@@ -467,6 +472,9 @@ public:
 	}
 #endif
 
+	/// <summary>
+	/// Print matrix to file
+	/// </summary>
 	void PrintToFile(std::ofstream& kalmanFile) const
 	{
 		
@@ -480,16 +488,6 @@ public:
 		}
 		
 	}
-
-	/// <summary>
-	/// Return the transpose matrix
-	/// </summary>
-	//#if (_Rows == 9 && _Cols == 4)
-	
-	//#endif
-
-	//#if (_Rows == 4 && _Cols == 9)
-	//#endif
 
 	/*
 	// overload function call

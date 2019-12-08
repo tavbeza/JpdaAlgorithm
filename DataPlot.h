@@ -1,12 +1,15 @@
 #ifndef _DATA_PLOT_H_
 #define _DATA_PLOT_H_
-
 #include "Vector.h"
+
+/// <summary>
+/// Data of plot that obtained from the sensor
+/// </summary>
 class DataPlot
 {
 public:
 	/// <summary>
-	/// empty constructor
+	/// Empty constructor
 	/// </summary>
 	DataPlot();
 

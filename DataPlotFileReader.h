@@ -8,11 +8,14 @@
 
 using namespace std;
 
+/// <summary>
+/// Class that read plots from file
+/// </summary>
 class DataPlotFileReader
 {
 public:
 	/// <summary>
-	/// Constructor for data plot reader
+	/// Constructor for data plot reader that get the file name
 	/// </summary>
 	DataPlotFileReader(string fileName);
 

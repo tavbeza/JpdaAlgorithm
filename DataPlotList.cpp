@@ -7,7 +7,9 @@ DataPlotList::DataPlotList()
 {
 }
 
-
+/// <summary>
+/// Destructor
+/// </summary>
 DataPlotList::~DataPlotList()
 {
 }

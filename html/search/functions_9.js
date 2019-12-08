@@ -1,0 +1,4 @@
+var searchData=
+[
+  ['matrix_179',['Matrix',['../class_matrix.html#a6fd996473c4fe5c7e6bbecc573e081b2',1,'Matrix::Matrix()'],['../class_matrix.html#ab65af4bb6b351b3b0ee1587847e41867',1,'Matrix::Matrix(const Matrix&lt; _T, _Rows, _Cols &gt; &amp;other)'],['../class_matrix.html#a948c9f18ff05e9f461987d8c12a114b4',1,'Matrix::Matrix(_T *pData)']]]
+];

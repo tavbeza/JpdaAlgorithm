@@ -17,6 +17,10 @@ int currentPoolSize = 0;
 // both adjoin and inverse. adjoin is integer matrix and inverse 
 // is a float. 
 template<class T>
+
+/// <summary>
+/// Print A
+/// </summary>
 void display(T** A, int n)
 {
 	for (int i = 0; i<n; i++)
@@ -27,7 +31,9 @@ void display(T** A, int n)
 	}
 }
 
-
+/// <summary>
+/// Get Cofactor
+/// </summary>
 void getCofactor(int** A, int** temp, int p, int q, int n)
 {
 	int i = 0, j = 0;
@@ -55,9 +61,10 @@ void getCofactor(int** A, int** temp, int p, int q, int n)
 	}
 }
 
-
-/* Recursive function for finding determinant of matrix.
-n is current dimension of A[][]. */
+/// <summary>
+/// Recursive function for finding determinant of matrix.
+///n is current dimension of A[][].
+/// </summary>
 int determinant(int** A, int n)
 {
 	int D = 0; // Initialize result 
@@ -87,8 +94,9 @@ int determinant(int** A, int n)
 	return D;
 }
 
-
-// Function to get adjoint of A[N][N] in adj[N][N]. 
+/// <summary>
+/// Function to get adjoint of A[N][N] in adj[N][N]. 
+/// </summary>
 void adjoint(int** A, float** adj, int n)
 {
 	if (n == 1)
@@ -123,9 +131,9 @@ void adjoint(int** A, float** adj, int n)
 	}
 }
 
-
-// Function to calculate and store inverse, returns false if 
-// matrix is singular 
+/// <summary>
+/// Function to calculate and store inverse, returns false if matrix is singular 
+/// </summary>
 bool inverse(int** A, float** inverse, int n)
 {
 	// Find determinant of A[][] 
@@ -151,8 +159,9 @@ bool inverse(int** A, float** inverse, int n)
 	return true;
 }
 
-
-//this function multiplication the original matrix and the inverse matrix
+/// <summary>
+/// This function multiplication the original matrix and the inverse matrix
+/// </summary>
 int** mult(int **A, float **B, int n) {
 	int i, j, k;
 	float **C = (float**)calloc(n, sizeof(float*));
@@ -180,6 +189,10 @@ int** mult(int **A, float **B, int n) {
 TreeNode *trees[SIZE];
 TreeNode *fathers[SIZE*SIZE];
 TreeNode *sons[SIZE*SIZE];
+
+/// <summary>
+/// Create hypothesis function
+/// </summary>
 void createHypothesis()
 {
 	TreeNode lastChild;

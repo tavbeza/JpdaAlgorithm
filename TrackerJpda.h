@@ -2,16 +2,19 @@
 #define TRACKERJPDA_H_
 
 /// <summary>
+/// Tracker Class
 /// </summary>
 class TrackerJpda
 {
 
 public:
 	/// <summary>
+	/// Empty constructor
 	/// </summary>
 	TrackerJpda();
 
 	/// <summary>
+	/// Destructor 
 	/// </summary>
 	virtual ~TrackerJpda();
 

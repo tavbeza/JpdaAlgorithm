@@ -59,7 +59,9 @@ void TreeNode::AddChild(TreeNode *pChild)
 	m_nChilds++;
 }
 
+/// <summary>
 /// Check if the track is already exist: return true if exist, else return false
+/// </summary>
 bool TreeNode::hasTrackParent(TreeNode *pParent, int track)
 {
 	if (pParent->m_j == track)

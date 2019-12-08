@@ -7,6 +7,9 @@
 #include "DataPlot.h"
 #include "NavPlatStatusStruct.h"
 
+/// <summary>
+/// Tracker Parameters 
+/// </summary>
 struct TrackerParams {
 	double m_SigmaVxs=0.1;
 	double m_SigmaVys = 0.1;
@@ -100,6 +103,13 @@ public:
 	/// </summary>
 	virtual void GainUpdate(const float& beta);
 
+
+	/// <summary>
+	/// The algorithm works in a two-step process. 
+	/// In the prediction step, the Kalman filter produces estimates of the current state variables, along with their uncertainties. 
+	/// Once the outcome of the next measurement (necessarily corrupted with some amount of error, including random noise) is observed, 
+	// these estimates are updated using a weighted average, with more weight being given to estimates with higher certainty.
+	/// </summary>
 	virtual void Update(DataPlot* pPlot);
 
 

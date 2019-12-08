@@ -1,0 +1,164 @@
+\hypertarget{class_srv_time_stamp}{}\doxysection{Srv\+Time\+Stamp Class Reference}
+\label{class_srv_time_stamp}\index{SrvTimeStamp@{SrvTimeStamp}}
+
+
+this class is supporting Time Stamp service. The time stamp measure the activities in the system The time stamp shall contain init start and stop functionality The initialization shall accrue once.\+start shall return the start time and stop shall return the stop time  
+
+
+
+
+{\ttfamily \#include $<$Srv\+Time\+Stamp.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_srv_time_stamp_af3eb8e6f31e8568631e1e5d12b3b2248}{Srv\+Time\+Stamp}} ()
+\begin{DoxyCompactList}\small\item\em Empty constructor \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{class_srv_time_stamp_a58028978d1e5b275f6ff187e34c95bec}{$\sim$\+Srv\+Time\+Stamp}} ()
+\begin{DoxyCompactList}\small\item\em Virtual destructor \end{DoxyCompactList}\item 
+long long \mbox{\hyperlink{class_srv_time_stamp_a0b6097ac761f1b9d4160cbc52198a53a}{get\+Time\+Delta}} (long long start\+Time)
+\begin{DoxyCompactList}\small\item\em 
+\begin{DoxyParams}{Parameters}
+{\em start\+Time} & \\
+\hline
+\end{DoxyParams}
+\end{DoxyCompactList}\item 
+long long \mbox{\hyperlink{class_srv_time_stamp_a0f539957df92831630fdd0362e1d0610}{get\+Time\+Stamp}} ()
+\begin{DoxyCompactList}\small\item\em Get the Time Stamp \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_srv_time_stamp_aa380d275708d0bfae10064508febdc7c}{init\+Service}} ()
+\begin{DoxyCompactList}\small\item\em this method is used to initialize the service parameters \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{class_srv_time_stamp_a58ae34bc51f726764df2253592d08ccc}{Init}} ()
+\begin{DoxyCompactList}\small\item\em Initialize the frequency of the timer \end{DoxyCompactList}\item 
+static long long \mbox{\hyperlink{class_srv_time_stamp_a25dba62a9c5ae7366ca9e788d376b9d6}{Start}} ()
+\begin{DoxyCompactList}\small\item\em Start the timer \end{DoxyCompactList}\item 
+static long long \mbox{\hyperlink{class_srv_time_stamp_ad49e7895ddb0f4db8b4c50921e238b49}{Get\+Current}} ()
+\begin{DoxyCompactList}\small\item\em Get Current Time of timer \end{DoxyCompactList}\item 
+static long long \mbox{\hyperlink{class_srv_time_stamp_a4f866f08e85702932f523747810e6878}{Stop}} ()
+\begin{DoxyCompactList}\small\item\em Stop the timer \end{DoxyCompactList}\item 
+static double \mbox{\hyperlink{class_srv_time_stamp_ad2ccda4bed6f97965ac0dc8423eecaf8}{Stop}} (long long start\+Time)
+\begin{DoxyCompactList}\small\item\em Stop the timer and return the time difference \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+this class is supporting Time Stamp service. The time stamp measure the activities in the system The time stamp shall contain init start and stop functionality The initialization shall accrue once.\+start shall return the start time and stop shall return the stop time 
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_srv_time_stamp_af3eb8e6f31e8568631e1e5d12b3b2248}\label{class_srv_time_stamp_af3eb8e6f31e8568631e1e5d12b3b2248}} 
+\index{SrvTimeStamp@{SrvTimeStamp}!SrvTimeStamp@{SrvTimeStamp}}
+\index{SrvTimeStamp@{SrvTimeStamp}!SrvTimeStamp@{SrvTimeStamp}}
+\doxysubsubsection{\texorpdfstring{SrvTimeStamp()}{SrvTimeStamp()}}
+{\footnotesize\ttfamily Srv\+Time\+Stamp\+::\+Srv\+Time\+Stamp (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Empty constructor 
+
+Constructor\mbox{\Hypertarget{class_srv_time_stamp_a58028978d1e5b275f6ff187e34c95bec}\label{class_srv_time_stamp_a58028978d1e5b275f6ff187e34c95bec}} 
+\index{SrvTimeStamp@{SrvTimeStamp}!````~SrvTimeStamp@{$\sim$SrvTimeStamp}}
+\index{````~SrvTimeStamp@{$\sim$SrvTimeStamp}!SrvTimeStamp@{SrvTimeStamp}}
+\doxysubsubsection{\texorpdfstring{$\sim$SrvTimeStamp()}{~SrvTimeStamp()}}
+{\footnotesize\ttfamily Srv\+Time\+Stamp\+::$\sim$\+Srv\+Time\+Stamp (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Virtual destructor 
+
+Destructor
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_srv_time_stamp_ad49e7895ddb0f4db8b4c50921e238b49}\label{class_srv_time_stamp_ad49e7895ddb0f4db8b4c50921e238b49}} 
+\index{SrvTimeStamp@{SrvTimeStamp}!GetCurrent@{GetCurrent}}
+\index{GetCurrent@{GetCurrent}!SrvTimeStamp@{SrvTimeStamp}}
+\doxysubsubsection{\texorpdfstring{GetCurrent()}{GetCurrent()}}
+{\footnotesize\ttfamily long long Srv\+Time\+Stamp\+::\+Get\+Current (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Get Current Time of timer 
+
+\mbox{\Hypertarget{class_srv_time_stamp_a0b6097ac761f1b9d4160cbc52198a53a}\label{class_srv_time_stamp_a0b6097ac761f1b9d4160cbc52198a53a}} 
+\index{SrvTimeStamp@{SrvTimeStamp}!getTimeDelta@{getTimeDelta}}
+\index{getTimeDelta@{getTimeDelta}!SrvTimeStamp@{SrvTimeStamp}}
+\doxysubsubsection{\texorpdfstring{getTimeDelta()}{getTimeDelta()}}
+{\footnotesize\ttfamily long long Srv\+Time\+Stamp\+::get\+Time\+Delta (\begin{DoxyParamCaption}\item[{long long}]{start\+Time }\end{DoxyParamCaption})}
+
+
+
+
+\begin{DoxyParams}{Parameters}
+{\em start\+Time} & \\
+\hline
+\end{DoxyParams}
+
+
+\mbox{\Hypertarget{class_srv_time_stamp_a0f539957df92831630fdd0362e1d0610}\label{class_srv_time_stamp_a0f539957df92831630fdd0362e1d0610}} 
+\index{SrvTimeStamp@{SrvTimeStamp}!getTimeStamp@{getTimeStamp}}
+\index{getTimeStamp@{getTimeStamp}!SrvTimeStamp@{SrvTimeStamp}}
+\doxysubsubsection{\texorpdfstring{getTimeStamp()}{getTimeStamp()}}
+{\footnotesize\ttfamily long long Srv\+Time\+Stamp\+::get\+Time\+Stamp (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Get the Time Stamp 
+
+Get the Time\+Stamp\mbox{\Hypertarget{class_srv_time_stamp_a58ae34bc51f726764df2253592d08ccc}\label{class_srv_time_stamp_a58ae34bc51f726764df2253592d08ccc}} 
+\index{SrvTimeStamp@{SrvTimeStamp}!Init@{Init}}
+\index{Init@{Init}!SrvTimeStamp@{SrvTimeStamp}}
+\doxysubsubsection{\texorpdfstring{Init()}{Init()}}
+{\footnotesize\ttfamily void Srv\+Time\+Stamp\+::\+Init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Initialize the frequency of the timer 
+
+\mbox{\Hypertarget{class_srv_time_stamp_aa380d275708d0bfae10064508febdc7c}\label{class_srv_time_stamp_aa380d275708d0bfae10064508febdc7c}} 
+\index{SrvTimeStamp@{SrvTimeStamp}!initService@{initService}}
+\index{initService@{initService}!SrvTimeStamp@{SrvTimeStamp}}
+\doxysubsubsection{\texorpdfstring{initService()}{initService()}}
+{\footnotesize\ttfamily void Srv\+Time\+Stamp\+::init\+Service (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+this method is used to initialize the service parameters 
+
+\mbox{\Hypertarget{class_srv_time_stamp_a25dba62a9c5ae7366ca9e788d376b9d6}\label{class_srv_time_stamp_a25dba62a9c5ae7366ca9e788d376b9d6}} 
+\index{SrvTimeStamp@{SrvTimeStamp}!Start@{Start}}
+\index{Start@{Start}!SrvTimeStamp@{SrvTimeStamp}}
+\doxysubsubsection{\texorpdfstring{Start()}{Start()}}
+{\footnotesize\ttfamily long long Srv\+Time\+Stamp\+::\+Start (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Start the timer 
+
+\mbox{\Hypertarget{class_srv_time_stamp_a4f866f08e85702932f523747810e6878}\label{class_srv_time_stamp_a4f866f08e85702932f523747810e6878}} 
+\index{SrvTimeStamp@{SrvTimeStamp}!Stop@{Stop}}
+\index{Stop@{Stop}!SrvTimeStamp@{SrvTimeStamp}}
+\doxysubsubsection{\texorpdfstring{Stop()}{Stop()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily long long Srv\+Time\+Stamp\+::\+Stop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Stop the timer 
+
+\mbox{\Hypertarget{class_srv_time_stamp_ad2ccda4bed6f97965ac0dc8423eecaf8}\label{class_srv_time_stamp_ad2ccda4bed6f97965ac0dc8423eecaf8}} 
+\index{SrvTimeStamp@{SrvTimeStamp}!Stop@{Stop}}
+\index{Stop@{Stop}!SrvTimeStamp@{SrvTimeStamp}}
+\doxysubsubsection{\texorpdfstring{Stop()}{Stop()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily double Srv\+Time\+Stamp\+::\+Stop (\begin{DoxyParamCaption}\item[{long long}]{start\+Time }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Stop the timer and return the time difference 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Srv\+Time\+Stamp.\+h\item 
+Srv\+Time\+Stamp\+P\+C.\+cpp\end{DoxyCompactItemize}

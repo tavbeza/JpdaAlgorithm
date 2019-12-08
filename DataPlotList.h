@@ -4,6 +4,9 @@
 #include "DataPlot.h"
 #include <list>
 
+/// <summary>
+/// Class with a list of data plot that obtained from the sensor
+/// </summary>
 class DataPlotList
 {
 public:
@@ -13,6 +16,9 @@ public:
 	/// </summary>
 	DataPlotList();
 
+	/// <summary>
+	/// Destructor
+	/// </summary>
 	~DataPlotList();
 
 	/// <summary>

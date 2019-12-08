@@ -1,7 +1,9 @@
 #include "NavPlatStatusStruct.h"
 
 
-
+/// <summary>
+/// Empty constructor
+/// </summary>
 NavPlatStatusStruct::NavPlatStatusStruct()
 {
 	// TODO:
@@ -11,7 +13,9 @@ NavPlatStatusStruct::NavPlatStatusStruct()
 	//velENU.m_Data[0] = 0;
 }
 
-
+/// <summary>
+/// Destructor 
+/// </summary>
 NavPlatStatusStruct::~NavPlatStatusStruct()
 {
 }

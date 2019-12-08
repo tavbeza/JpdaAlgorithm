@@ -1,0 +1,253 @@
+\hypertarget{class_vector}{}\doxysection{Vector$<$ \+\_\+T, \+\_\+\+Rows $>$ Class Template Reference}
+\label{class_vector}\index{Vector$<$ \_T, \_Rows $>$@{Vector$<$ \_T, \_Rows $>$}}
+
+
+\mbox{\hyperlink{class_vector}{Vector}} Class  
+
+
+
+
+{\ttfamily \#include $<$Vector.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_vector_a2bcd18977eed2ce359bab2481086e112}{Vector}} ()
+\begin{DoxyCompactList}\small\item\em Default Constructor for vector \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_vector_af882688827ec7aff9af34de38d386388}{Vector}} (\+\_\+T x, \+\_\+T y, \+\_\+T z)
+\begin{DoxyCompactList}\small\item\em 3d construcotr \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_vector_a44ddd978938ec749a9c1ca93f94f5ee8}{Vector}} (\+\_\+T x, \+\_\+T y)
+\begin{DoxyCompactList}\small\item\em 2d construcotr \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_vector_ac22f29f1fb0ee3b7f3da5b833ded8e8f}{Vector}} (\+\_\+T x0, \+\_\+T x1, \+\_\+T x2, \+\_\+T x3, \+\_\+T x4)
+\begin{DoxyCompactList}\small\item\em 5d construcotr \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_vector_ac69e1c2a648831a3c322168a3ed23796}{Set\+Zero}} ()
+\begin{DoxyCompactList}\small\item\em Set the array with 0 values \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_vector}{Vector}}$<$ \+\_\+T, \+\_\+\+Rows $>$ \mbox{\hyperlink{class_vector_a41df61c682c6e2218b4e112cce307ccc}{operator+}} (const \mbox{\hyperlink{class_vector}{Vector}}$<$ \+\_\+T, \+\_\+\+Rows $>$ \&other) const
+\begin{DoxyCompactList}\small\item\em addition vector on the right \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_vector}{Vector}}$<$ \+\_\+T, \+\_\+\+Rows $>$ \mbox{\hyperlink{class_vector_ad5339edcc28e54f7a340a45d3f1a57f8}{operator+=}} (const \mbox{\hyperlink{class_vector}{Vector}}$<$ \+\_\+T, \+\_\+\+Rows $>$ \&other) const
+\begin{DoxyCompactList}\small\item\em addition vector on the right \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_vector}{Vector}}$<$ \+\_\+T, \+\_\+\+Rows $>$ \mbox{\hyperlink{class_vector_af404b54dade6744f595c1d33f8695ba9}{operator-\/}} (const \mbox{\hyperlink{class_vector}{Vector}}$<$ \+\_\+T, \+\_\+\+Rows $>$ \&other) const
+\begin{DoxyCompactList}\small\item\em substract vector on the right \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_vector}{Vector}}$<$ \+\_\+T, \+\_\+\+Rows $>$ \mbox{\hyperlink{class_vector_a97c5341f3cf55ae14849359b2e6e60da}{operator-\/=}} (const \mbox{\hyperlink{class_vector}{Vector}}$<$ \+\_\+T, \+\_\+\+Rows $>$ \&other) const
+\begin{DoxyCompactList}\small\item\em substract vector on the right \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_vector}{Vector}}$<$ \+\_\+T, \+\_\+\+Rows $>$ \mbox{\hyperlink{class_vector_a3e23a47f2e76d64434403daae466751f}{operator$\ast$}} (const \+\_\+T \&value) const
+\begin{DoxyCompactList}\small\item\em Multiply vector on the right \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_vector}{Vector}}$<$ \+\_\+T, \+\_\+\+Rows $>$ \mbox{\hyperlink{class_vector_a14cbd85a0646043c082dea9d37b42330}{operator$\ast$=}} (const \+\_\+T \&value) const
+\begin{DoxyCompactList}\small\item\em Multiply vector with constant \end{DoxyCompactList}\item 
+\+\_\+T \mbox{\hyperlink{class_vector_af749812ff50a4c2f2c6a60ff62cb9824}{operator$\ast$}} (const \mbox{\hyperlink{class_vector}{Vector}}$<$ \+\_\+T, \+\_\+\+Rows $>$ \&value) const
+\begin{DoxyCompactList}\small\item\em Multiply vector on the right \end{DoxyCompactList}\item 
+\+\_\+T \mbox{\hyperlink{class_vector_ac1a16c831a1f4b442e8ad7fccd5b4f73}{operator()}} (unsigned int a)
+\begin{DoxyCompactList}\small\item\em Overload function call \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_vector_a2c1f4afd5f2066261e7ccb16aa1e9b33}{From\+Spherical}} (const \mbox{\hyperlink{class_vector}{Vector}}$<$ \+\_\+T, \+\_\+\+Rows $>$ \&spherical)
+\begin{DoxyCompactList}\small\item\em Convert spherical coordinate R,El,Az to cartesian coordinate x,y,z \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_vector_a63fcc873ebbc13e4ddb847128bde0278}{To\+Spherical}} (const \mbox{\hyperlink{class_vector}{Vector}}$<$ \+\_\+T, \+\_\+\+Rows $>$ \&cartesian)
+\begin{DoxyCompactList}\small\item\em Convert cartesian coordinate x,y,z to spherical coordinate R,El,Az \end{DoxyCompactList}\item 
+\+\_\+T \mbox{\hyperlink{class_vector_a2a1c7f188b0c4981b8b920bf1f0d81d4}{Norm}} () const
+\begin{DoxyCompactList}\small\item\em Return the size of the vector \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_vector_af53741088c5e05cefc02e7e79e5daf49}\label{class_vector_af53741088c5e05cefc02e7e79e5daf49}} 
+static \+\_\+T {\bfseries Euclidean\+Dist} (const \mbox{\hyperlink{class_vector}{Vector}}$<$ \+\_\+T, \+\_\+\+Rows $>$ \&value1, const \mbox{\hyperlink{class_vector}{Vector}}$<$ \+\_\+T, \+\_\+\+Rows $>$ \&value2)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_vector_a6a11dafd3b7a3421a4a12f86ff0cd0af}\label{class_vector_a6a11dafd3b7a3421a4a12f86ff0cd0af}} 
+\+\_\+T {\bfseries m\+\_\+\+Data} \mbox{[}\+\_\+\+Rows\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class \+\_\+T, unsigned int \+\_\+\+Rows$>$\newline
+class Vector$<$ \+\_\+\+T, \+\_\+\+Rows $>$}
+
+\mbox{\hyperlink{class_vector}{Vector}} Class 
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_vector_a2bcd18977eed2ce359bab2481086e112}\label{class_vector_a2bcd18977eed2ce359bab2481086e112}} 
+\index{Vector$<$ \_T, \_Rows $>$@{Vector$<$ \_T, \_Rows $>$}!Vector@{Vector}}
+\index{Vector@{Vector}!Vector$<$ \_T, \_Rows $>$@{Vector$<$ \_T, \_Rows $>$}}
+\doxysubsubsection{\texorpdfstring{Vector()}{Vector()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily template$<$class \+\_\+T, unsigned int \+\_\+\+Rows$>$ \\
+\mbox{\hyperlink{class_vector}{Vector}}$<$ \+\_\+T, \+\_\+\+Rows $>$\+::\mbox{\hyperlink{class_vector}{Vector}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Default Constructor for vector 
+
+\mbox{\Hypertarget{class_vector_af882688827ec7aff9af34de38d386388}\label{class_vector_af882688827ec7aff9af34de38d386388}} 
+\index{Vector$<$ \_T, \_Rows $>$@{Vector$<$ \_T, \_Rows $>$}!Vector@{Vector}}
+\index{Vector@{Vector}!Vector$<$ \_T, \_Rows $>$@{Vector$<$ \_T, \_Rows $>$}}
+\doxysubsubsection{\texorpdfstring{Vector()}{Vector()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily template$<$class \+\_\+T, unsigned int \+\_\+\+Rows$>$ \\
+\mbox{\hyperlink{class_vector}{Vector}}$<$ \+\_\+T, \+\_\+\+Rows $>$\+::\mbox{\hyperlink{class_vector}{Vector}} (\begin{DoxyParamCaption}\item[{\+\_\+T}]{x,  }\item[{\+\_\+T}]{y,  }\item[{\+\_\+T}]{z }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+3d construcotr 
+
+\mbox{\Hypertarget{class_vector_a44ddd978938ec749a9c1ca93f94f5ee8}\label{class_vector_a44ddd978938ec749a9c1ca93f94f5ee8}} 
+\index{Vector$<$ \_T, \_Rows $>$@{Vector$<$ \_T, \_Rows $>$}!Vector@{Vector}}
+\index{Vector@{Vector}!Vector$<$ \_T, \_Rows $>$@{Vector$<$ \_T, \_Rows $>$}}
+\doxysubsubsection{\texorpdfstring{Vector()}{Vector()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily template$<$class \+\_\+T, unsigned int \+\_\+\+Rows$>$ \\
+\mbox{\hyperlink{class_vector}{Vector}}$<$ \+\_\+T, \+\_\+\+Rows $>$\+::\mbox{\hyperlink{class_vector}{Vector}} (\begin{DoxyParamCaption}\item[{\+\_\+T}]{x,  }\item[{\+\_\+T}]{y }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+2d construcotr 
+
+\mbox{\Hypertarget{class_vector_ac22f29f1fb0ee3b7f3da5b833ded8e8f}\label{class_vector_ac22f29f1fb0ee3b7f3da5b833ded8e8f}} 
+\index{Vector$<$ \_T, \_Rows $>$@{Vector$<$ \_T, \_Rows $>$}!Vector@{Vector}}
+\index{Vector@{Vector}!Vector$<$ \_T, \_Rows $>$@{Vector$<$ \_T, \_Rows $>$}}
+\doxysubsubsection{\texorpdfstring{Vector()}{Vector()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily template$<$class \+\_\+T, unsigned int \+\_\+\+Rows$>$ \\
+\mbox{\hyperlink{class_vector}{Vector}}$<$ \+\_\+T, \+\_\+\+Rows $>$\+::\mbox{\hyperlink{class_vector}{Vector}} (\begin{DoxyParamCaption}\item[{\+\_\+T}]{x0,  }\item[{\+\_\+T}]{x1,  }\item[{\+\_\+T}]{x2,  }\item[{\+\_\+T}]{x3,  }\item[{\+\_\+T}]{x4 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+5d construcotr 
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_vector_a2c1f4afd5f2066261e7ccb16aa1e9b33}\label{class_vector_a2c1f4afd5f2066261e7ccb16aa1e9b33}} 
+\index{Vector$<$ \_T, \_Rows $>$@{Vector$<$ \_T, \_Rows $>$}!FromSpherical@{FromSpherical}}
+\index{FromSpherical@{FromSpherical}!Vector$<$ \_T, \_Rows $>$@{Vector$<$ \_T, \_Rows $>$}}
+\doxysubsubsection{\texorpdfstring{FromSpherical()}{FromSpherical()}}
+{\footnotesize\ttfamily template$<$class \+\_\+T, unsigned int \+\_\+\+Rows$>$ \\
+void \mbox{\hyperlink{class_vector}{Vector}}$<$ \+\_\+T, \+\_\+\+Rows $>$\+::From\+Spherical (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_vector}{Vector}}$<$ \+\_\+T, \+\_\+\+Rows $>$ \&}]{spherical }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Convert spherical coordinate R,El,Az to cartesian coordinate x,y,z 
+
+\mbox{\Hypertarget{class_vector_a2a1c7f188b0c4981b8b920bf1f0d81d4}\label{class_vector_a2a1c7f188b0c4981b8b920bf1f0d81d4}} 
+\index{Vector$<$ \_T, \_Rows $>$@{Vector$<$ \_T, \_Rows $>$}!Norm@{Norm}}
+\index{Norm@{Norm}!Vector$<$ \_T, \_Rows $>$@{Vector$<$ \_T, \_Rows $>$}}
+\doxysubsubsection{\texorpdfstring{Norm()}{Norm()}}
+{\footnotesize\ttfamily template$<$class \+\_\+T, unsigned int \+\_\+\+Rows$>$ \\
+\+\_\+T \mbox{\hyperlink{class_vector}{Vector}}$<$ \+\_\+T, \+\_\+\+Rows $>$\+::Norm (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the size of the vector 
+
+\mbox{\Hypertarget{class_vector_ac1a16c831a1f4b442e8ad7fccd5b4f73}\label{class_vector_ac1a16c831a1f4b442e8ad7fccd5b4f73}} 
+\index{Vector$<$ \_T, \_Rows $>$@{Vector$<$ \_T, \_Rows $>$}!operator()@{operator()}}
+\index{operator()@{operator()}!Vector$<$ \_T, \_Rows $>$@{Vector$<$ \_T, \_Rows $>$}}
+\doxysubsubsection{\texorpdfstring{operator()()}{operator()()}}
+{\footnotesize\ttfamily template$<$class \+\_\+T, unsigned int \+\_\+\+Rows$>$ \\
+\+\_\+T \mbox{\hyperlink{class_vector}{Vector}}$<$ \+\_\+T, \+\_\+\+Rows $>$\+::operator() (\begin{DoxyParamCaption}\item[{unsigned int}]{a }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Overload function call 
+
+\mbox{\Hypertarget{class_vector_a3e23a47f2e76d64434403daae466751f}\label{class_vector_a3e23a47f2e76d64434403daae466751f}} 
+\index{Vector$<$ \_T, \_Rows $>$@{Vector$<$ \_T, \_Rows $>$}!operator$\ast$@{operator$\ast$}}
+\index{operator$\ast$@{operator$\ast$}!Vector$<$ \_T, \_Rows $>$@{Vector$<$ \_T, \_Rows $>$}}
+\doxysubsubsection{\texorpdfstring{operator$\ast$()}{operator*()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class \+\_\+T, unsigned int \+\_\+\+Rows$>$ \\
+\mbox{\hyperlink{class_vector}{Vector}}$<$\+\_\+T, \+\_\+\+Rows$>$ \mbox{\hyperlink{class_vector}{Vector}}$<$ \+\_\+T, \+\_\+\+Rows $>$\+::operator$\ast$ (\begin{DoxyParamCaption}\item[{const \+\_\+T \&}]{value }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Multiply vector on the right 
+
+\mbox{\Hypertarget{class_vector_af749812ff50a4c2f2c6a60ff62cb9824}\label{class_vector_af749812ff50a4c2f2c6a60ff62cb9824}} 
+\index{Vector$<$ \_T, \_Rows $>$@{Vector$<$ \_T, \_Rows $>$}!operator$\ast$@{operator$\ast$}}
+\index{operator$\ast$@{operator$\ast$}!Vector$<$ \_T, \_Rows $>$@{Vector$<$ \_T, \_Rows $>$}}
+\doxysubsubsection{\texorpdfstring{operator$\ast$()}{operator*()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class \+\_\+T, unsigned int \+\_\+\+Rows$>$ \\
+\+\_\+T \mbox{\hyperlink{class_vector}{Vector}}$<$ \+\_\+T, \+\_\+\+Rows $>$\+::operator$\ast$ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_vector}{Vector}}$<$ \+\_\+T, \+\_\+\+Rows $>$ \&}]{value }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Multiply vector on the right 
+
+\mbox{\Hypertarget{class_vector_a14cbd85a0646043c082dea9d37b42330}\label{class_vector_a14cbd85a0646043c082dea9d37b42330}} 
+\index{Vector$<$ \_T, \_Rows $>$@{Vector$<$ \_T, \_Rows $>$}!operator$\ast$=@{operator$\ast$=}}
+\index{operator$\ast$=@{operator$\ast$=}!Vector$<$ \_T, \_Rows $>$@{Vector$<$ \_T, \_Rows $>$}}
+\doxysubsubsection{\texorpdfstring{operator$\ast$=()}{operator*=()}}
+{\footnotesize\ttfamily template$<$class \+\_\+T, unsigned int \+\_\+\+Rows$>$ \\
+\mbox{\hyperlink{class_vector}{Vector}}$<$\+\_\+T, \+\_\+\+Rows$>$ \mbox{\hyperlink{class_vector}{Vector}}$<$ \+\_\+T, \+\_\+\+Rows $>$\+::operator$\ast$= (\begin{DoxyParamCaption}\item[{const \+\_\+T \&}]{value }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Multiply vector with constant 
+
+\mbox{\Hypertarget{class_vector_a41df61c682c6e2218b4e112cce307ccc}\label{class_vector_a41df61c682c6e2218b4e112cce307ccc}} 
+\index{Vector$<$ \_T, \_Rows $>$@{Vector$<$ \_T, \_Rows $>$}!operator+@{operator+}}
+\index{operator+@{operator+}!Vector$<$ \_T, \_Rows $>$@{Vector$<$ \_T, \_Rows $>$}}
+\doxysubsubsection{\texorpdfstring{operator+()}{operator+()}}
+{\footnotesize\ttfamily template$<$class \+\_\+T, unsigned int \+\_\+\+Rows$>$ \\
+\mbox{\hyperlink{class_vector}{Vector}}$<$\+\_\+T, \+\_\+\+Rows$>$ \mbox{\hyperlink{class_vector}{Vector}}$<$ \+\_\+T, \+\_\+\+Rows $>$\+::operator+ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_vector}{Vector}}$<$ \+\_\+T, \+\_\+\+Rows $>$ \&}]{other }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+addition vector on the right 
+
+\mbox{\Hypertarget{class_vector_ad5339edcc28e54f7a340a45d3f1a57f8}\label{class_vector_ad5339edcc28e54f7a340a45d3f1a57f8}} 
+\index{Vector$<$ \_T, \_Rows $>$@{Vector$<$ \_T, \_Rows $>$}!operator+=@{operator+=}}
+\index{operator+=@{operator+=}!Vector$<$ \_T, \_Rows $>$@{Vector$<$ \_T, \_Rows $>$}}
+\doxysubsubsection{\texorpdfstring{operator+=()}{operator+=()}}
+{\footnotesize\ttfamily template$<$class \+\_\+T, unsigned int \+\_\+\+Rows$>$ \\
+\mbox{\hyperlink{class_vector}{Vector}}$<$\+\_\+T, \+\_\+\+Rows$>$ \mbox{\hyperlink{class_vector}{Vector}}$<$ \+\_\+T, \+\_\+\+Rows $>$\+::operator+= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_vector}{Vector}}$<$ \+\_\+T, \+\_\+\+Rows $>$ \&}]{other }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+addition vector on the right 
+
+\mbox{\Hypertarget{class_vector_af404b54dade6744f595c1d33f8695ba9}\label{class_vector_af404b54dade6744f595c1d33f8695ba9}} 
+\index{Vector$<$ \_T, \_Rows $>$@{Vector$<$ \_T, \_Rows $>$}!operator-\/@{operator-\/}}
+\index{operator-\/@{operator-\/}!Vector$<$ \_T, \_Rows $>$@{Vector$<$ \_T, \_Rows $>$}}
+\doxysubsubsection{\texorpdfstring{operator-\/()}{operator-()}}
+{\footnotesize\ttfamily template$<$class \+\_\+T, unsigned int \+\_\+\+Rows$>$ \\
+\mbox{\hyperlink{class_vector}{Vector}}$<$\+\_\+T, \+\_\+\+Rows$>$ \mbox{\hyperlink{class_vector}{Vector}}$<$ \+\_\+T, \+\_\+\+Rows $>$\+::operator-\/ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_vector}{Vector}}$<$ \+\_\+T, \+\_\+\+Rows $>$ \&}]{other }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+substract vector on the right 
+
+\mbox{\Hypertarget{class_vector_a97c5341f3cf55ae14849359b2e6e60da}\label{class_vector_a97c5341f3cf55ae14849359b2e6e60da}} 
+\index{Vector$<$ \_T, \_Rows $>$@{Vector$<$ \_T, \_Rows $>$}!operator-\/=@{operator-\/=}}
+\index{operator-\/=@{operator-\/=}!Vector$<$ \_T, \_Rows $>$@{Vector$<$ \_T, \_Rows $>$}}
+\doxysubsubsection{\texorpdfstring{operator-\/=()}{operator-=()}}
+{\footnotesize\ttfamily template$<$class \+\_\+T, unsigned int \+\_\+\+Rows$>$ \\
+\mbox{\hyperlink{class_vector}{Vector}}$<$\+\_\+T, \+\_\+\+Rows$>$ \mbox{\hyperlink{class_vector}{Vector}}$<$ \+\_\+T, \+\_\+\+Rows $>$\+::operator-\/= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_vector}{Vector}}$<$ \+\_\+T, \+\_\+\+Rows $>$ \&}]{other }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+substract vector on the right 
+
+\mbox{\Hypertarget{class_vector_ac69e1c2a648831a3c322168a3ed23796}\label{class_vector_ac69e1c2a648831a3c322168a3ed23796}} 
+\index{Vector$<$ \_T, \_Rows $>$@{Vector$<$ \_T, \_Rows $>$}!SetZero@{SetZero}}
+\index{SetZero@{SetZero}!Vector$<$ \_T, \_Rows $>$@{Vector$<$ \_T, \_Rows $>$}}
+\doxysubsubsection{\texorpdfstring{SetZero()}{SetZero()}}
+{\footnotesize\ttfamily template$<$class \+\_\+T, unsigned int \+\_\+\+Rows$>$ \\
+void \mbox{\hyperlink{class_vector}{Vector}}$<$ \+\_\+T, \+\_\+\+Rows $>$\+::Set\+Zero (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set the array with 0 values 
+
+\mbox{\Hypertarget{class_vector_a63fcc873ebbc13e4ddb847128bde0278}\label{class_vector_a63fcc873ebbc13e4ddb847128bde0278}} 
+\index{Vector$<$ \_T, \_Rows $>$@{Vector$<$ \_T, \_Rows $>$}!ToSpherical@{ToSpherical}}
+\index{ToSpherical@{ToSpherical}!Vector$<$ \_T, \_Rows $>$@{Vector$<$ \_T, \_Rows $>$}}
+\doxysubsubsection{\texorpdfstring{ToSpherical()}{ToSpherical()}}
+{\footnotesize\ttfamily template$<$class \+\_\+T, unsigned int \+\_\+\+Rows$>$ \\
+void \mbox{\hyperlink{class_vector}{Vector}}$<$ \+\_\+T, \+\_\+\+Rows $>$\+::To\+Spherical (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_vector}{Vector}}$<$ \+\_\+T, \+\_\+\+Rows $>$ \&}]{cartesian }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Convert cartesian coordinate x,y,z to spherical coordinate R,El,Az 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Vector.\+h\end{DoxyCompactItemize}

@@ -6,6 +6,9 @@
 //#include "InfraLayer/MONAGENT/Pack1Start.h"
 
 template<class _T, unsigned int _Rows>
+/// <summary>
+/// Vector Class
+/// </summary>
 class Vector
 {
 public:
@@ -16,6 +19,7 @@ public:
 	{
 		SetZero();
 	}
+	
 	/// <summary>
 	/// 3d construcotr
 	/// </summary>
@@ -130,7 +134,10 @@ public:
 			temp += m_Data[i] * value.m_Data[i];
 		return temp;
 	}
-	// overload function call
+	
+	/// <summary>
+	/// Overload function call
+	/// </summary>
 	_T operator()(unsigned int a)
 	{
 		return m_Data[a];

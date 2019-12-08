@@ -20,32 +20,56 @@ class SrvTimeStamp// : public Service
 {
 
 public:
+	/// <summary>
+	/// Empty constructor
+	/// </summary>
 	SrvTimeStamp();
+
+	/// <summary>
+	/// Virtual destructor 
+	/// </summary>
 	virtual ~SrvTimeStamp();
 
-	/// 
+	/// <summary>
 	/// <param name="startTime"></param>
+	/// </summary>
 	long long getTimeDelta(long long startTime);
+
+	/// <summary>
+	/// Get the Time Stamp
+	/// </summary>
 	long long  getTimeStamp();
+
 	/// <summary>
 	/// this method is used to initialize the service parameters
 	/// </summary>
 	void initService();
 
-	///Initialize the frequency of the timer
+	/// <summary>
+	/// Initialize the frequency of the timer
+	/// </summary>
 	static void Init();
 
-	///Start the timer
+	/// <summary>
+	/// Start the timer
+	/// </summary>
 	static long long Start();
 
-	///Get Current Time of timer
+	/// <summary>
+	/// Get Current Time of timer
+	/// </summary>
 	static long long GetCurrent();
 
-	///Stop the timer
+	/// <summary>
+	/// Stop the timer
+	/// </summary>
 	static long long Stop();
 
-	///Stop the timer and return the time difference
+	/// <summary>
+	/// Stop the timer and return the time difference
+	/// </summary>
 	static double Stop(long long startTime);
+
 private:
 	static double m_Frequency;
 };
