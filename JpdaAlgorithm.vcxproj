@@ -127,6 +127,7 @@
     <ClCompile Include="memoryPool.cpp" />
     <ClCompile Include="NavPlatStatusStruct.cpp" />
     <ClCompile Include="queueManger.cpp" />
+    <ClCompile Include="SrvDspMath.cpp" />
     <ClCompile Include="SrvTimeStampPC.cpp" />
     <ClCompile Include="staticQueue.cpp" />
     <ClCompile Include="testMethod.cpp" />
@@ -144,8 +145,8 @@
     <ClInclude Include="Matrix.h" />
     <ClInclude Include="memoryPool.h" />
     <ClInclude Include="NavPlatStatusStruct.h" />
-    <ClInclude Include="ns.h" />
     <ClInclude Include="queueManager.h" />
+    <ClInclude Include="SrvDspMath.h" />
     <ClInclude Include="SrvTimeStamp.h" />
     <ClInclude Include="staticQueue.h" />
     <ClInclude Include="stdafx.h" />

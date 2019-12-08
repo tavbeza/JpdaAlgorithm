@@ -66,6 +66,9 @@
     <ClCompile Include="testMethod.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SrvDspMath.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TreeNode.h">
@@ -95,9 +98,6 @@
     <ClInclude Include="ExtendedKalman.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ns.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="DataPlot.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -123,6 +123,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="testMethod.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SrvDspMath.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

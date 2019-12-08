@@ -1,6 +1,5 @@
 #include "ExtendedKalman.h"
-#include "ns.h"
-
+//#include "ns.h"
 
 float ExtendedKalman::m_k = 5.0620f; // n/2 * log(4*PI) where n is the state dimention (x, y, x', y')
 

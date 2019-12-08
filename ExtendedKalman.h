@@ -6,6 +6,7 @@
 #include "Matrix.h"
 #include "DataPlot.h"
 #include "NavPlatStatusStruct.h"
+#include "SrvDspMath.h"
 
 /// <summary>
 /// Tracker Parameters 
