@@ -51,6 +51,21 @@
     <ClCompile Include="ExtendedKalman.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="memoryPool.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="staticQueue.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="queueManger.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DrvUhard.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="testMethod.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TreeNode.h">
@@ -93,6 +108,21 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="DataPlotList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="memoryPool.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="staticQueue.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="queueManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DrvUhard.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="testMethod.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
