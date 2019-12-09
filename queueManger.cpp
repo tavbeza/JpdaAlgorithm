@@ -1,16 +1,31 @@
-#include "queueManager.h"
+
+#include "QueueManager.h"
 
 
 /// <sumary>
 /// Empty constructor
 /// <\summary>
-queueManger::queueManger()
+QueueManager::QueueManager()
 {
 }
+
 
 /// <sumary>
 /// Destructor
 /// <\summary>
-queueManger::~queueManger()
+QueueManager::~QueueManager()
+{
+}
+/// <sumary>
+// Allocates a queue
+/// <\summary>
+StaticQueue* AllocateQueue()
+{
+}
+
+/// <sumary>
+/// Returns the top queue from the list.
+/// <\summary>
+StaticQueue* GetQueue()
 {
 }

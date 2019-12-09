@@ -1,20 +1,29 @@
-#pragma once
+#ifndef _TEST_METHOD_H_
+#define _TEST_METHOD_H_
 
-/// <sumary>
-/// In this class we test the function 
-/// <\summary>
-class testMethod
+/// <summary>
+/// This class encpsulate the TestMethod entity. 
+/// This is the base class for all tests.
+/// </summary>
+class TestMethod
 {
 public:
-	/// <sumary>
-	/// Empty constructor
-	/// <\summary>
-	testMethod();
 
+	/// <summary>
+	/// Default Constructor
+	/// </summary>
+	TestMethod();
 
-	/// <sumary>
-	/// Destructor
-	/// <\summary>
-	~testMethod();
+	/// <summary>
+	/// TestMethod Destructor
+	/// </summary>
+	~TestMethod();
+
+	/// <summary>
+	/// Executes the test.
+	/// </summary>
+	virtual void Execute() = 0;
 };
 
+
+#endif //_TEST_METHOD_H_

@@ -1,16 +1,16 @@
-#include "testMethod.h"
+#include "TestMethod.h"
 
-
-/// <sumary>
-/// Empty constructor
-/// <\summary>
-testMethod::testMethod()
+/// <summary>
+/// Default Constructor
+/// </summary>
+TestMethod::TestMethod()
 {
 }
 
-/// <sumary>
-/// Destructor
-/// <\summary>
-testMethod::~testMethod()
+
+/// <summary>
+/// TestMethod Destructor
+/// </summary>
+TestMethod::~TestMethod()
 {
 }

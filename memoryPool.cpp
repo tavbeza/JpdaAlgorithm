@@ -1,16 +1,23 @@
-#include "memoryPool.h"
-
+#include "MemoryPool.h"
+#define SIZE 1000000 //size to the memory 1 milion
 
 /// <sumary>
 /// Empty constructor
 /// <\summary>
-memoryPool::memoryPool()
+MemoryPool::MemoryPool()
 {
 }
 
 /// <sumary>
 /// Destructor
 /// <\summary>
-memoryPool::~memoryPool()
+MemoryPool::~MemoryPool()
+{
+}
+
+/// <sumary>
+/// This function allocate memory to the program
+/// <\summary>
+void allocate() 
 {
 }
