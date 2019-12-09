@@ -116,6 +116,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AssociationMatrix.cpp" />
     <ClCompile Include="DataPlot.cpp" />
     <ClCompile Include="DataPlotFileReader.cpp" />
     <ClCompile Include="DataPlotList.cpp" />
@@ -137,6 +138,7 @@
     <ClCompile Include="TreeNode.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AssociationMatrix.h" />
     <ClInclude Include="DataPlot.h" />
     <ClInclude Include="DataPlotFileReader.h" />
     <ClInclude Include="DataPlotList.h" />

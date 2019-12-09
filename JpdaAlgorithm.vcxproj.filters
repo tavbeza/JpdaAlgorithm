@@ -72,6 +72,9 @@
     <ClCompile Include="QueueManger.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="AssociationMatrix.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TreeNode.h">
@@ -132,6 +135,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="QueueManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AssociationMatrix.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
