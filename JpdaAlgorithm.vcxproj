@@ -135,6 +135,7 @@
     <ClCompile Include="TestMethod.cpp" />
     <ClCompile Include="TrackerJpda.cpp" />
     <ClCompile Include="Tracking_Hypothesis.cpp" />
+    <ClCompile Include="TrakerParams.cpp" />
     <ClCompile Include="TreeNode.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -157,6 +158,7 @@
     <ClInclude Include="targetver.h" />
     <ClInclude Include="TestMethod.h" />
     <ClInclude Include="TrackerJpda.h" />
+    <ClInclude Include="TrakerParams.h" />
     <ClInclude Include="TreeNode.h" />
     <ClInclude Include="Vector.h" />
   </ItemGroup>
