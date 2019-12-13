@@ -1,31 +1,30 @@
-
 #include "QueueManager.h"
 
 
 /// <sumary>
 /// Empty constructor
-/// <\summary>
+/// </summary>
 QueueManager::QueueManager()
 {
 }
 
 
-/// <sumary>
+/// <summary>
 /// Destructor
-/// <\summary>
+/// </summary>
 QueueManager::~QueueManager()
 {
 }
-/// <sumary>
+/// <summary>
 // Allocates a queue
-/// <\summary>
+/// </summary>
 StaticQueue* AllocateQueue()
 {
 }
 
-/// <sumary>
+/// <summary>
 /// Returns the top queue from the list.
-/// <\summary>
+/// </summary>
 StaticQueue* GetQueue()
 {
 }

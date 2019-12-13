@@ -7,7 +7,7 @@
 
 template<class _T, unsigned int _Rows>
 /// <summary>
-/// Vector Class
+/// A genaric vector class
 /// </summary>
 class Vector
 {

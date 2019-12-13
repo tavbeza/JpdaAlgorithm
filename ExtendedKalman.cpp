@@ -279,7 +279,7 @@ void ExtendedKalman::GainUpdate(const float& beta)
 void ExtendedKalman::SetQ(double Dt,
 	Matrix9d &Q)
 {
-	TrackerParams *pTrakerParams = new TrackerParams;
+	TrackerParams *pTrakerParams;
 	Matrix3d temp[3];
 	Vector3d sigMan2;
 	for (int i = 0; i < 3; i++)

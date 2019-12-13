@@ -1,12 +1,12 @@
-#include "TrakerParams.h"
+#include "TrackerParams.h"
 
 
 
-TrakerParams::TrakerParams()
+TrackerParams::TrackerParams()
 {
 }
 
 
-TrakerParams::~TrakerParams()
+TrackerParams::~TrackerParams()
 {
 }

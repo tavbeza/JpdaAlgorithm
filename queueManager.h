@@ -2,31 +2,31 @@
 #define _Queue_Manager
 #include "StaticQueue.h"
 
-/// <sumary>
+/// <summary>
 /// Encapsulates the logic of managing all the queues of the system.
-/// <\summary>
+/// </summary>
 class QueueManager
 {
 public:
 
-	/// <sumary>
+	/// <summary>
 	/// Empty constructor
-	/// <\summary>
+	/// </summary>
 	QueueManager();
 
-	/// <sumary>
+	/// <summary>
 	/// Destructor
-	/// <\summary>
+	/// </summary>
 	~QueueManager();
 
-	/// <sumary>
+	/// <summary>
 	/// Allocates a queue
-	/// <\summary>
+	/// </summary>
 	StaticQueue* AllocateQueue();
 
-	/// <sumary>
+	/// <summary>
 	/// Returns the top queue from the list.
-	/// <\summary>
+	/// </summary>
 	StaticQueue* GetQueue();
 
 

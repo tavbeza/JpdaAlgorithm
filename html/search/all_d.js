@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['readdataplot_76',['ReadDataPlot',['../class_data_plot_file_reader.html#a947671ba342569fc90722f0ce248402f',1,'DataPlotFileReader']]]
+  ['queuemanager_120',['QueueManager',['../class_queue_manager.html',1,'QueueManager'],['../class_queue_manager.html#acc54fe1816c531a089cdff1d4c5ee397',1,'QueueManager::QueueManager()']]]
 ];

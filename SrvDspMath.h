@@ -3,6 +3,10 @@
 
 #include <math.h>
 
+/// <summary>
+/// This class shall support enhanced Mathematical services for<span dir="ltr">DSP.
+/// </summary>
+
 class SrvDspMath
 {
 public:

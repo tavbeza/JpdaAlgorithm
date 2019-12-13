@@ -2,7 +2,7 @@
 
 #include "AssociationMatrix.h"
 #include "SrvDspMath.h"
-#include "TrakerParams.h"
+#include "TrackerParams.h"
 #include "GeodeticConverter.h"
 
 AssociationMatrix   gAssociationMatrix;

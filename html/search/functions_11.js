@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['vector_218',['Vector',['../class_vector.html#a2bcd18977eed2ce359bab2481086e112',1,'Vector::Vector()'],['../class_vector.html#af882688827ec7aff9af34de38d386388',1,'Vector::Vector(_T x, _T y, _T z)'],['../class_vector.html#a44ddd978938ec749a9c1ca93f94f5ee8',1,'Vector::Vector(_T x, _T y)'],['../class_vector.html#ac22f29f1fb0ee3b7f3da5b833ded8e8f',1,'Vector::Vector(_T x0, _T x1, _T x2, _T x3, _T x4)']]]
+  ['update_336',['Update',['../class_extended_kalman.html#ac32649b38f843002dc47500977e647ca',1,'ExtendedKalman::Update()'],['../class_kalman.html#aa54dc418108487a484c3511fa34e7132',1,'Kalman::Update()']]]
 ];

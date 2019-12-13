@@ -1,26 +1,26 @@
 #ifndef _MEMORY_POOL_H_
 #define _MEMORY_POOL_H_
 
-/// <sumary>
+/// <summary>
 /// In this class we alloction memory to the program, and if some process or variable need some memory
 /// this class allocate memory to him
-/// <\summary>
+/// </summary>
 class MemoryPool
 {
 public:
-	/// <sumary>
+	/// <summary>
 	/// Empty constructor
-	/// <\summary>
+	/// </summary>
 	MemoryPool();
 
-	/// <sumary>
+	/// <summary>
 	/// Destructor
-	/// <\summary>
+	/// </summary>
 	~MemoryPool();
 
-	/// <sumary>
+	/// <summary>
 	/// This function allocate memory to the program
-	/// <\summary>
+	/// </summary>
 	void allocate();
 
 protected:

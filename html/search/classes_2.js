@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['kalman_120',['Kalman',['../class_kalman.html',1,'']]]
+  ['extendedkalman_189',['ExtendedKalman',['../class_extended_kalman.html',1,'']]]
 ];

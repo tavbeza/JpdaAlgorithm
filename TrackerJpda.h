@@ -1,10 +1,12 @@
 #ifndef TRACKERJPDA_H_
 #define TRACKERJPDA_H_
 
+#include "Tracker.h"
+
 /// <summary>
-/// Tracker Class
+/// This tracker class inherits from the class Tracker
 /// </summary>
-class TrackerJpda
+class TrackerJpda : Tracker
 {
 
 public:

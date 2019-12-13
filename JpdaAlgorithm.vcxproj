@@ -120,9 +120,11 @@
     <ClCompile Include="DataPlot.cpp" />
     <ClCompile Include="DataPlotFileReader.cpp" />
     <ClCompile Include="DataPlotList.cpp" />
+    <ClCompile Include="DataTrack.cpp" />
     <ClCompile Include="DrvUhrd.cpp" />
     <ClCompile Include="ExtendedKalman.cpp" />
     <ClCompile Include="GeodeticConverter.cpp" />
+    <ClCompile Include="Graph.cpp" />
     <ClCompile Include="Kalman.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Matrix.cpp" />
@@ -133,6 +135,7 @@
     <ClCompile Include="SrvTimeStampPC.cpp" />
     <ClCompile Include="StaticQueue.cpp" />
     <ClCompile Include="TestMethod.cpp" />
+    <ClCompile Include="Tracker.cpp" />
     <ClCompile Include="TrackerJpda.cpp" />
     <ClCompile Include="Tracking_Hypothesis.cpp" />
     <ClCompile Include="TrakerParams.cpp" />
@@ -143,9 +146,11 @@
     <ClInclude Include="DataPlot.h" />
     <ClInclude Include="DataPlotFileReader.h" />
     <ClInclude Include="DataPlotList.h" />
+    <ClInclude Include="DataTrack.h" />
     <ClInclude Include="DrvUhrd.h" />
     <ClInclude Include="ExtendedKalman.h" />
     <ClInclude Include="GeodeticConverter.h" />
+    <ClInclude Include="Graph.h" />
     <ClInclude Include="Kalman.h" />
     <ClInclude Include="Matrix.h" />
     <ClInclude Include="MemoryPool.h" />
@@ -157,8 +162,9 @@
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="TestMethod.h" />
+    <ClInclude Include="Tracker.h" />
     <ClInclude Include="TrackerJpda.h" />
-    <ClInclude Include="TrakerParams.h" />
+    <ClInclude Include="TrackerParams.h" />
     <ClInclude Include="TreeNode.h" />
     <ClInclude Include="Vector.h" />
   </ItemGroup>

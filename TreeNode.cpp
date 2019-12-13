@@ -14,7 +14,9 @@ TreeNode::TreeNode()
 	m_nChilds = 0;
 }
 
+/// <summary>
 /// Copy constructor
+/// </summary>
 TreeNode::TreeNode(const TreeNode &old_obj) {
 	//this->m_pParent = old_obj.m_pParent;
 	this->SetParent(old_obj.m_pParent);

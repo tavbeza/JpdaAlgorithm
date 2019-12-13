@@ -9,7 +9,7 @@
 
 template<class _T, unsigned int _Rows, unsigned int _Cols>
 /// <summary>
-/// Matrix Class
+/// A genaric matrix class
 /// </summary>
 class Matrix
 {
