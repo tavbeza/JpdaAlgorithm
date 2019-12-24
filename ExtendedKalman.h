@@ -42,15 +42,7 @@ public:
 	/// <summary>
 	/// Initialize the kalman
 	/// </summary>
-	void Init(
-		const float& dt,
-		const float& x,
-		const float& y,
-		const float& z,
-		const float& vx,
-		const float& vy,
-		const float& vz,
-		const Matrix4d& R);
+	void Init(const DataPlot &plot);
 
 	/// <summary>
 	/// The algorithm works in a two-step process. 

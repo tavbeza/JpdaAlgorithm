@@ -5,6 +5,7 @@
 /// </summary>
 DataPlotList::DataPlotList()
 {
+	m_nPlots = 0;
 }
 
 /// <summary>
@@ -17,23 +18,37 @@ DataPlotList::~DataPlotList()
 /// <summary>
 /// Add plot to DataPlotList
 /// </summary>
-void DataPlotList::AddPlot(DataPlot* m_pLastDataPlot)
+void DataPlotList::AddPlot(DataPlot* pDataPlot)
 {	
-	m_dataPlotList.push_back(m_pLastDataPlot);
+	m_dataPlotList[m_nPlots] = pDataPlot;
+	m_nPlots++;
 }
 
 /// <summary>
 /// Get m_dataPlotList
 /// </summary>
-std::list<DataPlot*>* DataPlotList::getDataPlotList()
+DataPlot* DataPlotList::getDataPlotList()
 {
-	return &m_dataPlotList;
+	return m_dataPlotList[0];
 }
 
 /// <summary>
 /// clear m_dataPlotList
 /// </summary>
-void DataPlotList::clear()
+void DataPlotList::Clear()
 {
-	m_dataPlotList.clear();
+	m_nPlots = 0;
+}
+
+int DataPlotList::GetCount() const
+{
+	return m_nPlots;
+}
+
+DataPlot* DataPlotList::operator[](const int index) const
+{
+	if (index > m_nPlots)
+		return 0;
+	
+	return m_dataPlotList[index];
 }

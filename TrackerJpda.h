@@ -2,6 +2,8 @@
 #define TRACKERJPDA_H_
 
 #include "Tracker.h"
+#include "ExtendedKalman.h"
+
 
 /// <summary>
 /// This tracker class inherits from the class Tracker
@@ -23,7 +25,11 @@ public:
 	/// <summary>
 	// The function should receive plots  
 	/// </summary>
-	void Track();
+	virtual void DoTrack(const DataPlotList &dataPlotList);
+
+private:
+	
+
 };
 
 #endif // TRACKERJPDA_H_

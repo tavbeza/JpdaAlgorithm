@@ -121,6 +121,7 @@
     <ClCompile Include="DataPlotFileReader.cpp" />
     <ClCompile Include="DataPlotList.cpp" />
     <ClCompile Include="DataTrack.cpp" />
+    <ClCompile Include="DataTrackList.cpp" />
     <ClCompile Include="DrvUhrd.cpp" />
     <ClCompile Include="ExtendedKalman.cpp" />
     <ClCompile Include="GeodeticConverter.cpp" />
@@ -147,7 +148,8 @@
     <ClInclude Include="DataPlotFileReader.h" />
     <ClInclude Include="DataPlotList.h" />
     <ClInclude Include="DataTrack.h" />
-    <ClInclude Include="DrvUhrd.h" />
+    <ClInclude Include="DataTrackList.h" />
+    <ClInclude Include="DrvUhrt.h" />
     <ClInclude Include="ExtendedKalman.h" />
     <ClInclude Include="GeodeticConverter.h" />
     <ClInclude Include="Graph.h" />

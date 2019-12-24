@@ -5,6 +5,7 @@
 #include <fstream>
 #include "Vector.h"
 #include "Matrix.h"
+#include "DataPlot.h"
 #include <vector>
 
 //#include "Eigen/Dense"
@@ -24,10 +25,15 @@ public:
 	/// <summary>
 	/// 2D constructor
 	/// </summary>
-	Kalman(const float& dt, const Vector2f &target_delta,
+	void InitKalman(const float& dt, const Vector2f &target_delta,
 		const float& x, const float& y,
 		const float& vx, const float& vy,
 		const Matrix2f &R);
+
+	/// <summary>
+	/// 2D constructor that get pointer of DataPlot
+	/// </summary>
+	Kalman(DataPlot* pPlot);
 
 	/// <summary>
 	/// The algorithm works in a two-step process. 

@@ -2,8 +2,8 @@
 #define _TRACKER_H_
 
 #include <list>
-#include "DataTrack.h"
-
+#include "DataTrackList.h"
+#include "DataPlotList.h"
 
 /// <summary>
 /// This class encpsulate the tracker entity. 
@@ -25,12 +25,15 @@ public:
 	/// <summary>
 	/// Preform the tracking of the current duell.
 	/// </summary>
-	virtual void DoTrack() = 0;
+	virtual void DoTrack(const DataPlotList &dataPlotList) = 0;
 
 	/// <summary>
 	/// Returns all tracks in the system.
 	/// </summary>
-	virtual std::list<DataTrack*> GetTrack() = 0;
+	DataTrackList* GetTrack();
+
+protected:
+	DataTrackList m_dataTrackList;
 };
 
 #endif //_TRACKER_H_

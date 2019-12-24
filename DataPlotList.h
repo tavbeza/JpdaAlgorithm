@@ -4,6 +4,8 @@
 #include "DataPlot.h"
 #include <list>
 
+#define MAX_PLOTS 500
+
 /// <summary>
 /// Class with a list of data plot that obtained from the sensor
 /// </summary>
@@ -29,17 +31,21 @@ public:
 	/// <summary>
 	/// Get m_dataPlotList
 	/// </summary>
-	std::list<DataPlot*>* getDataPlotList();
+	DataPlot* getDataPlotList();
 
 	/// <summary>
 	/// clear m_dataPlotList
 	/// </summary>
-	void clear();
+	void Clear();
+
+	int GetCount() const;
+
+	DataPlot* operator[](const int index) const;
 
 private:
 
-	std::list<DataPlot*> m_dataPlotList;
-
+	DataPlot* m_dataPlotList[MAX_PLOTS];
+	int m_nPlots;
 };
 
 #endif // _DATA_PLOT_LIST_H

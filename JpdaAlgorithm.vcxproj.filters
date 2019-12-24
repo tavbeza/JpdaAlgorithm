@@ -87,6 +87,9 @@
     <ClCompile Include="Graph.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="DataTrackList.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TreeNode.h">
@@ -143,9 +146,6 @@
     <ClInclude Include="TestMethod.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="DrvUhrd.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="QueueManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -162,6 +162,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Graph.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DrvUhrt.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DataTrackList.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

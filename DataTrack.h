@@ -3,6 +3,7 @@
 
 #include "Vector.h"
 #include "Kalman.h"
+#include "DataPlot.h"
 
 /// <summary>
 /// This class encpsulate the Track entity. 
@@ -50,11 +51,15 @@ public:
 	int m_MeasAssProbHist;
 	int m_MeasAssProbLast;
 
-
 	/// <summary>
 	/// Track constractor.
 	/// </summary>
 	DataTrack();
+
+	/// <summary>
+	/// Track constractor.
+	/// </summary>
+	void InitTrack(DataPlot* pDataPlot);
 
 	/// <summary>
 	/// Tracl constractor.
@@ -65,8 +70,7 @@ private:
 
 	int m_Id;
 	int m_Color;
-	Kalman m_kalman;
-
+	Kalman* m_pKalman;
 };
 
 #endif //_DATA_TRACK_H_

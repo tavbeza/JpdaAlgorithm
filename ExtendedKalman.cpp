@@ -15,7 +15,7 @@ ExtendedKalman::ExtendedKalman() noexcept
 /// <summary>
 /// Kalman 3D constructor
 /// </summary>
-ExtendedKalman::ExtendedKalman(
+ExtendedKalman::Init(
 	const float& dt,
 	const float& x,
 	const float& y,
@@ -115,16 +115,9 @@ ExtendedKalman::~ExtendedKalman()
 /// <summary>
 /// Initialize the kalman
 /// </summary>
-void ExtendedKalman::Init(
-	const float& dt,
-	const float& x,
-	const float& y,
-	const float& z,
-	const float& vx,
-	const float& vy,
-	const float& vz,
-	const Matrix4d& R)
+void ExtendedKalman::Init(const DataPlot &plot)
 {
+	
 }
 
 /// <summary>

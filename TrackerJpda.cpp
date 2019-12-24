@@ -17,8 +17,20 @@ TrackerJpda::~TrackerJpda()
 
 
 /// <summary>
-// The function should receive plots  
+/// The function should receive plots  
 /// </summary>
-void TrackerJpda::Track()
+void TrackerJpda::DoTrack(const DataPlotList &dataPlotList)
 {
+	int nTracks = m_dataTrackList.GetCount();
+	int nPlots = dataPlotList.GetCount();
+
+	if (nTracks == 0)
+	{
+		for (int i = 0; i < nPlots; i++)
+		{
+			DataTrack* pDataTrack = m_dataTrackList.CreateTrack();
+			pDataTrack->InitTrack(dataPlotList[i]);
+		}
+		
+	}
 }

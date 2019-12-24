@@ -17,7 +17,7 @@ Kalman::Kalman()
 /// <summary>
 /// 2D constructor
 /// </summary>
-Kalman::Kalman(const float& dt, const Vector2f &target_delta, const float& x, const float& y, const float& vx, const float& vy, const Matrix2f& R)
+void Kalman::InitKalman(const float& dt, const Vector2f &target_delta, const float& x, const float& y, const float& vx, const float& vy, const Matrix2f& R)
 {
 	static int counter = 0;
 	m_nTrack = counter++;
@@ -127,6 +127,25 @@ Kalman::Kalman(const float& dt, const Vector2f &target_delta, const float& x, co
 	m_last_speed.m_Data[1] = vy;
 
 	m_first = true;
+}
+
+/// <summary>
+/// 2D constructor that get pointer of DataPlot
+/// </summary>
+Kalman::Kalman(DataPlot* pPlot)
+{
+	float dt = 93.0 / 1000.0;
+	Vector2f target_delta((float)10, (float)10);
+	Matrix2f R;
+	R.Init((float)100, (float)0, (float)0, (float)100);
+
+	InitKalman(dt,												// dt
+		target_delta,
+		cos(pPlot->GetAzimuthAngle())*pPlot->GetRange(),		// x
+		sin(pPlot->GetAzimuthAngle())*pPlot->GetRange(),		// y
+		cos(pPlot->GetAzimuthAngle())*pPlot->GetVelocity(),		// vx
+		sin(pPlot->GetAzimuthAngle())*pPlot->GetVelocity(),		// vy
+		R);
 }
 
 /// <summary>
