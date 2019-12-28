@@ -40,11 +40,17 @@ void DataPlotList::Clear()
 	m_nPlots = 0;
 }
 
+/// <summary>
+/// Returns the number of plots
+/// </summary>
 int DataPlotList::GetCount() const
 {
 	return m_nPlots;
 }
 
+/// <summary>
+/// New operator reruen the DataPlot in the DataPlotList with index
+/// </summary>
 DataPlot* DataPlotList::operator[](const int index) const
 {
 	if (index > m_nPlots)

@@ -1,23 +1,23 @@
-#include "DrvUhrd.h"
+#include "DrvUhrt.h"
 
 
 /// <sumary>
 /// Empty constructor
 /// <\summary>
-DrvUard::DrvUard()
+DrvUart::DrvUart()
 {
 }
 
 /// <sumary>
 /// Destructor
 /// <\summary>
-DrvUard::DrvUard()
+DrvUart::DrvUart()
 {
 }
 
 /// <summary>
-	/// Initialize the uhard driver information.
-	/// </summary>
+/// Initialize the uhard driver information.
+/// </summary>
 void Init()
 {
 }

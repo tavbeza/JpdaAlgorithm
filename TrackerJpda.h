@@ -1,5 +1,5 @@
-#ifndef TRACKERJPDA_H_
-#define TRACKERJPDA_H_
+#ifndef _TRACKERJPDA_H_
+#define _TRACKERJPDA_H_
 
 #include "Tracker.h"
 #include "ExtendedKalman.h"
@@ -32,5 +32,5 @@ private:
 
 };
 
-#endif // TRACKERJPDA_H_
+#endif // _TRACKERJPDA_H_
 

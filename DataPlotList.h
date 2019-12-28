@@ -38,8 +38,14 @@ public:
 	/// </summary>
 	void Clear();
 
+	/// <summary>
+	/// Returns the number of plots
+	/// </summary>
 	int GetCount() const;
 
+	/// <summary>
+	/// New operator reruen the DataPlot in the DataPlotList with index
+	/// </summary>
 	DataPlot* operator[](const int index) const;
 
 private:

@@ -1,3 +1,5 @@
+#ifndef _DATA_TRACK_LIST_H
+#define _DATA_TRACK_LIST_H
 
 #include "DataTrack.h"
 #define MAX_TRACKS 200
@@ -7,8 +9,14 @@ public:
 	DataTrackList();
 	~DataTrackList();
 
+	/// <summary>
+	/// Returns the number of Tracks 
+	/// </summary>
 	int GetCount();
 
+	/// <summary>
+	/// Creat new Track and upward the m_nTracks 
+	/// </summary>
 	DataTrack* CreateTrack();
 
 private:
@@ -16,3 +24,4 @@ private:
 	int m_nTracks;
 };
 
+#endif // _DATA_TRACK_LIST_H

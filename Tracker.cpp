@@ -1,12 +1,16 @@
 #include "Tracker.h"
 
 
-
+/// <summary>
+/// Tracker constractor.
+/// </summary>
 Tracker::Tracker()
 {
 }
 
-
+/// <summary>
+/// Tracker destractor.
+/// </summary>
 Tracker::~Tracker()
 {
 }
