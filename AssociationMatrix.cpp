@@ -5,6 +5,8 @@
 #include "TrackerParams.h"
 #include "GeodeticConverter.h"
 
+#define PI_VALUE 3.14159
+
 AssociationMatrix   gAssociationMatrix;
 
 /// <summary>

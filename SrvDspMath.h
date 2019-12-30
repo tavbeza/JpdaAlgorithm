@@ -1,7 +1,7 @@
 #ifndef _SRV_DSP_MATH_H
 #define _SRV_DSP_MATH_H
 
-#include <math.h>
+#include "stdafx.h"
 
 /// <summary>
 /// This class shall support enhanced Mathematical services for<span dir="ltr">DSP.
@@ -44,7 +44,6 @@ public:
 	/// Compute square root
 	/// </summary>
 	static double sqrt(double x);
-
 };
 
 #endif //_SRV_DSP_MATH_H
