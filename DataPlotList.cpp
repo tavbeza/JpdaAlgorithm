@@ -49,7 +49,7 @@ int DataPlotList::GetCount() const
 }
 
 /// <summary>
-/// New operator reruen the DataPlot in the DataPlotList with index
+/// New operator return the DataPlot in the DataPlotList with index
 /// </summary>
 DataPlot* DataPlotList::operator[](const int index) const
 {

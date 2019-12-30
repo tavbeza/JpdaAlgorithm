@@ -9,7 +9,7 @@ DataTrack::DataTrack()
 
 }
 
-void DataTrack::InitTrack(DataPlot* pDataPlot)
+void DataTrack::InitTrack(const DataPlot &pDataPlot)
 {
 	m_pKalman = new ExtendedKalman(pDataPlot);
 }

@@ -19,8 +19,13 @@ public:
 	/// </summary>
 	DataTrack* CreateTrack();
 
+	/// <summary>
+	/// New operator return the DataTrack in the DataTrackList with index
+	/// </summary>
+	DataTrack* DataTrackList::operator[](const int index) const;
+
 private:
-	DataTrack m_dataTracksList[MAX_TRACKS];
+	DataTrack* m_dataTracksList[MAX_TRACKS];
 	int m_nTracks;
 };
 

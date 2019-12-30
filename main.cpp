@@ -8,6 +8,7 @@
 #include "DataPlot.h"
 #include "DataPlotList.h"
 #include "DataPlotFileReader.h"
+#include "TrackerJpda.h"
 
 
 #define NUMBER_DWELL 5
@@ -30,6 +31,7 @@ void main()
 
 
 	// Test Extended Kalman Filter 3D.
+	TrackerJpda trackerJpda;
 	ExtendedKalman extendedKalman;
 	std::ofstream m_kalmanFile;
 	std::stringstream path;
@@ -50,19 +52,13 @@ void main()
 	for (int i = 1; i < NUMBER_DWELL + 1; i++)
 	{
 		plotsReader.ReadDataPlot(&plotsList, i);
-		for (list<DataPlot*>::iterator &it = plotsList.getDataPlotList()->begin(); it != plotsList.getDataPlotList()->end(); it++)
-		{
-			DataPlot* pPlot = *it;
-			extendedKalman.InitXP(*pPlot, nav, xInit, pInit);
-			extendedKalman = ExtendedKalman(dt,															// dt
-												cos(pPlot->GetAzimuthAngle())*pPlot->GetRange(),		// x
-												sin(pPlot->GetAzimuthAngle())*pPlot->GetRange(),		// y
-												0,														// z
-												cos(pPlot->GetAzimuthAngle())*pPlot->GetVelocity(),		// vx
-												sin(pPlot->GetAzimuthAngle())*pPlot->GetVelocity(),		// vy
-												0,														// vz
-												R);														// R
+		trackerJpda.DoTrack(plotsList);
 		
+		for (int j = 0; j < plotsList.GetCount(); j++)
+		{
+			DataPlot* pPlot = plotsList[j];
+			
+			extendedKalman = ExtendedKalman(*pPlot);
 			extendedKalman.Predict(dt);
 			extendedKalman.Update(pPlot);
 

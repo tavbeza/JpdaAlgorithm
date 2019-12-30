@@ -29,8 +29,16 @@ void TrackerJpda::DoTrack(const DataPlotList &dataPlotList)
 		for (int i = 0; i < nPlots; i++)
 		{
 			DataTrack* pDataTrack = m_dataTrackList.CreateTrack();
-			pDataTrack->InitTrack(dataPlotList[i]);
+			pDataTrack->InitTrack(*dataPlotList[i]);
 		}
-		
+	}
+	else
+	{
+		for (int i = 0; i < nTracks; i++)
+		{
+			float dt = 93.0 / 1000.0;
+			m_dataTrackList[i]->m_pKalman->Predict(dt);
+			m_dataTrackList[i]->m_pKalman->Update()
+		}
 	}
 }

@@ -21,28 +21,27 @@ public:
 	ExtendedKalman() noexcept;
 
 	/// <summary>
+	/// Kalman 3D constructor
+	/// </summary>
+	ExtendedKalman(const DataPlot &plot);
+
+	/// <summary>
 	/// Virtual kalman destructor
 	/// </summary>
 	virtual ~ExtendedKalman();
 
 	/// <summary>
-	/// Kalman 3D constructor
+	/// Initialize the kalman
 	/// </summary>
-	ExtendedKalman(
+	void Init(
 		const float& dt,
 		const float& x,
 		const float& y,
 		const float& z,
 		const float& vx,
 		const float& vy,
-		const float& vz,
-		const Matrix4d& R)
+		const float& vz)
 		noexcept;
-
-	/// <summary>
-	/// Initialize the kalman
-	/// </summary>
-	void Init(const DataPlot &plot);
 
 	/// <summary>
 	/// The algorithm works in a two-step process. 
@@ -210,7 +209,7 @@ public:
 					double Sigma_rdot,
 					double Sigma_az,
 					double Sigma_el,
-					Vector3d SigmaV,
+					/*Vector3d SigmaV,*/
 					Matrix4d &R);
 
 	/// <summary>
@@ -233,7 +232,7 @@ public:
 	/// </summary>
 	void InitXP(
 		const DataPlot &plot,
-		const NavPlatStatusStruct &platData,
+		/*const NavPlatStatusStruct &platData,*/
 		Vector9d &xInit,
 		Matrix9d &pInit
 	);

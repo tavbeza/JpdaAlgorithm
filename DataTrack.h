@@ -2,7 +2,7 @@
 #define _DATA_TRACK_H_
 
 #include "Vector.h"
-#include "Kalman.h"
+#include "ExtendedKalman.h"
 #include "DataPlot.h"
 
 /// <summary>
@@ -59,18 +59,19 @@ public:
 	/// <summary>
 	/// Track constractor.
 	/// </summary>
-	void InitTrack(DataPlot* pDataPlot);
+	void InitTrack(const DataPlot &pDataPlot);
 
 	/// <summary>
 	/// Tracl constractor.
 	/// </summary>
 	~DataTrack();
 
-private:
+// TODO: private
+public:
 
 	int m_Id;
 	int m_Color;
-	Kalman* m_pKalman;
+	ExtendedKalman* m_pKalman;
 };
 
 #endif //_DATA_TRACK_H_

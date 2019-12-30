@@ -15,15 +15,50 @@ ExtendedKalman::ExtendedKalman() noexcept
 /// <summary>
 /// Kalman 3D constructor
 /// </summary>
-ExtendedKalman::Init(
+ExtendedKalman::ExtendedKalman(const DataPlot &plot)
+{
+	TrackerParams *pTrakerParams = new TrackerParams;
+	Vector3d vs;
+	vs.m_Data[0] = pTrakerParams->m_SigmaVxs;
+	vs.m_Data[1] = pTrakerParams->m_SigmaVys;
+	vs.m_Data[2] = pTrakerParams->m_SigmaVzs;
+	
+	SetR_Enu(2,
+		plot.GetRange(),
+		plot.GetAzimuthAngle(),
+		plot.GetElevationAngle(),
+		vs,
+		plot.GetRangeAccuracy(),
+		plot.GetVelocityAccuracy(),
+		plot.GetAzimuthAccuracy(),
+		plot.GetElevationAccuracy(),
+		/*platData.velENU,*/
+		m_R);
+
+	float dt = 93.0 / 1000;
+
+	Init(
+		dt,
+		cos(plot.GetAzimuthAngle())*plot.GetRange(),		// x
+		sin(plot.GetAzimuthAngle())*plot.GetRange(),		// y
+		0,													// z
+		cos(plot.GetAzimuthAngle())*plot.GetVelocity(),		// vx
+		sin(plot.GetAzimuthAngle())*plot.GetVelocity(),		// vy
+		0
+	);
+}
+
+/// <summary>
+/// Kalman 3D constructor
+/// </summary>
+void ExtendedKalman::Init(
 	const float& dt,
 	const float& x,
 	const float& y,
 	const float& z,
 	const float& vx,
 	const float& vy,
-	const float& vz,
-	const Matrix4d& R) noexcept
+	const float& vz) noexcept
 {
 	m_Entropy = 0;
 	m_last_prediction = Vector3d(x, y, z);
@@ -97,7 +132,7 @@ ExtendedKalman::Init(
 	//m_K = MatrixXf(4, 2);
 
 	//measurement noise covariance matrix
-	m_R = R;
+	//m_R = R;
 
 	m_IsFirst = true;
 	SetF(dt, m_F);
@@ -110,14 +145,6 @@ ExtendedKalman::Init(
 ExtendedKalman::~ExtendedKalman()
 {
 
-}
-
-/// <summary>
-/// Initialize the kalman
-/// </summary>
-void ExtendedKalman::Init(const DataPlot &plot)
-{
-	
 }
 
 /// <summary>
@@ -650,7 +677,7 @@ void ExtendedKalman::SetR_Enu(int type,
 	double Sigma_rdot,
 	double Sigma_az,
 	double Sigma_el,
-	Vector3d SigmaV,
+	/*Vector3d SigmaV,*/
 	Matrix4d &R)
 {
 	switch (type)
@@ -742,7 +769,7 @@ void ExtendedKalman::SetZ_Enu(const Vector3d &meas,
 /// Initialize State Vector X and Covariance Matrix P
 /// </summary>
 void ExtendedKalman::InitXP(const DataPlot &plot,
-	const NavPlatStatusStruct &platData,
+	/*const NavPlatStatusStruct &platData,*/
 	Vector9d &xInit,
 	Matrix9d &pInit)
 {
@@ -772,7 +799,7 @@ void ExtendedKalman::InitXP(const DataPlot &plot,
 		plot.GetVelocityAccuracy(),
 		plot.GetAzimuthAccuracy(),
 		plot.GetElevationAccuracy(),
-		platData.velENU,
+		/*platData.velENU,*/
 		m_R);
 	//m_R.Print();
 		  //P_enu=CovMat([1:3],[1:3]);
