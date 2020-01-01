@@ -49,7 +49,7 @@ ExtendedKalman::ExtendedKalman(const DataPlot &plot)
 }
 
 /// <summary>
-/// Kalman 3D constructor
+/// Init Extended Kalman Filter
 /// </summary>
 void ExtendedKalman::Init(
 	const float& dt,
