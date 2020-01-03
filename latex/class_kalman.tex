@@ -14,8 +14,10 @@ The \mbox{\hyperlink{class_kalman}{Kalman}} class encapsulate the basic kalman f
 \item 
 \mbox{\hyperlink{class_kalman_a0b487a843716cd64125c1206370cf03c}{Kalman}} ()
 \begin{DoxyCompactList}\small\item\em Empty constructor \end{DoxyCompactList}\item 
-\mbox{\hyperlink{class_kalman_a82cfabd300047616b6ccd76694d866ee}{Kalman}} (const float \&dt, const \mbox{\hyperlink{class_vector}{Vector2f}} \&target\+\_\+delta, const float \&x, const float \&y, const float \&vx, const float \&vy, const \mbox{\hyperlink{class_matrix}{Matrix2f}} \&R)
+void \mbox{\hyperlink{class_kalman_a2338812c5ea63e3fcec0cdc23dad0f92}{Init\+Kalman}} (const float \&dt, const \mbox{\hyperlink{class_vector}{Vector2f}} \&target\+\_\+delta, const float \&x, const float \&y, const float \&vx, const float \&vy, const \mbox{\hyperlink{class_matrix}{Matrix2f}} \&R)
 \begin{DoxyCompactList}\small\item\em 2D constructor \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_kalman_a61232700fb87933d0753361d7fd91d8c}{Kalman}} (\mbox{\hyperlink{class_data_plot}{Data\+Plot}} $\ast$p\+Plot)
+\begin{DoxyCompactList}\small\item\em 2D constructor that get pointer of \mbox{\hyperlink{class_data_plot}{Data\+Plot}} \end{DoxyCompactList}\item 
 virtual \mbox{\hyperlink{class_vector}{Vector2f}} \mbox{\hyperlink{class_kalman_a321173a37f683aaf60c4943fbd0a34d3}{Predict}} ()
 \begin{DoxyCompactList}\small\item\em The algorithm works in a two-\/step process. In the prediction step, the \mbox{\hyperlink{class_kalman}{Kalman}} filter produces estimates of the current state variables, along with their uncertainties. Once the outcome of the next measurement (necessarily corrupted with some amount of error, including random noise) is observed, these estimates are updated using a weighted average, with more weight being given to estimates with higher certainty. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{class_kalman_a4dd089121fdf9684829390fb3e53f898}{Gain\+Update}} (const float \&beta)
@@ -130,15 +132,15 @@ The \mbox{\hyperlink{class_kalman}{Kalman}} class encapsulate the basic kalman f
 
 Empty constructor 
 
-\mbox{\Hypertarget{class_kalman_a82cfabd300047616b6ccd76694d866ee}\label{class_kalman_a82cfabd300047616b6ccd76694d866ee}} 
+\mbox{\Hypertarget{class_kalman_a61232700fb87933d0753361d7fd91d8c}\label{class_kalman_a61232700fb87933d0753361d7fd91d8c}} 
 \index{Kalman@{Kalman}!Kalman@{Kalman}}
 \index{Kalman@{Kalman}!Kalman@{Kalman}}
 \doxysubsubsection{\texorpdfstring{Kalman()}{Kalman()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily Kalman\+::\+Kalman (\begin{DoxyParamCaption}\item[{const float \&}]{dt,  }\item[{const \mbox{\hyperlink{class_vector}{Vector2f}} \&}]{target\+\_\+delta,  }\item[{const float \&}]{x,  }\item[{const float \&}]{y,  }\item[{const float \&}]{vx,  }\item[{const float \&}]{vy,  }\item[{const \mbox{\hyperlink{class_matrix}{Matrix2f}} \&}]{R }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily Kalman\+::\+Kalman (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_data_plot}{Data\+Plot}} $\ast$}]{p\+Plot }\end{DoxyParamCaption})}
 
 
 
-2D constructor 
+2D constructor that get pointer of \mbox{\hyperlink{class_data_plot}{Data\+Plot}} 
 
 
 
@@ -152,6 +154,16 @@ Empty constructor
 
 
 The relative certainty of the measurements and current state estimate is an important consideration, and it is common to discuss the response of the filter in terms of the \mbox{\hyperlink{class_kalman}{Kalman}} filter\textquotesingle{}s gain. The \mbox{\hyperlink{class_kalman}{Kalman}} gain is the relative weight given to the measurements and current state estimate, and can be \char`\"{}tuned\char`\"{} to achieve particular performance. With a high gain, the filter places more weight on the most recent measurements, and thus follows them more responsively. With a low gain, the filter follows the model predictions more closely. At the extremes, a high gain close to one will result in a more jumpy estimated trajectory, while low gain close to zero will smooth out noise but decrease the responsiveness. 
+
+\mbox{\Hypertarget{class_kalman_a2338812c5ea63e3fcec0cdc23dad0f92}\label{class_kalman_a2338812c5ea63e3fcec0cdc23dad0f92}} 
+\index{Kalman@{Kalman}!InitKalman@{InitKalman}}
+\index{InitKalman@{InitKalman}!Kalman@{Kalman}}
+\doxysubsubsection{\texorpdfstring{InitKalman()}{InitKalman()}}
+{\footnotesize\ttfamily void Kalman\+::\+Init\+Kalman (\begin{DoxyParamCaption}\item[{const float \&}]{dt,  }\item[{const \mbox{\hyperlink{class_vector}{Vector2f}} \&}]{target\+\_\+delta,  }\item[{const float \&}]{x,  }\item[{const float \&}]{y,  }\item[{const float \&}]{vx,  }\item[{const float \&}]{vy,  }\item[{const \mbox{\hyperlink{class_matrix}{Matrix2f}} \&}]{R }\end{DoxyParamCaption})}
+
+
+
+2D constructor 
 
 \mbox{\Hypertarget{class_kalman_a09dca6a56b1576f9533e9800c885d2ca}\label{class_kalman_a09dca6a56b1576f9533e9800c885d2ca}} 
 \index{Kalman@{Kalman}!kalmanTest@{kalmanTest}}

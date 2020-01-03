@@ -38,7 +38,7 @@ void TrackerJpda::DoTrack(const DataPlotList &dataPlotList)
 		{
 			float dt = 93.0 / 1000.0;
 			m_dataTrackList[i]->m_pKalman->Predict(dt);
-			m_dataTrackList[i]->m_pKalman->Update()
+			//m_dataTrackList[i]->m_pKalman->Update()
 		}
 	}
 }

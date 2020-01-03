@@ -18,10 +18,14 @@ Class with a list of data plot that obtained from the sensor
 \begin{DoxyCompactList}\small\item\em Destructor \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_data_plot_list_ace11458fa3ba21934f55e5922b9ddfc8}{Add\+Plot}} (\mbox{\hyperlink{class_data_plot}{Data\+Plot}} $\ast$m\+\_\+p\+Last\+Data\+Plot)
 \begin{DoxyCompactList}\small\item\em Add plot to \mbox{\hyperlink{class_data_plot_list}{Data\+Plot\+List}} \end{DoxyCompactList}\item 
-std\+::list$<$ \mbox{\hyperlink{class_data_plot}{Data\+Plot}} $\ast$ $>$ $\ast$ \mbox{\hyperlink{class_data_plot_list_aab6c179c043c4cceffbe2b79e2961818}{get\+Data\+Plot\+List}} ()
+\mbox{\hyperlink{class_data_plot}{Data\+Plot}} $\ast$ \mbox{\hyperlink{class_data_plot_list_a020557480692eaa0a4a387d43b1dbdf0}{get\+Data\+Plot\+List}} ()
 \begin{DoxyCompactList}\small\item\em Get m\+\_\+data\+Plot\+List \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{class_data_plot_list_a701ca6c7ebc22dd178ebfc4cd31e8571}{clear}} ()
-\begin{DoxyCompactList}\small\item\em clear m\+\_\+data\+Plot\+List \end{DoxyCompactList}\end{DoxyCompactItemize}
+void \mbox{\hyperlink{class_data_plot_list_a854b068c9ada9385dfbe7cce52d75d3b}{Clear}} ()
+\begin{DoxyCompactList}\small\item\em clear m\+\_\+data\+Plot\+List \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_data_plot_list_ae54450f0bc139d88b3a579b5fb72813d}{Get\+Count}} () const
+\begin{DoxyCompactList}\small\item\em Returns the number of plots \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_data_plot}{Data\+Plot}} $\ast$ \mbox{\hyperlink{class_data_plot_list_a828b647be5b5a65ebabfdbdf06bc7712}{operator\mbox{[}$\,$\mbox{]}}} (const int index) const
+\begin{DoxyCompactList}\small\item\em New operator return the \mbox{\hyperlink{class_data_plot}{Data\+Plot}} in the \mbox{\hyperlink{class_data_plot_list}{Data\+Plot\+List}} with index \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
@@ -57,31 +61,51 @@ Destructor
 \index{DataPlotList@{DataPlotList}!AddPlot@{AddPlot}}
 \index{AddPlot@{AddPlot}!DataPlotList@{DataPlotList}}
 \doxysubsubsection{\texorpdfstring{AddPlot()}{AddPlot()}}
-{\footnotesize\ttfamily void Data\+Plot\+List\+::\+Add\+Plot (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_data_plot}{Data\+Plot}} $\ast$}]{m\+\_\+p\+Last\+Data\+Plot }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void Data\+Plot\+List\+::\+Add\+Plot (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_data_plot}{Data\+Plot}} $\ast$}]{p\+Data\+Plot }\end{DoxyParamCaption})}
 
 
 
 Add plot to \mbox{\hyperlink{class_data_plot_list}{Data\+Plot\+List}} 
 
-\mbox{\Hypertarget{class_data_plot_list_a701ca6c7ebc22dd178ebfc4cd31e8571}\label{class_data_plot_list_a701ca6c7ebc22dd178ebfc4cd31e8571}} 
-\index{DataPlotList@{DataPlotList}!clear@{clear}}
-\index{clear@{clear}!DataPlotList@{DataPlotList}}
-\doxysubsubsection{\texorpdfstring{clear()}{clear()}}
-{\footnotesize\ttfamily void Data\+Plot\+List\+::clear (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+\mbox{\Hypertarget{class_data_plot_list_a854b068c9ada9385dfbe7cce52d75d3b}\label{class_data_plot_list_a854b068c9ada9385dfbe7cce52d75d3b}} 
+\index{DataPlotList@{DataPlotList}!Clear@{Clear}}
+\index{Clear@{Clear}!DataPlotList@{DataPlotList}}
+\doxysubsubsection{\texorpdfstring{Clear()}{Clear()}}
+{\footnotesize\ttfamily void Data\+Plot\+List\+::\+Clear (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 
 
 clear m\+\_\+data\+Plot\+List 
 
-\mbox{\Hypertarget{class_data_plot_list_aab6c179c043c4cceffbe2b79e2961818}\label{class_data_plot_list_aab6c179c043c4cceffbe2b79e2961818}} 
+\mbox{\Hypertarget{class_data_plot_list_ae54450f0bc139d88b3a579b5fb72813d}\label{class_data_plot_list_ae54450f0bc139d88b3a579b5fb72813d}} 
+\index{DataPlotList@{DataPlotList}!GetCount@{GetCount}}
+\index{GetCount@{GetCount}!DataPlotList@{DataPlotList}}
+\doxysubsubsection{\texorpdfstring{GetCount()}{GetCount()}}
+{\footnotesize\ttfamily int Data\+Plot\+List\+::\+Get\+Count (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Returns the number of plots 
+
+\mbox{\Hypertarget{class_data_plot_list_a020557480692eaa0a4a387d43b1dbdf0}\label{class_data_plot_list_a020557480692eaa0a4a387d43b1dbdf0}} 
 \index{DataPlotList@{DataPlotList}!getDataPlotList@{getDataPlotList}}
 \index{getDataPlotList@{getDataPlotList}!DataPlotList@{DataPlotList}}
 \doxysubsubsection{\texorpdfstring{getDataPlotList()}{getDataPlotList()}}
-{\footnotesize\ttfamily std\+::list$<$ \mbox{\hyperlink{class_data_plot}{Data\+Plot}} $\ast$ $>$ $\ast$ Data\+Plot\+List\+::get\+Data\+Plot\+List (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_data_plot}{Data\+Plot}} $\ast$ Data\+Plot\+List\+::get\+Data\+Plot\+List (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 
 
 Get m\+\_\+data\+Plot\+List 
+
+\mbox{\Hypertarget{class_data_plot_list_a828b647be5b5a65ebabfdbdf06bc7712}\label{class_data_plot_list_a828b647be5b5a65ebabfdbdf06bc7712}} 
+\index{DataPlotList@{DataPlotList}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!DataPlotList@{DataPlotList}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_data_plot}{Data\+Plot}} $\ast$ Data\+Plot\+List\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{const int}]{index }\end{DoxyParamCaption}) const}
+
+
+
+New operator return the \mbox{\hyperlink{class_data_plot}{Data\+Plot}} in the \mbox{\hyperlink{class_data_plot_list}{Data\+Plot\+List}} with index 
 
 
 

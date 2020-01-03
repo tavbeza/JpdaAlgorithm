@@ -91,8 +91,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a800c40c6e9782727c5a95883341ecef2"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_tracker_jpda.html#a800c40c6e9782727c5a95883341ecef2">~TrackerJpda</a> ()</td></tr>
 <tr class="memdesc:a800c40c6e9782727c5a95883341ecef2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor  <a href="class_tracker_jpda.html#a800c40c6e9782727c5a95883341ecef2">More...</a><br /></td></tr>
 <tr class="separator:a800c40c6e9782727c5a95883341ecef2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4228724df722e036bae4b8bba3a90b93"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_tracker_jpda.html#a4228724df722e036bae4b8bba3a90b93">Track</a> ()</td></tr>
-<tr class="separator:a4228724df722e036bae4b8bba3a90b93"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a781b1701752d145a95594e490d8a2a50"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_tracker_jpda.html#a781b1701752d145a95594e490d8a2a50">DoTrack</a> (const <a class="el" href="class_data_plot_list.html">DataPlotList</a> &amp;dataPlotList)</td></tr>
+<tr class="separator:a781b1701752d145a95594e490d8a2a50"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This tracker class inherits from the class <a class="el" href="class_tracker.html" title="This class encpsulate the tracker entity. This is the base class for all trackers.">Tracker</a> </p>
@@ -144,22 +144,35 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a4228724df722e036bae4b8bba3a90b93"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4228724df722e036bae4b8bba3a90b93">&#9670;&nbsp;</a></span>Track()</h2>
+<a id="a781b1701752d145a95594e490d8a2a50"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a781b1701752d145a95594e490d8a2a50">&#9670;&nbsp;</a></span>DoTrack()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void TrackerJpda::Track </td>
+          <td class="memname">void TrackerJpda::DoTrack </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">const <a class="el" href="class_data_plot_list.html">DataPlotList</a> &amp;&#160;</td>
+          <td class="paramname"><em>dataPlotList</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p></p>
+<p>The function should receive plots <br  />
+</p>
+
+<p>Implements <a class="el" href="class_tracker.html#aa639e0c5a8ab960b02838b0fece27ee1">Tracker</a>.</p>
 
 </div>
 </div>

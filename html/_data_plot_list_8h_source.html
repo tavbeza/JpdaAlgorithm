@@ -71,36 +71,44 @@ $(function() {
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;DataPlot.h&quot;</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;list&gt;</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
-<div class="line"><a name="l00010"></a><span class="lineno"><a class="line" href="class_data_plot_list.html">   10</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_data_plot_list.html">DataPlotList</a></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;{</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <a class="code" href="class_data_plot_list.html#a476caaaf5cb561e36c687c2f20b8172a">DataPlotList</a>();</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <a class="code" href="class_data_plot_list.html#acb657c89a74c476b3210220a9fa40486">~DataPlotList</a>();</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_data_plot_list.html#ace11458fa3ba21934f55e5922b9ddfc8">AddPlot</a>(<a class="code" href="class_data_plot.html">DataPlot</a>* m_pLastDataPlot);</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    std::list&lt;DataPlot*&gt;* <a class="code" href="class_data_plot_list.html#aab6c179c043c4cceffbe2b79e2961818">getDataPlotList</a>();</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_data_plot_list.html#a701ca6c7ebc22dd178ebfc4cd31e8571">clear</a>();</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#define MAX_PLOTS 500</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
+<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="class_data_plot_list.html">   12</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_data_plot_list.html">DataPlotList</a></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;{</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <a class="code" href="class_data_plot_list.html#a476caaaf5cb561e36c687c2f20b8172a">DataPlotList</a>();</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <a class="code" href="class_data_plot_list.html#acb657c89a74c476b3210220a9fa40486">~DataPlotList</a>();</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_data_plot_list.html#ace11458fa3ba21934f55e5922b9ddfc8">AddPlot</a>(<a class="code" href="class_data_plot.html">DataPlot</a>* m_pLastDataPlot);</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <a class="code" href="class_data_plot.html">DataPlot</a>* <a class="code" href="class_data_plot_list.html#a020557480692eaa0a4a387d43b1dbdf0">getDataPlotList</a>();</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_data_plot_list.html#a854b068c9ada9385dfbe7cce52d75d3b">Clear</a>();</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    std::list&lt;DataPlot*&gt; m_dataPlotList;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;};</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="preprocessor">#endif // _DATA_PLOT_LIST_H</span></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="class_data_plot_list.html#ae54450f0bc139d88b3a579b5fb72813d">GetCount</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <a class="code" href="class_data_plot.html">DataPlot</a>* <a class="code" href="class_data_plot_list.html#a828b647be5b5a65ebabfdbdf06bc7712">operator[]</a>(<span class="keyword">const</span> <span class="keywordtype">int</span> index) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <a class="code" href="class_data_plot.html">DataPlot</a>* m_dataPlotList[MAX_PLOTS];</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keywordtype">int</span> m_nPlots;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;};</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="preprocessor">#endif // _DATA_PLOT_LIST_H</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="aclass_data_plot_list_html_a701ca6c7ebc22dd178ebfc4cd31e8571"><div class="ttname"><a href="class_data_plot_list.html#a701ca6c7ebc22dd178ebfc4cd31e8571">DataPlotList::clear</a></div><div class="ttdeci">void clear()</div><div class="ttdoc">clear m_dataPlotList</div><div class="ttdef"><b>Definition:</b> DataPlotList.cpp:36</div></div>
-<div class="ttc" id="aclass_data_plot_list_html"><div class="ttname"><a href="class_data_plot_list.html">DataPlotList</a></div><div class="ttdoc">Class with a list of data plot that obtained from the sensor</div><div class="ttdef"><b>Definition:</b> DataPlotList.h:10</div></div>
+<div class="ttc" id="aclass_data_plot_list_html_a828b647be5b5a65ebabfdbdf06bc7712"><div class="ttname"><a href="class_data_plot_list.html#a828b647be5b5a65ebabfdbdf06bc7712">DataPlotList::operator[]</a></div><div class="ttdeci">DataPlot * operator[](const int index) const</div><div class="ttdoc">New operator return the DataPlot in the DataPlotList with index</div><div class="ttdef"><b>Definition:</b> DataPlotList.cpp:54</div></div>
+<div class="ttc" id="aclass_data_plot_list_html_a854b068c9ada9385dfbe7cce52d75d3b"><div class="ttname"><a href="class_data_plot_list.html#a854b068c9ada9385dfbe7cce52d75d3b">DataPlotList::Clear</a></div><div class="ttdeci">void Clear()</div><div class="ttdoc">clear m_dataPlotList</div><div class="ttdef"><b>Definition:</b> DataPlotList.cpp:38</div></div>
+<div class="ttc" id="aclass_data_plot_list_html"><div class="ttname"><a href="class_data_plot_list.html">DataPlotList</a></div><div class="ttdoc">Class with a list of data plot that obtained from the sensor</div><div class="ttdef"><b>Definition:</b> DataPlotList.h:12</div></div>
 <div class="ttc" id="aclass_data_plot_html"><div class="ttname"><a href="class_data_plot.html">DataPlot</a></div><div class="ttdoc">Data of plot that obtained from the sensor</div><div class="ttdef"><b>Definition:</b> DataPlot.h:8</div></div>
-<div class="ttc" id="aclass_data_plot_list_html_aab6c179c043c4cceffbe2b79e2961818"><div class="ttname"><a href="class_data_plot_list.html#aab6c179c043c4cceffbe2b79e2961818">DataPlotList::getDataPlotList</a></div><div class="ttdeci">std::list&lt; DataPlot * &gt; * getDataPlotList()</div><div class="ttdoc">Get m_dataPlotList</div><div class="ttdef"><b>Definition:</b> DataPlotList.cpp:28</div></div>
 <div class="ttc" id="aclass_data_plot_list_html_a476caaaf5cb561e36c687c2f20b8172a"><div class="ttname"><a href="class_data_plot_list.html#a476caaaf5cb561e36c687c2f20b8172a">DataPlotList::DataPlotList</a></div><div class="ttdeci">DataPlotList()</div><div class="ttdoc">Empty Constructor</div><div class="ttdef"><b>Definition:</b> DataPlotList.cpp:6</div></div>
-<div class="ttc" id="aclass_data_plot_list_html_ace11458fa3ba21934f55e5922b9ddfc8"><div class="ttname"><a href="class_data_plot_list.html#ace11458fa3ba21934f55e5922b9ddfc8">DataPlotList::AddPlot</a></div><div class="ttdeci">void AddPlot(DataPlot *m_pLastDataPlot)</div><div class="ttdoc">Add plot to DataPlotList</div><div class="ttdef"><b>Definition:</b> DataPlotList.cpp:20</div></div>
-<div class="ttc" id="aclass_data_plot_list_html_acb657c89a74c476b3210220a9fa40486"><div class="ttname"><a href="class_data_plot_list.html#acb657c89a74c476b3210220a9fa40486">DataPlotList::~DataPlotList</a></div><div class="ttdeci">~DataPlotList()</div><div class="ttdoc">Destructor</div><div class="ttdef"><b>Definition:</b> DataPlotList.cpp:13</div></div>
+<div class="ttc" id="aclass_data_plot_list_html_ace11458fa3ba21934f55e5922b9ddfc8"><div class="ttname"><a href="class_data_plot_list.html#ace11458fa3ba21934f55e5922b9ddfc8">DataPlotList::AddPlot</a></div><div class="ttdeci">void AddPlot(DataPlot *m_pLastDataPlot)</div><div class="ttdoc">Add plot to DataPlotList</div><div class="ttdef"><b>Definition:</b> DataPlotList.cpp:21</div></div>
+<div class="ttc" id="aclass_data_plot_list_html_ae54450f0bc139d88b3a579b5fb72813d"><div class="ttname"><a href="class_data_plot_list.html#ae54450f0bc139d88b3a579b5fb72813d">DataPlotList::GetCount</a></div><div class="ttdeci">int GetCount() const</div><div class="ttdoc">Returns the number of plots</div><div class="ttdef"><b>Definition:</b> DataPlotList.cpp:46</div></div>
+<div class="ttc" id="aclass_data_plot_list_html_acb657c89a74c476b3210220a9fa40486"><div class="ttname"><a href="class_data_plot_list.html#acb657c89a74c476b3210220a9fa40486">DataPlotList::~DataPlotList</a></div><div class="ttdeci">~DataPlotList()</div><div class="ttdoc">Destructor</div><div class="ttdef"><b>Definition:</b> DataPlotList.cpp:14</div></div>
+<div class="ttc" id="aclass_data_plot_list_html_a020557480692eaa0a4a387d43b1dbdf0"><div class="ttname"><a href="class_data_plot_list.html#a020557480692eaa0a4a387d43b1dbdf0">DataPlotList::getDataPlotList</a></div><div class="ttdeci">DataPlot * getDataPlotList()</div><div class="ttdoc">Get m_dataPlotList</div><div class="ttdef"><b>Definition:</b> DataPlotList.cpp:30</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

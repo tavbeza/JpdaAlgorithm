@@ -22,10 +22,16 @@ Inheritance diagram for Tracker\+:\begin{figure}[H]
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_tracker}{Tracker}} constractor. \end{DoxyCompactList}\item 
 virtual \mbox{\hyperlink{class_tracker_a0ed1e23312cfe7fcfe5f2ac2abd69163}{$\sim$\+Tracker}} ()
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_tracker}{Tracker}} destractor. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{class_tracker_a343d256f7c7b0d7fb08517d93b2702d3}{Do\+Track}} ()=0
+virtual void \mbox{\hyperlink{class_tracker_aa639e0c5a8ab960b02838b0fece27ee1}{Do\+Track}} (const \mbox{\hyperlink{class_data_plot_list}{Data\+Plot\+List}} \&data\+Plot\+List)=0
 \begin{DoxyCompactList}\small\item\em Preform the tracking of the current duell. \end{DoxyCompactList}\item 
-virtual std\+::list$<$ \mbox{\hyperlink{class_data_track}{Data\+Track}} $\ast$ $>$ \mbox{\hyperlink{class_tracker_a2e82729a259c719e81255a72d2efd2a9}{Get\+Track}} ()=0
+\mbox{\hyperlink{class_data_track_list}{Data\+Track\+List}} $\ast$ \mbox{\hyperlink{class_tracker_a545b0567161ddd2c647204633cbdf9ab}{Get\+Track}} ()
 \begin{DoxyCompactList}\small\item\em Returns all tracks in the system. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_tracker_aa87c44da48e3390ab07b83432fd4d6b8}\label{class_tracker_aa87c44da48e3390ab07b83432fd4d6b8}} 
+\mbox{\hyperlink{class_data_track_list}{Data\+Track\+List}} {\bfseries m\+\_\+data\+Track\+List}
+\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
@@ -57,21 +63,25 @@ This class encpsulate the tracker entity. This is the base class for all tracker
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{class_tracker_a343d256f7c7b0d7fb08517d93b2702d3}\label{class_tracker_a343d256f7c7b0d7fb08517d93b2702d3}} 
+\mbox{\Hypertarget{class_tracker_aa639e0c5a8ab960b02838b0fece27ee1}\label{class_tracker_aa639e0c5a8ab960b02838b0fece27ee1}} 
 \index{Tracker@{Tracker}!DoTrack@{DoTrack}}
 \index{DoTrack@{DoTrack}!Tracker@{Tracker}}
 \doxysubsubsection{\texorpdfstring{DoTrack()}{DoTrack()}}
-{\footnotesize\ttfamily virtual void Tracker\+::\+Do\+Track (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+{\footnotesize\ttfamily virtual void Tracker\+::\+Do\+Track (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_data_plot_list}{Data\+Plot\+List}} \&}]{data\+Plot\+List }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
 Preform the tracking of the current duell. 
 
-\mbox{\Hypertarget{class_tracker_a2e82729a259c719e81255a72d2efd2a9}\label{class_tracker_a2e82729a259c719e81255a72d2efd2a9}} 
+
+
+Implemented in \mbox{\hyperlink{class_tracker_jpda_a781b1701752d145a95594e490d8a2a50}{Tracker\+Jpda}}.
+
+\mbox{\Hypertarget{class_tracker_a545b0567161ddd2c647204633cbdf9ab}\label{class_tracker_a545b0567161ddd2c647204633cbdf9ab}} 
 \index{Tracker@{Tracker}!GetTrack@{GetTrack}}
 \index{GetTrack@{GetTrack}!Tracker@{Tracker}}
 \doxysubsubsection{\texorpdfstring{GetTrack()}{GetTrack()}}
-{\footnotesize\ttfamily virtual std\+::list$<$\mbox{\hyperlink{class_data_track}{Data\+Track}}$\ast$$>$ Tracker\+::\+Get\+Track (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_data_track_list}{Data\+Track\+List}} $\ast$ Tracker\+::\+Get\+Track (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 
 

@@ -81,9 +81,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a0b487a843716cd64125c1206370cf03c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kalman.html#a0b487a843716cd64125c1206370cf03c">Kalman</a> ()</td></tr>
 <tr class="memdesc:a0b487a843716cd64125c1206370cf03c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty constructor  <a href="class_kalman.html#a0b487a843716cd64125c1206370cf03c">More...</a><br /></td></tr>
 <tr class="separator:a0b487a843716cd64125c1206370cf03c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a82cfabd300047616b6ccd76694d866ee"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kalman.html#a82cfabd300047616b6ccd76694d866ee">Kalman</a> (const float &amp;dt, const <a class="el" href="class_vector.html">Vector2f</a> &amp;target_delta, const float &amp;x, const float &amp;y, const float &amp;vx, const float &amp;vy, const <a class="el" href="class_matrix.html">Matrix2f</a> &amp;R)</td></tr>
-<tr class="memdesc:a82cfabd300047616b6ccd76694d866ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">2D constructor  <a href="class_kalman.html#a82cfabd300047616b6ccd76694d866ee">More...</a><br /></td></tr>
-<tr class="separator:a82cfabd300047616b6ccd76694d866ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2338812c5ea63e3fcec0cdc23dad0f92"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kalman.html#a2338812c5ea63e3fcec0cdc23dad0f92">InitKalman</a> (const float &amp;dt, const <a class="el" href="class_vector.html">Vector2f</a> &amp;target_delta, const float &amp;x, const float &amp;y, const float &amp;vx, const float &amp;vy, const <a class="el" href="class_matrix.html">Matrix2f</a> &amp;R)</td></tr>
+<tr class="memdesc:a2338812c5ea63e3fcec0cdc23dad0f92"><td class="mdescLeft">&#160;</td><td class="mdescRight">2D constructor  <a href="class_kalman.html#a2338812c5ea63e3fcec0cdc23dad0f92">More...</a><br /></td></tr>
+<tr class="separator:a2338812c5ea63e3fcec0cdc23dad0f92"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a61232700fb87933d0753361d7fd91d8c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kalman.html#a61232700fb87933d0753361d7fd91d8c">Kalman</a> (<a class="el" href="class_data_plot.html">DataPlot</a> *pPlot)</td></tr>
+<tr class="memdesc:a61232700fb87933d0753361d7fd91d8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">2D constructor that get pointer of <a class="el" href="class_data_plot.html" title="Data of plot that obtained from the sensor">DataPlot</a>  <a href="class_kalman.html#a61232700fb87933d0753361d7fd91d8c">More...</a><br /></td></tr>
+<tr class="separator:a61232700fb87933d0753361d7fd91d8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a321173a37f683aaf60c4943fbd0a34d3"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_vector.html">Vector2f</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kalman.html#a321173a37f683aaf60c4943fbd0a34d3">Predict</a> ()</td></tr>
 <tr class="memdesc:a321173a37f683aaf60c4943fbd0a34d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">The algorithm works in a two-step process. In the prediction step, the <a class="el" href="class_kalman.html" title="The Kalman class encapsulate the basic kalman filter algorithm. It contains 2D and 3D implementation.">Kalman</a> filter produces estimates of the current state variables, along with their uncertainties. Once the outcome of the next measurement (necessarily corrupted with some amount of error, including random noise) is observed, these estimates are updated using a weighted average, with more weight being given to estimates with higher certainty.  <a href="class_kalman.html#a321173a37f683aaf60c4943fbd0a34d3">More...</a><br /></td></tr>
 <tr class="separator:a321173a37f683aaf60c4943fbd0a34d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -212,14 +215,63 @@ static constexpr float&#160;</td><td class="memItemRight" valign="bottom"><b>m_k
 
 </div>
 </div>
-<a id="a82cfabd300047616b6ccd76694d866ee"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a82cfabd300047616b6ccd76694d866ee">&#9670;&nbsp;</a></span>Kalman() <span class="overload">[2/2]</span></h2>
+<a id="a61232700fb87933d0753361d7fd91d8c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a61232700fb87933d0753361d7fd91d8c">&#9670;&nbsp;</a></span>Kalman() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">Kalman::Kalman </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_data_plot.html">DataPlot</a> *&#160;</td>
+          <td class="paramname"><em>pPlot</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>2D constructor that get pointer of <a class="el" href="class_data_plot.html" title="Data of plot that obtained from the sensor">DataPlot</a> </p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a4dd089121fdf9684829390fb3e53f898"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4dd089121fdf9684829390fb3e53f898">&#9670;&nbsp;</a></span>GainUpdate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Kalman::GainUpdate </td>
+          <td>(</td>
+          <td class="paramtype">const float &amp;&#160;</td>
+          <td class="paramname"><em>beta</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The relative certainty of the measurements and current state estimate is an important consideration, and it is common to discuss the response of the filter in terms of the <a class="el" href="class_kalman.html" title="The Kalman class encapsulate the basic kalman filter algorithm. It contains 2D and 3D implementation.">Kalman</a> filter's gain. The <a class="el" href="class_kalman.html" title="The Kalman class encapsulate the basic kalman filter algorithm. It contains 2D and 3D implementation.">Kalman</a> gain is the relative weight given to the measurements and current state estimate, and can be "tuned" to achieve particular performance. With a high gain, the filter places more weight on the most recent measurements, and thus follows them more responsively. With a low gain, the filter follows the model predictions more closely. At the extremes, a high gain close to one will result in a more jumpy estimated trajectory, while low gain close to zero will smooth out noise but decrease the responsiveness. </p>
+
+</div>
+</div>
+<a id="a2338812c5ea63e3fcec0cdc23dad0f92"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2338812c5ea63e3fcec0cdc23dad0f92">&#9670;&nbsp;</a></span>InitKalman()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Kalman::InitKalman </td>
           <td>(</td>
           <td class="paramtype">const float &amp;&#160;</td>
           <td class="paramname"><em>dt</em>, </td>
@@ -269,35 +321,6 @@ static constexpr float&#160;</td><td class="memItemRight" valign="bottom"><b>m_k
 </div><div class="memdoc">
 
 <p>2D constructor </p>
-
-</div>
-</div>
-<h2 class="groupheader">Member Function Documentation</h2>
-<a id="a4dd089121fdf9684829390fb3e53f898"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4dd089121fdf9684829390fb3e53f898">&#9670;&nbsp;</a></span>GainUpdate()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Kalman::GainUpdate </td>
-          <td>(</td>
-          <td class="paramtype">const float &amp;&#160;</td>
-          <td class="paramname"><em>beta</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>The relative certainty of the measurements and current state estimate is an important consideration, and it is common to discuss the response of the filter in terms of the <a class="el" href="class_kalman.html" title="The Kalman class encapsulate the basic kalman filter algorithm. It contains 2D and 3D implementation.">Kalman</a> filter's gain. The <a class="el" href="class_kalman.html" title="The Kalman class encapsulate the basic kalman filter algorithm. It contains 2D and 3D implementation.">Kalman</a> gain is the relative weight given to the measurements and current state estimate, and can be "tuned" to achieve particular performance. With a high gain, the filter places more weight on the most recent measurements, and thus follows them more responsively. With a low gain, the filter follows the model predictions more closely. At the extremes, a high gain close to one will result in a more jumpy estimated trajectory, while low gain close to zero will smooth out noise but decrease the responsiveness. </p>
 
 </div>
 </div>

@@ -65,31 +65,38 @@ $(function() {
 <div class="title">TrackerJpda.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef TRACKERJPDA_H_</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define TRACKERJPDA_H_</span></div>
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef _TRACKERJPDA_H_</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define _TRACKERJPDA_H_</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;Tracker.h&quot;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
-<div class="line"><a name="l00009"></a><span class="lineno"><a class="line" href="class_tracker_jpda.html">    9</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_tracker_jpda.html">TrackerJpda</a> : <a class="code" href="class_tracker.html">Tracker</a></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;{</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <a class="code" href="class_tracker_jpda.html#a6d0eb30bd9826c3be05057d6b0abfb9d">TrackerJpda</a>();</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="class_tracker_jpda.html#a800c40c6e9782727c5a95883341ecef2">~TrackerJpda</a>();</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="comment">// The function should receive plots  </span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment"></span>    <span class="keywordtype">void</span> <a class="code" href="class_tracker_jpda.html#a4228724df722e036bae4b8bba3a90b93">Track</a>();</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;};</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="preprocessor">#endif // TRACKERJPDA_H_</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;ExtendedKalman.h&quot;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
+<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="class_tracker_jpda.html">   11</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_tracker_jpda.html">TrackerJpda</a> : <a class="code" href="class_tracker.html">Tracker</a></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;{</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <a class="code" href="class_tracker_jpda.html#a6d0eb30bd9826c3be05057d6b0abfb9d">TrackerJpda</a>();</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="class_tracker_jpda.html#a800c40c6e9782727c5a95883341ecef2">~TrackerJpda</a>();</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="comment">// The function should receive plots  </span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment"></span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_tracker_jpda.html#a781b1701752d145a95594e490d8a2a50">DoTrack</a>(<span class="keyword">const</span> <a class="code" href="class_data_plot_list.html">DataPlotList</a> &amp;dataPlotList);</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    </div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;};</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="preprocessor">#endif // _TRACKERJPDA_H_</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="aclass_tracker_jpda_html"><div class="ttname"><a href="class_tracker_jpda.html">TrackerJpda</a></div><div class="ttdoc">This tracker class inherits from the class Tracker</div><div class="ttdef"><b>Definition:</b> TrackerJpda.h:9</div></div>
+<div class="ttc" id="aclass_tracker_jpda_html"><div class="ttname"><a href="class_tracker_jpda.html">TrackerJpda</a></div><div class="ttdoc">This tracker class inherits from the class Tracker</div><div class="ttdef"><b>Definition:</b> TrackerJpda.h:11</div></div>
 <div class="ttc" id="aclass_tracker_jpda_html_a6d0eb30bd9826c3be05057d6b0abfb9d"><div class="ttname"><a href="class_tracker_jpda.html#a6d0eb30bd9826c3be05057d6b0abfb9d">TrackerJpda::TrackerJpda</a></div><div class="ttdeci">TrackerJpda()</div><div class="ttdoc">Empty constructor</div><div class="ttdef"><b>Definition:</b> TrackerJpda.cpp:7</div></div>
+<div class="ttc" id="aclass_data_plot_list_html"><div class="ttname"><a href="class_data_plot_list.html">DataPlotList</a></div><div class="ttdoc">Class with a list of data plot that obtained from the sensor</div><div class="ttdef"><b>Definition:</b> DataPlotList.h:12</div></div>
 <div class="ttc" id="aclass_tracker_html"><div class="ttname"><a href="class_tracker.html">Tracker</a></div><div class="ttdoc">This class encpsulate the tracker entity. This is the base class for all trackers.</div><div class="ttdef"><b>Definition:</b> Tracker.h:12</div></div>
 <div class="ttc" id="aclass_tracker_jpda_html_a800c40c6e9782727c5a95883341ecef2"><div class="ttname"><a href="class_tracker_jpda.html#a800c40c6e9782727c5a95883341ecef2">TrackerJpda::~TrackerJpda</a></div><div class="ttdeci">virtual ~TrackerJpda()</div><div class="ttdoc">Destructor</div><div class="ttdef"><b>Definition:</b> TrackerJpda.cpp:14</div></div>
-<div class="ttc" id="aclass_tracker_jpda_html_a4228724df722e036bae4b8bba3a90b93"><div class="ttname"><a href="class_tracker_jpda.html#a4228724df722e036bae4b8bba3a90b93">TrackerJpda::Track</a></div><div class="ttdeci">void Track()</div><div class="ttdef"><b>Definition:</b> TrackerJpda.cpp:22</div></div>
+<div class="ttc" id="aclass_tracker_jpda_html_a781b1701752d145a95594e490d8a2a50"><div class="ttname"><a href="class_tracker_jpda.html#a781b1701752d145a95594e490d8a2a50">TrackerJpda::DoTrack</a></div><div class="ttdeci">virtual void DoTrack(const DataPlotList &amp;dataPlotList)</div><div class="ttdef"><b>Definition:</b> TrackerJpda.cpp:22</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">
