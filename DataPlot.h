@@ -80,6 +80,7 @@ public:
 	float m_magnitude;
 	unsigned int m_seqNumber;
 	Vector3d m_CartEnu0;
+	Vector3d m_PolarEnu0;
 };
 
 #endif //_DATA_PLOT_H_

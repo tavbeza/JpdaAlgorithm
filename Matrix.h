@@ -648,6 +648,11 @@ Vector4d operator *(Matrix49d &rhMatrix, const Vector9d &other);
 Vector4f operator *(Matrix42f &rhMatrix, const Vector2f &other);
 
 /// <summary>
+/// multiply matrix on the right 49 = 49*99
+/// </summary>
+Matrix49d operator *(Matrix49d &rhMatrix, const Matrix9d &other);
+
+/// <summary>
 /// print float matrix 42
 /// </summary>
 void print42f(Matrix42f rhMatrix);

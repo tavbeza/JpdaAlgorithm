@@ -45,6 +45,7 @@ public:
 	Vector3d m_P0 = Vector3d(0.1, 0.1, 0.1);
 	Vector3d m_SigmaManeuver2 = Vector3d(0.1, 0.1, 0.1);
 	double m_SigmaMnvrCalcMtd = 0.1;
+	double m_Kgl = 1;
 };
 
 #endif // _TRACKER_PARAMS_H_

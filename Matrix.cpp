@@ -116,6 +116,25 @@ Matrix4f operator *(Matrix42f &rhMatrix, const Matrix24f &other)
 }
 
 /// <summary>
+/// multiply matrix on the right 49 = 49*99
+/// </summary>
+Matrix49d operator *(Matrix49d &rhMatrix, const Matrix9d &other)
+{
+	Matrix49d temp;
+	for (int i = 0; i < 4; i++)
+	{
+		for (int j = 0; j < 9; j++)
+		{
+			for (int k = 0; k < 9; k++)
+			{
+				temp.m_Data[i][j] += rhMatrix.m_Data[i][k] * other.m_Data[k][j];
+			}
+		}
+	}
+	return temp;
+}
+
+/// <summary>
 /// multiply matrix on the right 24 = 22*24
 /// </summary>
 Matrix24f operator *(Matrix2f &rhMatrix, const Matrix24f &other)

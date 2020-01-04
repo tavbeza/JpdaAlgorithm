@@ -176,17 +176,23 @@ void AssociationMatrix::CheckAssociation(DataTrack &track,
 		z.m_Data[1] = az1;
 		z.m_Data[2] = el1;
 		z.m_Data[3] = rr1;
-
+		
 		// GateType='Rect'
 		// case 'nonlin'
 		// Rectangular gating coefficient
-		TrakerParams *pTrakerParams = TrakerParams;
-		double kgl = pTrakerParams->m_Kgl;
+		TrackerParams *pTrackerParams = new TrackerParams();
+		double kgl = pTrackerParams->m_Kgl; // m_Kgl = 1
+		Vector4d gateR;
+		gateR.m_Data[0] = SrvDspMath::sqrt(track.m_pKalman->m_S.m_Data[0][0]);
+		gateR.m_Data[1] = SrvDspMath::sqrt(track.m_pKalman->m_S.m_Data[1][1]);
+		gateR.m_Data[2] = SrvDspMath::sqrt(track.m_pKalman->m_S.m_Data[2][2]);
+		gateR.m_Data[3] = SrvDspMath::sqrt(track.m_pKalman->m_S.m_Data[3][3]);
+		
 		bool flagInGate = true;
-		flagInGate &= (abs(dR) <= kgl * track.m_Hyp[iHyp].m_GateR.m_Data[0]);
-		flagInGate &= (abs(dAz) < kgl*track.m_Hyp[iHyp].m_GateR.m_Data[1]);
-		flagInGate &= (abs(dEl) < kgl*track.m_Hyp[iHyp].m_GateR.m_Data[2]);
-		flagInGate &= (abs(dRR) < kgl*track.m_Hyp[iHyp].m_GateR.m_Data[3]);
+		flagInGate &= (abs(dR) <= kgl * gateR.m_Data[0]);
+		flagInGate &= (abs(dAz) < kgl * gateR.m_Data[1]);
+		flagInGate &= (abs(dEl) < kgl * gateR.m_Data[2]);
+		flagInGate &= (abs(dRR) < kgl * gateR.m_Data[3]);
 
 		if (flagInGate)
 		{
@@ -215,15 +221,16 @@ void AssociationMatrix::CheckAssociation(DataTrack &track,
 
 			// Calculate S
 			// m_S = m_H*m_P*m_H' + m_R
-			Matrix94d temp1 = track.m_Hyp[iHyp].m_PPredict * track.m_KF.m_H.TransposeB();
-			track.m_KF.m_S = track.m_KF.m_H*temp1 + track.m_KF.m_R;
+			//track.m_pKalman.
+			Matrix94d temp1 = track.m_Hyp[iHyp].m_PPredict * track.m_pKalman->m_H.Transpose();
+			track.m_pKalman->m_S = track.m_pKalman->m_H * temp1 + track.m_pKalman->m_R;
 			//track.m_KF.m_S.Print();
 
 
-			Vector4d tempV = track.m_KF.m_S * y;
+			Vector4d tempV = track.m_pKalman->m_S * y;
 			double d2 = (y * tempV) / y.Norm();
 			double m = 4;//length(Z);
-			double sqrtDetSi = SrvDspMath::sqrt(track.m_KF.m_S.Determinant());
+			double sqrtDetSi = SrvDspMath::sqrt(track.m_pKalman->m_S.Determinant());
 			g = SrvDspMath::exp(-d2 / 2) / (pow(2 * PI_VALUE, (m / 2)) * sqrtDetSi);
 		}
 	}

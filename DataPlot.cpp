@@ -25,6 +25,9 @@ DataPlot::DataPlot(float range, float rangeAccuracy, float velocity, float veloc
 	m_SNR = SNR;
 	m_magnitude = magnitude;
 	m_seqNumber = seqNumber;
+	m_PolarEnu0.m_Data[0] = range;
+	m_PolarEnu0.m_Data[1] = azimuth;
+	m_PolarEnu0.m_Data[2] = elevation;
 }
 
 /// <summary>
