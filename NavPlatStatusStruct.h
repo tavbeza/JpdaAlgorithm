@@ -35,6 +35,7 @@ public:
 	double inertialVelocityEast;
 	double inertialVelocityDown;
 	double calibratedAirspeed;
+	Vector3d posENU;
 	Vector3d velENU;
 };
 

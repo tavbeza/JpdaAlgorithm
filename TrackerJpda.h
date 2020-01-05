@@ -3,6 +3,7 @@
 
 #include "Tracker.h"
 #include "ExtendedKalman.h"
+#include "AssociationMatrix.h"
 
 
 /// <summary>

@@ -137,7 +137,7 @@ double AssociationMatrix::Mod7(double angle)
 /// </summary>
 void AssociationMatrix::CheckAssociation(DataTrack &track,
 	const DataPlot &plot,
-	const NavPlatStatusStruct &platData,
+	/*const NavPlatStatusStruct &platData,*/
 	bool &isAsocFlagVec,
 	double &g)
 {
@@ -151,31 +151,31 @@ void AssociationMatrix::CheckAssociation(DataTrack &track,
 		//platData.velENU.Print();
 		//track.m_Hyp[iHyp].m_XPredict.Print();
 
-		GeodeticConverter::Cart2Sph(platData.posENU,
+		/*GeodeticConverter::Cart2Sph(platData.posENU,
 			platData.velENU,
 			track.m_Hyp[iHyp].m_XPredict,
 			r,
 			az,
 			el,
-			rr);
+			rr);*/
 
 		//plot.enu_0.Az;
 		double r1 = plot.m_PolarEnu0.m_Data[0];
 		double az1 = plot.m_PolarEnu0.m_Data[1];
 		double el1 = plot.m_PolarEnu0.m_Data[2];
-		double rr1 = plot.GetVelocity();
+		double v1 = plot.GetVelocity();
 
-		double dAz = Mod7(az1 - az);
+		/*double dAz = Mod7(az1 - az);
 		double dEl = el1 - el;
 		double dR = r1 - r;
-		double dRR = rr1 - rr;
+		double dRR = rr1 - rr;*/
 
 		//Z=[Meas.enu_0.R; Meas.enu_0.Az; Meas.enu_0.El;  Meas.enu_0.RR];
-		Vector4d z;
+		/*Vector4d z;
 		z.m_Data[0] = r1;
 		z.m_Data[1] = az1;
 		z.m_Data[2] = el1;
-		z.m_Data[3] = rr1;
+		z.m_Data[3] = rr1;*/
 		
 		// GateType='Rect'
 		// case 'nonlin'
@@ -189,40 +189,40 @@ void AssociationMatrix::CheckAssociation(DataTrack &track,
 		gateR.m_Data[3] = SrvDspMath::sqrt(track.m_pKalman->m_S.m_Data[3][3]);
 		
 		bool flagInGate = true;
-		flagInGate &= (abs(dR) <= kgl * gateR.m_Data[0]);
-		flagInGate &= (abs(dAz) < kgl * gateR.m_Data[1]);
-		flagInGate &= (abs(dEl) < kgl * gateR.m_Data[2]);
-		flagInGate &= (abs(dRR) < kgl * gateR.m_Data[3]);
+		flagInGate &= r1 <= kgl * gateR.m_Data[0];
+		flagInGate &= az1 < kgl * gateR.m_Data[1];
+		flagInGate &= el1 < kgl * gateR.m_Data[2];
+		flagInGate &= v1 < kgl * gateR.m_Data[3];
 
 		if (flagInGate)
 		{
 			// Update Track
 			// case 'nonlin'
 			isAsocFlagVec = true;
-			double rPredict, azPredict, elPredict, rrPredict;
+			//double rPredict, azPredict, elPredict, vPredict;
 
 			//TODO: 50114 this is the same previous call to Cart2Sph
-			GeodeticConverter::Cart2Sph(platData.posENU,
+			/*GeodeticConverter::Cart2Sph(platData.posENU,
 				platData.velENU,
 				track.m_Hyp[iHyp].m_XPredict,
 				rPredict,
 				azPredict,
 				elPredict,
-				rrPredict);
+				vPredict);*/
 
 			//Z_predict=[R_predict; Az_predict; El_predict;RR_predict];
-			Vector4d zPredict;
+			/*Vector4d zPredict;
 			zPredict.m_Data[0] = rPredict;
 			zPredict.m_Data[1] = azPredict;
 			zPredict.m_Data[2] = elPredict;
 			zPredict.m_Data[3] = rrPredict;
 
-			Vector4d y = z - zPredict;
+			Vector4d y = z - zPredict;*/
 
 			// Calculate S
 			// m_S = m_H*m_P*m_H' + m_R
 			//track.m_pKalman.
-			Matrix94d temp1 = track.m_Hyp[iHyp].m_PPredict * track.m_pKalman->m_H.Transpose();
+			Matrix94d temp1 = track.m_pKalman->m_P_Predict * Transpose(track.m_pKalman->m_H);
 			track.m_pKalman->m_S = track.m_pKalman->m_H * temp1 + track.m_pKalman->m_R;
 			//track.m_KF.m_S.Print();
 
@@ -231,7 +231,7 @@ void AssociationMatrix::CheckAssociation(DataTrack &track,
 			double d2 = (y * tempV) / y.Norm();
 			double m = 4;//length(Z);
 			double sqrtDetSi = SrvDspMath::sqrt(track.m_pKalman->m_S.Determinant());
-			g = SrvDspMath::exp(-d2 / 2) / (pow(2 * PI_VALUE, (m / 2)) * sqrtDetSi);
+			g = SrvDspMath::exp(/*-d2*/1 / 2) / (pow(2 * PI_VALUE, (m / 2)) * sqrtDetSi);
 		}
 	}
 }

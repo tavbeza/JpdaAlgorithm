@@ -71,7 +71,7 @@ void main()
 			extendedKalman.m_P.PrintToFile(m_kalmanFile);
 			m_kalmanFile << std::endl << std::endl;
 		}
-		plotsList.clear();
+		plotsList.Clear();
 	}
 	m_kalmanFile.close();
 }

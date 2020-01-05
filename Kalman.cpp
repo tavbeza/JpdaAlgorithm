@@ -335,7 +335,7 @@ Vector4f Kalman::Update(const std::vector< Vector2f >& selected_detections, cons
 /// <\summary>
 void Kalman::kalmanTest()
 {
-	const float dt = 0.4;
+	/*const float dt = 0.4;
 	const Vector2f target_delta((float)10, (float)10);
 	const float& x = 511;
 	const float& y = 194;
@@ -344,7 +344,7 @@ void Kalman::kalmanTest()
 	Matrix2f R;
 	R.Init((float)100, (float)0, (float)0, (float)100);
 
-	Kalman kalman(dt, target_delta, x, y, vx, vy, R);
+	Kalman kalman() // (dt, target_delta, x, y, vx, vy, R);
 
 	kalman.Predict();
 
@@ -357,7 +357,7 @@ void Kalman::kalmanTest()
 	const float& last_beta = 0.240925908;
 
 	kalman.Update(selected_detections, beta2, last_beta);
-
+	*/
 }
 
 
