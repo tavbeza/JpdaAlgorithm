@@ -23,6 +23,7 @@ int DataTrackList::GetCount()
 /// </summary>
 DataTrack* DataTrackList::CreateTrack()
 {
+	m_dataTracksList[m_nTracks] = new DataTrack();
 	DataTrack* pDataTrack = m_dataTracksList[m_nTracks];
 	m_nTracks++;
 

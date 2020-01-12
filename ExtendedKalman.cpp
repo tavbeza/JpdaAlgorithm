@@ -82,6 +82,16 @@ void ExtendedKalman::Init(
 	x_predict.m_Data[6] = z;
 	x_predict.m_Data[7] = 0;
 	x_predict.m_Data[8] = 0;
+
+	/*m_X.m_Data[0] = x;
+	m_X.m_Data[1] = vx;
+	m_X.m_Data[2] = 0;
+	m_X.m_Data[3] = y;
+	m_X.m_Data[4] = vy;
+	m_X.m_Data[5] = 0;
+	m_X.m_Data[6] = z;
+	m_X.m_Data[7] = vz;
+	m_X.m_Data[8] = 0;*/
 	
 	TrackerParams *pTrakerParams = new TrackerParams;
 	
@@ -440,12 +450,12 @@ void ExtendedKalman::SetH_Ecef(Vector9d X_predict,
 	double &R_dot)
 {
 	Vector9d DX = X_predict - X_sensor;
-	double Dx = DX.m_Data[0];
-	double Dy = DX.m_Data[3];
-	double Dz = DX.m_Data[6];
-	double Dvx = DX.m_Data[1];
-	double Dvy = DX.m_Data[4];
-	double Dvz = DX.m_Data[7];
+	double Dx = DX.m_Data[0];	// x
+	double Dy = DX.m_Data[3];	// y
+	double Dz = DX.m_Data[6];	// z
+	double Dvx = DX.m_Data[1];	// Vx
+	double Dvy = DX.m_Data[4];	// Vy
+	double Dvz = DX.m_Data[7];	// Vz
 	// Difference between state vector of target prediction to self
 	double D = Dx * Dvx + Dy * Dvy + Dz * Dvz;
 	double R = SrvDspMath::sqrt(Dx*Dx + Dy * Dy + Dz * Dz);

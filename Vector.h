@@ -154,9 +154,19 @@ public:
 	/// </summary>
 	void FromSpherical(const Vector<_T, _Rows> &spherical)
 	{
-		m_Data[0] = spherical.m_Data[0] * SrvDspMath::cos(spherical.m_Data[1])*SrvDspMath::cos(spherical.m_Data[2]);
-		m_Data[1] = spherical.m_Data[0] * SrvDspMath::cos(spherical.m_Data[1])*SrvDspMath::sin(spherical.m_Data[2]);
-		m_Data[2] = -1.0*spherical.m_Data[0] * SrvDspMath::sin(spherical.m_Data[1]);
+		if (spherical.m_Data[2] != 0)
+		{
+			m_Data[0] = spherical.m_Data[0] * SrvDspMath::cos(spherical.m_Data[1])*SrvDspMath::cos(spherical.m_Data[2]);
+			m_Data[1] = spherical.m_Data[0] * SrvDspMath::cos(spherical.m_Data[1])*SrvDspMath::sin(spherical.m_Data[2]);
+			m_Data[2] = -1.0*spherical.m_Data[0] * SrvDspMath::sin(spherical.m_Data[1]);
+		}
+		else
+		{
+			m_Data[0] = spherical.m_Data[0] * SrvDspMath::cos(spherical.m_Data[1]);
+			m_Data[1] = spherical.m_Data[0] * SrvDspMath::sin(spherical.m_Data[1]);
+			m_Data[2] = 0;
+		}
+		
 	}
 
 	/// <summary>
