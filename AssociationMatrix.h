@@ -57,7 +57,7 @@ public:
 	/// </summary>
 	void CheckAssociation(DataTrack &track,
 		const DataPlot &plot,
-		/*const NavPlatStatusStruct &platData,*/
+		const NavPlatStatusStruct &platData,
 		bool &isAsocFlagVec,
 		double &g);
 

@@ -1,6 +1,6 @@
 #include "StaticQueue.h"
 
-
+/*
 /// <summary>
 /// Empty constructor
 /// </summary>
@@ -49,3 +49,4 @@ void push()
 bool isEmpty()
 {
 }
+*/

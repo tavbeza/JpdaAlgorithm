@@ -9,7 +9,7 @@
 /// <summary>
 /// This tracker class inherits from the class Tracker
 /// </summary>
-class TrackerJpda : Tracker
+class TrackerJpda :  public Tracker
 {
 
 public:

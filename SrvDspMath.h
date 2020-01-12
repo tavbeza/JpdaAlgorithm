@@ -31,9 +31,19 @@ public:
 	static float atan2(float a, float b);
 
 	/// <summary>
-	/// Compute arc sine 
+	/// Compute arc sin
 	/// </summary>
 	static float asin(float number);
+
+	/// <summary>
+/// Compute cos 
+/// </summary>
+	static float cos(float number);
+
+	/// <summary>
+	/// Compute sin 
+	/// </summary>
+	static float sin(float number);
 
 	/// <summary>
 	/// Raise to power 

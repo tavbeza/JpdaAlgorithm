@@ -37,11 +37,19 @@ ExtendedKalman::ExtendedKalman(const DataPlot &plot)
 
 	float dt = 93.0 / 1000;
 
+	Vector3d spherical;
+	spherical.m_Data[0] = plot.GetRange();
+	spherical.m_Data[1] = plot.GetAzimuthAngle();
+	spherical.m_Data[2] = plot.GetElevationAngle();
+
+	Vector3d cartesian;
+	cartesian.FromSpherical(spherical);
+
 	Init(
 		dt,
-		cos(plot.GetAzimuthAngle())*plot.GetRange(),		// x
-		sin(plot.GetAzimuthAngle())*plot.GetRange(),		// y
-		0,													// z
+		cartesian.m_Data[0],		// x
+		cartesian.m_Data[1],		// y
+		cartesian.m_Data[2],		// z
 		cos(plot.GetAzimuthAngle())*plot.GetVelocity(),		// vx
 		sin(plot.GetAzimuthAngle())*plot.GetVelocity(),		// vy
 		0
@@ -89,12 +97,6 @@ void ExtendedKalman::Init(
 	x_sensor.m_Data[8] = 0;
 	double r_dot = 0;
 	SetH_Ecef(x_predict, x_sensor, m_H, r_dot);
-	Vector3d cartesian;
-	cartesian.m_Data[0] = x;
-	cartesian.m_Data[1] = y;
-	cartesian.m_Data[2] = z;
-	Vector3d spherical;
-	spherical.ToSpherical(cartesian);
 	
 	Vector4d meas;
 	

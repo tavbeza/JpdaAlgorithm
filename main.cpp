@@ -38,14 +38,8 @@ void main()
 	path << "C:\\Users\\tavbe\\Desktop\\KalmanParams.txt";
 	m_kalmanFile.open(path.str());
 	
-	// for InitXP()
-	NavPlatStatusStruct nav;
-	Vector9d xInit;
-	Matrix9d pInit;
-	
 	// for kalman constructor
 	float dt = 93.0/1000.0;
-	Matrix4d R;
 	DataPlotList plotsList;
 	DataPlotFileReader plotsReader(fileName);
 	
@@ -58,34 +52,27 @@ void main()
 		{
 			DataPlot* pPlot = plotsList[j];
 			
-			extendedKalman = ExtendedKalman(*pPlot);
-			extendedKalman.Predict(dt);
-			extendedKalman.Update(pPlot);
+			//extendedKalman = ExtendedKalman(*pPlot);
+			//extendedKalman.Predict(dt);
+			//extendedKalman.Update(pPlot);
 
+			DataTrackList *dataTrackList = trackerJpda.GetTrack();
+			
 			m_kalmanFile << "//m_X" << std::endl;
 			for (int x = 0; x < 9; x++)
-			{
-				m_kalmanFile << extendedKalman.m_X.m_Data[x] << std::endl;
+			{			
+				m_kalmanFile << dataTrackList[0][0]->m_pKalman->m_X.m_Data[x] << std::endl;
 			}
+			
 			m_kalmanFile << "//m_P" << std::endl;
-			extendedKalman.m_P.PrintToFile(m_kalmanFile);
+			dataTrackList[0][0]->m_pKalman->m_P.PrintToFile(m_kalmanFile);
+			//extendedKalman.m_P.PrintToFile(m_kalmanFile);
 			m_kalmanFile << std::endl << std::endl;
 		}
 		plotsList.Clear();
 	}
 	m_kalmanFile.close();
 }
-/*
-ExtendedKalman::ExtendedKalman(
-	const float& dt,
-	const float& x,
-	const float& y,
-	const float& z,
-	const float& vx,
-	const float& vy,
-	const float& vz,
-	const Matrix4d& R)
-*/
 
 
 void createCSVfile()

@@ -1,5 +1,5 @@
 #include "QueueManager.h"
-
+/*
 
 /// <sumary>
 /// Empty constructor
@@ -27,4 +27,4 @@ StaticQueue* AllocateQueue()
 /// </summary>
 StaticQueue* GetQueue()
 {
-}
+}*/

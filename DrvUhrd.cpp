@@ -1,5 +1,5 @@
 #include "DrvUhrt.h"
-
+/*
 
 /// <sumary>
 /// Empty constructor
@@ -34,4 +34,4 @@ void Write()
 /// </summary>
 void Read()
 {
-}
+}*/

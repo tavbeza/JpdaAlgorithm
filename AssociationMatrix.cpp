@@ -137,102 +137,132 @@ double AssociationMatrix::Mod7(double angle)
 /// </summary>
 void AssociationMatrix::CheckAssociation(DataTrack &track,
 	const DataPlot &plot,
-	/*const NavPlatStatusStruct &platData,*/
+	const NavPlatStatusStruct &platData,
 	bool &isAsocFlagVec,
 	double &g)
 {
 	g = 0;
-	for (int iHyp = 0; iHyp < MAX_NUM_HYPOSIS; iHyp++)
-	{
-		//case 'ENU'
-		//case 'nonlin'
-		double r, az, el, rr;
-		//platData.posENU.Print();
-		//platData.velENU.Print();
-		//track.m_Hyp[iHyp].m_XPredict.Print();
 
+	//case 'ENU'
+	//case 'nonlin'
+	double r, az, el, rr;
+	//platData.posENU.Print();
+	//platData.velENU.Print();
+	//track.m_Hyp[iHyp].m_XPredict.Print();
+
+	/*Vector3d cartesian;
+	cartesian.m_Data[0] = platData.posENU.m_Data[0];	// X
+	cartesian.m_Data[1] = platData.posENU.m_Data[1];	// Y
+	cartesian.m_Data[2] = platData.posENU.m_Data[2];	// Z
+
+	Vector3d spherical;
+	spherical.ToSpherical(cartesian);
+	r = spherical.m_Data[0];
+	az = spherical.m_Data[1];
+	el = spherical.m_Data[2];
+
+	cartesian.m_Data[0] = platData.velENU.m_Data[0];	// Vx
+	cartesian.m_Data[1] = platData.velENU.m_Data[1];	// Vy
+	cartesian.m_Data[2] = platData.velENU.m_Data[2];	// Vz
+	spherical.ToSpherical(cartesian);*/
+
+
+	/*GeodeticConverter::Cart2Sph(platData.posENU,
+		platData.velENU,
+		track.m_pKalman->m_X_Predict,
+		r,
+		az,
+		el,
+		rr);*/
+
+
+	/*
+	//plot.enu_0.Az;
+	double r1 = plot.m_PolarEnu0.m_Data[0];
+	double az1 = plot.m_PolarEnu0.m_Data[1];
+	double el1 = plot.m_PolarEnu0.m_Data[2];
+	double v1 = plot.GetVelocity();
+
+	m_PolarEnu0 - Converted pos to Enu0 (Our static location)
+	*/
+	
+	// pos without Enu0 (without converts)
+	double r1 = plot.GetRange();
+	double az1 = plot.GetAzimuthAngle();
+	double el1 = plot.GetElevationAngle();
+	double v1 = plot.GetVelocity();
+
+
+
+	/*
+	// diff between the plot and the platform
+	double dAz = Mod7(az1 - az);
+	double dEl = el1 - el;
+	double dR = r1 - r;		
+	double dRR = rr1 - rr; */
+
+	//Z=[Meas.enu_0.R; Meas.enu_0.Az; Meas.enu_0.El;  Meas.enu_0.RR];
+	Vector4d z;
+	z.m_Data[0] = r1;
+	z.m_Data[1] = az1;
+	z.m_Data[2] = el1;
+	z.m_Data[3] = v1;
+		
+	// GateType='Rect'
+	// case 'nonlin'
+	// Rectangular gating coefficient
+	TrackerParams *pTrackerParams = new TrackerParams();
+	double kgl = pTrackerParams->m_Kgl; // m_Kgl = 1
+	Vector4d gateR;
+	gateR.m_Data[0] = SrvDspMath::sqrt(track.m_pKalman->m_S.m_Data[0][0]);
+	gateR.m_Data[1] = SrvDspMath::sqrt(track.m_pKalman->m_S.m_Data[1][1]);
+	gateR.m_Data[2] = SrvDspMath::sqrt(track.m_pKalman->m_S.m_Data[2][2]);
+	gateR.m_Data[3] = SrvDspMath::sqrt(track.m_pKalman->m_S.m_Data[3][3]);
+		
+	bool flagInGate = true;
+	flagInGate &= r1 <= kgl * gateR.m_Data[0];
+	flagInGate &= az1 < kgl * gateR.m_Data[1];
+	flagInGate &= el1 < kgl * gateR.m_Data[2];
+	flagInGate &= v1 < kgl * gateR.m_Data[3];
+
+	if (flagInGate)
+	{
+		// Update Track
+		// case 'nonlin'
+		isAsocFlagVec = true;
+		//double rPredict, azPredict, elPredict, vPredict;
+
+		//TODO: 50114 this is the same previous call to Cart2Sph
 		/*GeodeticConverter::Cart2Sph(platData.posENU,
 			platData.velENU,
 			track.m_Hyp[iHyp].m_XPredict,
-			r,
-			az,
-			el,
-			rr);*/
+			rPredict,
+			azPredict,
+			elPredict,
+			vPredict);*/
 
-		//plot.enu_0.Az;
-		double r1 = plot.m_PolarEnu0.m_Data[0];
-		double az1 = plot.m_PolarEnu0.m_Data[1];
-		double el1 = plot.m_PolarEnu0.m_Data[2];
-		double v1 = plot.GetVelocity();
+		//Z_predict=[R_predict; Az_predict; El_predict;RR_predict];
+		/*Vector4d zPredict;
+		zPredict.m_Data[0] = rPredict;
+		zPredict.m_Data[1] = azPredict;
+		zPredict.m_Data[2] = elPredict;
+		zPredict.m_Data[3] = rrPredict; */
 
-		/*double dAz = Mod7(az1 - az);
-		double dEl = el1 - el;
-		double dR = r1 - r;
-		double dRR = rr1 - rr;*/
+		//Vector4d y = z - zPredict;
+		Vector4d y = z;
 
-		//Z=[Meas.enu_0.R; Meas.enu_0.Az; Meas.enu_0.El;  Meas.enu_0.RR];
-		/*Vector4d z;
-		z.m_Data[0] = r1;
-		z.m_Data[1] = az1;
-		z.m_Data[2] = el1;
-		z.m_Data[3] = rr1;*/
-		
-		// GateType='Rect'
-		// case 'nonlin'
-		// Rectangular gating coefficient
-		TrackerParams *pTrackerParams = new TrackerParams();
-		double kgl = pTrackerParams->m_Kgl; // m_Kgl = 1
-		Vector4d gateR;
-		gateR.m_Data[0] = SrvDspMath::sqrt(track.m_pKalman->m_S.m_Data[0][0]);
-		gateR.m_Data[1] = SrvDspMath::sqrt(track.m_pKalman->m_S.m_Data[1][1]);
-		gateR.m_Data[2] = SrvDspMath::sqrt(track.m_pKalman->m_S.m_Data[2][2]);
-		gateR.m_Data[3] = SrvDspMath::sqrt(track.m_pKalman->m_S.m_Data[3][3]);
-		
-		bool flagInGate = true;
-		flagInGate &= r1 <= kgl * gateR.m_Data[0];
-		flagInGate &= az1 < kgl * gateR.m_Data[1];
-		flagInGate &= el1 < kgl * gateR.m_Data[2];
-		flagInGate &= v1 < kgl * gateR.m_Data[3];
+		// Calculate S
+		// m_S = m_H*m_P*m_H' + m_R
+		//track.m_pKalman.
+		Matrix94d temp1 = track.m_pKalman->m_P_Predict * Transpose(track.m_pKalman->m_H);
+		track.m_pKalman->m_S = track.m_pKalman->m_H * temp1 + track.m_pKalman->m_R;
+		//track.m_KF.m_S.Print();
 
-		if (flagInGate)
-		{
-			// Update Track
-			// case 'nonlin'
-			isAsocFlagVec = true;
-			//double rPredict, azPredict, elPredict, vPredict;
-
-			//TODO: 50114 this is the same previous call to Cart2Sph
-			/*GeodeticConverter::Cart2Sph(platData.posENU,
-				platData.velENU,
-				track.m_Hyp[iHyp].m_XPredict,
-				rPredict,
-				azPredict,
-				elPredict,
-				vPredict);*/
-
-			//Z_predict=[R_predict; Az_predict; El_predict;RR_predict];
-			/*Vector4d zPredict;
-			zPredict.m_Data[0] = rPredict;
-			zPredict.m_Data[1] = azPredict;
-			zPredict.m_Data[2] = elPredict;
-			zPredict.m_Data[3] = rrPredict;
-
-			Vector4d y = z - zPredict;*/
-
-			// Calculate S
-			// m_S = m_H*m_P*m_H' + m_R
-			//track.m_pKalman.
-			Matrix94d temp1 = track.m_pKalman->m_P_Predict * Transpose(track.m_pKalman->m_H);
-			track.m_pKalman->m_S = track.m_pKalman->m_H * temp1 + track.m_pKalman->m_R;
-			//track.m_KF.m_S.Print();
-
-
-			Vector4d tempV = track.m_pKalman->m_S * y;
-			double d2 = (y * tempV) / y.Norm();
-			double m = 4;//length(Z);
-			double sqrtDetSi = SrvDspMath::sqrt(track.m_pKalman->m_S.Determinant());
-			g = SrvDspMath::exp(/*-d2*/1 / 2) / (pow(2 * PI_VALUE, (m / 2)) * sqrtDetSi);
-		}
+		Vector4d tempV = track.m_pKalman->m_S * y;
+		double d2 = (y * tempV) / y.Norm();
+		double m = 4;//length(Z);
+		double sqrtDetSi = SrvDspMath::sqrt(track.m_pKalman->m_S.Determinant());
+		g = SrvDspMath::exp(-d2 / 2) / (pow(2 * PI_VALUE, (m / 2)) * sqrtDetSi);
 	}
 }
 

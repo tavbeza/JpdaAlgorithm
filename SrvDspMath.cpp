@@ -40,6 +40,22 @@ float SrvDspMath::asin(float number)
 }
 
 /// <summary>
+/// Compute cos 
+/// </summary>
+float SrvDspMath::cos(float number)
+{
+	return ::cos(number);
+}
+
+/// <summary>
+/// Compute sin 
+/// </summary>
+float SrvDspMath::sin(float number)
+{
+	return ::sin(number);
+}
+
+/// <summary>
 /// Raise to power 
 /// </summary>
 double SrvDspMath::pow(double x, int y)
