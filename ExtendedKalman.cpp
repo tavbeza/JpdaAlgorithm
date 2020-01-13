@@ -83,7 +83,7 @@ void ExtendedKalman::Init(
 	x_predict.m_Data[7] = 0;
 	x_predict.m_Data[8] = 0;
 
-	/*m_X.m_Data[0] = x;
+	m_X.m_Data[0] = x;
 	m_X.m_Data[1] = vx;
 	m_X.m_Data[2] = 0;
 	m_X.m_Data[3] = y;
@@ -91,7 +91,7 @@ void ExtendedKalman::Init(
 	m_X.m_Data[5] = 0;
 	m_X.m_Data[6] = z;
 	m_X.m_Data[7] = vz;
-	m_X.m_Data[8] = 0;*/
+	m_X.m_Data[8] = 0;
 	
 	TrackerParams *pTrakerParams = new TrackerParams;
 	
@@ -146,7 +146,7 @@ void ExtendedKalman::Init(
 	//measurement noise covariance matrix
 	//m_R = R;
 
-	m_IsFirst = true;
+	m_IsFirst = false;
 	SetF(dt, m_F);
 	SetQ(dt, m_Q);
 }
@@ -204,7 +204,7 @@ Vector3d ExtendedKalman::Predict(const double& dt)
 	//m_Entropy = m_k + 0.5 * log10(m_P.Determinant());
 
 	m_last_prediction_eigen = m_Z_Predict;
-	m_last_prediction = Vector3d(m_Z_Predict.m_Data[0], m_Z_Predict.m_Data[1], m_Z_Predict.m_Data[2]);
+	m_last_prediction = Vector3d(m_Z_Predict.m_Data[0], m_Z_Predict.m_Data[3], m_Z_Predict.m_Data[6]);
 	return m_last_prediction;
 }
 
@@ -225,11 +225,20 @@ void ExtendedKalman::Update(DataPlot* pPlot)
 	// m_K = m_P *m_S'*m_H'
 	Matrix94d temp1 = Transpose(m_H);
 	m_K = m_P * (temp1 * m_S.Inverse());
+
+	Vector3d spherical;
+	spherical.m_Data[0] = pPlot->GetRange();
+	spherical.m_Data[1] = pPlot->GetAzimuthAngle();
+	spherical.m_Data[2] = pPlot->GetElevationAngle();
+
+	Vector3d cartesian;
+	cartesian.FromSpherical(spherical);
+
 	// Updated state estimate 
 	Vector4d Zk;
-	Zk.m_Data[0] = pPlot->GetRange();
-	Zk.m_Data[1] = pPlot->GetAzimuthAngle();
-	Zk.m_Data[2] = pPlot->GetElevationAngle();
+	Zk.m_Data[0] = cartesian.m_Data[0];
+	Zk.m_Data[1] = cartesian.m_Data[1];
+	Zk.m_Data[2] = cartesian.m_Data[2];
 	Zk.m_Data[3] = pPlot->GetVelocity();
 	Vector4d zPredict = m_H * m_X_Predict; // To check the result zPredict = 0
 	
@@ -411,34 +420,34 @@ void ExtendedKalman::SetF(double dt,
 	SetF_Singer(dt, pTrakerParams->m_TauAcc.m_Data[0], fx);
 	SetF_Singer(dt, pTrakerParams->m_TauAcc.m_Data[1], fy);
 	SetF_Singer(dt, pTrakerParams->m_TauAcc.m_Data[2], fz);
-
+	// TODO:
 	F.m_Data[0][0] = fx.m_Data[0][0];
 	F.m_Data[0][1] = fx.m_Data[0][1];
-	F.m_Data[0][2] = fx.m_Data[0][2];
+	F.m_Data[0][2] = 0;// fx.m_Data[0][2];
 	F.m_Data[1][0] = fx.m_Data[1][0];
 	F.m_Data[1][1] = fx.m_Data[1][1];
-	F.m_Data[1][2] = fx.m_Data[1][2];
+	F.m_Data[1][2] = 0;//fx.m_Data[1][2];
 	F.m_Data[2][0] = fx.m_Data[2][0];
 	F.m_Data[2][1] = fx.m_Data[2][1];
-	F.m_Data[2][2] = fx.m_Data[2][2];
+	F.m_Data[2][2] = 0;//fx.m_Data[2][2];
 	F.m_Data[3][3] = fy.m_Data[0][0];
 	F.m_Data[3][4] = fy.m_Data[0][1];
-	F.m_Data[3][5] = fy.m_Data[0][2];
+	F.m_Data[3][5] = 0;//fy.m_Data[0][2];
 	F.m_Data[4][3] = fy.m_Data[1][0];
 	F.m_Data[4][4] = fy.m_Data[1][1];
-	F.m_Data[4][5] = fy.m_Data[1][2];
+	F.m_Data[4][5] = 0;//fy.m_Data[1][2];
 	F.m_Data[5][3] = fy.m_Data[2][0];
 	F.m_Data[5][4] = fy.m_Data[2][1];
-	F.m_Data[5][5] = fy.m_Data[2][2];
+	F.m_Data[5][5] = 0;//fy.m_Data[2][2];
 	F.m_Data[6][6] = fz.m_Data[0][0];
 	F.m_Data[6][7] = fz.m_Data[0][1];
-	F.m_Data[6][8] = fz.m_Data[0][2];
+	F.m_Data[6][8] = 0;//fz.m_Data[0][2];
 	F.m_Data[7][6] = fz.m_Data[1][0];
 	F.m_Data[7][7] = fz.m_Data[1][1];
-	F.m_Data[7][8] = fz.m_Data[1][2];
+	F.m_Data[7][8] = 0;//fz.m_Data[1][2];
 	F.m_Data[8][6] = fz.m_Data[2][0];
 	F.m_Data[8][7] = fz.m_Data[2][1];
-	F.m_Data[8][8] = fz.m_Data[2][2];
+	F.m_Data[8][8] = 0;//fz.m_Data[2][2];
 }
 
 /// <summary>

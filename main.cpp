@@ -61,7 +61,17 @@ void main()
 			m_kalmanFile << "//m_X" << std::endl;
 			for (int x = 0; x < 9; x++)
 			{			
-				m_kalmanFile << dataTrackList[0][0]->m_pKalman->m_X.m_Data[x] << std::endl;
+				m_kalmanFile << dataTrackList[0][0]->m_pKalman->m_X.m_Data[x];
+				if (x == 0)
+					m_kalmanFile << "\t// x" << std::endl;
+				else if (x == 1)
+					m_kalmanFile << "\t// Vx" << std::endl;
+				else if (x == 3)
+					m_kalmanFile << "\t// y" << std::endl;
+				else if (x == 4)
+					m_kalmanFile << "\t// Vy" << std::endl;
+				else
+					m_kalmanFile << std::endl;
 			}
 			
 			m_kalmanFile << "//m_P" << std::endl;
