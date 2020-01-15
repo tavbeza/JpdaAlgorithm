@@ -1,4 +1,5 @@
 #include "TrackerJpda.h"
+#include "SrvTimeStamp.h"
 
 
 /// <summary>
@@ -51,9 +52,13 @@ void TrackerJpda::DoTrack(const DataPlotList &dataPlotList)
 				//gAssociationMatrix->Associate(m_dataTrackList[j]->m_Id, dataPlotList[i]->m_seqNumber, isAsocFlagVec, g);
 				//if (isAsocFlagVec)
 				//{
+					long long time = SrvTimeStamp::Start();
 					m_dataTrackList[j]->m_pKalman->Predict(dt);
+					double time1 = SrvTimeStamp::Stop(time)*1000*1000;
+					time = SrvTimeStamp::Start();
 					m_dataTrackList[j]->m_pKalman->Update(dataPlotList[i]);
-
+					double time2 = SrvTimeStamp::Stop(time)*1000*1000;
+					int r = 3;
 				//}
 				//else
 				//{

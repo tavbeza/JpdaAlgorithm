@@ -11,7 +11,7 @@
 #include "TrackerJpda.h"
 
 
-#define NUMBER_DWELL 5
+#define NUMBER_DWELL 100
 
 using namespace std;
 
@@ -35,7 +35,7 @@ void main()
 	ExtendedKalman extendedKalman;
 	std::ofstream m_kalmanFile;
 	std::stringstream path;
-	path << "C:\\Users\\tavbe\\Desktop\\KalmanParams.txt";
+	path << "C:\\Users\\amitz\\OneDrive\\שולחן העבודה\\KalmanParams.txt";
 	m_kalmanFile.open(path.str());
 	
 	// for kalman constructor
@@ -46,6 +46,9 @@ void main()
 	for (int i = 1; i < NUMBER_DWELL + 1; i++)
 	{
 		plotsReader.ReadDataPlot(&plotsList, i);
+		//m_kalmanFile <<cos(plotsList[0]->GetAzimuthAngle())*plotsList[0]->GetRange();
+		//m_kalmanFile << sin(plotsList[0]->GetAzimuthAngle())*plotsList[0]->GetRange() <<std::endl;
+
 		trackerJpda.DoTrack(plotsList);
 		
 		for (int j = 0; j < plotsList.GetCount(); j++)
@@ -58,7 +61,7 @@ void main()
 
 			DataTrackList *dataTrackList = trackerJpda.GetTrack();
 			
-			m_kalmanFile << "//m_X" << std::endl;
+			/*m_kalmanFile << "//m_X" << std::endl;
 			for (int x = 0; x < 9; x++)
 			{			
 				m_kalmanFile << dataTrackList[0][0]->m_pKalman->m_X.m_Data[x];
@@ -75,9 +78,12 @@ void main()
 			}
 			
 			m_kalmanFile << "//m_P" << std::endl;
-			dataTrackList[0][0]->m_pKalman->m_P.PrintToFile(m_kalmanFile);
+			dataTrackList[0][0]->m_pKalman->m_P.PrintToFile(m_kalmanFile);*/
 			//extendedKalman.m_P.PrintToFile(m_kalmanFile);
-			m_kalmanFile << std::endl << std::endl;
+		//	m_kalmanFile << dataTrackList[0][0]->m_pKalman->m_X.m_Data[0]<< std::endl; 
+			m_kalmanFile <<dataTrackList[0][0]->m_pKalman->m_X.m_Data[3] << std::endl;
+
+			//m_kalmanFile << std::endl << std::endl;
 		}
 		plotsList.Clear();
 	}
@@ -113,7 +119,7 @@ void createCSVfile()
 		allDataPlots[i].m_elevation = 0;
 		fout << allDataPlots[i].m_elevation << ",";
 		
-		allDataPlots[i].m_velocity = 2;
+		allDataPlots[i].m_velocity = 24.04374169;
 		fout << allDataPlots[i].m_velocity << ",";
 		
 		allDataPlots[i].m_rangeAccuracy = 0.1;

@@ -218,6 +218,7 @@ void ExtendedKalman::Update(DataPlot* pPlot)
 {
 	// Innovation (or pre-fit residual) covariance
 	// Error Measurement Covariance Matrix
+	//TODO: update m_R before
 	m_S = (m_H * (m_P_Predict * Transpose(m_H))) + m_R;
 	// Near-optimal Kalman gain
 	// Sets the optimal kalman gain
