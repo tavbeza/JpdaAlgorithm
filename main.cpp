@@ -27,7 +27,7 @@ void main()
 	string fileName = "dataPlots.csv";
 	
 	// already created 
-	createCSVfile(); 
+	//createCSVfile(); 
 
 
 	// Test Extended Kalman Filter 3D.
@@ -111,12 +111,12 @@ void createCSVfile()
 		if (isInc)
 		{
 			min = 1;
-			max = 1.25;
+			max = 1.125;
 			isInc = false;
 		}
 		else
 		{
-			min = 0.75;
+			min = 0.875;
 			max = 1;
 			isInc = true;
 		}

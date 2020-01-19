@@ -170,6 +170,68 @@ public:
 	}
 
 	/// <summary>
+	/// Convert spherical coordinate R, Az, El to cartesian  coordinate X,Y,Z
+	/// </summary>
+	void SphericalToCart(const Vector<_T, _Rows> &spherical)
+	{
+		m_Data[0] = spherical.m_Data[0] * SrvDspMath::sin(spherical.m_Data[2])*SrvDspMath::cos(spherical.m_Data[1]);
+		m_Data[1] = spherical.m_Data[0] * SrvDspMath::sin(spherical.m_Data[2])*SrvDspMath::sin(spherical.m_Data[1]);
+		m_Data[2] = spherical.m_Data[0] * SrvDspMath::cos(spherical.m_Data[2]);
+	}
+
+	/// <summary>
+	/// Convert cartesian coordinate X,Y,Z to spherical coordinate R, Az, El 
+	/// </summary>
+	void CartToSpherical(const Vector<_T, _Rows> &cartesian)
+	{
+		m_Data[0] = SrvDspMath::sqrt(SrvDspMath::pow(cartesian.m_Data[0],2) +
+									 SrvDspMath::pow(cartesian.m_Data[1], 2) +
+									 SrvDspMath::pow(cartesian.m_Data[2], 2)
+									);
+		//TODO: Unit Test //if(cartesian.m_Data[0] != 0)
+		m_Data[1] =	SrvDspMath::atan2(cartesian.m_Data[1]/ cartesian.m_Data[0]));
+		m_Data[2] = SrvDspMath::acos(cartesian.m_Data[2]/ m_Data[0]);
+	}
+
+	/// <summary>
+	/// Error Convert spherical coordinate R, Az, El to cartesian  coordinate X,Y,Z
+	/// </summary>
+	void ErrorSphericalToCart(const Vector<_T, _Rows> &spherical, const Vector<_T, _Rows> &errorSpherical)
+	{
+		m_Data[0] = SrvDspMath::cos(spherical.m_Data[1])*SrvDspMath::sin(spherical.m_Data[2])
+				*errorSpherical.m_Data[0] - spherical.m_Data[0]* 
+			SrvDspMath::sin(spherical.m_Data[1])
+			*SrvDspMath::sin(spherical.m_Data[2])*errorSpherical.m_Data[1] + spherical.m_Data[0]
+			* SrvDspMath::cos(spherical.m_Data[1])*SrvDspMath::cos(spherical.m_Data[2])
+			*errorSpherical.m_Data[2];
+		m_Data[1] = SrvDspMath::sin(spherical.m_Data[1])*SrvDspMath::sin(spherical.m_Data[2])*errorSpherical.m_Data[0]
+			+ spherical.m_Data[0]* SrvDspMath::sin(spherical.m_Data[2])* SrvDspMath::cos(spherical.m_Data[1])
+			*errorSpherical.m_Data[1]+ spherical.m_Data[0]* SrvDspMath::sin(spherical.m_Data[1])*
+			SrvDspMath::cos(spherical.m_Data[2])*errorSpherical.m_Data[2];
+		m_Data[2] = SrvDspMath::cos(spherical.m_Data[2])*errorSpherical.m_Data[0] - spherical.m_Data[0]
+			* SrvDspMath::sin(spherical.m_Data[2])*errorSpherical.m_Data[2];
+	}
+
+	/// <summary>
+	/// Error Convert cartesian  coordinate X,Y,Z to spherical coordinate R, Az, El
+	/// </summary>
+	void ErrorCartToSpherical(const Vector<_T, _Rows> &spherical, const Vector<_T, _Rows> &errorCartesian)
+	{
+		m_Data[0] = SrvDspMath::cos(spherical.m_Data[1])*SrvDspMath::sin(spherical.m_Data[2])
+			*errorCartesian.m_Data[0] + SrvDspMath::sin(spherical.m_Data[1]) *
+			SrvDspMath::sin(spherical.m_Data[2])*errorCartesian.m_Data[1] + SrvDspMath::cos(spherical.m_Data[2])
+			*errorCartesian.m_Data[2];
+			
+		m_Data[1] = (-1 * SrvDspMath::sin(spherical.m_Data[1]) / (spherical.m_Data[0] * *SrvDspMath::sin(spherical.m_Data[2])))
+			*errorCartesian.m_Data[0]+ (SrvDspMath::cos(spherical.m_Data[1])/ (spherical.m_Data[0] * 
+				SrvDspMath::sin(spherical.m_Data[2])));
+			
+		m_Data[2] = SrvDspMath::cos(spherical.m_Data[2])*errorSpherical.m_Data[0] - spherical.m_Data[0]
+			* SrvDspMath::sin(spherical.m_Data[2])*errorSpherical.m_Data[2];
+	}
+
+
+	/// <summary>
 	/// Convert cartesian coordinate x,y,z to spherical coordinate R,El,Az
 	/// </summary>
 	void ToSpherical(const Vector<_T, _Rows> &cartesian)
