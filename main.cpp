@@ -27,7 +27,7 @@ void main()
 	string fileName = "dataPlots.csv";
 	
 	// already created 
-	//createCSVfile(); 
+	createCSVfile(); 
 
 
 	// Test Extended Kalman Filter 3D.
@@ -35,8 +35,10 @@ void main()
 	ExtendedKalman extendedKalman;
 	std::ofstream m_kalmanFile;
 	std::stringstream path;
-	path << "C:\\Users\\amitz\\OneDrive\\שולחן העבודה\\KalmanParams.txt";
-	m_kalmanFile.open(path.str());
+	path << "C:\\Users\\amitz\\OneDrive\\שולחן העבודה\\KalmanParams.csv";
+	//m_kalmanFile.open(path.str());
+	m_kalmanFile.open("KalmanParams.csv", ios::out | ios::app);
+
 	
 	// for kalman constructor
 	float dt = 93.0/1000.0;
@@ -46,8 +48,8 @@ void main()
 	for (int i = 1; i < NUMBER_DWELL + 1; i++)
 	{
 		plotsReader.ReadDataPlot(&plotsList, i);
-		//m_kalmanFile <<cos(plotsList[0]->GetAzimuthAngle())*plotsList[0]->GetRange();
-		//m_kalmanFile << sin(plotsList[0]->GetAzimuthAngle())*plotsList[0]->GetRange() <<std::endl;
+		m_kalmanFile <<cos(plotsList[0]->GetAzimuthAngle())*plotsList[0]->GetRange()<<",";
+		m_kalmanFile << sin(plotsList[0]->GetAzimuthAngle())*plotsList[0]->GetRange() <<",";
 
 		trackerJpda.DoTrack(plotsList);
 		
@@ -80,8 +82,8 @@ void main()
 			m_kalmanFile << "//m_P" << std::endl;
 			dataTrackList[0][0]->m_pKalman->m_P.PrintToFile(m_kalmanFile);*/
 			//extendedKalman.m_P.PrintToFile(m_kalmanFile);
-		//	m_kalmanFile << dataTrackList[0][0]->m_pKalman->m_X.m_Data[0]<< std::endl; 
-			m_kalmanFile <<dataTrackList[0][0]->m_pKalman->m_X.m_Data[3] << std::endl;
+			m_kalmanFile << dataTrackList[0][0]->m_pKalman->m_X.m_Data[0]<<","; 
+			m_kalmanFile <<dataTrackList[0][0]->m_pKalman->m_X.m_Data[3] <<"," <<std::endl;
 
 			//m_kalmanFile << std::endl << std::endl;
 		}
@@ -95,23 +97,42 @@ void createCSVfile()
 {
 	// file pointer 
 	fstream fout;
-
 	// opens an existing csv file or creates a new file. 
 	fout.open("dataPlots.csv", ios::out | ios::app);
 
 	DataPlot allDataPlots[NUMBER_DWELL];	 // NUMBER_OF_DATA_PLOTS = 5
-	int dwel = 1, x = 1, seqNumber = 1;
-	float azimuth = atan(2);
-	
+	bool isInc=true;
+	double dwel = 1, x = 1, seqNumber = 1,y=2;
+	float azimuth;
+	double max, min, diff, range,rx,ry;
 	// create and write array of DataPlot
 	for (int i = 0; i < NUMBER_DWELL; i++)
 	{
+		if (isInc)
+		{
+			min = 1;
+			max = 1.25;
+			isInc = false;
+		}
+		else
+		{
+			min = 0.75;
+			max = 1;
+			isInc = true;
+		}
+		diff = max - min;
+		rx = (((double) rand() / RAND_MAX) * diff ) + min;
+		ry = (((double)rand() / RAND_MAX) * diff) + min;
+		//range = sqrt(pow(x, 2) + pow((2 * x), 2));
+		x *= rx;
+		y *= ry;
+		azimuth = atan(y/x);
 		fout << dwel << ",";
 		dwel++;
 
-		allDataPlots[i].m_range = sqrt(pow(x, 2) + pow((2*x), 2));
+		allDataPlots[i].m_range = sqrt(pow(x, 2) + pow((y), 2));
 		fout << allDataPlots[i].m_range << ",";
-		x++;
+
 		
 		allDataPlots[i].m_azimuth = azimuth;
 		fout << allDataPlots[i].m_azimuth << ",";
@@ -142,6 +163,9 @@ void createCSVfile()
 		
 		allDataPlots[i].m_seqNumber = seqNumber++;
 		fout << allDataPlots[i].m_seqNumber << ",";
+		//fout << "\trx\t" << rx << "\try\t" << ry;
+		x=i+1;
+		y =x*2;
 
 		if( i != NUMBER_DWELL - 1)
 			fout << "\n";
