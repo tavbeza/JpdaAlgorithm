@@ -143,32 +143,6 @@ public:
 		return m_Data[a];
 	}
 
-	static _T EuclideanDist(const Vector<_T, _Rows> &value1, const Vector<_T, _Rows> &value2)
-	{
-		const Vector<_T, _Rows> &tmp = value1 - value2;
-		return sqrt(tmp.m_Data[0] * tmp.m_Data[0] + tmp.m_Data[1] * tmp.m_Data[1]);
-	}
-
-	/// <summary>
-	/// Convert spherical coordinate R,El,Az to cartesian coordinate x,y,z
-	/// </summary>
-	void FromSpherical(const Vector<_T, _Rows> &spherical)
-	{
-		if (spherical.m_Data[2] != 0)
-		{
-			m_Data[0] = spherical.m_Data[0] * SrvDspMath::cos(spherical.m_Data[1])*SrvDspMath::cos(spherical.m_Data[2]);
-			m_Data[1] = spherical.m_Data[0] * SrvDspMath::cos(spherical.m_Data[1])*SrvDspMath::sin(spherical.m_Data[2]);
-			m_Data[2] = -1.0*spherical.m_Data[0] * SrvDspMath::sin(spherical.m_Data[1]);
-		}
-		else
-		{
-			m_Data[0] = spherical.m_Data[0] * SrvDspMath::cos(spherical.m_Data[1]);
-			m_Data[1] = spherical.m_Data[0] * SrvDspMath::sin(spherical.m_Data[1]);
-			m_Data[2] = 0;
-		}
-		
-	}
-
 	/// <summary>
 	/// Convert spherical coordinate R, Az, El to cartesian  coordinate X,Y,Z
 	/// </summary>
@@ -186,10 +160,10 @@ public:
 	{
 		m_Data[0] = SrvDspMath::sqrt(SrvDspMath::pow(cartesian.m_Data[0],2) +
 									 SrvDspMath::pow(cartesian.m_Data[1], 2) +
-									 SrvDspMath::pow(cartesian.m_Data[2], 2)
-									);
+									 SrvDspMath::pow(cartesian.m_Data[2], 2));
+
 		//TODO: Unit Test //if(cartesian.m_Data[0] != 0)
-		m_Data[1] =	SrvDspMath::atan2(cartesian.m_Data[1]/ cartesian.m_Data[0]));
+		m_Data[1] =	SrvDspMath::atan2(cartesian.m_Data[1]/ cartesian.m_Data[0]);
 		m_Data[2] = SrvDspMath::acos(cartesian.m_Data[2]/ m_Data[0]);
 	}
 
@@ -199,17 +173,19 @@ public:
 	void ErrorSphericalToCart(const Vector<_T, _Rows> &spherical, const Vector<_T, _Rows> &errorSpherical)
 	{
 		m_Data[0] = SrvDspMath::cos(spherical.m_Data[1])*SrvDspMath::sin(spherical.m_Data[2])
-				*errorSpherical.m_Data[0] - spherical.m_Data[0]* 
-			SrvDspMath::sin(spherical.m_Data[1])
-			*SrvDspMath::sin(spherical.m_Data[2])*errorSpherical.m_Data[1] + spherical.m_Data[0]
-			* SrvDspMath::cos(spherical.m_Data[1])*SrvDspMath::cos(spherical.m_Data[2])
-			*errorSpherical.m_Data[2];
+						*errorSpherical.m_Data[0] - spherical.m_Data[0]
+						*SrvDspMath::sin(spherical.m_Data[1])
+						*SrvDspMath::sin(spherical.m_Data[2])*errorSpherical.m_Data[1] + spherical.m_Data[0]
+						* SrvDspMath::cos(spherical.m_Data[1])*SrvDspMath::cos(spherical.m_Data[2])
+						*errorSpherical.m_Data[2];
+
 		m_Data[1] = SrvDspMath::sin(spherical.m_Data[1])*SrvDspMath::sin(spherical.m_Data[2])*errorSpherical.m_Data[0]
-			+ spherical.m_Data[0]* SrvDspMath::sin(spherical.m_Data[2])* SrvDspMath::cos(spherical.m_Data[1])
-			*errorSpherical.m_Data[1]+ spherical.m_Data[0]* SrvDspMath::sin(spherical.m_Data[1])*
-			SrvDspMath::cos(spherical.m_Data[2])*errorSpherical.m_Data[2];
+						+ spherical.m_Data[0]* SrvDspMath::sin(spherical.m_Data[2])* SrvDspMath::cos(spherical.m_Data[1])
+						* errorSpherical.m_Data[1]+ spherical.m_Data[0]* SrvDspMath::sin(spherical.m_Data[1])
+						* SrvDspMath::cos(spherical.m_Data[2])*errorSpherical.m_Data[2];
+		
 		m_Data[2] = SrvDspMath::cos(spherical.m_Data[2])*errorSpherical.m_Data[0] - spherical.m_Data[0]
-			* SrvDspMath::sin(spherical.m_Data[2])*errorSpherical.m_Data[2];
+						* SrvDspMath::sin(spherical.m_Data[2])*errorSpherical.m_Data[2];
 	}
 
 	/// <summary>
@@ -218,27 +194,26 @@ public:
 	void ErrorCartToSpherical(const Vector<_T, _Rows> &spherical, const Vector<_T, _Rows> &errorCartesian)
 	{
 		m_Data[0] = SrvDspMath::cos(spherical.m_Data[1])*SrvDspMath::sin(spherical.m_Data[2])
-			*errorCartesian.m_Data[0] + SrvDspMath::sin(spherical.m_Data[1]) *
-			SrvDspMath::sin(spherical.m_Data[2])*errorCartesian.m_Data[1] + SrvDspMath::cos(spherical.m_Data[2])
-			*errorCartesian.m_Data[2];
+						*errorCartesian.m_Data[0] + SrvDspMath::sin(spherical.m_Data[1]) *
+						SrvDspMath::sin(spherical.m_Data[2])*errorCartesian.m_Data[1] + SrvDspMath::cos(spherical.m_Data[2])
+						*errorCartesian.m_Data[2];
 			
-		m_Data[1] = (-1 * SrvDspMath::sin(spherical.m_Data[1]) / (spherical.m_Data[0] * *SrvDspMath::sin(spherical.m_Data[2])))
-			*errorCartesian.m_Data[0]+ (SrvDspMath::cos(spherical.m_Data[1])/ (spherical.m_Data[0] * 
-				SrvDspMath::sin(spherical.m_Data[2])));
+		m_Data[1] = (-1 * SrvDspMath::sin(spherical.m_Data[1]) / (spherical.m_Data[0] * SrvDspMath::sin(spherical.m_Data[2])))
+						* errorCartesian.m_Data[0]
+						+ (SrvDspMath::cos(spherical.m_Data[1]) / (spherical.m_Data[0] * SrvDspMath::sin(spherical.m_Data[2])))
+						* errorCartesian.m_Data[1];
 			
-		m_Data[2] = SrvDspMath::cos(spherical.m_Data[2])*errorSpherical.m_Data[0] - spherical.m_Data[0]
-			* SrvDspMath::sin(spherical.m_Data[2])*errorSpherical.m_Data[2];
-	}
+		m_Data[2] = ((SrvDspMath::cos(spherical.m_Data[1]) * SrvDspMath::cos(spherical.m_Data[2])) / spherical.m_Data[0])
+						* errorCartesian.m_Data[0]
+						+ ((SrvDspMath::sin(spherical.m_Data[1]) * SrvDspMath::cos(spherical.m_Data[2])) / spherical.m_Data[0])
+						* errorCartesian.m_Data[1]
+						- ((SrvDspMath::sin(spherical.m_Data[2])) / spherical.m_Data[0])
+						* errorCartesian.m_Data[2];
 
-
-	/// <summary>
-	/// Convert cartesian coordinate x,y,z to spherical coordinate R,El,Az
-	/// </summary>
-	void ToSpherical(const Vector<_T, _Rows> &cartesian)
-	{
-		m_Data[0] = cartesian.Norm();
-		m_Data[1] = SrvDspMath::asin(-1.0*cartesian.m_Data[2] / m_Data[0]);
-		m_Data[2] = SrvDspMath::atan2(cartesian.m_Data[1], cartesian.m_Data[0]);
+		if (spherical.m_Data[2] >= 1.5 && spherical.m_Data[2] <= 1.6)
+		{
+			m_Data[2] = 0;
+		}
 	}
 
 	/// <summary>
@@ -254,9 +229,9 @@ public:
 		value = SrvDspMath::sqrt(sum);
 		return value;
 	}
+
 	_T m_Data[_Rows];
 };
-
 typedef Vector<float, 2> Vector2f;
 typedef Vector<float, 3> Vector3f;
 typedef Vector<float, 4> Vector4f;

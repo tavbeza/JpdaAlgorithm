@@ -53,7 +53,7 @@ void TrackerJpda::DoTrack(const DataPlotList &dataPlotList)
 				//if (isAsocFlagVec)
 				//{
 					long long time = SrvTimeStamp::Start();
-					m_dataTrackList[j]->m_pKalman->Predict(dt);
+					m_dataTrackList[j]->m_pKalman->Predict();
 					double time1 = SrvTimeStamp::Stop(time)*1000*1000;
 					time = SrvTimeStamp::Start();
 					m_dataTrackList[j]->m_pKalman->Update(dataPlotList[i]);

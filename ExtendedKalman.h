@@ -34,13 +34,10 @@ public:
 	/// Initialize the kalman
 	/// </summary>
 	void Init(
-		const float& dt,
-		const float& x,
-		const float& y,
-		const float& z,
-		const float& vx,
-		const float& vy,
-		const float& vz)
+		Vector3d cartesian,
+		float vx,
+		float vy,
+		float vz)
 		noexcept;
 
 	/// <summary>
@@ -49,20 +46,7 @@ public:
 	/// Once the outcome of the next measurement (necessarily corrupted with some amount of error, including random noise) is observed, 
 	/// these estimates are updated using a weighted average, with more weight being given to estimates with higher certainty.
 	/// </summary>
-	Vector3d Predict(const double& dt);
-	
-	/// <summary>
-	/// The relative certainty of the measurements and current state estimate is an important consideration, 
-	/// and it is common to discuss the response of the filter in terms of the Kalman filter's gain. 
-	/// The Kalman gain is the relative weight given to the measurements and current state estimate, 
-	/// and can be "tuned" to achieve particular performance. 
-	/// With a high gain, the filter places more weight on the most recent measurements, and thus follows them more responsively. 
-	/// With a low gain, the filter follows the model predictions more closely. 
-	/// At the extremes, a high gain close to one will result in a more jumpy estimated trajectory, 
-	/// while low gain close to zero will smooth out noise but decrease the responsiveness.
-	/// </summary>
-	virtual void GainUpdate(const float& beta);
-
+	Vector3d Predict();
 
 	/// <summary>
 	/// The algorithm works in a two-step process. 
@@ -109,7 +93,7 @@ public:
 	/// <summary>
 	/// Sets the delta time in the matrix A (Evolution state matrix)
 	/// </summary>
-	void SetDt(const double& dt);
+	void SetDt(float dt);
 
 	/// <summary>
 	/// Returns the updated vector
@@ -122,7 +106,7 @@ public:
 	/// <summary>
 	/// Set Singer Model Process Noise Covariance matrix for state vector:[x Vx Ax]';
 	/// </summary>
-	void SetQ_Singer(double dt, double tau, double sigmaManeuver2, Matrix3d &q);
+	void SetQ_Singer(double tau, double sigmaManeuver2, Matrix3d &q);
 
 	/// <summary>
 	/// Purpose:          Set process noise covariance matrix Q
@@ -154,63 +138,30 @@ public:
 	///      z3 q{2} z3;
 	///      z3 z3 q{3} ];
 	/// </summary>
-	void SetQ(double Dt, Matrix9d &Q);
+	void SetQ();
 
 	/// <summary>
 	/// Set the matrix F
 	/// </summary>
-	void SetF_Singer(double dt, double tau, Matrix3d &f);
+	void SetF_Singer(double tau, Matrix3d &f);
 	
 	/// <summary>
 	/// Set the matrix F
 	/// </summary>
-	void SetF(double dt, Matrix9d &F);
+	void SetF();
 	
 	/// <summary>
-	/// Set measurement matrix H in ECEF coordinate axes
+	/// Set measurement matrix H
 	/// </summary>
-	void SetH_Ecef(Vector9d X_predict, Vector9d X_sensor, Matrix49d &H, double &R_dot);
+	void SetH();
 	
 	/// <summary>
-	/// Set measurement matrix H in ENU coordinate axes
+	/// Set measurement covariance matrix
 	/// </summary>
-	void SetH_Enu(	int type,
-					double az,
-					double el,
-					Vector3d pos_t,
-					Vector3d pos_s,
-					Vector3d vel_t,
-					Vector3d vel_s,
-					Matrix49d &H);
-	
-	/// <summary>
-	/// Set measurement covariance matrix in ECEF tracking axes
-	/// </summary>
-	void SetR_Ecef(	double r,
-					double az,
-					double el,
-					Vector3d Vs,
-					double Sigma_r,
-					double Sigma_rdot,
-					double Sigma_az,
-					double Sigma_el,
-					Vector3d SigmaV,
-					Matrix4d &R);
-	
-	/// <summary>
-	/// Set measurement covariance matrix in ENU tracking axes
-	/// </summary>
-	void SetR_Enu(	int type,
-					double r,
-					double az,
-					double el,
-					Vector3d Vs,
-					double Sigma_r,
-					double Sigma_rdot,
-					double Sigma_az,
-					double Sigma_el,
-					/*Vector3d SigmaV,*/
-					Matrix4d &R);
+	void SetR(double error_r,
+		double error_az,
+		double error_el,
+		double error_v);
 
 	/// <summary>
 	/// Set measurement vector Z in ECEF coordinates
@@ -221,21 +172,6 @@ public:
 	/// Set measurment vector Z in ENU coordinates
 	/// </summary>
 	void SetZ_Enu(const Vector3d &meas, double velocity, const Vector3d &velENU, Vector4d &z);
-	
-	/// <summary>
-	/// New function that calculates H matrix between Cartesian state vector to nonlinear measurement Z
-	/// </summary>
-	void Calc_H_Matrix_Cart2Pol(Vector9d X, Matrix49d &H);
-	
-	/// <summary>
-	/// Initialize State Vector X and Covariance Matrix P
-	/// </summary>
-	void InitXP(
-		const DataPlot &plot,
-		/*const NavPlatStatusStruct &platData,*/
-		Vector9d &xInit,
-		Matrix9d &pInit
-	);
 
 public:
 	/// <summary>
@@ -317,6 +253,7 @@ public:
 	Vector9d m_last_prediction_eigen;
 	bool     m_IsFirst;
 	double   m_Entropy;
+	float	 m_Dt;
 
 protected:
 	static float m_k;

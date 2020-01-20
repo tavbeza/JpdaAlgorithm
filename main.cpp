@@ -10,6 +10,8 @@
 #include "DataPlotFileReader.h"
 #include "TrackerJpda.h"
 
+# define M_PI 3.14159265358979323846  /* pi */
+
 
 #define NUMBER_DWELL 100
 
@@ -27,7 +29,7 @@ void main()
 	string fileName = "dataPlots.csv";
 	
 	// already created 
-	//createCSVfile(); 
+	createCSVfile(); 
 
 
 	// Test Extended Kalman Filter 3D.
@@ -137,19 +139,32 @@ void createCSVfile()
 		allDataPlots[i].m_azimuth = azimuth;
 		fout << allDataPlots[i].m_azimuth << ",";
 		
-		allDataPlots[i].m_elevation = 0;
+		allDataPlots[i].m_elevation = M_PI / 2; //3.14159265359 / 2;	// pi / 2
 		fout << allDataPlots[i].m_elevation << ",";
 		
 		allDataPlots[i].m_velocity = 24.04374169;
 		fout << allDataPlots[i].m_velocity << ",";
+
+		Vector3d spherical;
+		spherical.m_Data[0] = allDataPlots[i].GetRange();
+		spherical.m_Data[1] = allDataPlots[i].GetAzimuthAngle();
+		spherical.m_Data[2] = allDataPlots[i].GetElevationAngle();
+
+		Vector3d errorCartesian;
+		errorCartesian.m_Data[0] = rx;
+		errorCartesian.m_Data[1] = ry;
+		errorCartesian.m_Data[2] = 0;
+
+		Vector3d errorSpherical;
+		errorSpherical.ErrorCartToSpherical(spherical, errorCartesian);
 		
-		allDataPlots[i].m_rangeAccuracy = 0.1;
+		allDataPlots[i].m_rangeAccuracy = errorSpherical.m_Data[0];
 		fout << allDataPlots[i].m_rangeAccuracy << ",";
 		
-		allDataPlots[i].m_azimuthAccuracy = 0.1;
+		allDataPlots[i].m_azimuthAccuracy = errorSpherical.m_Data[1];
 		fout << allDataPlots[i].m_azimuthAccuracy << ",";
 		
-		allDataPlots[i].m_elevationAccuracy = 0.1;
+		allDataPlots[i].m_elevationAccuracy = errorSpherical.m_Data[2];
 		fout << allDataPlots[i].m_elevationAccuracy << ",";
 		
 		allDataPlots[i].m_velocityAccuracy = 0.1;
