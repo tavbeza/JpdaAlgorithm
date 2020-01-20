@@ -90,6 +90,12 @@
     <ClCompile Include="DataTrackList.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="TestsManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="KalmanTests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TreeNode.h">
@@ -168,6 +174,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="DataTrackList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TestsManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="KalmanTests.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -5,7 +5,6 @@
 #include "Vector.h"
 #include "Matrix.h"
 #include "DataPlot.h"
-#include "NavPlatStatusStruct.h"
 #include "SrvDspMath.h"
 #include "TrackerParams.h"
 
@@ -59,14 +58,6 @@ public:
 
 public:
 	/// <summary>
-	/// Returns the matrix S
-	/// </summary>
-	inline const Matrix4d GetS() const
-	{
-		return m_S;
-	}
-
-	/// <summary>
 	/// Returns the last predictions
 	/// </summary>
 	const Vector3d GetLastPrediction() const
@@ -75,33 +66,9 @@ public:
 	}
 
 	/// <summary>
-	/// Returns the last prediction eigen
-	/// </summary>
-	inline const Vector9d GetLastPredictionEigen() const
-	{
-		return m_last_prediction_eigen;
-	}
-
-	/// <summary>
-	/// Returns the entropy
-	/// </summary>
-	inline double GetEntropy() const
-	{
-		return m_Entropy;
-	}
-
-	/// <summary>
 	/// Sets the delta time in the matrix A (Evolution state matrix)
 	/// </summary>
 	void SetDt(float dt);
-
-	/// <summary>
-	/// Returns the updated vector
-	/// </summary>
-	const Vector9d GetUpdate()
-	{
-		return m_X;
-	}
 
 	/// <summary>
 	/// Set Singer Model Process Noise Covariance matrix for state vector:[x Vx Ax]';
@@ -163,29 +130,12 @@ public:
 		double error_el,
 		double error_v);
 
-	/// <summary>
-	/// Set measurement vector Z in ECEF coordinates
-	/// </summary>
-	void SetZ_Ecef(const Vector4d &meas, Vector4d &z);
-	
-	/// <summary>
-	/// Set measurment vector Z in ENU coordinates
-	/// </summary>
-	void SetZ_Enu(const Vector3d &meas, double velocity, const Vector3d &velENU, Vector4d &z);
-
 public:
 	/// <summary>
 	/// The kalman state estimate vector of current track in enu_0 coordinate
 	/// axes: [x,Vx,Ax,y,Vy,Ay,z,Vz,Az]
 	/// </summary>
 	Vector9d m_X;
-	
-	/// <summary>
-	/// The kalman state estimate vector of current track translated into polar
-    /// coordinates (relative to enu_p)
-	/// axes: [R,Az,El,RR]
-	/// </summary>
-	Vector4d m_X_Polar;
 	
 	/// <summary>
 	///The kalman gain matrix
@@ -198,20 +148,9 @@ public:
 	Matrix9d m_P;
 	
 	/// <summary>
-	/// The kalman error covariance matrix translated into polar relative to ENU_p coordinate axes
-	/// </summary>
-	Matrix4d m_P_Polar;
-	
-	/// <summary>
 	/// The kalman residual covariance matrix
 	/// </summary>
 	Matrix4d m_S;
-	
-	/// <summary>
-	/// The kalman measurement vector [x,y,z,rDot]
-	/// [m;m;m;m/sec]
-	/// </summary>
-	Vector4d m_Z;
 	
 	/// <summary>
 	/// The kalman observation model
@@ -234,11 +173,6 @@ public:
 	Matrix9d m_P_Predict;
 	
 	/// <summary>
-	/// The measurement of the true state
-	/// </summary>
-	Vector9d m_Z_Predict;
-	
-	/// <summary>
 	/// The kalman process noise covariance matrix
 	/// </summary>
 	Matrix9d m_Q;
@@ -249,14 +183,7 @@ public:
 	Matrix9d m_F;
 
 	Vector3d m_last_prediction;
-	Vector3d m_last_speed;
-	Vector9d m_last_prediction_eigen;
-	bool     m_IsFirst;
-	double   m_Entropy;
 	float	 m_Dt;
-
-protected:
-	static float m_k;
 
 };
 #endif //_EXTENDED_KALMAN_H_

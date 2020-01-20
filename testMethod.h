@@ -23,7 +23,7 @@ public:
 	/// Executes the test.
 	/// </summary>
 	virtual void Execute() = 0;
-};
 
+};
 
 #endif //_TEST_METHOD_H_

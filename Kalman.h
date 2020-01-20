@@ -63,11 +63,6 @@ public:
 	/// </summary>
 	virtual Vector4f Update(const std::vector< Vector2f >& selected_detections, const Vector5f& beta, const float& last_beta);
 
-	/// <sumary>
-	/// Test
-	/// <\summary>
-	void kalmanTest();
-
 public:
 	/// <summary>
 	/// Returns the matrix S

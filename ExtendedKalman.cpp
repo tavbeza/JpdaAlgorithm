@@ -1,15 +1,10 @@
 #include "ExtendedKalman.h"
-//#include "ns.h"
-
-float ExtendedKalman::m_k = 5.0620f; // n/2 * log(4*PI) where n is the state dimention (x, y, x', y')
 
 /// <summary>
 /// Default kalman Constructor
 /// </summary>
 ExtendedKalman::ExtendedKalman() noexcept
 {
-	m_IsFirst = true;
-	m_Entropy = 0;
 }
 
 /// <summary>
@@ -55,9 +50,7 @@ void ExtendedKalman::Init(
 	float vy,
 	float vz) noexcept
 {
-	m_Entropy = 0;
 	m_last_prediction = cartesian;
-	m_last_speed = Vector3d(vx, vy, vz);
 
 	m_X.m_Data[0] = cartesian.m_Data[0];
 	m_X.m_Data[1] = vx;
@@ -166,7 +159,9 @@ void ExtendedKalman::Update(DataPlot* pPlot)
 	m_X = m_X_Predict + (m_K * (Zk));
 		
 	// m_P_Predict = P(k,k-1)
+	// TODO: Ask Israel
 	m_P = m_P_Predict - (m_K * (m_S * Transpose(m_K)));
+	//m_P = m_P_Predict - m_K * m_H * m_P_Predict;
 }
 
 /// <summary>
@@ -371,34 +366,6 @@ void ExtendedKalman::SetR(double error_x,
 		m_R.m_Data[1][1] = pow(error_y, 2);
 		m_R.m_Data[2][2] = pow(error_z, 2);
 		m_R.m_Data[3][3] = pow(error_v, 2);
-}
-
-
-/// <summary>
-/// Set measurement vector Z in ECEF coordinates
-/// </summary>
-void ExtendedKalman::SetZ_Ecef(const Vector4d &meas, Vector4d &z)
-{
-	z.m_Data[0] = meas.m_Data[0];
-	z.m_Data[1] = meas.m_Data[1];
-	z.m_Data[2] = meas.m_Data[2];
-	z.m_Data[3] = meas.m_Data[3];
-}
-
-/// <summary>
-/// Set measurment vector Z in ENU coordinates
-/// </summary>
-void ExtendedKalman::SetZ_Enu(const Vector3d &meas,
-	double velocity,
-	const Vector3d &velENU,
-	Vector4d &z)
-{
-	//case 'nonlin'
-	// Z=[Meas.enu_0.R; Meas.enu_0.Az; Meas.enu_0.El; Meas.enu_0.RR];
-	z.m_Data[0] = meas.m_Data[0];
-	z.m_Data[1] = meas.m_Data[1];
-	z.m_Data[2] = meas.m_Data[2];
-	z.m_Data[3] = velocity;
 }
 
 /// <summary>
