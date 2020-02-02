@@ -19,7 +19,7 @@ public:
 	{
 		SetZero();
 	}
-	
+
 	/// <summary>
 	/// 3d construcotr
 	/// </summary>
@@ -134,7 +134,7 @@ public:
 			temp += m_Data[i] * value.m_Data[i];
 		return temp;
 	}
-	
+
 	/// <summary>
 	/// Overload function call
 	/// </summary>
@@ -150,7 +150,14 @@ public:
 	{
 		m_Data[0] = spherical.m_Data[0] * SrvDspMath::sin(spherical.m_Data[2])*SrvDspMath::cos(spherical.m_Data[1]);
 		m_Data[1] = spherical.m_Data[0] * SrvDspMath::sin(spherical.m_Data[2])*SrvDspMath::sin(spherical.m_Data[1]);
-		m_Data[2] = spherical.m_Data[0] * SrvDspMath::cos(spherical.m_Data[2]);
+		if (spherical.m_Data[2] < 1.6 || spherical.m_Data[2] > 1.5)
+		{
+			m_Data[2] = 0;
+		}
+		else
+		{
+			m_Data[2] = spherical.m_Data[0] * SrvDspMath::cos(spherical.m_Data[2]);
+		}
 	}
 
 	/// <summary>
@@ -158,13 +165,13 @@ public:
 	/// </summary>
 	void CartToSpherical(const Vector<_T, _Rows> &cartesian)
 	{
-		m_Data[0] = SrvDspMath::sqrt(SrvDspMath::pow(cartesian.m_Data[0],2) +
-									 SrvDspMath::pow(cartesian.m_Data[1], 2) +
-									 SrvDspMath::pow(cartesian.m_Data[2], 2));
+		m_Data[0] = SrvDspMath::sqrt(SrvDspMath::pow(cartesian.m_Data[0], 2) +
+			SrvDspMath::pow(cartesian.m_Data[1], 2) +
+			SrvDspMath::pow(cartesian.m_Data[2], 2));
 
 		// TODO: Unit Test //if(cartesian.m_Data[0] != 0)
-		m_Data[1] =	SrvDspMath::atan2(cartesian.m_Data[1]/ cartesian.m_Data[0]);
-		m_Data[2] = SrvDspMath::acos(cartesian.m_Data[2]/ m_Data[0]);
+		m_Data[1] = SrvDspMath::atan2(cartesian.m_Data[1] / cartesian.m_Data[0]);
+		m_Data[2] = SrvDspMath::acos(cartesian.m_Data[2] / m_Data[0]);
 	}
 
 	/// <summary>
@@ -173,19 +180,26 @@ public:
 	void ErrorSphericalToCart(const Vector<_T, _Rows> &spherical, const Vector<_T, _Rows> &errorSpherical)
 	{
 		m_Data[0] = SrvDspMath::cos(spherical.m_Data[1])*SrvDspMath::sin(spherical.m_Data[2])
-						*errorSpherical.m_Data[0] - spherical.m_Data[0]
-						*SrvDspMath::sin(spherical.m_Data[1])
-						*SrvDspMath::sin(spherical.m_Data[2])*errorSpherical.m_Data[1] + spherical.m_Data[0]
-						* SrvDspMath::cos(spherical.m_Data[1])*SrvDspMath::cos(spherical.m_Data[2])
-						*errorSpherical.m_Data[2];
+			*errorSpherical.m_Data[0] - spherical.m_Data[0]
+			* SrvDspMath::sin(spherical.m_Data[1])
+			*SrvDspMath::sin(spherical.m_Data[2])*errorSpherical.m_Data[1] + spherical.m_Data[0]
+			* SrvDspMath::cos(spherical.m_Data[1])*SrvDspMath::cos(spherical.m_Data[2])
+			*errorSpherical.m_Data[2];
 
 		m_Data[1] = SrvDspMath::sin(spherical.m_Data[1])*SrvDspMath::sin(spherical.m_Data[2])*errorSpherical.m_Data[0]
-						+ spherical.m_Data[0]* SrvDspMath::sin(spherical.m_Data[2])* SrvDspMath::cos(spherical.m_Data[1])
-						* errorSpherical.m_Data[1]+ spherical.m_Data[0]* SrvDspMath::sin(spherical.m_Data[1])
-						* SrvDspMath::cos(spherical.m_Data[2])*errorSpherical.m_Data[2];
-		
-		m_Data[2] = SrvDspMath::cos(spherical.m_Data[2])*errorSpherical.m_Data[0] - spherical.m_Data[0]
-						* SrvDspMath::sin(spherical.m_Data[2])*errorSpherical.m_Data[2];
+			+ spherical.m_Data[0] * SrvDspMath::sin(spherical.m_Data[2])* SrvDspMath::cos(spherical.m_Data[1])
+			* errorSpherical.m_Data[1] + spherical.m_Data[0] * SrvDspMath::sin(spherical.m_Data[1])
+			* SrvDspMath::cos(spherical.m_Data[2])*errorSpherical.m_Data[2];
+
+		if (spherical.m_Data[2] < 1.6 || spherical.m_Data[2] > 1.5)
+		{
+			m_Data[2] = 0;
+		}
+		else
+		{
+			m_Data[2] = SrvDspMath::cos(spherical.m_Data[2])*errorSpherical.m_Data[0] - spherical.m_Data[0]
+				* SrvDspMath::sin(spherical.m_Data[2])*errorSpherical.m_Data[2];
+		}
 	}
 
 	/// <summary>
