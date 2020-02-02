@@ -127,8 +127,7 @@ public:
 	/// </summary>
 	void SetR(double error_r,
 		double error_az,
-		double error_el,
-		double error_v);
+		double error_el);
 
 public:
 	/// <summary>
@@ -140,7 +139,7 @@ public:
 	/// <summary>
 	///The kalman gain matrix
 	/// </summary>
-	Matrix94d m_K;
+	Matrix93d m_K;
 	
 	/// <summary>
 	/// The kalman error covariance matrix in ENU_0 coordinate axes
@@ -150,17 +149,17 @@ public:
 	/// <summary>
 	/// The kalman residual covariance matrix
 	/// </summary>
-	Matrix4d m_S;
+	Matrix3d m_S;
 	
 	/// <summary>
 	/// The kalman observation model
 	/// </summary>
-	Matrix49d m_H;
+	Matrix39d m_H;
 	
 	/// <summary>
 	/// The kalman covariance matrix of the observation noise
 	/// </summary>
-	Matrix4d m_R;
+	Matrix3d m_R;
 	
 	/// <summary>
 	/// The kalman predicted (a prior) state estimate

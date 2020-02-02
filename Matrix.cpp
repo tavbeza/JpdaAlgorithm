@@ -21,6 +21,25 @@ Matrix4d operator *(Matrix49d &rhMatrix, const Matrix94d &other)
 }
 
 /// <summary>
+/// multiply matrix on the right 33 = 39*93
+/// </summary>
+Matrix3d operator *(Matrix39d &rhMatrix, const Matrix93d &other)
+{
+	Matrix3d temp;
+	for (int i = 0; i < 3; i++)
+	{
+		for (int j = 0; j < 3; j++)
+		{
+			for (int k = 0; k < 9; k++)
+			{
+				temp.m_Data[i][j] += rhMatrix.m_Data[i][k] * other.m_Data[k][j];
+			}
+		}
+	}
+	return temp;
+}
+
+/// <summary>
 /// multiply matrix on the right 49 = 44*49
 /// </summary>
 Matrix49d operator *(Matrix4d &rhMatrix, const Matrix49d &other)
@@ -31,6 +50,25 @@ Matrix49d operator *(Matrix4d &rhMatrix, const Matrix49d &other)
 		for (int j = 0; j < 9; j++)
 		{
 			for (int k = 0; k < 4; k++)
+			{
+				temp.m_Data[i][j] += rhMatrix.m_Data[i][k] * other.m_Data[k][j];
+			}
+		}
+	}
+	return temp;
+}
+
+/// <summary>
+/// multiply matrix on the right 39 = 33*39
+/// </summary>
+Matrix39d operator *(Matrix3d &rhMatrix, const Matrix39d &other)
+{
+	Matrix39d temp;
+	for (int i = 0; i < 3; i++)
+	{
+		for (int j = 0; j < 9; j++)
+		{
+			for (int k = 0; k < 3; k++)
 			{
 				temp.m_Data[i][j] += rhMatrix.m_Data[i][k] * other.m_Data[k][j];
 			}
@@ -59,6 +97,25 @@ Matrix9d operator *(Matrix94d &rhMatrix, const Matrix49d &other)
 }
 
 /// <summary>
+/// multiply matrix on the right 99 = 93*39
+/// </summary>
+Matrix9d operator *(Matrix93d &rhMatrix, const Matrix39d &other)
+{
+	Matrix9d temp;
+	for (int i = 0; i < 9; i++)
+	{
+		for (int j = 0; j < 9; j++)
+		{
+			for (int k = 0; k < 3; k++)
+			{
+				temp.m_Data[i][j] += rhMatrix.m_Data[i][k] * other.m_Data[k][j];
+			}
+		}
+	}
+	return temp;
+}
+
+/// <summary>
 /// multiply matrix on the right 94 = 99*94
 /// </summary>
 Matrix94d operator *(Matrix9d &rhMatrix, const Matrix94d &other)
@@ -67,6 +124,25 @@ Matrix94d operator *(Matrix9d &rhMatrix, const Matrix94d &other)
 	for (int i = 0; i < 9; i++)
 	{
 		for (int j = 0; j < 4; j++)
+		{
+			for (int k = 0; k < 9; k++)
+			{
+				temp.m_Data[i][j] += rhMatrix.m_Data[i][k] * other.m_Data[k][j];
+			}
+		}
+	}
+	return temp;
+}
+
+/// <summary>
+/// multiply matrix on the right 94 = 99*93
+/// </summary>
+Matrix93d operator *(Matrix9d &rhMatrix, const Matrix93d &other)
+{
+	Matrix93d temp;
+	for (int i = 0; i < 9; i++)
+	{
+		for (int j = 0; j < 3; j++)
 		{
 			for (int k = 0; k < 9; k++)
 			{
@@ -88,6 +164,25 @@ Matrix94d operator *(Matrix94d &rhMatrix, const Matrix4d &other)
 		for (int j = 0; j < 4; j++)
 		{
 			for (int k = 0; k < 4; k++)
+			{
+				temp.m_Data[i][j] += rhMatrix.m_Data[i][k] * other.m_Data[k][j];
+			}
+		}
+	}
+	return temp;
+}
+
+/// <summary>
+/// multiply matrix on the right 93 = 93*33
+/// </summary>
+Matrix93d operator *(Matrix93d &rhMatrix, const Matrix3d &other)
+{
+	Matrix93d temp;
+	for (int i = 0; i < 9; i++)
+	{
+		for (int j = 0; j < 3; j++)
+		{
+			for (int k = 0; k < 3; k++)
 			{
 				temp.m_Data[i][j] += rhMatrix.m_Data[i][k] * other.m_Data[k][j];
 			}
@@ -281,6 +376,22 @@ Vector9d operator *(Matrix94d &rhMatrix, const Vector4d &other)
 }
 
 /// <summary>
+/// multiply matrix on the right 91 = 93*31
+/// </summary>
+Vector9d operator *(Matrix93d &rhMatrix, const Vector3d &other)
+{
+	Vector9d temp;
+	for (int i = 0; i < 9; i++)
+	{
+		for (int k = 0; k < 3; k++)
+		{
+			temp.m_Data[i] += rhMatrix.m_Data[i][k] * other.m_Data[k];
+		}
+	}
+	return temp;
+}
+
+/// <summary>
 /// multiply matrix on the right 41 = 49*91
 /// </summary>
 Vector4d operator *(Matrix49d &rhMatrix, const Vector9d &other)
@@ -340,6 +451,19 @@ Matrix94f Transpose(Matrix49f &matrix49f)
 }
 
 /// <summary>
+/// Transpose Matrix39d
+/// </summary>
+Matrix93d Transpose(Matrix39d &matrix39d)
+{
+	Matrix93d temp;
+	for (int i = 0; i < 9; i++)
+		for (int j = 0; j < 3; j++)
+			temp.m_Data[i][j] = matrix39d.m_Data[j][i];
+
+	return temp;
+}
+
+/// <summary>
 /// Transpose Matrix49d
 /// </summary>
 Matrix94d Transpose(Matrix49d &matrix49d)
@@ -361,6 +485,19 @@ Matrix49f Transpose(Matrix94f &matrix94f)
 	for (int i = 0; i < 4; i++)
 		for (int j = 0; j < 9; j++)
 			temp.m_Data[i][j] = matrix94f.m_Data[j][i];
+
+	return temp;
+}
+
+/// <summary>
+/// Transpose Matrix93d
+/// </summary>
+Matrix39d Transpose(Matrix93d &matrix93d)
+{
+	Matrix39d temp;
+	for (int i = 0; i < 3; i++)
+		for (int j = 0; j < 9; j++)
+			temp.m_Data[i][j] = matrix93d.m_Data[j][i];
 
 	return temp;
 }

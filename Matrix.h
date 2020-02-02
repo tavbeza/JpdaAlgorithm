@@ -522,6 +522,8 @@ typedef Matrix<float, 9, 4> Matrix94f;
 typedef Matrix<float, 4, 9> Matrix49f;
 typedef Matrix<double, 2, 2> Matrix2d;
 typedef Matrix<double, 3, 3> Matrix3d;
+typedef Matrix<double, 3, 9> Matrix39d;
+typedef Matrix<double, 9, 3> Matrix93d;
 typedef Matrix<double, 4, 4> Matrix4d;
 typedef Matrix<double, 9, 9> Matrix9d;
 typedef Matrix<double, 9, 4> Matrix94d;
@@ -536,6 +538,11 @@ Matrix2f Inverse2f(Matrix2f &matrix2f);
 /// Transpose Matrix49f
 /// </summary>
 Matrix94f Transpose(Matrix49f &matrix49f);
+
+/// <summary>
+/// Transpose Matrix39d
+/// </summary>
+Matrix93d Transpose(Matrix39d &matrix39d);
 
 /// <summary>
 /// Transpose Matrix94f
@@ -558,6 +565,11 @@ Matrix42f Transpose(Matrix24f &matrix24f);
 Matrix94d Transpose(Matrix49d &matrix49d);
 
 /// <summary>
+/// Transpose Matrix93d
+/// </summary>
+Matrix39d Transpose(Matrix93d &matrix93d);
+
+/// <summary>
 /// Transpose Matrix94d
 /// </summary>
 Matrix49d Transpose(Matrix94d &matrix94f);
@@ -578,6 +590,21 @@ Matrix4d operator *(Matrix49d &rhMatrix, const Matrix94d &other);
 Matrix24f operator *(Matrix2f &rhMatrix, const Matrix24f &other);
 
 /// <summary>
+/// multiply matrix on the right 94 = 99*93
+/// </summary>
+Matrix93d operator *(Matrix9d &rhMatrix, const Matrix93d &other);
+
+/// <summary>
+/// multiply matrix on the right 33 = 39*93
+/// </summary>
+Matrix3d operator *(Matrix39d &rhMatrix, const Matrix93d &other);
+
+/// <summary>
+/// multiply matrix on the right 93 = 93*33
+/// </summary>
+Matrix93d operator *(Matrix93d &rhMatrix, const Matrix3d &other);
+
+/// <summary>
 /// multiply matrix on the right 24 = 24*44
 /// </summary>
 Matrix24f operator *(Matrix24f &rhMatrix, const Matrix4f &other);
@@ -588,9 +615,19 @@ Matrix24f operator *(Matrix24f &rhMatrix, const Matrix4f &other);
 Matrix4f operator *(Matrix42f &rhMatrix, const Matrix24f &other);
 
 /// <summary>
+/// multiply matrix on the right 99 = 93*39
+/// </summary>
+Matrix9d operator *(Matrix93d &rhMatrix, const Matrix39d &other);
+
+/// <summary>
 /// multiply matrix on the right 42 = 44*42
 /// </summary>
 Matrix42f operator *(Matrix4f &rhMatrix, const Matrix42f &other);
+
+/// <summary>
+/// multiply matrix on the right 39 = 33*39
+/// </summary>
+Matrix39d operator *(Matrix3d &rhMatrix, const Matrix39d &other);
 
 /// <summary>
 /// multiply matrix on the right 22 = 24*42
@@ -636,6 +673,11 @@ Vector2f operator *(Matrix24f &rhMatrix, const Vector4f &other);
 /// multiply matrix on the right 91 = 94*41
 /// </summary>
 Vector9d operator *(Matrix94d &rhMatrix, const Vector4d &other);
+
+/// <summary>
+/// multiply matrix on the right 91 = 93*31
+/// </summary>
+Vector9d operator *(Matrix93d &rhMatrix, const Vector3d &other);
 
 /// <summary>
 /// multiply matrix on the right 41 = 49*91

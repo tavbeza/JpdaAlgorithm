@@ -25,7 +25,7 @@ ExtendedKalman::ExtendedKalman(const DataPlot &plot)
 	Vector3d errorCartesian;
 	errorCartesian.ErrorSphericalToCart(spherical, errorSpherical);
 
-	SetR(errorCartesian.m_Data[0], errorCartesian.m_Data[1], errorCartesian.m_Data[2], plot.GetVelocityAccuracy());
+	SetR(errorCartesian.m_Data[0], errorCartesian.m_Data[1], errorCartesian.m_Data[2]);
 
 	float dt = 93.0 / 1000;
 	SetDt(dt);
@@ -136,7 +136,7 @@ void ExtendedKalman::Update(DataPlot* pPlot)
 	Vector3d errorCartesian;
 	errorCartesian.ErrorSphericalToCart(spherical, errorSpherical);
 
-	SetR(errorCartesian.m_Data[0], errorCartesian.m_Data[1], errorCartesian.m_Data[2], pPlot->GetVelocityAccuracy());
+	SetR(errorCartesian.m_Data[0], errorCartesian.m_Data[1], errorCartesian.m_Data[2]);
 
 	m_S = (m_H * (m_P_Predict * Transpose(m_H))) + m_R;
 	// Near-optimal Kalman gain
@@ -149,14 +149,14 @@ void ExtendedKalman::Update(DataPlot* pPlot)
 	cartesian.SphericalToCart(spherical);
 
 	// Updated state estimate 
-	Vector4d Zk;
+	Vector3d Zk;
 	Zk.m_Data[0] = cartesian.m_Data[0];
 	Zk.m_Data[1] = cartesian.m_Data[1];
 	Zk.m_Data[2] = cartesian.m_Data[2];
-	Zk.m_Data[3] = pPlot->GetVelocity();
+	//Zk.m_Data[3] = pPlot->GetVelocity();
 
 	// TODO: Should be zPredict instead m_X_Predict ?
-	m_X = m_X_Predict + (m_K * (Zk));
+	m_X = m_X_Predict + (m_K * Zk);
 		
 	// m_P_Predict = P(k,k-1)
 	// TODO: Ask Israel
@@ -358,15 +358,13 @@ void ExtendedKalman::SetH()
 /// </summary>
 void ExtendedKalman::SetR(double error_x,
 	double error_y,
-	double error_z,
-	double error_v)
+	double error_z)
 {
 	// TODO: Change to 3x3 without v and change like the research
 		m_R.Zero();
 		m_R.m_Data[0][0] = pow(error_x, 2);
 		m_R.m_Data[1][1] = pow(error_y, 2);
 		m_R.m_Data[2][2] = pow(error_z, 2);
-		m_R.m_Data[3][3] = pow(error_v, 2);
 }
 
 /// <summary>
