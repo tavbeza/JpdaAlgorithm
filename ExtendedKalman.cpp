@@ -332,25 +332,17 @@ void ExtendedKalman::SetH()
 	double Dx = m_X_Predict.m_Data[0];	// x
 	double Dy = m_X_Predict.m_Data[3];	// y
 	double Dz = m_X_Predict.m_Data[6];	// z
-	double Dvx = m_X_Predict.m_Data[1];	// Vx
-	double Dvy = m_X_Predict.m_Data[4];	// Vy
-	double Dvz = m_X_Predict.m_Data[7];	// Vz
 	// Difference between state vector of target prediction to self
-	double D = Dx * Dvx + Dy * Dvy + Dz * Dvz;
-	double R = SrvDspMath::sqrt(Dx*Dx + Dy * Dy + Dz * Dz);
+	double R = SrvDspMath::sqrt(Dx * Dx + Dy * Dy + Dz * Dz);
 	m_H.Zero();
-	m_H.m_Data[0][0] = 1;
-	m_H.m_Data[1][3] = 1;
-	m_H.m_Data[2][6] = 1;
-	m_H.m_Data[3][0] = (Dvx*R - D * Dx / R) / (SrvDspMath::pow(R, 2));
-	m_H.m_Data[3][1] = Dx / R;
-	m_H.m_Data[3][2] = 0;
-	m_H.m_Data[3][3] = Dvy / R - Dy * D / (SrvDspMath::pow(R, 3));
-	m_H.m_Data[3][4] = Dy / R;
-	m_H.m_Data[3][5] = 0;
-	m_H.m_Data[3][6] = Dvz / R - Dz * D / (SrvDspMath::pow(R, 3));
-	m_H.m_Data[3][7] = Dz / R;
-	m_H.m_Data[3][8] = 0;
+	m_H.m_Data[0][0] = Dx / R;  //	dR / dX
+	m_H.m_Data[0][1] = Dy / R;	//	dR / dY
+	m_H.m_Data[0][2] = Dz / R;	//	dR / dZ
+	m_H.m_Data[1][0] = - ( Dy / (SrvDspMath::pow(Dy, 2) + SrvDspMath::pow(Dx, 2)));  //	dAz / dX
+	m_H.m_Data[1][1] = Dx / (SrvDspMath::pow(Dy, 2) + SrvDspMath::pow(Dx, 2));  //	dAz / dY
+	m_H.m_Data[2][0] = (Dz * Dx) / (SrvDspMath::pow(R, 2) * SrvDspMath::sqrt(Dx*Dx + Dy*Dy));  //  dEl / dX
+	m_H.m_Data[2][1] = (Dz * Dy) / (SrvDspMath::pow(R, 2) * SrvDspMath::sqrt(Dx*Dx + Dy*Dy));  //  dEl / dY
+	m_H.m_Data[2][2] = SrvDspMath::sqrt(Dx*Dx + Dy * Dy) / SrvDspMath::pow(R, 2); //  dEl / dZ
 }
 
 /// <summary>
