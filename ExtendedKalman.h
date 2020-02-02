@@ -125,9 +125,9 @@ public:
 	/// <summary>
 	/// Set measurement covariance matrix
 	/// </summary>
-	void SetR(double error_r,
-		double error_az,
-		double error_el);
+	void ExtendedKalman::SetR(double error_x,
+		double error_y,
+		double error_z);
 
 public:
 	/// <summary>
