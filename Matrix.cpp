@@ -408,6 +408,22 @@ Vector4d operator *(Matrix49d &rhMatrix, const Vector9d &other)
 }
 
 /// <summary>
+/// multiply matrix on the right 31 = 39*91
+/// </summary>
+Vector3d operator *(Matrix39d &rhMatrix, const Vector9d &other)
+{
+	Vector3d temp;
+	for (int i = 0; i < 3; i++)
+	{
+		for (int k = 0; k < 9; k++)
+		{
+			temp.m_Data[i] += rhMatrix.m_Data[i][k] * other.m_Data[k];
+		}
+	}
+	return temp;
+}
+
+/// <summary>
 /// multiply matrix on the right 41 = 42*21
 /// </summary>
 Vector4f operator *(Matrix42f &rhMatrix, const Vector2f &other)

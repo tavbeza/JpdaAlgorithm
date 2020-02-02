@@ -105,7 +105,7 @@ Vector3d ExtendedKalman::Predict()
 	m_P_Predict = m_F * m_P * m_F.Transpose() + m_Q;
 
 	//Predicted Measurement
-	Vector4d zPredict = m_H * m_X_Predict;	// H * F * X
+	Vector3d zPredict = m_H * m_X_Predict;	// H * F * X
 
 	m_last_prediction = Vector3d(zPredict.m_Data[0], zPredict.m_Data[1], zPredict.m_Data[2]);
 	return m_last_prediction;

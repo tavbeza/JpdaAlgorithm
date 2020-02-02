@@ -620,6 +620,11 @@ Matrix4f operator *(Matrix42f &rhMatrix, const Matrix24f &other);
 Matrix9d operator *(Matrix93d &rhMatrix, const Matrix39d &other);
 
 /// <summary>
+/// multiply matrix on the right 31 = 39*91
+/// </summary>
+Vector3d operator *(Matrix39d &rhMatrix, const Vector9d &other);
+
+/// <summary>
 /// multiply matrix on the right 42 = 44*42
 /// </summary>
 Matrix42f operator *(Matrix4f &rhMatrix, const Matrix42f &other);
