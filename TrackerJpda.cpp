@@ -55,6 +55,7 @@ void TrackerJpda::DoTrack(const DataPlotList &dataPlotList)
 					long long time = SrvTimeStamp::Start();
 					m_dataTrackList[j]->m_pKalman->Predict();
 					double time1 = SrvTimeStamp::Stop(time)*1000*1000;
+
 					time = SrvTimeStamp::Start();
 					m_dataTrackList[j]->m_pKalman->Update(dataPlotList[i]);
 					double time2 = SrvTimeStamp::Stop(time)*1000*1000;
