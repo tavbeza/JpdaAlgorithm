@@ -68,13 +68,13 @@ void ExtendedKalman::Init(
 	
 	TrackerParams *pTrakerParams = new TrackerParams;
 	m_P.Zero();
-	m_P.m_Data[0][0] = m_R.m_Data[0][0];
+	m_P.m_Data[0][0] = m_R.m_Data[0][0]; // Rxx (Delta X)
 	m_P.m_Data[1][1] = pow(pTrakerParams->m_SigmaVxs, 2);
 	m_P.m_Data[2][2] = pow(pTrakerParams->m_SigmaAxs, 2);
-	m_P.m_Data[3][3] = m_R.m_Data[1][1];
+	m_P.m_Data[3][3] = m_R.m_Data[1][1]; // Ryy (Delta Y)
 	m_P.m_Data[4][4] = pow(pTrakerParams->m_SigmaVys, 2);
 	m_P.m_Data[5][5] = pow(pTrakerParams->m_SigmaAys, 2);
-	m_P.m_Data[6][6] = m_R.m_Data[2][2];
+	m_P.m_Data[6][6] = m_R.m_Data[2][2]; // Rzz	(Delta Z)
 	m_P.m_Data[7][7] = pow(pTrakerParams->m_SigmaVzs, 2);
 	m_P.m_Data[8][8] = pow(pTrakerParams->m_SigmaAzs, 2);
 
@@ -98,7 +98,7 @@ ExtendedKalman::~ExtendedKalman()
 /// </summary>
 Vector3d ExtendedKalman::Predict()
 {
-	// TODO: check if should update m_F and m_Q
+	// TODO: check if should update m_F and m_Q // Answer: No
 
 	m_X_Predict = m_F * m_X;
 	
@@ -161,7 +161,7 @@ void ExtendedKalman::Update(DataPlot* pPlot)
 	// m_P_Predict = P(k,k-1)
 	// TODO: Ask Israel
 	m_P = m_P_Predict - (m_K * (m_S * Transpose(m_K)));
-	//m_P = m_P_Predict - m_K * m_H * m_P_Predict;
+	//m_P = I * m_P_Predict - m_K * m_H * m_P_Predict;
 }
 
 /// <summary>
@@ -361,6 +361,7 @@ void ExtendedKalman::SetR(double error_x,
 	double error_z,
 	double error_v)
 {
+	// TODO: Change to 3x3 without v and change like the research
 		m_R.Zero();
 		m_R.m_Data[0][0] = pow(error_x, 2);
 		m_R.m_Data[1][1] = pow(error_y, 2);
