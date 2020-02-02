@@ -137,11 +137,10 @@ void ExtendedKalman::Update(DataPlot* pPlot)
 	errorCartesian.ErrorSphericalToCart(spherical, errorSpherical);
 
 	SetR(errorCartesian.m_Data[0], errorCartesian.m_Data[1], errorCartesian.m_Data[2]);
-
 	m_S = (m_H * (m_P_Predict * Transpose(m_H))) + m_R;
 	// Near-optimal Kalman gain
 	// Sets the optimal kalman gain
-	// 94 = 99 * (94*44)
+	// 93 = 99 * (93*33)
 	// m_K = m_P *m_S'*m_H'
 	m_K = m_P * (Transpose(m_H) * m_S.Inverse());
 

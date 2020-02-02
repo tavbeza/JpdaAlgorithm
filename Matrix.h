@@ -590,7 +590,7 @@ Matrix4d operator *(Matrix49d &rhMatrix, const Matrix94d &other);
 Matrix24f operator *(Matrix2f &rhMatrix, const Matrix24f &other);
 
 /// <summary>
-/// multiply matrix on the right 94 = 99*93
+/// multiply matrix on the right 93 = 99*93
 /// </summary>
 Matrix93d operator *(Matrix9d &rhMatrix, const Matrix93d &other);
 
