@@ -25,7 +25,7 @@ ExtendedKalman::ExtendedKalman(const DataPlot &plot)
 	Vector3d errorCartesian;
 	errorCartesian.ErrorSphericalToCart(spherical, errorSpherical);
 
-	SetR(errorCartesian.m_Data[0], errorCartesian.m_Data[1], errorCartesian.m_Data[2]);
+	SetR(errorCartesian.m_Data[0], errorCartesian.m_Data[1], errorCartesian.m_Data[2], plot.GetVelocityAccuracy());
 
 	float dt = 93.0 / 1000;
 	SetDt(dt);
@@ -33,11 +33,13 @@ ExtendedKalman::ExtendedKalman(const DataPlot &plot)
 	Vector3d cartesian;
 	cartesian.SphericalToCart(spherical);
 
+	SetP(spherical);
+
 	Init(
 		cartesian,		// (x, y, z)
 		cos(plot.GetAzimuthAngle())*plot.GetVelocity(),		// vx
 		sin(plot.GetAzimuthAngle())*plot.GetVelocity(),		// vy
-		0
+		0													// vz
 	);
 }
 
@@ -53,31 +55,18 @@ void ExtendedKalman::Init(
 	m_last_prediction = cartesian;
 
 	m_X.m_Data[0] = cartesian.m_Data[0];
-	m_X.m_Data[1] = vx;
-	m_X.m_Data[2] = 0;
-	m_X.m_Data[3] = cartesian.m_Data[1];
+	m_X.m_Data[1] = cartesian.m_Data[1];
+	m_X.m_Data[2] = cartesian.m_Data[2];
+	m_X.m_Data[3] = vx;
 	m_X.m_Data[4] = vy;
-	m_X.m_Data[5] = 0;
-	m_X.m_Data[6] = cartesian.m_Data[2];
-	m_X.m_Data[7] = vz;
+	m_X.m_Data[5] = vz;
+	m_X.m_Data[6] = 0;
+	m_X.m_Data[7] = 0;
 	m_X.m_Data[8] = 0;
 
 	m_X_Predict = m_X;
 
 	SetH();
-	
-	TrackerParams *pTrakerParams = new TrackerParams;
-	m_P.Zero();
-	m_P.m_Data[0][0] = m_R.m_Data[0][0]; // Rxx (Delta X)
-	m_P.m_Data[1][1] = pow(pTrakerParams->m_SigmaVxs, 2);
-	m_P.m_Data[2][2] = pow(pTrakerParams->m_SigmaAxs, 2);
-	m_P.m_Data[3][3] = m_R.m_Data[1][1]; // Ryy (Delta Y)
-	m_P.m_Data[4][4] = pow(pTrakerParams->m_SigmaVys, 2);
-	m_P.m_Data[5][5] = pow(pTrakerParams->m_SigmaAys, 2);
-	m_P.m_Data[6][6] = m_R.m_Data[2][2]; // Rzz	(Delta Z)
-	m_P.m_Data[7][7] = pow(pTrakerParams->m_SigmaVzs, 2);
-	m_P.m_Data[8][8] = pow(pTrakerParams->m_SigmaAzs, 2);
-
 	SetF();
 	SetQ();
 }
@@ -105,9 +94,12 @@ Vector3d ExtendedKalman::Predict()
 	m_P_Predict = m_F * m_P * m_F.Transpose() + m_Q;
 
 	//Predicted Measurement
-	Vector3d zPredict = m_H * m_X_Predict;	// H * F * X
+	//Vector4d zPredict = m_H * m_X_Predict;	// H * F * X
 
-	m_last_prediction = Vector3d(zPredict.m_Data[0], zPredict.m_Data[1], zPredict.m_Data[2]);
+	m_last_speed = SrvDspMath::sqrt(SrvDspMath::pow(m_X_Predict.m_Data[3], 2) + SrvDspMath::pow(m_X_Predict.m_Data[4], 2)
+											+ SrvDspMath::pow(m_X_Predict.m_Data[5], 2));
+
+	m_last_prediction = Vector3d(m_X_Predict.m_Data[0], m_X_Predict.m_Data[1], m_X_Predict.m_Data[2]);
 	return m_last_prediction;
 }
 
@@ -136,30 +128,47 @@ void ExtendedKalman::Update(DataPlot* pPlot)
 	Vector3d errorCartesian;
 	errorCartesian.ErrorSphericalToCart(spherical, errorSpherical);
 
-	SetR(errorCartesian.m_Data[0], errorCartesian.m_Data[1], errorCartesian.m_Data[2]);
+	SetR(errorCartesian.m_Data[0], errorCartesian.m_Data[1], errorCartesian.m_Data[2], pPlot->GetVelocityAccuracy());
 	m_S = (m_H * (m_P_Predict * Transpose(m_H))) + m_R;
 	// Near-optimal Kalman gain
 	// Sets the optimal kalman gain
 	// 93 = 99 * (93*33)
 	// m_K = m_P *m_S'*m_H'
-	m_K = m_P * (Transpose(m_H) * m_S.Inverse());
+	m_K = m_P_Predict * (Transpose(m_H) * m_S.Inverse());
+
+	double D = m_X_Predict.m_Data[0] * m_X_Predict.m_Data[3] + m_X_Predict.m_Data[1] * m_X_Predict.m_Data[4] + m_X_Predict.m_Data[2] * m_X_Predict.m_Data[5];
+	double R = m_last_prediction.m_Data[0];
+	double R_dot = D / R;
+
+	Vector4d z_predict;
+	z_predict.m_Data[0] = m_last_prediction.m_Data[0];
+	z_predict.m_Data[1] = m_last_prediction.m_Data[1];
+	z_predict.m_Data[2] = m_last_prediction.m_Data[2];
+	z_predict.m_Data[3] = m_last_speed;
 
 	Vector3d cartesian;
 	cartesian.SphericalToCart(spherical);
 
 	// Updated state estimate 
-	Vector3d Zk;
+	Vector4d Zk;
 	Zk.m_Data[0] = cartesian.m_Data[0];
 	Zk.m_Data[1] = cartesian.m_Data[1];
 	Zk.m_Data[2] = cartesian.m_Data[2];
-	//Zk.m_Data[3] = pPlot->GetVelocity();
+	Zk.m_Data[3] = pPlot->GetVelocity();
+
+	Vector4d y = Zk - z_predict;
 
 	// TODO: Should be zPredict instead m_X_Predict ?
-	m_X = m_X_Predict + (m_K * Zk);
+	m_X = m_X_Predict + (m_K * y);
 		
 	// m_P_Predict = P(k,k-1)
 	// TODO: Ask Israel
-	m_P = m_P_Predict - (m_K * (m_S * Transpose(m_K)));
+	Matrix9d I;
+	I.Identity();
+
+	m_P = (I - m_K * m_H) * m_P_Predict;
+
+	//m_P = m_P_Predict - (m_K * (m_S * Transpose(m_K)));
 	//m_P = I * m_P_Predict - m_K * m_H * m_P_Predict;
 }
 
@@ -195,7 +204,8 @@ void ExtendedKalman::Update(DataPlot* pPlot)
 /// </summary>
 void ExtendedKalman::SetQ()
 {
-	TrackerParams *pTrakerParams = new TrackerParams;
+	m_Q.Zero();
+	/*TrackerParams *pTrakerParams = new TrackerParams;
 	Matrix3d temp[3];
 	Vector3d sigMan2;
 	for (int i = 0; i < 3; i++)
@@ -242,6 +252,7 @@ void ExtendedKalman::SetQ()
 	m_Q.m_Data[8][6] = temp[2].m_Data[2][0];
 	m_Q.m_Data[8][7] = temp[2].m_Data[2][1];
 	m_Q.m_Data[8][8] = temp[2].m_Data[2][2];
+	*/
 }
 
 /// <summary>
@@ -287,8 +298,20 @@ void ExtendedKalman::SetF_Singer(double tau,
 /// </summary>
 void ExtendedKalman::SetF()
 {
-	TrackerParams *pTrakerParams = new TrackerParams;
 	m_F.Zero();
+	m_F.m_Data[0][0] = 1;
+	m_F.m_Data[1][1] = 1;
+	m_F.m_Data[2][2] = 1;
+	m_F.m_Data[3][3] = 1;
+	m_F.m_Data[4][4] = 1;
+	m_F.m_Data[5][5] = 1;
+
+	m_F.m_Data[0][3] = m_Dt;
+	m_F.m_Data[1][4] = m_Dt;
+	m_F.m_Data[2][5] = m_Dt;
+
+	/*
+	TrackerParams *pTrakerParams = new TrackerParams;
 	Matrix3d fx, fy, fz;
 	SetF_Singer(pTrakerParams->m_TauAcc.m_Data[0], fx);
 	SetF_Singer(pTrakerParams->m_TauAcc.m_Data[1], fy);
@@ -321,6 +344,7 @@ void ExtendedKalman::SetF()
 	m_F.m_Data[8][6] = fz.m_Data[2][0];
 	m_F.m_Data[8][7] = fz.m_Data[2][1];
 	m_F.m_Data[8][8] = 0;//fz.m_Data[2][2];
+	*/
 }
 
 /// <summary>
@@ -329,8 +353,11 @@ void ExtendedKalman::SetF()
 void ExtendedKalman::SetH()
 {
 	double x = m_X_Predict.m_Data[0];	// x
-	double y = m_X_Predict.m_Data[3];	// y
-	double z = m_X_Predict.m_Data[6];	// z
+	double y = m_X_Predict.m_Data[1];	// y
+	double z = m_X_Predict.m_Data[2];	// z
+	double vx = m_X_Predict.m_Data[3];	// vx
+	double vy = m_X_Predict.m_Data[4];	// vy
+	double vz = m_X_Predict.m_Data[5];	// vz
 	// Difference between state vector of target prediction to self
 	double R = SrvDspMath::sqrt(x*x + y*y + z*z);
 	m_H.Zero();
@@ -341,7 +368,13 @@ void ExtendedKalman::SetH()
 	m_H.m_Data[1][1] = x / (SrvDspMath::pow(y, 2) + SrvDspMath::pow(x, 2));  //	dAz / dY
 	m_H.m_Data[2][0] = (z * x) / (SrvDspMath::pow(R, 2) * SrvDspMath::sqrt(x*x + y*y));  //  dEl / dX
 	m_H.m_Data[2][1] = (z * y) / (SrvDspMath::pow(R, 2) * SrvDspMath::sqrt(x*x + y*y));  //  dEl / dY
-	m_H.m_Data[2][2] = SrvDspMath::sqrt(x*x + y*y) / SrvDspMath::pow(R, 2); //  dEl / dZ
+	m_H.m_Data[2][2] = -SrvDspMath::sqrt(x*x + y*y) / SrvDspMath::pow(R, 2); //  dEl / dZ
+	m_H.m_Data[4][0] = (vx * (SrvDspMath::pow(y, 2) + SrvDspMath::pow(z, 2)) - x * (y*vy + z * vz)) / SrvDspMath::pow(R, 3);
+	m_H.m_Data[4][1] = (vy * (SrvDspMath::pow(x, 2) + SrvDspMath::pow(z, 2)) - y * (x*vx + z * vz)) / SrvDspMath::pow(R, 3);
+	m_H.m_Data[4][2] = (vz * (SrvDspMath::pow(y, 2) + SrvDspMath::pow(x, 2)) - z * (y*vy + x * vx)) / SrvDspMath::pow(R, 3);
+	m_H.m_Data[4][3] = x / R;
+	m_H.m_Data[4][4] = y / R;
+	m_H.m_Data[4][5] = z / R;
 }
 
 /// <summary>
@@ -349,13 +382,57 @@ void ExtendedKalman::SetH()
 /// </summary>
 void ExtendedKalman::SetR(double error_x,
 	double error_y,
-	double error_z)
+	double error_z,
+	double error_v)
 {
 	// TODO: Change to 3x3 without v and change like the research
 		m_R.Zero();
 		m_R.m_Data[0][0] = pow(error_x, 2);
 		m_R.m_Data[1][1] = pow(error_y, 2);
 		m_R.m_Data[2][2] = pow(error_z, 2);
+		m_R.m_Data[3][3] = pow(error_v, 2);
+}
+
+/// <summary>
+/// Set covariance matrix P
+/// </summary>
+void ExtendedKalman::SetP(Vector3d spherical)
+{
+	Matrix4d jacobian;
+	jacobian.Zero();
+	jacobian.m_Data[0][0] = SrvDspMath::sin(spherical.m_Data[2]) * SrvDspMath::cos(spherical.m_Data[1]);
+	jacobian.m_Data[0][1] = -spherical.m_Data[0] * SrvDspMath::sin(spherical.m_Data[2]) * SrvDspMath::sin(spherical.m_Data[1]);
+	jacobian.m_Data[0][2] = spherical.m_Data[0] * SrvDspMath::cos(spherical.m_Data[2]) * SrvDspMath::cos(spherical.m_Data[1]);
+	jacobian.m_Data[1][0] = SrvDspMath::sin(spherical.m_Data[2]) * SrvDspMath::sin(spherical.m_Data[1]);
+	jacobian.m_Data[1][1] = spherical.m_Data[0] * SrvDspMath::sin(spherical.m_Data[2]) * SrvDspMath::cos(spherical.m_Data[1]);
+	jacobian.m_Data[1][2] = spherical.m_Data[0] * SrvDspMath::cos(spherical.m_Data[2]) * SrvDspMath::sin(spherical.m_Data[1]);
+	jacobian.m_Data[2][0] = SrvDspMath::cos(spherical.m_Data[2]);
+	//jacobian.m_Data[2][1] = 0;
+	jacobian.m_Data[2][2] = -spherical.m_Data[0] * SrvDspMath::sin(spherical.m_Data[2]);
+
+	Matrix4d jacobianT = Transpose(jacobian);
+
+	Matrix4d p_location = jacobian * m_R * jacobianT;
+
+	TrackerParams *pTrakerParams = new TrackerParams;
+	m_P.Zero();
+	m_P.m_Data[0][0] = p_location.m_Data[0][0];
+	m_P.m_Data[0][1] = p_location.m_Data[0][1];
+	m_P.m_Data[0][2] = p_location.m_Data[0][2];
+	m_P.m_Data[1][0] = p_location.m_Data[1][0];
+	m_P.m_Data[1][1] = p_location.m_Data[1][1];
+	m_P.m_Data[1][2] = p_location.m_Data[1][2];
+	m_P.m_Data[2][0] = p_location.m_Data[2][0];
+	m_P.m_Data[2][1] = p_location.m_Data[2][1];
+	m_P.m_Data[2][2] = p_location.m_Data[2][2];
+	// v
+	m_P.m_Data[3][3] = pow(pTrakerParams->m_SigmaVxs, 2);
+	m_P.m_Data[4][4] = pow(pTrakerParams->m_SigmaVys, 2);
+	m_P.m_Data[5][5] = pow(pTrakerParams->m_SigmaVzs, 2);
+	// a
+	m_P.m_Data[6][6] = pow(pTrakerParams->m_SigmaAxs, 2);
+	m_P.m_Data[7][7] = pow(pTrakerParams->m_SigmaAys, 2);
+	m_P.m_Data[8][8] = pow(pTrakerParams->m_SigmaAzs, 2);
 }
 
 /// <summary>

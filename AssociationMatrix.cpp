@@ -254,7 +254,7 @@ void AssociationMatrix::CheckAssociation(DataTrack &track,
 		// Calculate S
 		// m_S = m_H*m_P*m_H' + m_R
 		//track.m_pKalman.
-		Matrix93d temp1 = track.m_pKalman->m_P_Predict * Transpose(track.m_pKalman->m_H);
+		Matrix94d temp1 = track.m_pKalman->m_P_Predict * Transpose(track.m_pKalman->m_H);
 		track.m_pKalman->m_S = track.m_pKalman->m_H * temp1 + track.m_pKalman->m_R;
 		//track.m_KF.m_S.Print();
 

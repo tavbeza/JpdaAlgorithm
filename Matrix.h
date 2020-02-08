@@ -535,6 +535,11 @@ typedef Matrix<double, 4, 9> Matrix49d;
 Matrix2f Inverse2f(Matrix2f &matrix2f);
 
 /// <summary>
+/// Transpose Matrix4d
+/// </summary>
+Matrix4d Transpose(Matrix4d &matrix4d);
+
+/// <summary>
 /// Transpose Matrix49f
 /// </summary>
 Matrix94f Transpose(Matrix49f &matrix49f);

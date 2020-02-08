@@ -121,13 +121,19 @@ public:
 	/// Set measurement matrix H
 	/// </summary>
 	void SetH();
+
+	/// <summary>
+	/// Set covariance matrix P
+	/// </summary>
+	void SetP(Vector3d spherical);
 	
 	/// <summary>
 	/// Set measurement covariance matrix
 	/// </summary>
 	void ExtendedKalman::SetR(double error_x,
 		double error_y,
-		double error_z);
+		double error_z,
+		double error_v);
 
 public:
 	/// <summary>
@@ -139,7 +145,7 @@ public:
 	/// <summary>
 	///The kalman gain matrix
 	/// </summary>
-	Matrix93d m_K;
+	Matrix94d m_K;
 	
 	/// <summary>
 	/// The kalman error covariance matrix in ENU_0 coordinate axes
@@ -149,17 +155,17 @@ public:
 	/// <summary>
 	/// The kalman residual covariance matrix
 	/// </summary>
-	Matrix3d m_S;
+	Matrix4d m_S;
 	
 	/// <summary>
 	/// The kalman observation model
 	/// </summary>
-	Matrix39d m_H;
+	Matrix49d m_H;
 	
 	/// <summary>
 	/// The kalman covariance matrix of the observation noise
 	/// </summary>
-	Matrix3d m_R;
+	Matrix4d m_R;
 	
 	/// <summary>
 	/// The kalman predicted (a prior) state estimate
@@ -182,6 +188,7 @@ public:
 	Matrix9d m_F;
 
 	Vector3d m_last_prediction;
+	double m_last_speed;
 	float	 m_Dt;
 
 };

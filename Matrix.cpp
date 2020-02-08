@@ -558,6 +558,19 @@ Matrix42f Transpose(Matrix24f &matrix24f)
 }
 
 /// <summary>
+/// Transpose Matrix4d
+/// </summary>
+Matrix4d Transpose(Matrix4d &matrix4d)
+{
+	Matrix4d temp;
+	for (int i = 0; i < 4; i++)
+		for (int j = 0; j < 4; j++)
+			temp.m_Data[i][j] = matrix4d.m_Data[j][i];
+
+	return temp;
+}
+
+/// <summary>
 /// Transpose Vector4f
 /// </summary>
 Matrix14f Transpose(Vector4f &vector4f)
