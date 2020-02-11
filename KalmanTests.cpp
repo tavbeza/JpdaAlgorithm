@@ -50,7 +50,9 @@ void KalmanTests::CreateCSVfileOfPlotsAndDwells()
 		fout << dwel << ",";
 		dwel++;
 
-		allDataPlots[i].m_range = sqrt(pow(x, 2) + pow((y), 2));
+		range = sqrt(pow(x, 2) + pow((y), 2));
+
+		allDataPlots[i].m_range = range;
 		fout << allDataPlots[i].m_range << ",";
 
 
@@ -60,7 +62,11 @@ void KalmanTests::CreateCSVfileOfPlotsAndDwells()
 		allDataPlots[i].m_elevation = M_PI / 2; //3.14159265359 / 2;	// pi / 2
 		fout << allDataPlots[i].m_elevation << ",";
 
-		allDataPlots[i].m_velocity = 24.04374169;
+		double velocity = 24.04374169;
+		allDataPlots[i].m_velocity = (x * velocity * SrvDspMath::cos(azimuth)
+									+ y * velocity * SrvDspMath::sin(azimuth))
+									/ range;
+										
 		fout << allDataPlots[i].m_velocity << ",";
 
 		Vector3d spherical;

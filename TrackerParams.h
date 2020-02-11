@@ -20,16 +20,16 @@ public:
 	~TrackerParams();
 
 public:
-	double m_SigmaVxs = 0.1;
-	double m_SigmaVys = 0.1;
-	double m_SigmaVzs = 0.1;
+	double m_SigmaVxs = 10;	// 10 m/sec
+	double m_SigmaVys = 10;
+	double m_SigmaVzs = 10;
+	double m_SigmaAxs = 9;	// 9 m/sec*sec
+	double m_SigmaAys = 9;
+	double m_SigmaAzs = 9;
 	double m_Sigma_r = 0.1;
 	double m_Sigma_rdot = 0.1;
 	double m_Sigma_az = 0.1;
 	double m_Sigma_el = 0.1;
-	double m_SigmaAxs = 0.1;
-	double m_SigmaAys = 0.1;
-	double m_SigmaAzs = 0.1;
 	double m_SigmaVxt = 0.1;
 	double m_SigmaVyt = 0.1;
 	double m_SigmaVzt = 0.1;

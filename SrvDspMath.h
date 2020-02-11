@@ -26,6 +26,11 @@ public:
 	static double exp(double x);
 
 	/// <summary>
+	/// Compute arc tangent
+	/// </summary>
+	static float atan(float a);
+
+	/// <summary>
 	/// Compute arc tangent with two parameters
 	/// </summary>
 	static float atan2(float a, float b);
@@ -36,8 +41,13 @@ public:
 	static float asin(float number);
 
 	/// <summary>
-/// Compute cos 
-/// </summary>
+	/// Compute arc cos
+	/// </summary>
+	static float acos(float number);
+
+	/// <summary>
+	/// Compute cos 
+	/// </summary>
 	static float cos(float number);
 
 	/// <summary>

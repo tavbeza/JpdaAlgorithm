@@ -24,6 +24,14 @@ double SrvDspMath::exp(double x)
 }
 
 /// <summary>
+/// Compute arc tangent
+/// </summary>
+float SrvDspMath::atan(float a)
+{
+	return ::atan(a);
+}
+
+/// <summary>
 /// Compute arc tangent with two parameters
 /// </summary>
 float SrvDspMath::atan2(float a, float b)
@@ -37,6 +45,14 @@ float SrvDspMath::atan2(float a, float b)
 float SrvDspMath::asin(float number)
 {
 	return ::asin(number);
+}
+
+/// <summary>
+/// Compute arc cos
+/// </summary>
+float SrvDspMath::acos(float number)
+{
+	return ::acos(number);
 }
 
 /// <summary>

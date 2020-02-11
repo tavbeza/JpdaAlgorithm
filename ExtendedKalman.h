@@ -32,12 +32,7 @@ public:
 	/// <summary>
 	/// Initialize the kalman
 	/// </summary>
-	void Init(
-		Vector3d cartesian,
-		float vx,
-		float vy,
-		float vz)
-		noexcept;
+	void Init(Vector3d cartesian) noexcept;
 
 	/// <summary>
 	/// The algorithm works in a two-step process. 
@@ -186,6 +181,11 @@ public:
 	/// The kalman transition matrix for state vector
 	/// </summary>
 	Matrix9d m_F;
+
+	/// <summary>
+	/// Identity matrix 9x9
+	/// </summary>
+	Matrix9d m_I;
 
 	Vector3d m_last_prediction;
 	double m_last_speed;

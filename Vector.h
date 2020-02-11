@@ -21,6 +21,17 @@ public:
 	}
 
 	/// <summary>
+	/// 4d construcotr
+	/// </summary>
+	Vector(_T x, _T y, _T z, _T k)
+	{
+		m_Data[0] = x;
+		m_Data[1] = y;
+		m_Data[2] = z;
+		m_Data[3] = k;
+	}
+
+	/// <summary>
 	/// 3d construcotr
 	/// </summary>
 	Vector(_T x, _T y, _T z)
@@ -170,7 +181,7 @@ public:
 			SrvDspMath::pow(cartesian.m_Data[2], 2));
 
 		// TODO: Unit Test //if(cartesian.m_Data[0] != 0)
-		m_Data[1] = SrvDspMath::atan2(cartesian.m_Data[1] / cartesian.m_Data[0]);
+		m_Data[1] = SrvDspMath::atan(cartesian.m_Data[1] / cartesian.m_Data[0]);
 		m_Data[2] = SrvDspMath::acos(cartesian.m_Data[2] / m_Data[0]);
 	}
 

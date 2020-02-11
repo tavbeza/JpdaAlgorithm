@@ -22,10 +22,10 @@ ExtendedKalman::ExtendedKalman(const DataPlot &plot)
 	errorSpherical.m_Data[1] = plot.GetAzimuthAccuracy();
 	errorSpherical.m_Data[2] = plot.GetElevationAccuracy();
 
-	Vector3d errorCartesian;
-	errorCartesian.ErrorSphericalToCart(spherical, errorSpherical);
+	//Vector3d errorCartesian;
+	//errorCartesian.ErrorSphericalToCart(spherical, errorSpherical);
 
-	SetR(errorCartesian.m_Data[0], errorCartesian.m_Data[1], errorCartesian.m_Data[2], plot.GetVelocityAccuracy());
+	SetR(errorSpherical.m_Data[0], errorSpherical.m_Data[1], errorSpherical.m_Data[2], plot.GetVelocityAccuracy());
 
 	float dt = 93.0 / 1000;
 	SetDt(dt);
@@ -34,32 +34,27 @@ ExtendedKalman::ExtendedKalman(const DataPlot &plot)
 	cartesian.SphericalToCart(spherical);
 
 	SetP(spherical);
+	m_I.Identity();
 
 	Init(
-		cartesian,		// (x, y, z)
-		cos(plot.GetAzimuthAngle())*plot.GetVelocity(),		// vx
-		sin(plot.GetAzimuthAngle())*plot.GetVelocity(),		// vy
-		0													// vz
+		cartesian		// (x, y, z)
 	);
 }
 
 /// <summary>
 /// Init Extended Kalman Filter
 /// </summary>
-void ExtendedKalman::Init(
-	Vector3d cartesian,
-	float vx,
-	float vy,
-	float vz) noexcept
+void ExtendedKalman::Init(Vector3d cartesian) noexcept
 {
 	m_last_prediction = cartesian;
+	m_last_speed = 0;
 
 	m_X.m_Data[0] = cartesian.m_Data[0];
 	m_X.m_Data[1] = cartesian.m_Data[1];
 	m_X.m_Data[2] = cartesian.m_Data[2];
-	m_X.m_Data[3] = vx;
-	m_X.m_Data[4] = vy;
-	m_X.m_Data[5] = vz;
+	m_X.m_Data[3] = 0;
+	m_X.m_Data[4] = 0;
+	m_X.m_Data[5] = 0;
 	m_X.m_Data[6] = 0;
 	m_X.m_Data[7] = 0;
 	m_X.m_Data[8] = 0;
@@ -96,10 +91,20 @@ Vector3d ExtendedKalman::Predict()
 	//Predicted Measurement
 	//Vector4d zPredict = m_H * m_X_Predict;	// H * F * X
 
-	m_last_speed = SrvDspMath::sqrt(SrvDspMath::pow(m_X_Predict.m_Data[3], 2) + SrvDspMath::pow(m_X_Predict.m_Data[4], 2)
-											+ SrvDspMath::pow(m_X_Predict.m_Data[5], 2));
+	Vector3d cartesian;
+	cartesian.m_Data[0] = m_X_Predict.m_Data[0];
+	cartesian.m_Data[1] = m_X_Predict.m_Data[1];
+	cartesian.m_Data[2] = m_X_Predict.m_Data[2];
 
-	m_last_prediction = Vector3d(m_X_Predict.m_Data[0], m_X_Predict.m_Data[1], m_X_Predict.m_Data[2]);
+	Vector3d spherical;
+	spherical.CartToSpherical(cartesian);
+
+	m_last_speed = (m_X_Predict.m_Data[0] * m_X_Predict.m_Data[3]	// r_dot_predict
+					+ m_X_Predict.m_Data[1] * m_X_Predict.m_Data[4]
+					+ m_X_Predict.m_Data[2] * m_X_Predict.m_Data[5]) 
+					/ spherical.m_Data[0];
+
+	m_last_prediction = Vector3d(spherical.m_Data[0], spherical.m_Data[1], spherical.m_Data[2]);
 	return m_last_prediction;
 }
 
@@ -114,31 +119,19 @@ void ExtendedKalman::Update(DataPlot* pPlot)
 	// Innovation (or pre-fit residual) covariance
 	// Error Measurement Covariance Matrix
 	SetH();
-	
-	Vector3d spherical;
-	spherical.m_Data[0] = pPlot->GetRange();
-	spherical.m_Data[1] = pPlot->GetAzimuthAngle();
-	spherical.m_Data[2] = pPlot->GetElevationAngle();
 
-	Vector3d errorSpherical;
-	errorSpherical.m_Data[0] = pPlot->GetRangeAccuracy();
-	errorSpherical.m_Data[1] = pPlot->GetAzimuthAccuracy();
-	errorSpherical.m_Data[2] = pPlot->GetElevationAccuracy();
+	SetR(pPlot->GetRangeAccuracy(), pPlot->GetAzimuthAccuracy(), pPlot->GetElevationAccuracy(), pPlot->GetVelocityAccuracy());
 
-	Vector3d errorCartesian;
-	errorCartesian.ErrorSphericalToCart(spherical, errorSpherical);
+	Matrix94d H_Transpose;
+	H_Transpose = Transpose(m_H);
 
-	SetR(errorCartesian.m_Data[0], errorCartesian.m_Data[1], errorCartesian.m_Data[2], pPlot->GetVelocityAccuracy());
-	m_S = (m_H * (m_P_Predict * Transpose(m_H))) + m_R;
+	m_S = (m_H * (m_P_Predict * H_Transpose)) + m_R;
 	// Near-optimal Kalman gain
 	// Sets the optimal kalman gain
 	// 93 = 99 * (93*33)
 	// m_K = m_P *m_S'*m_H'
-	m_K = m_P_Predict * (Transpose(m_H) * m_S.Inverse());
 
-	double D = m_X_Predict.m_Data[0] * m_X_Predict.m_Data[3] + m_X_Predict.m_Data[1] * m_X_Predict.m_Data[4] + m_X_Predict.m_Data[2] * m_X_Predict.m_Data[5];
-	double R = m_last_prediction.m_Data[0];
-	double R_dot = D / R;
+	m_K = m_P_Predict * (H_Transpose * m_S.Inverse());
 
 	Vector4d z_predict;
 	z_predict.m_Data[0] = m_last_prediction.m_Data[0];
@@ -146,14 +139,12 @@ void ExtendedKalman::Update(DataPlot* pPlot)
 	z_predict.m_Data[2] = m_last_prediction.m_Data[2];
 	z_predict.m_Data[3] = m_last_speed;
 
-	Vector3d cartesian;
-	cartesian.SphericalToCart(spherical);
 
 	// Updated state estimate 
 	Vector4d Zk;
-	Zk.m_Data[0] = cartesian.m_Data[0];
-	Zk.m_Data[1] = cartesian.m_Data[1];
-	Zk.m_Data[2] = cartesian.m_Data[2];
+	Zk.m_Data[0] = pPlot->GetRange();
+	Zk.m_Data[1] = pPlot->GetAzimuthAngle();
+	Zk.m_Data[2] = pPlot->GetElevationAngle();
 	Zk.m_Data[3] = pPlot->GetVelocity();
 
 	Vector4d y = Zk - z_predict;
@@ -163,10 +154,8 @@ void ExtendedKalman::Update(DataPlot* pPlot)
 		
 	// m_P_Predict = P(k,k-1)
 	// TODO: Ask Israel
-	Matrix9d I;
-	I.Identity();
 
-	m_P = (I - m_K * m_H) * m_P_Predict;
+	m_P = (m_I - m_K * m_H) * m_P_Predict;
 
 	//m_P = m_P_Predict - (m_K * (m_S * Transpose(m_K)));
 	//m_P = I * m_P_Predict - m_K * m_H * m_P_Predict;

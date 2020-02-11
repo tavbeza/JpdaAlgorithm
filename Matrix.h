@@ -147,13 +147,13 @@ public:
 
 
 	/// <summary>
-	/// Return Identity matrix
+	/// Return Inverse matrix
 	/// </summary>
 	Matrix<_T, _Rows, _Cols> Inverse()
 	{
 		Matrix<_T, _Rows, _Cols> temp;
 		_T determinant = Determinant();
-		if(_Rows == 2 && _Cols == 2)
+		if (_Rows == 2 && _Cols == 2)
 		{
 			temp.m_Data[0][0] = m_Data[1][1] / determinant;
 			temp.m_Data[0][1] = -m_Data[0][1] / determinant;
@@ -161,7 +161,7 @@ public:
 			temp.m_Data[1][1] = m_Data[0][0] / determinant;
 
 		}
-		else if(_Rows == 3 && _Cols == 3)
+		else if (_Rows == 3 && _Cols == 3)
 		{
 			for (int i = 0; i < _Rows; i++)
 			{
@@ -174,7 +174,50 @@ public:
 				}
 			}
 		}
-		else if(_Rows == 4 && _Cols == 4)
+		else if (_Rows == 4 && _Cols == 4)
+			// may god have mercy upon my soul
+		{
+
+			_T A2323 = m_Data[2][2] * m_Data[3][3] - m_Data[2][3] * m_Data[3][2];
+			_T A1323 = m_Data[2][1] * m_Data[3][3] - m_Data[2][3] * m_Data[3][1];
+			_T A1223 = m_Data[2][1] * m_Data[3][2] - m_Data[2][2] * m_Data[3][1];
+			_T A0323 = m_Data[2][0] * m_Data[3][3] - m_Data[2][3] * m_Data[3][0];
+			_T A0223 = m_Data[2][0] * m_Data[3][2] - m_Data[2][2] * m_Data[3][0];
+			_T A0123 = m_Data[2][0] * m_Data[3][1] - m_Data[2][1] * m_Data[3][0];
+			_T A2313 = m_Data[1][2] * m_Data[3][3] - m_Data[1][3] * m_Data[3][2];
+			_T A1313 = m_Data[1][1] * m_Data[3][3] - m_Data[1][3] * m_Data[3][1];
+			_T A1213 = m_Data[1][1] * m_Data[3][2] - m_Data[1][2] * m_Data[3][1];
+			_T A2312 = m_Data[1][2] * m_Data[2][3] - m_Data[1][3] * m_Data[2][2];
+			_T A1312 = m_Data[1][1] * m_Data[2][3] - m_Data[1][3] * m_Data[2][1];
+			_T A1212 = m_Data[1][1] * m_Data[2][2] - m_Data[1][2] * m_Data[2][1];
+			_T A0313 = m_Data[1][0] * m_Data[3][3] - m_Data[1][3] * m_Data[3][0];
+			_T A0213 = m_Data[1][0] * m_Data[3][2] - m_Data[1][2] * m_Data[3][0];
+			_T A0312 = m_Data[1][0] * m_Data[2][3] - m_Data[1][3] * m_Data[2][0];
+			_T A0212 = m_Data[1][0] * m_Data[2][2] - m_Data[1][2] * m_Data[2][0];
+			_T A0113 = m_Data[1][0] * m_Data[3][1] - m_Data[1][1] * m_Data[3][0];
+			_T A0112 = m_Data[1][0] * m_Data[2][1] - m_Data[1][1] * m_Data[2][0];
+
+			temp.m_Data[0][0] = (m_Data[1][1] * A2323 - m_Data[1][2] * A1323 + m_Data[1][3] * A1223) / determinant;
+			temp.m_Data[0][1] = -(m_Data[0][1] * A2323 - m_Data[0][2] * A1323 + m_Data[0][3] * A1223) / determinant;
+			temp.m_Data[0][2] = (m_Data[0][1] * A2313 - m_Data[0][2] * A1313 + m_Data[0][3] * A1213) / determinant;
+			temp.m_Data[0][3] = -(m_Data[0][1] * A2312 - m_Data[0][2] * A1312 + m_Data[0][3] * A1212) / determinant;
+
+			temp.m_Data[1][0] = -(m_Data[1][0] * A2323 - m_Data[1][2] * A0323 + m_Data[1][3] * A0223) / determinant;
+			temp.m_Data[1][1] = (m_Data[0][0] * A2323 - m_Data[0][2] * A0323 + m_Data[0][3] * A0223) / determinant;
+			temp.m_Data[1][2] = -(m_Data[0][0] * A2313 - m_Data[0][2] * A0313 + m_Data[0][3] * A0213) / determinant;
+			temp.m_Data[1][3] = (m_Data[0][0] * A2312 - m_Data[0][2] * A0312 + m_Data[0][3] * A0212) / determinant;
+
+			temp.m_Data[2][0] = (m_Data[1][0] * A1323 - m_Data[1][1] * A0323 + m_Data[1][3] * A0123) / determinant;
+			temp.m_Data[2][1] = -(m_Data[0][0] * A1323 - m_Data[0][1] * A0323 + m_Data[0][3] * A0123) / determinant;
+			temp.m_Data[2][2] = (m_Data[0][0] * A1313 - m_Data[0][1] * A0313 + m_Data[0][3] * A0113) / determinant;
+			temp.m_Data[2][3] = -(m_Data[0][0] * A1312 - m_Data[0][1] * A0312 + m_Data[0][3] * A0112) / determinant;
+
+			temp.m_Data[3][0] = -(m_Data[1][0] * A1223 - m_Data[1][1] * A0223 + m_Data[1][2] * A0123) / determinant;
+			temp.m_Data[3][1] = (m_Data[0][0] * A1223 - m_Data[0][1] * A0223 + m_Data[0][2] * A0123) / determinant;
+			temp.m_Data[3][2] = -(m_Data[0][0] * A1213 - m_Data[0][1] * A0213 + m_Data[0][2] * A0113) / determinant;
+			temp.m_Data[3][3] = (m_Data[0][0] * A1212 - m_Data[0][1] * A0212 + m_Data[0][2] * A0112) / determinant;
+
+		}
 
 		return temp;
 	}
@@ -182,7 +225,7 @@ public:
 	/// <summary>
 	/// Return the determinant of the matrix
 	/// </summary>
-	float Determinant() const
+	/*float Determinant() const
 	{
 		float deter = 0;
 		
@@ -224,7 +267,7 @@ public:
 		}
 		}
 
-		return deter;
+		return deter;*/
 
 		/*
 #if (_Rows == 2 && _Cols == 2)
@@ -250,6 +293,56 @@ public:
 #endif
 */
 		//return deter;
+
+	//}
+
+
+	/// <summary>
+	/// Return the determinant of the matrix
+	/// </summary>
+	float Determinant() const
+	{
+		float deter = 0;
+
+		//if (_Rows != _Cols)
+		//	return -1;
+
+		switch (_Rows)
+		{
+		case 2: {
+			deter = m_Data[0][0] * m_Data[1][1] - m_Data[0][1] * m_Data[1][0];
+			break;
+		}
+		case 3: {
+			_T determinant1 = (m_Data[1][1] * m_Data[2][2]) - (m_Data[2][1] * m_Data[1][2]);
+			_T determinant2 = (m_Data[1][0] * m_Data[2][2]) - (m_Data[2][0] * m_Data[1][2]);
+			_T determinant3 = (m_Data[1][0] * m_Data[2][1]) - (m_Data[2][0] * m_Data[1][1]);
+			deter = (m_Data[0][0] * determinant1) - (m_Data[0][1] * determinant2) + (m_Data[0][2] * determinant3);
+			break;
+		}
+		case 4: {
+			deter = m_Data[0][3] * m_Data[1][2] * m_Data[2][1] * m_Data[3][0] - m_Data[0][2] * m_Data[1][3] * m_Data[2][1] * m_Data[3][0] -
+				m_Data[0][3] * m_Data[1][1] * m_Data[2][2] * m_Data[3][0] + m_Data[0][1] * m_Data[1][3] * m_Data[2][2] * m_Data[3][0] +
+				m_Data[0][2] * m_Data[1][1] * m_Data[2][3] * m_Data[3][0] - m_Data[0][1] * m_Data[1][2] * m_Data[2][3] * m_Data[3][0] -
+				m_Data[0][3] * m_Data[1][2] * m_Data[2][0] * m_Data[3][1] + m_Data[0][2] * m_Data[1][3] * m_Data[2][0] * m_Data[3][1] +
+				m_Data[0][3] * m_Data[1][0] * m_Data[2][2] * m_Data[3][1] - m_Data[0][0] * m_Data[1][3] * m_Data[2][2] * m_Data[3][1] -
+				m_Data[0][2] * m_Data[1][0] * m_Data[2][3] * m_Data[3][1] + m_Data[0][0] * m_Data[1][2] * m_Data[2][3] * m_Data[3][1] +
+				m_Data[0][3] * m_Data[1][1] * m_Data[2][0] * m_Data[3][2] - m_Data[0][1] * m_Data[1][3] * m_Data[2][0] * m_Data[3][2] -
+				m_Data[0][3] * m_Data[1][0] * m_Data[2][1] * m_Data[3][2] + m_Data[0][0] * m_Data[1][3] * m_Data[2][1] * m_Data[3][2] +
+				m_Data[0][1] * m_Data[1][0] * m_Data[2][3] * m_Data[3][2] - m_Data[0][0] * m_Data[1][1] * m_Data[2][3] * m_Data[3][2] -
+				m_Data[0][2] * m_Data[1][1] * m_Data[2][0] * m_Data[3][3] + m_Data[0][1] * m_Data[1][2] * m_Data[2][0] * m_Data[3][3] +
+				m_Data[0][2] * m_Data[1][0] * m_Data[2][1] * m_Data[3][3] - m_Data[0][0] * m_Data[1][2] * m_Data[2][1] * m_Data[3][3] -
+				m_Data[0][1] * m_Data[1][0] * m_Data[2][2] * m_Data[3][3] + m_Data[0][0] * m_Data[1][1] * m_Data[2][2] * m_Data[3][3];
+			break;
+		}
+		default: {
+			std::cout << "Problem in: Matrix.h --> float Determinant() const" << std::endl;
+			exit(-1);
+			break;
+		}
+		}
+
+		return deter;
 
 	}
 
