@@ -9,7 +9,7 @@
 #include "TrackerParams.h"
 
 /// <summary>
-/// The Kalman class encapsulat the basic kalman filter algorithm. It contains 2D and 3D implementation.
+/// The Kalman class encapsulates the extended kalman filter algorithm. It contains 2D and 3D implementation.
 /// </summary>
 class ExtendedKalman
 {
