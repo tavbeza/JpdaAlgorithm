@@ -82,7 +82,6 @@ ExtendedKalman::~ExtendedKalman()
 /// </summary>
 Vector3d ExtendedKalman::Predict()
 {
-	// TODO: check if should update m_F and m_Q // Answer: No
 
 	m_X_Predict = m_F * m_X;
 	

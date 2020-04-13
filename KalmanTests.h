@@ -5,7 +5,7 @@
 #include "ExtendedKalman.h"
 
 #define M_PI 3.14159265358979323846  /* pi */
-#define NUMBER_DWELL 100
+#define NUMBER_DWELL 3
 #define DT 93.0/1000.0;
 
 #include <iostream>
