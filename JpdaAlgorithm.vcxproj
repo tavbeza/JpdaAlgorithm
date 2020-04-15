@@ -117,12 +117,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AssociationMatrix.cpp" />
+    <ClCompile Include="DataFileGenerator.cpp" />
     <ClCompile Include="DataPlot.cpp" />
     <ClCompile Include="DataPlotFileReader.cpp" />
     <ClCompile Include="DataPlotList.cpp" />
     <ClCompile Include="DataTrack.cpp" />
     <ClCompile Include="DataTrackList.cpp" />
     <ClCompile Include="DrvUhrd.cpp" />
+    <ClCompile Include="EquationOfMotion.cpp" />
     <ClCompile Include="ExtendedKalman.cpp" />
     <ClCompile Include="GeodeticConverter.cpp" />
     <ClCompile Include="Graph.cpp" />
@@ -132,6 +134,7 @@
     <ClCompile Include="Matrix.cpp" />
     <ClCompile Include="MemoryPool.cpp" />
     <ClCompile Include="NavPlatStatusStruct.cpp" />
+    <ClCompile Include="pch.cpp" />
     <ClCompile Include="QueueManger.cpp" />
     <ClCompile Include="SrvDspMath.cpp" />
     <ClCompile Include="SrvTimeStampPC.cpp" />
@@ -143,15 +146,21 @@
     <ClCompile Include="Tracking_Hypothesis.cpp" />
     <ClCompile Include="TrakerParams.cpp" />
     <ClCompile Include="TreeNode.cpp" />
+    <ClCompile Include="TwoDimensionalLine.cpp" />
+    <ClCompile Include="TwoDimensionalSquigglyLine.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\MHT main (our code)\pch.h" />
+    <ClInclude Include="..\tests oded\DataFileGenerator.h" />
     <ClInclude Include="AssociationMatrix.h" />
+    <ClInclude Include="DataFileGenerator.h" />
     <ClInclude Include="DataPlot.h" />
     <ClInclude Include="DataPlotFileReader.h" />
     <ClInclude Include="DataPlotList.h" />
     <ClInclude Include="DataTrack.h" />
     <ClInclude Include="DataTrackList.h" />
     <ClInclude Include="DrvUhrt.h" />
+    <ClInclude Include="EquationOfMotion.h" />
     <ClInclude Include="ExtendedKalman.h" />
     <ClInclude Include="GeodeticConverter.h" />
     <ClInclude Include="Graph.h" />
@@ -160,6 +169,7 @@
     <ClInclude Include="Matrix.h" />
     <ClInclude Include="MemoryPool.h" />
     <ClInclude Include="NavPlatStatusStruct.h" />
+    <ClInclude Include="pch.h" />
     <ClInclude Include="QueueManager.h" />
     <ClInclude Include="SrvDspMath.h" />
     <ClInclude Include="SrvTimeStamp.h" />
@@ -172,6 +182,8 @@
     <ClInclude Include="TrackerJpda.h" />
     <ClInclude Include="TrackerParams.h" />
     <ClInclude Include="TreeNode.h" />
+    <ClInclude Include="TwoDimensionalLine.h" />
+    <ClInclude Include="TwoDimensionalSquigglyLine.h" />
     <ClInclude Include="Vector.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

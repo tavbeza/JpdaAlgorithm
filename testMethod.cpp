@@ -1,16 +1,22 @@
+#include "pch.h"
 #include "TestMethod.h"
 
-/// <summary>
-/// Default Constructor
-/// </summary>
+
 TestMethod::TestMethod()
 {
 }
 
 
-/// <summary>
-/// TestMethod Destructor
-/// </summary>
 TestMethod::~TestMethod()
 {
+}
+
+void TestMethod::resetTestID()
+{
+	global_test_id = 0;
+}
+
+int TestMethod::getTestID()
+{
+	return ++global_test_id;
 }

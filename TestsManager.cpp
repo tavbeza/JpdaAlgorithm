@@ -1,4 +1,5 @@
 #include "TestsManager.h"
+int global_test_id;
 
 
 void TestsManager::Execute()

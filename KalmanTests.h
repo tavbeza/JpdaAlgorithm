@@ -1,9 +1,6 @@
 #ifndef KALMAN_TESTS_H_
 #define KALMAN_TESTS_H_
 
-#include "TestMethod.h"
-#include "ExtendedKalman.h"
-
 #define M_PI 3.14159265358979323846  /* pi */
 #define NUMBER_DWELL 100
 #define DT 93.0/1000.0;
@@ -20,6 +17,12 @@
 #include "DataPlotFileReader.h"
 #include "TrackerJpda.h"
 
+#include "TestMethod.h"
+#include "DataFileGenerator.h"
+#include "EquationOfMotion.h"
+#include "TwoDimensionalLine.h"
+#include "TwoDimensionalSquigglyLine.h"
+
 class KalmanTests : public TestMethod
 {
 public:
@@ -35,6 +38,10 @@ private:
 	/// Test Extended Kalman 2D
 	/// </summary>
 	static void TestExtendedKalmanFilter2D();
+
+	static void TestExtendedKalmanFilter3DWithOnePlot();
+
+	void SingleTargetTrackTest();
 };
 
 #endif // KALMAN_TESTS_H_

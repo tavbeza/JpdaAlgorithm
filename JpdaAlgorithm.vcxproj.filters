@@ -13,6 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\Tests">
+      <UniqueIdentifier>{8695a410-ab20-45cb-9406-4ecb60435689}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Tests">
+      <UniqueIdentifier>{57d1d9f2-eb83-4291-ba26-69f616945f23}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Tracking_Hypothesis.cpp">
@@ -63,9 +69,6 @@
     <ClCompile Include="GeodeticConverter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="TestMethod.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="DrvUhrd.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -90,11 +93,29 @@
     <ClCompile Include="DataTrackList.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="TestMethod.cpp">
+      <Filter>Source Files\Tests</Filter>
+    </ClCompile>
     <ClCompile Include="TestsManager.cpp">
+      <Filter>Source Files\Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="DataFileGenerator.cpp">
+      <Filter>Source Files\Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="EquationOfMotion.cpp">
+      <Filter>Source Files\Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="TwoDimensionalLine.cpp">
+      <Filter>Source Files\Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="TwoDimensionalSquigglyLine.cpp">
+      <Filter>Source Files\Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="KalmanTests.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Tests</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -149,9 +170,6 @@
     <ClInclude Include="GeodeticConverter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="TestMethod.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="QueueManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -176,10 +194,34 @@
     <ClInclude Include="DataTrackList.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="TestsManager.h">
+    <ClInclude Include="..\MHT main (our code)\pch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="KalmanTests.h">
+      <Filter>Header Files\Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="TestMethod.h">
+      <Filter>Header Files\Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="..\tests oded\DataFileGenerator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TestsManager.h">
+      <Filter>Header Files\Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="DataFileGenerator.h">
+      <Filter>Header Files\Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="EquationOfMotion.h">
+      <Filter>Header Files\Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="TwoDimensionalLine.h">
+      <Filter>Header Files\Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="TwoDimensionalSquigglyLine.h">
+      <Filter>Header Files\Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

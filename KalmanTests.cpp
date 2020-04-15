@@ -3,7 +3,47 @@
 void KalmanTests::Execute()
 {
 	//CreateCSVfileOfPlotsAndDwells();
-	TestExtendedKalmanFilter2D();
+	//TestExtendedKalmanFilter2D();
+	SingleTargetTrackTest();
+}
+
+void KalmanTests::SingleTargetTrackTest()
+{
+	string curTestID = to_string(getTestID());
+	float dt = 93.0 / 1000;
+	EquationOfMotion* eom = new TwoDimensionalLine(dt, 0, 0, 0, 5, 5, 0);
+	DataFileGenerator dfg = DataFileGenerator(*eom, curTestID + "-DatasetForKalman.csv");	// Create "curTestID + "-DatasetForKalman.csv"" file
+	dfg.GenerateDataFile();
+
+	DataPlotList plotsList;
+	DataPlotFileReader fileReader(dfg.GetFileName());
+
+	ofstream outfile("Resources/" + curTestID + "-KalmanPredictions.csv");
+
+	ExtendedKalman* filter = nullptr;
+	bool isFirstPlot = true;
+
+	for (int i = 1; i < NUMBER_DWELL + 1; i++)
+	{
+		fileReader.ReadDataPlot(&plotsList, i);
+
+		if (isFirstPlot)
+		{
+			filter = new ExtendedKalman(*plotsList[0]);
+			isFirstPlot = false;
+		}
+		else
+		{
+			filter->Predict();
+			filter->Update(plotsList[0]);
+		}
+
+		filter->GetLastPrediction().PrintToFile(outfile);
+
+	}
+
+	delete filter;
+	delete eom;
 }
 
 /// <summary>
@@ -114,7 +154,71 @@ void KalmanTests::CreateCSVfileOfPlotsAndDwells()
 /// <sumary>
 /// Test Extended Kalman 2D
 /// </summary>
-void KalmanTests::TestExtendedKalmanFilter2D()
+/*void KalmanTests::TestExtendedKalmanFilter3DWithOnePlot()
+{
+	//TrackerJpda trackerJpda;
+	ExtendedKalman* ekf = nullptr;
+	std::ofstream m_kalmanFile;
+
+	// CSV file contains NUMBER_DWELL dwells and 1 plot of each dwell
+	string writeFile = "KalmanParams.csv"; // "Resources/KalmanParams.csv"
+	m_kalmanFile.open(writeFile, ios::out | ios::app);
+
+	// CSV file contains NUMBER_DWELL dwells and 1 plot of each dwell
+	string readFile = "dataPlots.csv";
+	DataPlotFileReader plotsReader(readFile);
+
+	DataPlotList plotsList;
+	bool isFirstPlot = true;
+
+	for (int i = 1; i < NUMBER_DWELL + 1; i++)
+	{
+		plotsReader.ReadDataPlot(&plotsList, i);
+
+		m_kalmanFile << "//X" << i - 1 << std::endl;
+		m_kalmanFile << plotsList[0]->GetRange() * sin(plotsList[0]->GetElevationAngle()) * cos(plotsList[0]->GetAzimuthAngle()) << ",";	// Write x coordinate of the plot to file
+		m_kalmanFile << plotsList[0]->GetRange() * sin(plotsList[0]->GetElevationAngle()) * sin(plotsList[0]->GetAzimuthAngle()) << ",";	// Write y coordinate of the plot to file
+		m_kalmanFile << std::endl;
+
+		//trackerJpda.DoTrack(plotsList);
+		if (isFirstPlot)
+		{
+			ekf = new ExtendedKalman(*plotsList[0]);
+			isFirstPlot = false;
+		}
+		else
+		{
+			ekf->Predict();
+			ekf->Update(plotsList[0]);
+		}
+
+
+		for (int j = 0; j < plotsList.GetCount(); j++)
+		{
+			DataPlot* pPlot = plotsList[j];
+
+			DataTrackList *dataTrackList = trackerJpda.GetTrack();
+
+			m_kalmanFile << "//X_After_Update" << std::endl;
+			m_kalmanFile << dataTrackList[0][0]->m_pKalman->m_X.m_Data[0] << ",";		// Write x coordinate after update from kalman
+			m_kalmanFile << dataTrackList[0][0]->m_pKalman->m_X.m_Data[1] << "," << std::endl;  // Write y coordinate after update from kalman
+
+			// Write m_P matrix from kalman to file
+			//m_kalmanFile << "//m_P" << std::endl;
+			//dataTrackList[0][0]->m_pKalman->m_P.PrintToFile(m_kalmanFile);
+
+			m_kalmanFile << std::endl;
+		}
+		plotsList.Clear();
+	}
+	m_kalmanFile.close();
+
+}*/
+
+/// <sumary>
+/// Test Extended Kalman 2D
+/// </summary>
+/*void KalmanTests::TestExtendedKalmanFilter2D()
 {
 	TrackerJpda trackerJpda;
 	std::ofstream m_kalmanFile;
@@ -162,4 +266,4 @@ void KalmanTests::TestExtendedKalmanFilter2D()
 	}
 	m_kalmanFile.close();
 
-}
+}*/

@@ -10,7 +10,7 @@ ExtendedKalman::ExtendedKalman() noexcept
 /// <summary>
 /// Kalman 3D constructor
 /// </summary>
-ExtendedKalman::ExtendedKalman(const DataPlot &plot)
+ExtendedKalman::ExtendedKalman(const DataPlot &plot)	// plot in spherical model
 {
 	Vector3d spherical;
 	spherical.m_Data[0] = plot.GetRange();
@@ -24,7 +24,8 @@ ExtendedKalman::ExtendedKalman(const DataPlot &plot)
 
 	//Vector3d errorCartesian;
 	//errorCartesian.ErrorSphericalToCart(spherical, errorSpherical);
-
+	
+	// TODO: check if spherical or cartesian
 	SetR(errorSpherical.m_Data[0], errorSpherical.m_Data[1], errorSpherical.m_Data[2], plot.GetVelocityAccuracy());
 
 	float dt = 93.0 / 1000;
@@ -97,14 +98,14 @@ Vector3d ExtendedKalman::Predict()
 	cartesian.m_Data[2] = m_X_Predict.m_Data[2];
 
 	Vector3d spherical;
-	spherical.CartToSpherical(cartesian);
+	spherical.CartToSpherical(cartesian);	// TODO: here the run terminated in i=29 (DoTrack)
 
 	m_last_speed = (m_X_Predict.m_Data[0] * m_X_Predict.m_Data[3]	// r_dot_predict
 					+ m_X_Predict.m_Data[1] * m_X_Predict.m_Data[4]
 					+ m_X_Predict.m_Data[2] * m_X_Predict.m_Data[5]) 
 					/ spherical.m_Data[0];
 
-	m_last_prediction = Vector3d(spherical.m_Data[0], spherical.m_Data[1], spherical.m_Data[2]);
+	m_last_prediction = Vector3d(spherical.m_Data[0], spherical.m_Data[1], spherical.m_Data[2]); // TODO: spherical or cartesian???????????????????
 	return m_last_prediction;
 }
 
@@ -369,17 +370,16 @@ void ExtendedKalman::SetH()
 /// <summary>
 /// Set measurement covariance matrix
 /// </summary>
-void ExtendedKalman::SetR(double error_x,
-	double error_y,
-	double error_z,
-	double error_v)
+void ExtendedKalman::SetR(double error_range,
+	double error_azimuth,
+	double error_elevation,
+	double error_rdot)
 {
-	// TODO: Change to 3x3 without v and change like the research
 		m_R.Zero();
-		m_R.m_Data[0][0] = pow(error_x, 2);
-		m_R.m_Data[1][1] = pow(error_y, 2);
-		m_R.m_Data[2][2] = pow(error_z, 2);
-		m_R.m_Data[3][3] = pow(error_v, 2);
+		m_R.m_Data[0][0] = pow(error_range, 2);
+		m_R.m_Data[1][1] = pow(error_azimuth, 2);
+		m_R.m_Data[2][2] = pow(error_elevation, 2);
+		m_R.m_Data[3][3] = pow(error_rdot, 2);
 }
 
 /// <summary>

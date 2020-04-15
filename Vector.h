@@ -1,6 +1,8 @@
 #ifndef TRACKER_VECTOR_H_
 #define TRACKER_VECTOR_H_
 
+#include <fstream>
+
 //#include "ServiceLayer\SrvDspMath.h"
 
 //#include "InfraLayer/MONAGENT/Pack1Start.h"
@@ -60,6 +62,23 @@ public:
 		m_Data[2] = x2;
 		m_Data[3] = x3;
 		m_Data[4] = x4;
+
+	}
+
+	/// <summary>
+	/// Prints the vector information to a file.
+	/// </summary>
+	void PrintToFile(std::ofstream& fileStream) const
+	{
+
+		for (int i = 0; i < _Rows; i++)
+		{
+			fileStream << m_Data[i];
+			if (i < _Rows - 1)
+				fileStream << ",";
+		}
+
+		fileStream << endl; //std::endl ;
 
 	}
 
