@@ -2,7 +2,7 @@
 
 void KalmanTests::Execute()
 {
-	CreateCSVfileOfPlotsAndDwells();
+	//CreateCSVfileOfPlotsAndDwells();
 	TestExtendedKalmanFilter2D();
 }
 
@@ -133,11 +133,13 @@ void KalmanTests::TestExtendedKalmanFilter2D()
 	{
 		plotsReader.ReadDataPlot(&plotsList, i);
 
-		//m_kalmanFile << "//X" << std::endl;
+		m_kalmanFile << "//X" << i-1 << std::endl;
 		m_kalmanFile << plotsList[0]->GetRange() * sin(plotsList[0]->GetElevationAngle()) * cos(plotsList[0]->GetAzimuthAngle()) << ",";	// Write x coordinate of the plot to file
 		m_kalmanFile << plotsList[0]->GetRange() * sin(plotsList[0]->GetElevationAngle()) * sin(plotsList[0]->GetAzimuthAngle()) << ",";	// Write y coordinate of the plot to file
-		//m_kalmanFile << std::endl;
+		m_kalmanFile << std::endl;
 
+		
+			
 		trackerJpda.DoTrack(plotsList);
 
 		for (int j = 0; j < plotsList.GetCount(); j++)
@@ -146,7 +148,7 @@ void KalmanTests::TestExtendedKalmanFilter2D()
 
 			DataTrackList *dataTrackList = trackerJpda.GetTrack();
 
-			//m_kalmanFile << "//X_After_Update" << std::endl;
+			m_kalmanFile << "//X_After_Update" << std::endl;
 			m_kalmanFile << dataTrackList[0][0]->m_pKalman->m_X.m_Data[0] << ",";		// Write x coordinate after update from kalman
 			m_kalmanFile << dataTrackList[0][0]->m_pKalman->m_X.m_Data[1] << "," << std::endl;  // Write y coordinate after update from kalman
 
@@ -154,7 +156,7 @@ void KalmanTests::TestExtendedKalmanFilter2D()
 			//m_kalmanFile << "//m_P" << std::endl;
 			//dataTrackList[0][0]->m_pKalman->m_P.PrintToFile(m_kalmanFile);
 
-			//m_kalmanFile << std::endl;
+			m_kalmanFile << std::endl;
 		}
 		plotsList.Clear();
 	}
