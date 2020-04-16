@@ -150,8 +150,6 @@
     <ClCompile Include="TwoDimensionalSquigglyLine.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\MHT main (our code)\pch.h" />
-    <ClInclude Include="..\tests oded\DataFileGenerator.h" />
     <ClInclude Include="AssociationMatrix.h" />
     <ClInclude Include="DataFileGenerator.h" />
     <ClInclude Include="DataPlot.h" />

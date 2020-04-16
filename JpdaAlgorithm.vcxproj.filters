@@ -19,78 +19,45 @@
     <Filter Include="Header Files\Tests">
       <UniqueIdentifier>{57d1d9f2-eb83-4291-ba26-69f616945f23}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Kalman">
+      <UniqueIdentifier>{1805d5fd-2431-4049-b7ec-1f9114b1d3ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Data">
+      <UniqueIdentifier>{1762fb97-c929-4151-bfe8-111d03fc6cef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Databases">
+      <UniqueIdentifier>{84ac5efa-2917-4764-b1ab-546b47a8638c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Jpda">
+      <UniqueIdentifier>{e51aa046-ffc7-4341-92fa-94ad2f3a63f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Srv">
+      <UniqueIdentifier>{26bbfc8d-a372-49aa-8a9c-01fc1f7a3b17}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Data">
+      <UniqueIdentifier>{3f248991-6cb7-4e70-9a53-a1bd94e8a794}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Kalman">
+      <UniqueIdentifier>{910934bc-6a56-4aa3-b49f-f0658f992330}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Databases">
+      <UniqueIdentifier>{9dfde3b0-10e5-41de-ade3-0c59d8cd745f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Jpda">
+      <UniqueIdentifier>{5a7faf1b-38b5-44af-9f54-6010b4f67ccf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Srv">
+      <UniqueIdentifier>{599066c3-4098-4665-beba-80f4d848b530}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Tracking_Hypothesis.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="TreeNode.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="TrackerJpda.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SrvTimeStampPC.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Matrix.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Kalman.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DataPlot.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="NavPlatStatusStruct.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DataPlotFileReader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DataPlotList.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ExtendedKalman.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SrvDspMath.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="StaticQueue.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MemoryPool.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="GeodeticConverter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="DrvUhrd.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="QueueManger.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="AssociationMatrix.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="TrakerParams.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Tracker.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DataTrack.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Graph.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DataTrackList.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="TestMethod.cpp">
@@ -117,84 +84,84 @@
     <ClCompile Include="KalmanTests.cpp">
       <Filter>Source Files\Tests</Filter>
     </ClCompile>
+    <ClCompile Include="Kalman.cpp">
+      <Filter>Source Files\Kalman</Filter>
+    </ClCompile>
+    <ClCompile Include="ExtendedKalman.cpp">
+      <Filter>Source Files\Kalman</Filter>
+    </ClCompile>
+    <ClCompile Include="Tracker.cpp">
+      <Filter>Source Files\Jpda</Filter>
+    </ClCompile>
+    <ClCompile Include="TrackerJpda.cpp">
+      <Filter>Source Files\Jpda</Filter>
+    </ClCompile>
+    <ClCompile Include="Tracking_Hypothesis.cpp">
+      <Filter>Source Files\Jpda</Filter>
+    </ClCompile>
+    <ClCompile Include="TrakerParams.cpp">
+      <Filter>Source Files\Jpda</Filter>
+    </ClCompile>
+    <ClCompile Include="DataPlot.cpp">
+      <Filter>Source Files\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="DataPlotList.cpp">
+      <Filter>Source Files\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="DataTrack.cpp">
+      <Filter>Source Files\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="DataTrackList.cpp">
+      <Filter>Source Files\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="Matrix.cpp">
+      <Filter>Source Files\Databases</Filter>
+    </ClCompile>
+    <ClCompile Include="Graph.cpp">
+      <Filter>Source Files\Databases</Filter>
+    </ClCompile>
+    <ClCompile Include="MemoryPool.cpp">
+      <Filter>Source Files\Databases</Filter>
+    </ClCompile>
+    <ClCompile Include="QueueManger.cpp">
+      <Filter>Source Files\Databases</Filter>
+    </ClCompile>
+    <ClCompile Include="StaticQueue.cpp">
+      <Filter>Source Files\Databases</Filter>
+    </ClCompile>
+    <ClCompile Include="TreeNode.cpp">
+      <Filter>Source Files\Databases</Filter>
+    </ClCompile>
+    <ClCompile Include="AssociationMatrix.cpp">
+      <Filter>Source Files\Jpda</Filter>
+    </ClCompile>
+    <ClCompile Include="DataPlotFileReader.cpp">
+      <Filter>Source Files\Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SrvTimeStampPC.cpp">
+      <Filter>Source Files\Srv</Filter>
+    </ClCompile>
+    <ClCompile Include="SrvDspMath.cpp">
+      <Filter>Source Files\Srv</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="TreeNode.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TrackerJpda.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SrvTimeStamp.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Matrix.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Vector.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="stdafx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="targetver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Kalman.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ExtendedKalman.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DataPlot.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="NavPlatStatusStruct.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DataPlotFileReader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DataPlotList.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SrvDspMath.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="StaticQueue.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MemoryPool.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="GeodeticConverter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="QueueManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="AssociationMatrix.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TrackerParams.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Tracker.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DataTrack.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Graph.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="DrvUhrt.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DataTrackList.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\MHT main (our code)\pch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="KalmanTests.h">
@@ -202,9 +169,6 @@
     </ClInclude>
     <ClInclude Include="TestMethod.h">
       <Filter>Header Files\Tests</Filter>
-    </ClInclude>
-    <ClInclude Include="..\tests oded\DataFileGenerator.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="TestsManager.h">
       <Filter>Header Files\Tests</Filter>
@@ -223,6 +187,66 @@
     </ClInclude>
     <ClInclude Include="pch.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AssociationMatrix.h">
+      <Filter>Header Files\Jpda</Filter>
+    </ClInclude>
+    <ClInclude Include="DataPlotFileReader.h">
+      <Filter>Header Files\Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="DataPlot.h">
+      <Filter>Header Files\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="DataPlotList.h">
+      <Filter>Header Files\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="DataTrack.h">
+      <Filter>Header Files\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="DataTrackList.h">
+      <Filter>Header Files\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="ExtendedKalman.h">
+      <Filter>Header Files\Kalman</Filter>
+    </ClInclude>
+    <ClInclude Include="Kalman.h">
+      <Filter>Header Files\Kalman</Filter>
+    </ClInclude>
+    <ClInclude Include="SrvDspMath.h">
+      <Filter>Header Files\Srv</Filter>
+    </ClInclude>
+    <ClInclude Include="SrvTimeStamp.h">
+      <Filter>Header Files\Srv</Filter>
+    </ClInclude>
+    <ClInclude Include="Graph.h">
+      <Filter>Header Files\Databases</Filter>
+    </ClInclude>
+    <ClInclude Include="Matrix.h">
+      <Filter>Header Files\Databases</Filter>
+    </ClInclude>
+    <ClInclude Include="MemoryPool.h">
+      <Filter>Header Files\Databases</Filter>
+    </ClInclude>
+    <ClInclude Include="QueueManager.h">
+      <Filter>Header Files\Databases</Filter>
+    </ClInclude>
+    <ClInclude Include="StaticQueue.h">
+      <Filter>Header Files\Databases</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector.h">
+      <Filter>Header Files\Databases</Filter>
+    </ClInclude>
+    <ClInclude Include="TreeNode.h">
+      <Filter>Header Files\Databases</Filter>
+    </ClInclude>
+    <ClInclude Include="TrackerParams.h">
+      <Filter>Header Files\Jpda</Filter>
+    </ClInclude>
+    <ClInclude Include="TrackerJpda.h">
+      <Filter>Header Files\Jpda</Filter>
+    </ClInclude>
+    <ClInclude Include="Tracker.h">
+      <Filter>Header Files\Jpda</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
