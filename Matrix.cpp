@@ -571,6 +571,19 @@ Matrix4d Transpose(Matrix4d &matrix4d)
 }
 
 /// <summary>
+/// Transpose Matrix3d
+/// </summary>
+Matrix3d Transpose(Matrix3d &matrix3d)
+{
+	Matrix3d temp;
+	for (int i = 0; i < 3; i++)
+		for (int j = 0; j < 3; j++)
+			temp.m_Data[i][j] = matrix3d.m_Data[j][i];
+
+	return temp;
+}
+
+/// <summary>
 /// Transpose Vector4f
 /// </summary>
 Matrix14f Transpose(Vector4f &vector4f)
