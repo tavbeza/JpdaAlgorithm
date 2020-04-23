@@ -20,7 +20,7 @@ void KalmanTests::SingleTargetTrackTest()
 
 	ofstream outfile("Resources/" + curTestID + "-KalmanPredictions.csv");
 
-	ExtendedKalman* filter = nullptr;
+	ExtendedKalman* ekf = nullptr;
 	bool isFirstPlot = true;
 
 	for (int i = 1; i < NUMBER_DWELL + 1; i++)
@@ -29,20 +29,20 @@ void KalmanTests::SingleTargetTrackTest()
 
 		if (isFirstPlot)
 		{
-			filter = new ExtendedKalman(*plotsList[0]);
+			ekf = new ExtendedKalman(*plotsList[0]);
 			isFirstPlot = false;
 		}
 		else
 		{
-			filter->Predict();
-			filter->Update(plotsList[0]);
+			ekf->Predict();
+			ekf->Update(plotsList[i-1]);
 		}
 
-		filter->GetLastPrediction().PrintToFile(outfile);
+		ekf->GetLastPrediction().PrintToFile(outfile);
 
 	}
 
-	delete filter;
+	delete ekf;
 	delete eom;
 }
 
