@@ -52,7 +52,7 @@ void DataFileGenerator::GenerateDataFile()
 		for (EquationOfMotion* eom : m_movments)
 			WriteDwell(outfile, dwellCount, maxDwell , *eom);
 
-	outfile << endl;
+	//outfile << endl;
 
 	outfile.close();
 }
@@ -119,10 +119,10 @@ void DataFileGenerator::WriteDwell(ofstream& outfile, int dwellCount, int maxDwe
 	outfile << velocityAccuracy << ",";
 	outfile << snr << ",";
 	outfile << magnitudeAbsSq << ",";
-	//if (dwellCount != maxDwell - 1)
+	if (dwellCount != maxDwell)
 		outfile << ++seqNumber << endl;
-	//else
-	//	outfile << ++seqNumber;
+	else
+		outfile << ++seqNumber;
 }
 
 
