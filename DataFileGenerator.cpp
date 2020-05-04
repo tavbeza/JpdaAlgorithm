@@ -46,7 +46,7 @@ void DataFileGenerator::GenerateDataFile()
 
 	ofstream outfile(m_fileName);
 
-	int maxDwell = 10;
+	int maxDwell = 20;
 
 	for (int dwellCount = 1; dwellCount <= maxDwell; dwellCount++)
 		for (EquationOfMotion* eom : m_movments)

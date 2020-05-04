@@ -191,6 +191,36 @@ public:
 	}
 
 	/// <summary>
+	/// Convert spherical coordinate (velocity) R, Az, El to cartesian  coordinate VX,VY,VZ
+	/// </summary>
+	void SphericalToCartVelocity(const Vector<_T, _Rows> &spherical)
+	{
+		Vector3d cartesian;
+		cartesian.SphericalToCart(spherical);
+
+		double x = cartesian.m_Data[0];
+		double y = cartesian.m_Data[1];
+		double z = cartesian.m_Data[2];
+
+		double xx = x*x;
+		double yy = y*y;
+		double xxyysq = SrvDspMath::sqrt(xx + yy);
+
+		double r = spherical.m_Data[0];
+		double rr = r*r;
+		double sinTetha = SrvDspMath::sin(spherical.m_Data[1]);
+		double sinPhi = SrvDspMath::sin(spherical.m_Data[2]);
+		double cosTetha = SrvDspMath::cos(spherical.m_Data[1]);
+		double cosPhi = SrvDspMath::cos(spherical.m_Data[2]);
+
+		m_Data[0] = cosTetha * cosPhi * (x / r) + r * cosPhi * sinTetha * (-y / (xx + yy)) 
+							+ r * sinPhi * cosTetha * ( (x*z) / (rr * xxyysq) );		// Vx
+		m_Data[1] = cosPhi * sinTetha * (y / r) - r * cosPhi * cosTetha * (x / (xx + yy))
+							+ r * sinPhi * sinTetha * ((y*z) / (rr * xxyysq));			// Vy
+		m_Data[2] = sinPhi * (z / r) - r * cosPhi * (-xxyysq / rr);						// Vz
+	}
+
+	/// <summary>
 	/// Convert cartesian coordinate X,Y,Z to spherical coordinate R, Az, El 
 	/// </summary>
 	void CartToSpherical(const Vector<_T, _Rows> &cartesian)

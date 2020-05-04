@@ -38,7 +38,8 @@ void KalmanTests::SingleTargetTrackTest()
 			ekf->Update(plotsList[i-1]);
 		}
 
-		ekf->GetLastPrediction().PrintToFile(outfile);
+		//ekf->GetLastPrediction().PrintToFile(outfile);
+		ekf->GetLastLocation().PrintToFile(outfile);
 
 	}
 

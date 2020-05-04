@@ -37,6 +37,11 @@ ExtendedKalman::ExtendedKalman(const DataPlot &plot)	// plot in spherical model
 	SetP(spherical);
 	m_I.Identity();
 
+	Vector3d cartVelocity;
+	cartVelocity.SphericalToCartVelocity(spherical);
+
+	m_last_speed = cartVelocity;
+
 	Init(
 		cartesian		// (x, y, z)
 	);
@@ -48,14 +53,14 @@ ExtendedKalman::ExtendedKalman(const DataPlot &plot)	// plot in spherical model
 void ExtendedKalman::Init(Vector3d cartesian) noexcept
 {
 	m_last_prediction = cartesian;
-	m_last_speed = 0;
+	
 
 	m_X.m_Data[0] = cartesian.m_Data[0];	// x
 	m_X.m_Data[1] = cartesian.m_Data[1];	// y
 	m_X.m_Data[2] = cartesian.m_Data[2];	// z
-	m_X.m_Data[3] = 0;	// Vx
-	m_X.m_Data[4] = 0;	// Vy
-	m_X.m_Data[5] = 0;	// Vz
+	m_X.m_Data[3] = m_last_speed.m_Data[0];	// Vx
+	m_X.m_Data[4] = m_last_speed.m_Data[1];	// Vy
+	m_X.m_Data[5] = m_last_speed.m_Data[2];	// Vz
 	m_X.m_Data[6] = 0;	// Ax
 	m_X.m_Data[7] = 0;	// Ay
 	m_X.m_Data[8] = 0;	// Az
@@ -438,4 +443,17 @@ void ExtendedKalman::SetP(Vector3d spherical)
 void ExtendedKalman::SetDt(float dt)
 {
 	m_Dt = dt;
+}
+
+/// <summary>
+/// Returns the last location
+/// </summary>
+const Vector3d ExtendedKalman::GetLastLocation() const
+{
+	Vector3d location;
+	location.m_Data[0] = m_X.m_Data[0];
+	location.m_Data[1] = m_X.m_Data[1];
+	location.m_Data[2] = m_X.m_Data[2];
+
+	return location;
 }

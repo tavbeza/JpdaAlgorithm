@@ -61,6 +61,11 @@ public:
 	}
 
 	/// <summary>
+	/// Returns the last location
+	/// </summary>
+	const Vector3d GetLastLocation() const;
+
+	/// <summary>
 	/// Sets the delta time in the matrix A (Evolution state matrix)
 	/// </summary>
 	void SetDt(float dt);
@@ -188,7 +193,7 @@ public:
 	Matrix9d m_I;
 
 	Vector3d m_last_prediction;
-	double m_last_speed;
+	Vector3d m_last_speed;
 	float	 m_Dt;
 
 };

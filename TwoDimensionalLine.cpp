@@ -26,11 +26,11 @@ TwoDimensionalLine::TwoDimensionalLine(float x0, float y0, float z0,
 }
 */
 
-void TwoDimensionalLine::CalculateMotion(int dwellCount, Vector3f& locVec, Vector3f& velVec)
+void TwoDimensionalLine::CalculateMotion(int dwell, Vector3f& locVec, Vector3f& velVec)
 {
 
-	m_x = m_x0 + m_vx * m_dt * dwellCount;
-	m_y = m_y0 + m_vy * m_dt * dwellCount;
+	m_x = m_x0 + m_vx * m_dt * dwell;
+	m_y = m_y0 + m_vy * m_dt * dwell;
 
 	locVec.m_Data[0] = m_x;
 	locVec.m_Data[1] = m_y;
