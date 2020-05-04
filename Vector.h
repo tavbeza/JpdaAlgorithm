@@ -235,6 +235,30 @@ public:
 	}
 
 	/// <summary>
+	/// Convert cartesian velocity to R dot 
+	/// </summary>
+	void CartToSphericalVelocity(const Vector<_T, _Rows> &cartLocation, const Vector<_T, _Rows> &cartVelocity)
+	{
+		double x = cartLocation.m_Data[0];
+		double y = cartLocation.m_Data[1];
+		double z = cartLocation.m_Data[2];
+		z = 0;
+		double Vx = cartVelocity.m_Data[0];
+		double Vy = cartVelocity.m_Data[1];
+		double Vz = cartVelocity.m_Data[2];
+		double r = SrvDspMath::sqrt(x*x + y * y + z * z);
+		if (r == 0)
+		{
+			m_Data[0] = 0;
+		}
+		else
+		{
+			m_Data[0] = (x*Vx + y * Vy + z * Vz) / r;
+		}
+	}
+
+
+	/// <summary>
 	/// Error Convert spherical coordinate R, Az, El to cartesian  coordinate X,Y,Z
 	/// </summary>
 	void ErrorSphericalToCart(const Vector<_T, _Rows> &spherical, const Vector<_T, _Rows> &errorSpherical)

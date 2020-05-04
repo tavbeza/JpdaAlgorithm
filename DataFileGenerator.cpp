@@ -67,7 +67,10 @@ void DataFileGenerator::WriteDwell(ofstream& outfile, int dwellCount, int maxDwe
 	movmentEquation.CalculateMotion(dwellCount, locVecCart, velVecCart);
 
 	locVecSpherical.CartToSpherical(locVecCart);
-	velVecSpherical.CartToSpherical(velVecCart);
+	//velVecSpherical.CartToSpherical(locVecCart);
+
+	velVecSpherical.CartToSphericalVelocity(locVecCart, velVecCart);
+
 
 	//locVecSpherical.m_Data[1] = M_PI/2.0;
 	//velVecSpherical.m_Data[1] = M_PI/2.0;

@@ -40,8 +40,8 @@ ExtendedKalman::ExtendedKalman(const DataPlot &plot)	// plot in spherical model
 	Vector3d cartVelocity;
 	cartVelocity.SphericalToCartVelocity(spherical);
 
-	m_last_speed = cartVelocity;
-
+	m_last_speed_cartesian = cartVelocity;
+	SetRdot();
 	Init(
 		cartesian		// (x, y, z)
 	);
@@ -58,9 +58,9 @@ void ExtendedKalman::Init(Vector3d cartesian) noexcept
 	m_X.m_Data[0] = cartesian.m_Data[0];	// x
 	m_X.m_Data[1] = cartesian.m_Data[1];	// y
 	m_X.m_Data[2] = cartesian.m_Data[2];	// z
-	m_X.m_Data[3] = m_last_speed.m_Data[0];	// Vx
-	m_X.m_Data[4] = m_last_speed.m_Data[1];	// Vy
-	m_X.m_Data[5] = m_last_speed.m_Data[2];	// Vz
+	m_X.m_Data[3] = m_last_speed_cartesian.m_Data[0];	// Vx
+	m_X.m_Data[4] = m_last_speed_cartesian.m_Data[1];	// Vy
+	m_X.m_Data[5] = m_last_speed_cartesian.m_Data[2];	// Vz
 	m_X.m_Data[6] = 0;	// Ax
 	m_X.m_Data[7] = 0;	// Ay
 	m_X.m_Data[8] = 0;	// Az
@@ -443,6 +443,22 @@ void ExtendedKalman::SetP(Vector3d spherical)
 void ExtendedKalman::SetDt(float dt)
 {
 	m_Dt = dt;
+}
+
+/// <summary>
+/// Convert cartesian velocity to R dot 
+/// </summary>
+void ExtendedKalman::SetRdot()
+{
+	double x = m_X.m_Data[0];
+	double y = m_X.m_Data[1];
+	double z = m_X.m_Data[2];
+	double Vx = m_X.m_Data[3];
+	double Vy = m_X.m_Data[4];
+	double Vz = m_X.m_Data[5];
+	double r = SrvDspMath::sqrt(x*x + y*y + z*z);
+
+	m_Rdot = (x*Vx + y*Vy + z*Vz) / r;
 }
 
 /// <summary>

@@ -122,6 +122,13 @@ public:
 	/// </summary>
 	void SetH();
 
+
+	/// <summary>
+	/// Convert cartesian velocity to R dot 
+	/// </summary>
+	void SetRdot();
+
+
 	/// <summary>
 	/// Set covariance matrix P
 	/// </summary>
@@ -193,8 +200,9 @@ public:
 	Matrix9d m_I;
 
 	Vector3d m_last_prediction;
-	Vector3d m_last_speed;
+	Vector3d m_last_speed_cartesian;
 	float	 m_Dt;
+	float	 m_Rdot;
 
 };
 #endif //_EXTENDED_KALMAN_H_
