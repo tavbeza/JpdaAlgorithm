@@ -63,13 +63,13 @@ void AssociationMatrix::Associate(unsigned int trkID,
 	{
 		for (unsigned int i = 0; i < m_nTracks; i++)
 		{
-			if (m_TrkIds[i] == trkID)
+			if (m_TrkIds[i] == trkID) //cheak if the track exsist in the array
 			{
 				idxTrk = i;
 				break;
 			}
 		}
-		if (-1 == idxTrk)
+		if (-1 == idxTrk) // the track is not exsist and the array is not empty
 		{
 			m_TrkIds[m_nTracks] = trkID;
 			idxTrk = m_nTracks;
@@ -102,7 +102,7 @@ void AssociationMatrix::Associate(unsigned int trkID,
 	}
 
 
-	m_Gain[idxTrk][idxPlt] = g;
+	m_Gain[idxTrk][idxPlt] = g; 
 	if (g != 0)
 	{
 		int test = 1;
@@ -137,7 +137,7 @@ double AssociationMatrix::Mod7(double angle)
 /// </summary>
 void AssociationMatrix::CheckAssociation(DataTrack &track,
 	const DataPlot &plot,
-	const NavPlatStatusStruct &platData,
+	/*const NavPlatStatusStruct &platData,*/
 	bool &isAsocFlagVec,
 	double &g)
 {
