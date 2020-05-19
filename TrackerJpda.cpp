@@ -36,20 +36,20 @@ void TrackerJpda::DoTrack(const DataPlotList &dataPlotList)
 	else
 	{
 		float dt = 93.0 / 1000.0;
-		//AssociationMatrix *gAssociationMatrix = AssociationMatrix::GetInstance();
-		//bool isAsocFlagVec;
-		//double g;
-		//int counter;
+		AssociationMatrix *gAssociationMatrix = AssociationMatrix::GetInstance();
+		bool isAsocFlagVec;
+		double g;
+		int counter;
 
 		for (int i = 0; i < nPlots; i++)
 		{	
-			//counter = 0;
+			counter = 0;
 			for (int j = 0; j < nTracks; j++)
 			{
-				//isAsocFlagVec = false;
-				//g = 0;
-				//gAssociationMatrix->CheckAssociation(*m_dataTrackList[j], *dataPlotList[i], isAsocFlagVec, g);
-				//gAssociationMatrix->Associate(m_dataTrackList[j]->m_Id, dataPlotList[i]->m_seqNumber, isAsocFlagVec, g);
+				isAsocFlagVec = false;
+				g = 0;
+				gAssociationMatrix->CheckAssociation(*m_dataTrackList[j], *dataPlotList[i], isAsocFlagVec, g);
+				gAssociationMatrix->Associate(m_dataTrackList[j]->m_Id, dataPlotList[i]->m_seqNumber, isAsocFlagVec, g);
 				//if (isAsocFlagVec)
 				//{
 					long long time = SrvTimeStamp::Start();
