@@ -256,6 +256,7 @@ void AssociationMatrix::CheckAssociation(DataTrack &track,
 		//track.m_pKalman.
 		Matrix94d temp1 = track.m_pKalman->m_P_Predict * Transpose(track.m_pKalman->m_H);
 		track.m_pKalman->m_S = track.m_pKalman->m_H * temp1 + track.m_pKalman->m_R;
+		//לשנות, לא לגעת במטריצת אס של הקלמן זה אמור להיות משהו זמני וגם האמ אר הוא של הפלוט ולא של הטרק
 		//track.m_KF.m_S.Print();
 
 		Vector4d tempV = track.m_pKalman->m_S * y;

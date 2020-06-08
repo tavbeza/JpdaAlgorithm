@@ -84,7 +84,7 @@ public:
 	///                                        standard deviation [1X3] for each
 	///                                        dimension [sec]
 	///                                        (4) Amax - Maximal target
-	///                                        accelaeration with probability
+	///                                        accelaeration with ability
 	///                                        Pmax [1X3] for each dimension
 	///                                        (5) Pmax - Acceleration
 	///                                        probability [1X3] for each dimension
