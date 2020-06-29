@@ -87,7 +87,7 @@ void TrackerJpda::DoTrack(const DataPlotList &dataPlotList)
 			{
 				if (gAssociationMatrix->GetInstance[i][j] == 1)
 				{			
-					
+					trackListCluster[i] = i;
 				}
 			}
 		}

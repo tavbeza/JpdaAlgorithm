@@ -30,7 +30,8 @@ public:
 
 private:
 	
-
+	int trackListCluster[MAX_NUM_TRACKS];
+	int plotListCluster[MAX_NUM_PLOTS];
 };
 
 #endif // _TRACKERJPDA_H_
