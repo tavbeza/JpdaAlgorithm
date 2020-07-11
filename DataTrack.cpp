@@ -4,9 +4,9 @@
 /// <summary>
 /// Track constractor.
 /// </summary>
-DataTrack::DataTrack()
+DataTrack::DataTrack(int id)
 {
-
+	m_Id = id;
 }
 
 void DataTrack::InitTrack(const DataPlot &pDataPlot)

@@ -92,6 +92,8 @@ Vector3d ExtendedKalman::Predict()
 	m_P_Predict = m_F * m_P * m_F.Transpose() + m_Q;
 
 	m_last_prediction = Vector3d(m_X_Predict.m_Data[0], m_X_Predict.m_Data[1], m_X_Predict.m_Data[2]);
+
+	SetS();
 	return m_last_prediction;
 }
 
@@ -105,13 +107,14 @@ void ExtendedKalman::Update(DataPlot* pPlot)
 {
 	// Innovation (or pre-fit residual) covariance
 	// Error Measurement Covariance Matrix
-	SetH();
+	//SetH();
 	SetR(pPlot->GetRangeAccuracy(), pPlot->GetAzimuthAccuracy(), pPlot->GetElevationAccuracy(), pPlot->GetVelocityAccuracy());
 
 	Matrix94d H_Transpose;
 	H_Transpose = Transpose(m_H);
 
-	m_S = (m_H * (m_P_Predict * H_Transpose)) + m_R;
+	//m_S = (m_H * (m_P_Predict * H_Transpose)) + m_R;
+	
 	// Near-optimal Kalman gain
 	// Sets the optimal kalman gain
 	// 93 = 99 * (93*33)
@@ -151,6 +154,19 @@ void ExtendedKalman::Update(DataPlot* pPlot)
 
 	//m_P = m_P_Predict - (m_K * (m_S * Transpose(m_K)));
 	//m_P = I * m_P_Predict - m_K * m_H * m_P_Predict;
+}
+
+/// <summary>
+/// Set m_S
+/// </summary>
+void ExtendedKalman::SetS()
+{
+	SetH();
+
+	Matrix94d H_Transpose;
+	H_Transpose = Transpose(m_H);
+
+	m_S = (m_H * (m_P_Predict * H_Transpose)) + m_R;
 }
 
 /// <summary>

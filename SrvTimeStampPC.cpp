@@ -98,7 +98,7 @@ long long SrvTimeStamp::Stop()
 }
 
 /// <summary>
-/// Stop the timer and return the time difference
+/// Stop the timer and return the time difference in sec
 /// </summary>
 double SrvTimeStamp::Stop(long long startTime)
 {

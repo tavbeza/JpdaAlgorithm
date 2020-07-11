@@ -4,7 +4,40 @@ void KalmanTests::Execute()
 {
 	//CreateCSVfileOfPlotsAndDwells();
 	//TestExtendedKalmanFilter2D();
-	SingleTargetTrackTest();
+	//SingleTargetTrackTest();
+	DoTrackTest();
+}
+
+void KalmanTests::DoTrackTest()
+{
+	string curTestID = to_string(getTestID());
+	float dt = 93.0 / 1000;
+
+	//EquationOfMotion* eomList[5];
+	vector<EquationOfMotion*> eomVector;
+
+	for (int i = 0; i < 5; i++)
+	{
+		eomVector.push_back(new TwoDimensionalLine(dt, 0, i*2, 0, 5, 5, 0));
+	}
+	//EquationOfMotion* eom = new TwoDimensionalLine(dt, 29, 5, 0, 5, 5, 0);
+	DataFileGenerator dfg = DataFileGenerator(eomVector, curTestID + "-DatasetForKalman.csv");	// Create "curTestID + "-DatasetForKalman.csv"" file
+	dfg.GenerateDataFile();
+
+	DataPlotList plotsList;
+	DataPlotFileReader fileReader(dfg.GetFileName());
+
+	ofstream outfile("Resources/" + curTestID + "-KalmanPredictions.csv");
+
+	TrackerJpda tracker;
+
+	for (int i = 1; i < NUMBER_DWELL + 1; i++)
+	{
+		plotsList.Clear();
+		fileReader.ReadDataPlot(&plotsList, i);
+		tracker.DoTrack(plotsList);
+	}
+	
 }
 
 void KalmanTests::SingleTargetTrackTest()

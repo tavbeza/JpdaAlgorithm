@@ -42,6 +42,8 @@ private:
 	static void TestExtendedKalmanFilter3DWithOnePlot();
 
 	void SingleTargetTrackTest();
+
+	void DoTrackTest();
 };
 
 #endif // KALMAN_TESTS_H_

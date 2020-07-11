@@ -54,7 +54,7 @@ public:
 	/// <summary>
 	/// Track constractor.
 	/// </summary>
-	DataTrack();
+	DataTrack(int id);
 
 	/// <summary>
 	/// Track constractor.

@@ -47,10 +47,17 @@ void DataFileGenerator::GenerateDataFile()
 	ofstream outfile(m_fileName);
 
 	int maxDwell = 20;
+	static unsigned int seqNumber;
 
 	for (int dwellCount = 1; dwellCount <= maxDwell; dwellCount++)
+	{
+		seqNumber = 0;
 		for (EquationOfMotion* eom : m_movments)
-			WriteDwell(outfile, dwellCount, maxDwell , *eom);
+		{
+			seqNumber++;
+			WriteDwell(outfile, dwellCount, maxDwell, *eom, seqNumber);
+		}
+	}
 
 	//outfile << endl;
 
@@ -58,7 +65,7 @@ void DataFileGenerator::GenerateDataFile()
 }
 
 
-void DataFileGenerator::WriteDwell(ofstream& outfile, int dwellCount, int maxDwell, EquationOfMotion& movmentEquation)
+void DataFileGenerator::WriteDwell(ofstream& outfile, int dwellCount, int maxDwell, EquationOfMotion& movmentEquation, unsigned int seqNumber)
 {
 	Vector3f locVecCart, velVecCart , locVecSpherical, velVecSpherical;
 
@@ -88,7 +95,6 @@ void DataFileGenerator::WriteDwell(ofstream& outfile, int dwellCount, int maxDwe
 	float elevationAccuracy;
 	float snr;
 	float magnitudeAbsSq;
-	static unsigned int seqNumber;
 
 	dwell = dwellCount;
 	range = locVecSpherical.m_Data[0];
@@ -123,9 +129,9 @@ void DataFileGenerator::WriteDwell(ofstream& outfile, int dwellCount, int maxDwe
 	outfile << snr << ",";
 	outfile << magnitudeAbsSq << ",";
 	if (dwellCount != maxDwell)
-		outfile << ++seqNumber << endl;
+		outfile << seqNumber << endl;
 	else
-		outfile << ++seqNumber;
+		outfile << seqNumber << endl;
 }
 
 

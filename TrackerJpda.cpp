@@ -25,7 +25,7 @@ void TrackerJpda::DoTrack(const DataPlotList &dataPlotList)
 {
 	int nTracks = m_dataTrackList.GetCount();
 	int nPlots = dataPlotList.GetCount();
-
+	
 	if (nTracks == 0)
 	{
 		for (int i = 0; i < nPlots; i++)
@@ -38,7 +38,7 @@ void TrackerJpda::DoTrack(const DataPlotList &dataPlotList)
 	{
 		float dt = 93.0 / 1000.0;
 		AssociationMatrix *gAssociationMatrix = AssociationMatrix::GetInstance();
-		Graph graph(nTracks); //creat graph-list in nTracks size ?
+		Graph graph(nTracks + nPlots); //creat graph-list in nTracks size ?
 		bool isAsocFlagVec;
 		double g;
 		int i, j, t;
@@ -81,6 +81,7 @@ void TrackerJpda::DoTrack(const DataPlotList &dataPlotList)
 			//	pDataTrack->InitTrack(*dataPlotList[i]);
 			//}
 		}
+		/*
 		for (i = 0; i < nTracks; i++) 
 		{
 			for (j = j; j < nPlots; j++)
@@ -91,5 +92,6 @@ void TrackerJpda::DoTrack(const DataPlotList &dataPlotList)
 				}
 			}
 		}
+		*/
 	}
 }

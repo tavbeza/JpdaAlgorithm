@@ -71,6 +71,11 @@ public:
 	void SetDt(float dt);
 
 	/// <summary>
+	/// Sets m_S
+	/// </summary>
+	void SetS();
+
+	/// <summary>
 	/// Set Singer Model Process Noise Covariance matrix for state vector:[x Vx Ax]';
 	/// </summary>
 	void SetQ_Singer(double tau, double sigmaManeuver2, Matrix3d &q);

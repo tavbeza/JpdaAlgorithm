@@ -32,7 +32,7 @@ private:
 	//static const int LINE_FUNC_ID = 1;
 	//static const int SQUIGGLY_LINE_FUNC_ID = 2;
 
-	void WriteDwell(ofstream& outfile, int dwellCount, int maxDwell, EquationOfMotion& movmentEquation);
+	void WriteDwell(ofstream& outfile, int dwellCount, int maxDwell, EquationOfMotion& movmentEquation, unsigned int seqNumber);
 	//void function2DimLine(int dwellCount, Vector3f& locVec, Vector3f& velVec);
 	//void function2DimSquigglyLine(int dwellCount, Vector3f& locVec, Vector3f& velVec);
 

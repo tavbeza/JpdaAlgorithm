@@ -62,6 +62,8 @@ void DataPlotFileReader::ReadDataPlot(DataPlotList* plotList, int dwellToRead/*=
 		unsigned int seqNumber;
 
 		getline(m_fileStream, curValue, ',');
+		if (curValue.length() <= 0)
+			return;
 		dwell = (unsigned int)stoul(curValue);
 
 		getline(m_fileStream, curValue, ',');
