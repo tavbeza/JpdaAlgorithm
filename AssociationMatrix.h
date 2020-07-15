@@ -35,6 +35,11 @@ public:
 	virtual ~AssociationMatrix();
 
 	/// <summary>
+	/// Set matrix H with difference between track and plot
+	/// </summary>
+	void SetTempH(Vector9d track_pos, Vector9d plot_pos, Matrix49d &temp_h);
+
+	/// <summary>
 	/// Returns the global objects
 	/// </summary>
 	static AssociationMatrix *GetInstance();

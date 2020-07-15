@@ -94,6 +94,7 @@ Vector3d ExtendedKalman::Predict()
 	m_last_prediction = Vector3d(m_X_Predict.m_Data[0], m_X_Predict.m_Data[1], m_X_Predict.m_Data[2]);
 
 	//SetS();
+	//SetH();
 	return m_last_prediction;
 }
 
@@ -107,7 +108,7 @@ void ExtendedKalman::Update(DataPlot* pPlot)
 {
 	// Innovation (or pre-fit residual) covariance
 	// Error Measurement Covariance Matrix
-	//SetH();
+	SetH();
 	SetR(pPlot->GetRangeAccuracy(), pPlot->GetAzimuthAccuracy(), pPlot->GetElevationAccuracy(), pPlot->GetVelocityAccuracy());
 
 	Matrix94d H_Transpose;

@@ -205,17 +205,53 @@ void AssociationMatrix::CheckAssociation(DataTrack &track,
 	z.m_Data[1] = az1;
 	z.m_Data[2] = el1;
 	z.m_Data[3] = v1;
+
+	Vector3d cartVelocity;
+	Vector3d spherical(r1, az1, el1);
+	cartVelocity.SphericalToCartVelocity(spherical);
+
+	Vector9d plot_pos;
+	plot_pos.m_Data[0] = r1 * SrvDspMath::sin(az1)*SrvDspMath::cos(el1);
+	plot_pos.m_Data[1] = r1 * SrvDspMath::sin(az1)*SrvDspMath::sin(el1);
+	plot_pos.m_Data[2] = r1 * SrvDspMath::cos(el1);
+	plot_pos.m_Data[3] = cartVelocity.m_Data[0];
+	plot_pos.m_Data[4] = cartVelocity.m_Data[1];
+	plot_pos.m_Data[5] = cartVelocity.m_Data[2];
+	plot_pos.m_Data[6] = 0;
+	plot_pos.m_Data[7] = 0;
+	plot_pos.m_Data[8] = 0;
+	
+	Matrix49d temp_h;
+
+	SetTempH(track.m_pKalman->m_X_Predict, plot_pos, temp_h);
+
+	Matrix94d temp1 = track.m_pKalman->m_P_Predict * Transpose(temp_h);
+	//track.m_pKalman->m_S = track.m_pKalman->m_H * temp1 + track.m_pKalman->m_R;
+	Matrix4d new_S;
+
+	//new_S = track.m_pKalman->m_H * temp1 + R;
+	new_S = temp_h * temp1; // +track.m_pKalman->m_R;
+
+	double sigma_r_plot = plot.GetRangeAccuracy();
+	double sigma_az_plot = plot.GetAzimuthAccuracy();
+	double sigma_el_plot = plot.GetElevationAccuracy();
+	double sigma_v_plot = plot.GetVelocityAccuracy();
+
+	double sigma_r = SrvDspMath::pow(sigma_r_plot, 2) + SrvDspMath::pow(new_S.m_Data[0][0], 2);
+	double sigma_az = SrvDspMath::pow(sigma_az_plot, 2) + SrvDspMath::pow(new_S.m_Data[1][1], 2);
+	double sigma_el = SrvDspMath::pow(sigma_el_plot, 2) + SrvDspMath::pow(new_S.m_Data[2][2], 2);
+	double sigma_v = SrvDspMath::pow(sigma_v_plot, 2) + SrvDspMath::pow(new_S.m_Data[3][3], 2);
 		
 	// GateType='Rect'
 	// case 'nonlin'
 	// Rectangular gating coefficient
 	TrackerParams *pTrackerParams = new TrackerParams();
-	double kgl = 1;//25;//pTrackerParams->m_Kgl; // m_Kgl = 1
+	double kgl = 4;	//pTrackerParams->m_Kgl;
 	Vector4d gateR;
-	gateR.m_Data[0] = SrvDspMath::sqrt(track.m_pKalman->m_S.m_Data[0][0]);
-	gateR.m_Data[1] = SrvDspMath::sqrt(track.m_pKalman->m_S.m_Data[1][1]);
-	gateR.m_Data[2] = SrvDspMath::sqrt(track.m_pKalman->m_S.m_Data[2][2]);
-	gateR.m_Data[3] = SrvDspMath::sqrt(track.m_pKalman->m_S.m_Data[3][3]);
+	gateR.m_Data[0] = SrvDspMath::sqrt(sigma_r);
+	gateR.m_Data[1] = SrvDspMath::sqrt(sigma_az);
+	gateR.m_Data[2] = SrvDspMath::sqrt(sigma_el);
+	gateR.m_Data[3] = SrvDspMath::sqrt(sigma_v);
 
 	bool flagInGate = true;
 	flagInGate &= r1 <= kgl * gateR.m_Data[0];
@@ -258,12 +294,12 @@ void AssociationMatrix::CheckAssociation(DataTrack &track,
 		// Calculate S
 		// m_S = m_H*m_P*m_H' + m_R
 		//track.m_pKalman.
-		Matrix94d temp1 = track.m_pKalman->m_P_Predict * Transpose(track.m_pKalman->m_H);
+		//Matrix94d temp1 = track.m_pKalman->m_P_Predict * Transpose(track.m_pKalman->m_H);
 		//track.m_pKalman->m_S = track.m_pKalman->m_H * temp1 + track.m_pKalman->m_R;
-		Matrix4d new_S;
+		//Matrix4d new_S;
 		
 		//new_S = track.m_pKalman->m_H * temp1 + R;
-		new_S = track.m_pKalman->m_H * temp1 + track.m_pKalman->m_R;
+		//new_S = track.m_pKalman->m_H * temp1 + track.m_pKalman->m_R;
 		//new_S = track.m_pKalman->m_H * temp1 + track.m_pKalman->m_R;
 		//לשנות, לא לגעת במטריצת אס של הקלמן זה אמור להיות משהו זמני וגם האמ אר הוא של הפלוט ולא של הטרק
 		//track.m_KF.m_S.Print();
@@ -280,3 +316,44 @@ void AssociationMatrix::CheckAssociation(DataTrack &track,
 	}
 }
 
+
+/// <summary>
+/// Set matrix H with difference between track and plot
+/// </summary>
+void AssociationMatrix::SetTempH(Vector9d track_pos, Vector9d plot_pos, Matrix49d &temp_h)
+{
+	double x = track_pos.m_Data[0] - plot_pos.m_Data[0];		// x
+	double y = track_pos.m_Data[1] - plot_pos.m_Data[1];		// y
+	double z = track_pos.m_Data[2] - plot_pos.m_Data[2];		// z
+	double vx = track_pos.m_Data[3] - plot_pos.m_Data[3];		// vx
+	double vy = track_pos.m_Data[4] - plot_pos.m_Data[4];		// vy
+	double vz = track_pos.m_Data[5] - plot_pos.m_Data[5];		// vz
+	double ax = track_pos.m_Data[6] - plot_pos.m_Data[6];		// ax
+	double ay = track_pos.m_Data[7] - plot_pos.m_Data[7];		// ay
+	double az = track_pos.m_Data[8] - plot_pos.m_Data[8];		// az
+
+	double r = SrvDspMath::sqrt(x*x + y * y + z * z);
+	double rr = r * r;
+	double rrr = r * r*r;
+	double temp1 = x * x + y * y;		// x^2 + y^2
+	double temp2 = SrvDspMath::sqrt(temp1);								// sqrt(x^2 + y^2)
+
+	temp_h.Zero();
+	temp_h.m_Data[0][0] = x / r;   //	= dR / dX
+	temp_h.m_Data[0][1] = y / r;	//	= dR / dY
+	temp_h.m_Data[0][2] = z / r;	//	= dR / dZ
+	temp_h.m_Data[1][0] = -(y / temp1);  //	dAz / dX
+	temp_h.m_Data[1][1] = x / temp1;  //	dAz / dY
+	temp_h.m_Data[2][0] = (z * x) / (rr * temp2);  //  dEl / dX
+	temp_h.m_Data[2][1] = (z * y) / (rr * temp2);  //  dEl / dY
+	temp_h.m_Data[2][2] = -(temp2 / rr); //  dEl / dZ
+
+	//TODO:
+	// maybe lines 384 385 386 need to be in // 
+	temp_h.m_Data[3][0] = (vx*(y*y + z * z) - x * (y*vy + z * vz)) / rrr;
+	temp_h.m_Data[3][1] = (vy*(x*x + z * z) - y * (x*vx + z * vz)) / rrr;
+	temp_h.m_Data[3][2] = (vz*(y*y + x * x) - z * (y*vy + x * vx)) / rrr;
+	temp_h.m_Data[3][3] = x / r;
+	temp_h.m_Data[3][4] = y / r;
+	temp_h.m_Data[3][5] = z / r;
+}
