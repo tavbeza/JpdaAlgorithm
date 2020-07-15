@@ -210,7 +210,7 @@ void AssociationMatrix::CheckAssociation(DataTrack &track,
 	// case 'nonlin'
 	// Rectangular gating coefficient
 	TrackerParams *pTrackerParams = new TrackerParams();
-	double kgl = 25;//pTrackerParams->m_Kgl; // m_Kgl = 1
+	double kgl = 1;//25;//pTrackerParams->m_Kgl; // m_Kgl = 1
 	Vector4d gateR;
 	gateR.m_Data[0] = SrvDspMath::sqrt(track.m_pKalman->m_S.m_Data[0][0]);
 	gateR.m_Data[1] = SrvDspMath::sqrt(track.m_pKalman->m_S.m_Data[1][1]);
@@ -262,7 +262,8 @@ void AssociationMatrix::CheckAssociation(DataTrack &track,
 		//track.m_pKalman->m_S = track.m_pKalman->m_H * temp1 + track.m_pKalman->m_R;
 		Matrix4d new_S;
 		
-		new_S = track.m_pKalman->m_H * temp1 + R;
+		//new_S = track.m_pKalman->m_H * temp1 + R;
+		new_S = track.m_pKalman->m_H * temp1 + track.m_pKalman->m_R;
 		//new_S = track.m_pKalman->m_H * temp1 + track.m_pKalman->m_R;
 		//לשנות, לא לגעת במטריצת אס של הקלמן זה אמור להיות משהו זמני וגם האמ אר הוא של הפלוט ולא של הטרק
 		//track.m_KF.m_S.Print();

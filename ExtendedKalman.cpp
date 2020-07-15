@@ -93,7 +93,7 @@ Vector3d ExtendedKalman::Predict()
 
 	m_last_prediction = Vector3d(m_X_Predict.m_Data[0], m_X_Predict.m_Data[1], m_X_Predict.m_Data[2]);
 
-	SetS();
+	//SetS();
 	return m_last_prediction;
 }
 
@@ -379,6 +379,8 @@ void ExtendedKalman::SetH()
 	m_H.m_Data[2][1] = (z * y) / (rr * temp2);  //  dEl / dY
 	m_H.m_Data[2][2] = -(temp2 / rr); //  dEl / dZ
 
+	//TODO:
+	// maybe lines 384 385 386 need to be in // 
 	m_H.m_Data[3][0] = ( vx*(y*y + z*z) - x*(y*vy + z*vz) ) / rrr;
 	m_H.m_Data[3][1] = ( vy*(x*x + z*z) - y*(x*vx + z*vz)) / rrr;
 	m_H.m_Data[3][2] = ( vz*(y*y + x*x) - z*(y*vy + x*vx)) / rrr;
