@@ -199,25 +199,19 @@ void AssociationMatrix::CheckAssociation(DataTrack &track,
 	double dR = r1 - r;		
 	double dRR = rr1 - rr; */
 
-	//Z=[Meas.enu_0.R; Meas.enu_0.Az; Meas.enu_0.El;  Meas.enu_0.RR];
-	Vector4d z;
-	z.m_Data[0] = r1;
-	z.m_Data[1] = az1;
-	z.m_Data[2] = el1;
-	z.m_Data[3] = v1;
 
 	Vector3d cartVelocity;
 	Vector3d spherical(r1, az1, el1);
 	cartVelocity.SphericalToCartVelocity(spherical);
 
 	Vector9d plot_pos;
-	plot_pos.m_Data[0] = r1 * SrvDspMath::sin(az1)*SrvDspMath::cos(el1);
-	plot_pos.m_Data[1] = r1 * SrvDspMath::sin(az1)*SrvDspMath::sin(el1);
-	plot_pos.m_Data[2] = r1 * SrvDspMath::cos(el1);
-	plot_pos.m_Data[3] = cartVelocity.m_Data[0];
-	plot_pos.m_Data[4] = cartVelocity.m_Data[1];
-	plot_pos.m_Data[5] = cartVelocity.m_Data[2];
-	plot_pos.m_Data[6] = 0;
+	plot_pos.m_Data[0] = r1 * SrvDspMath::sin(az1)*SrvDspMath::cos(el1);	// x
+	plot_pos.m_Data[1] = r1 * SrvDspMath::sin(az1)*SrvDspMath::sin(el1);	// y
+	plot_pos.m_Data[2] = r1 * SrvDspMath::cos(el1);							// z
+	plot_pos.m_Data[3] = cartVelocity.m_Data[0];							// Vx
+	plot_pos.m_Data[4] = cartVelocity.m_Data[1];							// Vy
+	plot_pos.m_Data[5] = cartVelocity.m_Data[2];							// Vz
+	plot_pos.m_Data[6] = 0;													// Ax
 	plot_pos.m_Data[7] = 0;
 	plot_pos.m_Data[8] = 0;
 	
@@ -282,8 +276,28 @@ void AssociationMatrix::CheckAssociation(DataTrack &track,
 		zPredict.m_Data[2] = elPredict;
 		zPredict.m_Data[3] = rrPredict; */
 
+		//Z=[Meas.enu_0.R; Meas.enu_0.Az; Meas.enu_0.El;  Meas.enu_0.RR];
+		Vector4d z;
+		z.m_Data[0] = r1;
+		z.m_Data[1] = az1;
+		z.m_Data[2] = el1;
+		z.m_Data[3] = v1;
+
+		// xPredict	cartesian position
+		Vector4d xPredict;
+		xPredict.m_Data[0] = track.m_pKalman->m_X_Predict.m_Data[0];	// x
+		xPredict.m_Data[1] = track.m_pKalman->m_X_Predict.m_Data[1];	// y
+		xPredict.m_Data[2] = track.m_pKalman->m_X_Predict.m_Data[2];	// z
+
+		double r_dot = track.m_pKalman->m_Rdot_Predict;
+
+		// zPredict spherical position
+		Vector4d zPredict;
+		zPredict.CartToSpherical(xPredict);
+		zPredict.m_Data[3] = r_dot;
+
 		//Vector4d y = z - zPredict;
-		Vector4d y = z;
+		Vector4d y = z -zPredict;
 
 		Matrix4d R;
 		R.m_Data[0][0] = plot.GetRangeAccuracy();

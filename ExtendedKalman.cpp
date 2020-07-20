@@ -37,6 +37,8 @@ ExtendedKalman::ExtendedKalman(const DataPlot &plot)	// plot in spherical model
 	SetP(spherical);
 	m_I.Identity();
 
+
+	// TODO: How from (r,th,phi) we get cartesian velocity ??
 	Vector3d cartVelocity;
 	cartVelocity.SphericalToCartVelocity(spherical);
 
@@ -88,11 +90,12 @@ ExtendedKalman::~ExtendedKalman()
 Vector3d ExtendedKalman::Predict()
 {
 	m_X_Predict = m_F * m_X;
-	
+
 	m_P_Predict = m_F * m_P * m_F.Transpose() + m_Q;
 
 	m_last_prediction = Vector3d(m_X_Predict.m_Data[0], m_X_Predict.m_Data[1], m_X_Predict.m_Data[2]);
 
+	SetPredictRdot();
 	//SetS();
 	//SetH();
 	return m_last_prediction;
@@ -478,6 +481,22 @@ void ExtendedKalman::SetRdot()
 	double r = SrvDspMath::sqrt(x*x + y*y + z*z);
 
 	m_Rdot = (x*Vx + y*Vy + z*Vz) / r;
+}
+
+/// <summary>
+/// Convert cartesian velocity to R dot 
+/// </summary>
+void ExtendedKalman::SetPredictRdot()
+{
+	double x = m_X_Predict.m_Data[0];
+	double y = m_X_Predict.m_Data[1];
+	double z = m_X_Predict.m_Data[2];
+	double Vx = m_X_Predict.m_Data[3];
+	double Vy = m_X_Predict.m_Data[4];
+	double Vz = m_X_Predict.m_Data[5];
+	double r = SrvDspMath::sqrt(x*x + y * y + z * z);
+
+	m_Rdot_Predict = (x*Vx + y * Vy + z * Vz) / r;
 }
 
 /// <summary>

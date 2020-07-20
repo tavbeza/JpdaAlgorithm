@@ -19,7 +19,7 @@ void KalmanTests::DoTrackTest()
 	for (int i = 0; i < 5; i++)
 	{
 		//eomVector.push_back(new TwoDimensionalLine(dt, 0, i*2, 0, 5, 5, 0));
-		eomVector.push_back(new TwoDimensionalLine(dt, 0, i * 2, 0, 5, 5, 0));
+		eomVector.push_back(new TwoDimensionalLine(dt, 0, i * 10, 0, 5, 5, 0));
 	}
 	//EquationOfMotion* eom = new TwoDimensionalLine(dt, 29, 5, 0, 5, 5, 0);
 	DataFileGenerator dfg = DataFileGenerator(eomVector, curTestID + "-DatasetForKalman.csv");	// Create "curTestID + "-DatasetForKalman.csv"" file
