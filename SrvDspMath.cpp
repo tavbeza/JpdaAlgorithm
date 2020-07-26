@@ -76,7 +76,10 @@ float SrvDspMath::sin(float number)
 /// </summary>
 double SrvDspMath::pow(double x, int y)
 {
-	double temp;
+	double temp = ::pow(x, y);
+	return temp;
+
+	/*double temp;
 	if (y == 0)
 		return 1;
 	temp = pow(x, y / 2);
@@ -87,20 +90,22 @@ double SrvDspMath::pow(double x, int y)
 		if (y > 0)
 			return x * temp * temp;
 		else
-			return (temp * temp) / x;
-	}
+			return (temp * temp) / x;*/
+	//}
 }
 
 /// <summary>
 /// Compute square root
 /// </summary>
 double SrvDspMath::sqrt(double x) {
-	const double EPS = 1e-6;
+	double temp = ::sqrt(x);
+	return temp;
+	/*const double EPS = 1e-6;
 	double low = 0, high = x; // should be double not int here
 	while (low + EPS < high) {  // gist, note this predicate! 
 		double mid = (low + high) / 2;
 		if (mid * mid > x) high = mid;
 		else low = mid;
 	}
-	return low;            // it seems that returning'low' or 'high' will have the same results
+	return low;            // it seems that returning'low' or 'high' will have the same results*/
 }

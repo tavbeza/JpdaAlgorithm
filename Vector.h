@@ -225,9 +225,11 @@ public:
 	/// </summary>
 	void CartToSpherical(const Vector<_T, _Rows> &cartesian)
 	{
-		m_Data[0] = SrvDspMath::sqrt(SrvDspMath::pow(cartesian.m_Data[0], 2) +
+		m_Data[0] = SrvDspMath::sqrt(
+			SrvDspMath::pow(cartesian.m_Data[0], 2) +
 			SrvDspMath::pow(cartesian.m_Data[1], 2) +
-			SrvDspMath::pow(cartesian.m_Data[2], 2));
+			SrvDspMath::pow(cartesian.m_Data[2], 2)
+		);
 
 		// TODO: Unit Test //if(cartesian.m_Data[0] != 0)
 		m_Data[1] = SrvDspMath::atan(cartesian.m_Data[1] / cartesian.m_Data[0]);

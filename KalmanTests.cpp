@@ -23,7 +23,7 @@ void KalmanTests::DoTrackTest()
 	}
 	//EquationOfMotion* eom = new TwoDimensionalLine(dt, 29, 5, 0, 5, 5, 0);
 	DataFileGenerator dfg = DataFileGenerator(eomVector, curTestID + "-DatasetForKalman.csv");	// Create "curTestID + "-DatasetForKalman.csv"" file
-	dfg.GenerateDataFile();
+	//dfg.GenerateDataFile();
 
 	DataPlotList plotsList;
 	DataPlotFileReader fileReader(dfg.GetFileName());

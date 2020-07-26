@@ -135,56 +135,12 @@ double AssociationMatrix::Mod7(double angle)
 /// <summary>
 /// Check the track association to plot and calculate the gain
 /// </summary>
-void AssociationMatrix::CheckAssociation(DataTrack &track,
-	const DataPlot &plot,
-	/*const NavPlatStatusStruct &platData,*/
-	bool &isAsocFlagVec,
-	double &g)
+void AssociationMatrix::CheckAssociation(DataTrack &track, const DataPlot &plot, bool &isAsocFlagVec, double &g)
 {
-	g = 0;
-
 	//case 'ENU'
 	//case 'nonlin'
+	g = 0;
 	double r, az, el, rr;
-	//platData.posENU.Print();
-	//platData.velENU.Print();
-	//track.m_Hyp[iHyp].m_XPredict.Print();
-
-	/*Vector3d cartesian;
-	cartesian.m_Data[0] = platData.posENU.m_Data[0];	// X
-	cartesian.m_Data[1] = platData.posENU.m_Data[1];	// Y
-	cartesian.m_Data[2] = platData.posENU.m_Data[2];	// Z
-
-	Vector3d spherical;
-	spherical.ToSpherical(cartesian);
-	r = spherical.m_Data[0];
-	az = spherical.m_Data[1];
-	el = spherical.m_Data[2];
-
-	cartesian.m_Data[0] = platData.velENU.m_Data[0];	// Vx
-	cartesian.m_Data[1] = platData.velENU.m_Data[1];	// Vy
-	cartesian.m_Data[2] = platData.velENU.m_Data[2];	// Vz
-	spherical.ToSpherical(cartesian);*/
-
-
-	/*GeodeticConverter::Cart2Sph(platData.posENU,
-		platData.velENU,
-		track.m_pKalman->m_X_Predict,
-		r,
-		az,
-		el,
-		rr);*/
-
-
-	/*
-	//plot.enu_0.Az;
-	double r1 = plot.m_PolarEnu0.m_Data[0];
-	double az1 = plot.m_PolarEnu0.m_Data[1];
-	double el1 = plot.m_PolarEnu0.m_Data[2];
-	double v1 = plot.GetVelocity();
-
-	m_PolarEnu0 - Converted pos to Enu0 (Our static location)
-	*/
 	
 	// pos without Enu0 (without converts)
 	double r1 = plot.GetRange();
@@ -192,25 +148,13 @@ void AssociationMatrix::CheckAssociation(DataTrack &track,
 	double el1 = plot.GetElevationAngle();
 	double v1 = plot.GetVelocity();
 
-	/*
-	// diff between the plot and the platform
-	double dAz = Mod7(az1 - az);
-	double dEl = el1 - el;
-	double dR = r1 - r;		
-	double dRR = rr1 - rr; */
-
-
-	Vector3d cartVelocity;
-	Vector3d spherical(r1, az1, el1);
-	cartVelocity.SphericalToCartVelocity(spherical);
-
 	Vector9d plot_pos;
-	plot_pos.m_Data[0] = r1 * SrvDspMath::sin(az1)*SrvDspMath::cos(el1);	// x
-	plot_pos.m_Data[1] = r1 * SrvDspMath::sin(az1)*SrvDspMath::sin(el1);	// y
+	plot_pos.m_Data[0] = r1 * SrvDspMath::sin(el1)*SrvDspMath::cos(az1);	// x
+	plot_pos.m_Data[1] = r1 * SrvDspMath::sin(el1)*SrvDspMath::sin(az1);	// y
 	plot_pos.m_Data[2] = r1 * SrvDspMath::cos(el1);							// z
-	plot_pos.m_Data[3] = cartVelocity.m_Data[0];							// Vx
-	plot_pos.m_Data[4] = cartVelocity.m_Data[1];							// Vy
-	plot_pos.m_Data[5] = cartVelocity.m_Data[2];							// Vz
+	plot_pos.m_Data[3] = 0; // cartVelocity.m_Data[0];							// Vx
+	plot_pos.m_Data[4] = 0; // cartVelocity.m_Data[1];							// Vy
+	plot_pos.m_Data[5] = 0; // cartVelocity.m_Data[2];							// Vz
 	plot_pos.m_Data[6] = 0;													// Ax
 	plot_pos.m_Data[7] = 0;
 	plot_pos.m_Data[8] = 0;
@@ -246,6 +190,12 @@ void AssociationMatrix::CheckAssociation(DataTrack &track,
 	gateR.m_Data[1] = SrvDspMath::sqrt(sigma_az);
 	gateR.m_Data[2] = SrvDspMath::sqrt(sigma_el);
 	gateR.m_Data[3] = SrvDspMath::sqrt(sigma_v);
+
+	Vector4d z;
+	z.m_Data[0] = plot.GetRange();
+	z.m_Data[1] = plot.GetAzimuthAngle();
+	z.m_Data[2] = plot.GetElevationAngle();
+	z.m_Data[3] = plot.GetVelocity();
 
 	bool flagInGate = true;
 	flagInGate &= r1 <= kgl * gateR.m_Data[0];
@@ -349,18 +299,27 @@ void AssociationMatrix::SetTempH(Vector9d track_pos, Vector9d plot_pos, Matrix49
 	double r = SrvDspMath::sqrt(x*x + y * y + z * z);
 	double rr = r * r;
 	double rrr = r * r*r;
-	double temp1 = x * x + y * y;		// x^2 + y^2
-	double temp2 = SrvDspMath::sqrt(temp1);								// sqrt(x^2 + y^2)
+	double ro = x * x + y * y;		// x^2 + y^2
+	double sqrtro = SrvDspMath::sqrt(ro);								// sqrt(x^2 + y^2)
+	double rv = x * vx + y * vy + z * vz;
 
 	temp_h.Zero();
-	temp_h.m_Data[0][0] = x / r;   //	= dR / dX
-	temp_h.m_Data[0][1] = y / r;	//	= dR / dY
-	temp_h.m_Data[0][2] = z / r;	//	= dR / dZ
-	temp_h.m_Data[1][0] = -(y / temp1);  //	dAz / dX
-	temp_h.m_Data[1][1] = x / temp1;  //	dAz / dY
-	temp_h.m_Data[2][0] = (z * x) / (rr * temp2);  //  dEl / dX
-	temp_h.m_Data[2][1] = (z * y) / (rr * temp2);  //  dEl / dY
-	temp_h.m_Data[2][2] = -(temp2 / rr); //  dEl / dZ
+
+	if (r != 0)
+	{
+		temp_h.m_Data[0][0] = x / r;   //	= dR / dX
+		temp_h.m_Data[0][1] = y / r;	//	= dR / dY
+		temp_h.m_Data[0][2] = z / r;	//	= dR / dZ
+	}
+	if (ro != 0)
+	{
+		temp_h.m_Data[1][0] = -(y / ro);  //	dAz / dX	// ?
+		temp_h.m_Data[1][1] = x / ro;  //	dAz / dY
+		temp_h.m_Data[2][0] = (z * x) / (rr * sqrtro);  //  dEl / dX
+		temp_h.m_Data[2][1] = (z * y) / (rr * sqrtro);  //  dEl / dY
+		temp_h.m_Data[2][2] = -(sqrtro / rr); //  dEl / dZ
+	}
+	
 
 	//TODO:
 	// maybe lines 384 385 386 need to be in // 

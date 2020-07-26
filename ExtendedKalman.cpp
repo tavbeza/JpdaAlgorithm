@@ -60,9 +60,9 @@ void ExtendedKalman::Init(Vector3d cartesian) noexcept
 	m_X.m_Data[0] = cartesian.m_Data[0];	// x
 	m_X.m_Data[1] = cartesian.m_Data[1];	// y
 	m_X.m_Data[2] = cartesian.m_Data[2];	// z
-	m_X.m_Data[3] = m_last_speed_cartesian.m_Data[0];	// Vx
-	m_X.m_Data[4] = m_last_speed_cartesian.m_Data[1];	// Vy
-	m_X.m_Data[5] = m_last_speed_cartesian.m_Data[2];	// Vz
+	m_X.m_Data[3] = 0; // m_last_speed_cartesian.m_Data[0];	// Vx
+	m_X.m_Data[4] = 0; // m_last_speed_cartesian.m_Data[1];	// Vy
+	m_X.m_Data[5] = 0; // m_last_speed_cartesian.m_Data[2];	// Vz
 	m_X.m_Data[6] = 0;	// Ax
 	m_X.m_Data[7] = 0;	// Ay
 	m_X.m_Data[8] = 0;	// Az
