@@ -230,75 +230,21 @@ void AssociationMatrix::CheckAssociation(DataTrack &track, const DataPlot &plot,
 		// Update Track
 		// case 'nonlin'
 		isAsocFlagVec = true;
-		//double rPredict, azPredict, elPredict, vPredict;
+		new_S.m_Data[0][0] += sigma_r_plot;
+		new_S.m_Data[1][1] += sigma_az_plot;
+		new_S.m_Data[2][2] += sigma_el_plot;
+		new_S.m_Data[3][3] += sigma_v_plot;
 
-		//TODO: 50114 this is the same previous call to Cart2Sph
-		/*GeodeticConverter::Cart2Sph(platData.posENU,
-			platData.velENU,
-			track.m_Hyp[iHyp].m_XPredict,
-			rPredict,
-			azPredict,
-			elPredict,
-			vPredict);*/
-
-		//Z_predict=[R_predict; Az_predict; El_predict;RR_predict];
-		/*Vector4d zPredict;
-		zPredict.m_Data[0] = rPredict;
-		zPredict.m_Data[1] = azPredict;
-		zPredict.m_Data[2] = elPredict;
-		zPredict.m_Data[3] = rrPredict; */
-
-		//Z=[Meas.enu_0.R; Meas.enu_0.Az; Meas.enu_0.El;  Meas.enu_0.RR];
-		Vector4d z;
-		z.m_Data[0] = r1;
-		z.m_Data[1] = az1;
-		z.m_Data[2] = el1;
-		z.m_Data[3] = v1;
-
-		// xPredict	cartesian position
-		Vector4d xPredict;
-		xPredict.m_Data[0] = track.m_pKalman->m_X_Predict.m_Data[0];	// x
-		xPredict.m_Data[1] = track.m_pKalman->m_X_Predict.m_Data[1];	// y
-		xPredict.m_Data[2] = track.m_pKalman->m_X_Predict.m_Data[2];	// z
-
-		double r_dot = track.m_pKalman->m_Rdot_Predict;
-
-		// zPredict spherical position
-		Vector4d zPredict;
-		zPredict.CartToSpherical(xPredict);
-		zPredict.m_Data[3] = r_dot;
-
-		//Vector4d y = z - zPredict;
-		Vector4d y = z -zPredict;
-
-		Matrix4d R;
-		R.m_Data[0][0] = plot.GetRangeAccuracy();
-		R.m_Data[1][1] = plot.GetAzimuthAccuracy();
-		R.m_Data[2][2] = plot.GetElevationAccuracy();
-		R.m_Data[3][3] = plot.GetVelocityAccuracy();
-
-		// Calculate S
-		// m_S = m_H*m_P*m_H' + m_R
-		//track.m_pKalman.
-		//Matrix94d temp1 = track.m_pKalman->m_P_Predict * Transpose(track.m_pKalman->m_H);
-		//track.m_pKalman->m_S = track.m_pKalman->m_H * temp1 + track.m_pKalman->m_R;
-		//Matrix4d new_S;
-		
-		//new_S = track.m_pKalman->m_H * temp1 + R;
-		//new_S = track.m_pKalman->m_H * temp1 + track.m_pKalman->m_R;
-		//new_S = track.m_pKalman->m_H * temp1 + track.m_pKalman->m_R;
-		//לשנות, לא לגעת במטריצת אס של הקלמן זה אמור להיות משהו זמני וגם האמ אר הוא של הפלוט ולא של הטרק
-		//track.m_KF.m_S.Print();
-
-		Vector4d tempV = new_S * y;
-		double d2 = (y * tempV) / y.Norm();
+		Vector4d tempV = new_S.Inverse() * resZ;
+		double d2 = (resZ * tempV);
 		double m = 4;	// length(Z);
 		double sqrtDetSi = SrvDspMath::sqrt(new_S.Determinant());
 		double x1 = SrvDspMath::exp(-d2 / 2);
 		double x2 = (pow(2 * PI_VALUE, (m / 2)) * sqrtDetSi);
-		g = x1 / x2;
-
-		//g = SrvDspMath::exp(-d2 / 2) / (pow(2 * PI_VALUE, (m / 2)) * sqrtDetSi);
+		if (sqrtDetSi != 0)
+		{
+			g = x1 / x2;
+		}
 	}
 }
 

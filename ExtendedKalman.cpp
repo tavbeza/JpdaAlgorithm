@@ -96,8 +96,7 @@ Vector3d ExtendedKalman::Predict()
 	m_last_prediction = Vector3d(m_X_Predict.m_Data[0], m_X_Predict.m_Data[1], m_X_Predict.m_Data[2]);
 
 	SetPredictRdot();
-	//SetS();
-	//SetH();
+	
 	return m_last_prediction;
 }
 
@@ -117,7 +116,7 @@ void ExtendedKalman::Update(DataPlot* pPlot)
 	Matrix94d H_Transpose;
 	H_Transpose = Transpose(m_H);
 
-	//m_S = (m_H * (m_P_Predict * H_Transpose)) + m_R;
+	m_S = (m_H * (m_P_Predict * H_Transpose)) + m_R;
 	
 	// Near-optimal Kalman gain
 	// Sets the optimal kalman gain

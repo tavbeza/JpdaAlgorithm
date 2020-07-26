@@ -60,21 +60,6 @@ void TrackerJpda::DoTrack(const DataPlotList &dataPlotList)
 				g = 0;
 				gAssociationMatrix->CheckAssociation(*m_dataTrackList[j], *dataPlotList[i], isAsocFlagVec, g);
 				gAssociationMatrix->Associate(m_dataTrackList[j]->m_Id, dataPlotList[i]->m_seqNumber, isAsocFlagVec, g);
-				
-				//if (isAsocFlagVec)
-				//{
-					//long long time = SrvTimeStamp::Start();
-					//m_dataTrackList[j]->m_pKalman->Predict();
-					//double time1 = SrvTimeStamp::Stop(time)*1000*1000;
-
-					//time = SrvTimeStamp::Start();
-					//m_dataTrackList[j]->m_pKalman->Update(dataPlotList[i]);
-					//double time2 = SrvTimeStamp::Stop(time)*1000*1000;
-				//}
-				//else
-				//{
-				//	counter++;
-				//}
 			}
 
 			if (i == nPlots - 1)
@@ -111,6 +96,27 @@ void TrackerJpda::DoTrack(const DataPlotList &dataPlotList)
 			//	pDataTrack->InitTrack(*dataPlotList[i]);
 			//}
 		}
+
+		for (i = 0; i < nPlots; i++)
+		{
+			m_dataTrackList[i]->m_pKalman->Update(dataPlotList[i]);
+		}
+
+		//if (isAsocFlagVec && i == j)
+		//{
+			//long long time = SrvTimeStamp::Start();
+			//m_dataTrackList[j]->m_pKalman->Predict();
+			//double time1 = SrvTimeStamp::Stop(time)*1000*1000;
+
+			//time = SrvTimeStamp::Start();
+			//m_dataTrackList[j]->m_pKalman->Update(dataPlotList[i]);
+			//double time2 = SrvTimeStamp::Stop(time)*1000*1000;
+		//}
+		//else
+		//{
+			//counter++;
+		//}
+
 		/*
 		for (i = 0; i < nTracks; i++) 
 		{
