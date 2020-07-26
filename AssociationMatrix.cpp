@@ -148,6 +148,24 @@ void AssociationMatrix::CheckAssociation(DataTrack &track, const DataPlot &plot,
 	double el1 = plot.GetElevationAngle();
 	double v1 = plot.GetVelocity();
 
+	double xPredict = track.m_pKalman->m_X_Predict.m_Data[0];
+	double yPredict = track.m_pKalman->m_X_Predict.m_Data[1];
+	double zPredict = track.m_pKalman->m_X_Predict.m_Data[2];
+	double VxPredict= track.m_pKalman->m_X_Predict.m_Data[3];
+	double VyPredict= track.m_pKalman->m_X_Predict.m_Data[4];
+	double VzPredict= track.m_pKalman->m_X_Predict.m_Data[5];
+	double rPredict = SrvDspMath::sqrt(SrvDspMath::pow(xPredict,2)+
+										SrvDspMath::pow(yPredict, 2)+ 
+										SrvDspMath::pow(zPredict, 2));
+	double azPredict = SrvDspMath::atan(yPredict/xPredict);
+	double elPredict = SrvDspMath::acos(zPredict/rPredict);
+	double rrPredict = (xPredict*VxPredict + yPredict * VyPredict + zPredict * VzPredict) / rPredict;
+	Vector4d z_Predict;
+	z_Predict.m_Data[0] = rPredict;
+	z_Predict.m_Data[1] = azPredict;
+	z_Predict.m_Data[2] = elPredict;
+	z_Predict.m_Data[3] = rrPredict;
+
 	Vector9d plot_pos;
 	plot_pos.m_Data[0] = r1 * SrvDspMath::sin(el1)*SrvDspMath::cos(az1);	// x
 	plot_pos.m_Data[1] = r1 * SrvDspMath::sin(el1)*SrvDspMath::sin(az1);	// y
@@ -197,11 +215,15 @@ void AssociationMatrix::CheckAssociation(DataTrack &track, const DataPlot &plot,
 	z.m_Data[2] = plot.GetElevationAngle();
 	z.m_Data[3] = plot.GetVelocity();
 
+	Vector4d resZ;
+	resZ = z - z_Predict;
+	resZ.m_Data[1] = Mod7(resZ.m_Data[1]);
+
 	bool flagInGate = true;
-	flagInGate &= r1 <= kgl * gateR.m_Data[0];
-	flagInGate &= az1 < kgl * gateR.m_Data[1];
-	flagInGate &= el1 < kgl * gateR.m_Data[2];
-	flagInGate &= v1 < kgl * gateR.m_Data[3];
+	flagInGate &= (abs(resZ.m_Data[0] <= kgl * gateR.m_Data[0]));
+	flagInGate &= (abs(resZ.m_Data[1] <= kgl * gateR.m_Data[1]));
+	flagInGate &= (abs(resZ.m_Data[2] <= kgl * gateR.m_Data[2]));
+	flagInGate &= (abs(resZ.m_Data[3] <= kgl * gateR.m_Data[3]));
 
 	if (flagInGate)
 	{
