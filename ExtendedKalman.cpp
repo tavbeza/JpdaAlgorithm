@@ -286,7 +286,7 @@ void ExtendedKalman::SetQ_Singer(double tau, double sigmaManeuver2, Matrix3d &q)
 /// <summary>
 /// Set the matrix F
 /// </summary>
-void ExtendedKalman::SetF_Singer(double tau,
+/*void ExtendedKalman::SetF_Singer(double tau,
 	Matrix3d &f)
 {
 	f.Zero();
@@ -298,7 +298,7 @@ void ExtendedKalman::SetF_Singer(double tau,
 	f.m_Data[1][1] = 1;
 	f.m_Data[1][2] = 1 / beta * (1 - rho);
 	f.m_Data[2][2] = rho;
-}
+}*/
 
 /// <summary>
 /// Set the matrix F
@@ -319,8 +319,9 @@ void ExtendedKalman::SetF()
 	m_F.m_Data[0][3] = m_Dt;
 	m_F.m_Data[1][4] = m_Dt;
 	m_F.m_Data[2][5] = m_Dt;
-
-	/*
+	
+	
+	/*m_F.Zero();
 	TrackerParams *pTrakerParams = new TrackerParams;
 	Matrix3d fx, fy, fz;
 	SetF_Singer(pTrakerParams->m_TauAcc.m_Data[0], fx);
@@ -329,31 +330,31 @@ void ExtendedKalman::SetF()
 	// TODO:
 	m_F.m_Data[0][0] = fx.m_Data[0][0];
 	m_F.m_Data[0][1] = fx.m_Data[0][1];
-	m_F.m_Data[0][2] = 0;// fx.m_Data[0][2];
+	m_F.m_Data[0][2] = fx.m_Data[0][2];
 	m_F.m_Data[1][0] = fx.m_Data[1][0];
 	m_F.m_Data[1][1] = fx.m_Data[1][1];
-	m_F.m_Data[1][2] = 0;//fx.m_Data[1][2];
+	m_F.m_Data[1][2] = fx.m_Data[1][2];
 	m_F.m_Data[2][0] = fx.m_Data[2][0];
 	m_F.m_Data[2][1] = fx.m_Data[2][1];
-	m_F.m_Data[2][2] = 0;//fx.m_Data[2][2];
+	m_F.m_Data[2][2] = fx.m_Data[2][2];
 	m_F.m_Data[3][3] = fy.m_Data[0][0];
 	m_F.m_Data[3][4] = fy.m_Data[0][1];
-	m_F.m_Data[3][5] = 0;//fy.m_Data[0][2];
+	m_F.m_Data[3][5] = fy.m_Data[0][2];
 	m_F.m_Data[4][3] = fy.m_Data[1][0];
 	m_F.m_Data[4][4] = fy.m_Data[1][1];
-	m_F.m_Data[4][5] = 0;//fy.m_Data[1][2];
+	m_F.m_Data[4][5] = fy.m_Data[1][2];
 	m_F.m_Data[5][3] = fy.m_Data[2][0];
 	m_F.m_Data[5][4] = fy.m_Data[2][1];
-	m_F.m_Data[5][5] = 0;//fy.m_Data[2][2];
+	m_F.m_Data[5][5] = fy.m_Data[2][2];
 	m_F.m_Data[6][6] = fz.m_Data[0][0];
 	m_F.m_Data[6][7] = fz.m_Data[0][1];
-	m_F.m_Data[6][8] = 0;//fz.m_Data[0][2];
+	m_F.m_Data[6][8] = fz.m_Data[0][2];
 	m_F.m_Data[7][6] = fz.m_Data[1][0];
 	m_F.m_Data[7][7] = fz.m_Data[1][1];
-	m_F.m_Data[7][8] = 0;//fz.m_Data[1][2];
+	m_F.m_Data[7][8] = fz.m_Data[1][2];
 	m_F.m_Data[8][6] = fz.m_Data[2][0];
 	m_F.m_Data[8][7] = fz.m_Data[2][1];
-	m_F.m_Data[8][8] = 0;//fz.m_Data[2][2];
+	m_F.m_Data[8][8] = fz.m_Data[2][2];
 	*/
 }
 

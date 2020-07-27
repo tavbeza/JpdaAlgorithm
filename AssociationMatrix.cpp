@@ -283,6 +283,9 @@ void AssociationMatrix::SetTempH(Vector9d track_pos, Matrix49d &temp_h)
 		temp_h.m_Data[0][0] = x / r;   //	= dR / dX
 		temp_h.m_Data[0][1] = y / r;	//	= dR / dY
 		temp_h.m_Data[0][2] = z / r;	//	= dR / dZ
+		temp_h.m_Data[3][3] = x / r;
+		temp_h.m_Data[3][4] = y / r;
+		temp_h.m_Data[3][5] = z / r;
 	}
 	if (ro != 0)
 	{
@@ -293,10 +296,12 @@ void AssociationMatrix::SetTempH(Vector9d track_pos, Matrix49d &temp_h)
 		temp_h.m_Data[2][2] = -(sqrtro / rr); //  dEl / dZ
 	}
 	
-	temp_h.m_Data[3][0] = ( vx*(y*y + z*z) - x*(y*vy +z*vz) ) / rrr;
-	temp_h.m_Data[3][1] = ( vy*(x*x + z*z) - y*(x*vx + z*vz) ) / rrr;
-	temp_h.m_Data[3][2] = ( vz*(y*y + x*x) - z*(y*vy + x*vx) ) / rrr;
-	temp_h.m_Data[3][3] = x / r;
-	temp_h.m_Data[3][4] = y / r;
-	temp_h.m_Data[3][5] = z / r;
+	if(rrr!=0)
+	{
+		temp_h.m_Data[3][0] = (vx*(y*y + z * z) - x * (y*vy + z * vz)) / rrr;
+		temp_h.m_Data[3][1] = (vy*(x*x + z * z) - y * (x*vx + z * vz)) / rrr;
+		temp_h.m_Data[3][2] = (vz*(y*y + x * x) - z * (y*vy + x * vx)) / rrr;
+	}
+
+
 }

@@ -2,6 +2,8 @@
 #define TRACKER_VECTOR_H_
 
 #include <fstream>
+#define M_PI 3.14159265358979323846  /* pi */
+
 
 //#include "ServiceLayer\SrvDspMath.h"
 
@@ -225,15 +227,27 @@ public:
 	/// </summary>
 	void CartToSpherical(const Vector<_T, _Rows> &cartesian)
 	{
-		m_Data[0] = SrvDspMath::sqrt(
-			SrvDspMath::pow(cartesian.m_Data[0], 2) +
+		double rr = SrvDspMath::pow(cartesian.m_Data[0], 2) +
 			SrvDspMath::pow(cartesian.m_Data[1], 2) +
-			SrvDspMath::pow(cartesian.m_Data[2], 2)
-		);
-
-		// TODO: Unit Test //if(cartesian.m_Data[0] != 0)
-		m_Data[1] = SrvDspMath::atan(cartesian.m_Data[1] / cartesian.m_Data[0]);
-		m_Data[2] = SrvDspMath::acos(cartesian.m_Data[2] / m_Data[0]);
+			SrvDspMath::pow(cartesian.m_Data[2], 2);
+		if (rr != 0)
+		{
+			m_Data[0] = SrvDspMath::sqrt(rr);
+			m_Data[2] = SrvDspMath::acos(cartesian.m_Data[2] / m_Data[0]);
+		}
+		else
+		{
+			m_Data[0] = 0;
+			m_Data[2] = M_PI/2;
+		}
+		if (cartesian.m_Data[0] != 0)
+		{
+			m_Data[1] = SrvDspMath::atan(cartesian.m_Data[1] / cartesian.m_Data[0]);
+		}
+		else 
+		{
+			m_Data[1] = 0;
+		}
 	}
 
 	/// <summary>

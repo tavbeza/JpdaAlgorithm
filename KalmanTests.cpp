@@ -16,14 +16,17 @@ void KalmanTests::DoTrackTest()
 	//EquationOfMotion* eomList[5];
 	vector<EquationOfMotion*> eomVector;
 	int dis = 25;
-	for (int i = 0; i < 5; i++)
+	for (int i = 0; i < 11; i+=10)
 	{
 		//eomVector.push_back(new TwoDimensionalLine(dt, 0, i*2, 0, 5, 5, 0));
-		eomVector.push_back(new TwoDimensionalLine(dt, 0, i * 10, 0, 5, 5, 0));
+		if(i == 10)
+			eomVector.push_back(new TwoDimensionalLine(dt, 0, i, 0, 5, -5, 0));
+		else
+			eomVector.push_back(new TwoDimensionalLine(dt, 0, i, 0, 5, 5, 0));
 	}
 	//EquationOfMotion* eom = new TwoDimensionalLine(dt, 29, 5, 0, 5, 5, 0);
 	DataFileGenerator dfg = DataFileGenerator(eomVector, curTestID + "-DatasetForKalman.csv");	// Create "curTestID + "-DatasetForKalman.csv"" file
-	dfg.GenerateDataFile();
+	//dfg.GenerateDataFile();
 
 	DataPlotList plotsList;
 	DataPlotFileReader fileReader(dfg.GetFileName());
@@ -32,7 +35,7 @@ void KalmanTests::DoTrackTest()
 
 	TrackerJpda tracker;
 
-	for (int i = 1; i < NUMBER_DWELL + 1; i++)
+	for (int i = 1; i <= NUMBER_DWELL; i++)
 	{
 		plotsList.Clear();
 		fileReader.ReadDataPlot(&plotsList, i);

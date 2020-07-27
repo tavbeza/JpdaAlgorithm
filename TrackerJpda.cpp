@@ -1,6 +1,7 @@
 #include "TrackerJpda.h"
 #include "SrvTimeStamp.h"
 #include "Graph.h"
+#include "KalmanTests.h"
 
 
 /// <summary>
@@ -23,6 +24,15 @@ TrackerJpda::~TrackerJpda()
 /// </summary>
 void TrackerJpda::DoTrack(const DataPlotList &dataPlotList)
 {
+	// file pointer 
+	fstream fout;
+
+	// Create CSV file for Extended Kalman 3D test
+	string fileName = "dataPlots.csv";
+
+	// opens an existing csv file or creates a new file. 
+	fout.open(fileName, ios::out | ios::app);
+
 	int nTracks = m_dataTrackList.GetCount();
 	int nPlots = dataPlotList.GetCount();
 	
@@ -63,7 +73,7 @@ void TrackerJpda::DoTrack(const DataPlotList &dataPlotList)
 				gAssociationMatrix->Associate(m_dataTrackList[j]->m_Id, dataPlotList[i]->m_seqNumber, isAsocFlagVec, g);
 			}
 
-			if (i == nPlots - 1)
+			/*if (i == nPlots - 1)
 			{
 				cout << "m_MatTracksPlots:" << endl;
 				for (int k = 0; k < 6; k++)
@@ -89,7 +99,7 @@ void TrackerJpda::DoTrack(const DataPlotList &dataPlotList)
 
 
 				//cout << "Done2";
-			}
+			}*/
 
 			//if(counter == nTracks)
 			//{
@@ -98,10 +108,20 @@ void TrackerJpda::DoTrack(const DataPlotList &dataPlotList)
 			//}
 		}
 
-		for (i = 0; i < nPlots; i++)
+		for (i = 0; i < nTracks; i++)
 		{
-			m_dataTrackList[i]->m_pKalman->m_S = gAssociationMatrix->m_MatS[m_dataTrackList[i]->m_Id][i];
+			m_dataTrackList[i]->m_pKalman->m_S = gAssociationMatrix->m_MatS[m_dataTrackList[i]->m_Id][i+1];
 			m_dataTrackList[i]->m_pKalman->Update(dataPlotList[i]);
+			m_dataTrackList[i]->m_pKalman->GetLastLocation();
+			if (i == 1)
+			{
+				for (int h = 0; h < 2; h++)
+				{
+					fout << m_dataTrackList[i]->m_pKalman->m_X.m_Data[h] << ",";
+				}
+				fout << "\n";
+			}
+			
 		}
 
 		//if (isAsocFlagVec && i == j)
