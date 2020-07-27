@@ -38,6 +38,7 @@ void TrackerJpda::DoTrack(const DataPlotList &dataPlotList)
 	{
 		float dt = 93.0 / 1000.0;
 		AssociationMatrix *gAssociationMatrix = AssociationMatrix::GetInstance();
+		gAssociationMatrix->Clean();
 		
 		Graph graph(nTracks + nPlots); //creat graph-list in nTracks size ?
 		
@@ -84,10 +85,10 @@ void TrackerJpda::DoTrack(const DataPlotList &dataPlotList)
 					cout << endl;
 				}
 
-				cout << "Done" << endl;
+				//cout << "Done" << endl;
 
 
-				cout << "Done2";
+				//cout << "Done2";
 			}
 
 			//if(counter == nTracks)
@@ -99,6 +100,7 @@ void TrackerJpda::DoTrack(const DataPlotList &dataPlotList)
 
 		for (i = 0; i < nPlots; i++)
 		{
+			m_dataTrackList[i]->m_pKalman->m_S = gAssociationMatrix->m_MatS[m_dataTrackList[i]->m_Id][i];
 			m_dataTrackList[i]->m_pKalman->Update(dataPlotList[i]);
 		}
 

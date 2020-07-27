@@ -37,7 +37,7 @@ public:
 	/// <summary>
 	/// Set matrix H with difference between track and plot
 	/// </summary>
-	void SetTempH(Vector9d track_pos, Vector9d plot_pos, Matrix49d &temp_h);
+	void SetTempH(Vector9d track_pos, Matrix49d &temp_h);
 
 	/// <summary>
 	/// Returns the global objects
@@ -101,6 +101,11 @@ public:
 	/// Contains the probabilities matrix
 	/// </summary>
 	double          m_MatTracksPlotsProb[MAX_NUM_TRACKS][MAX_NUM_PLOTS];
+
+	/// <summary>
+	/// Contains all the S matrixes
+	/// </summary>
+	Matrix4d          m_MatS[MAX_NUM_TRACKS][MAX_NUM_PLOTS];
 
 
 private:

@@ -35,7 +35,7 @@ ExtendedKalman::ExtendedKalman(const DataPlot &plot)	// plot in spherical model
 	cartesian.SphericalToCart(spherical);
 
 	SetP(spherical);
-	m_I.Identity();
+	m_I = m_I.Identity();
 
 
 	// TODO: How from (r,th,phi) we get cartesian velocity ??
@@ -110,13 +110,18 @@ void ExtendedKalman::Update(DataPlot* pPlot)
 {
 	// Innovation (or pre-fit residual) covariance
 	// Error Measurement Covariance Matrix
+
+	double r = pPlot->GetRange();
+	double az = pPlot->GetAzimuthAngle();
+	double el = pPlot->GetElevationAngle();
+
 	SetH();
 	SetR(pPlot->GetRangeAccuracy(), pPlot->GetAzimuthAccuracy(), pPlot->GetElevationAccuracy(), pPlot->GetVelocityAccuracy());
 
 	Matrix94d H_Transpose;
 	H_Transpose = Transpose(m_H);
 
-	m_S = (m_H * (m_P_Predict * H_Transpose)) + m_R;
+	//m_S = (m_H * (m_P_Predict * H_Transpose)) + m_R;
 	
 	// Near-optimal Kalman gain
 	// Sets the optimal kalman gain
@@ -152,8 +157,9 @@ void ExtendedKalman::Update(DataPlot* pPlot)
 		
 	// m_P_Predict = P(k,k-1)
 	// TODO: Ask Israel
-
-	m_P = (m_I - m_K * m_H) * m_P_Predict;
+	Matrix9d tempKH = m_K * m_H;
+	Matrix9d tempIkh = m_I - tempKH;
+	m_P = tempIkh * m_P_Predict;
 
 	//m_P = m_P_Predict - (m_K * (m_S * Transpose(m_K)));
 	//m_P = I * m_P_Predict - m_K * m_H * m_P_Predict;
@@ -164,7 +170,7 @@ void ExtendedKalman::Update(DataPlot* pPlot)
 /// </summary>
 void ExtendedKalman::SetS()
 {
-	SetH();
+	//SetH();
 
 	Matrix94d H_Transpose;
 	H_Transpose = Transpose(m_H);
@@ -359,34 +365,40 @@ void ExtendedKalman::SetH()
 	double x = m_X_Predict.m_Data[0];		// x
 	double y = m_X_Predict.m_Data[1];		// y
 	double z = m_X_Predict.m_Data[2];		// z
-	double vx = m_X_Predict.m_Data[3];	// vx
-	double vy = m_X_Predict.m_Data[4];	// vy
-	double vz = m_X_Predict.m_Data[5];	// vz
-	double ax = m_X_Predict.m_Data[6];	// ax
-	double ay = m_X_Predict.m_Data[7];	// ay
-	double az = m_X_Predict.m_Data[8];	// az
+	double vx = m_X_Predict.m_Data[3];		// vx
+	double vy = m_X_Predict.m_Data[4];		// vy
+	double vz = m_X_Predict.m_Data[5];		// vz
+	double ax = m_X_Predict.m_Data[6];		// ax
+	double ay = m_X_Predict.m_Data[7];		// ay
+	double az = m_X_Predict.m_Data[8];		// az
 
-	double r = SrvDspMath::sqrt(x*x + y*y + z*z);
-	double rr = r*r;
-	double rrr = r*r*r;
-	double temp1 = x*x + y*y;		// x^2 + y^2
-	double temp2 = SrvDspMath::sqrt(temp1);								// sqrt(x^2 + y^2)
+	double r = SrvDspMath::sqrt(x*x + y * y + z * z);
+	double rr = r * r;
+	double rrr = r * r*r;
+	double ro = x * x + y * y;		// x^2 + y^2
+	double sqrtro = SrvDspMath::sqrt(ro);								// sqrt(x^2 + y^2)
+	double rv = x * vx + y * vy + z * vz;
 
 	m_H.Zero();
-	m_H.m_Data[0][0] = x / r;   //	= dR / dX
-	m_H.m_Data[0][1] = y / r;	//	= dR / dY
-	m_H.m_Data[0][2] = z / r;	//	= dR / dZ
-	m_H.m_Data[1][0] = -(y / temp1);  //	dAz / dX
-	m_H.m_Data[1][1] = x / temp1;  //	dAz / dY
-	m_H.m_Data[2][0] = (z * x) / (rr * temp2);  //  dEl / dX
-	m_H.m_Data[2][1] = (z * y) / (rr * temp2);  //  dEl / dY
-	m_H.m_Data[2][2] = -(temp2 / rr); //  dEl / dZ
 
-	//TODO:
-	// maybe lines 384 385 386 need to be in // 
-	m_H.m_Data[3][0] = ( vx*(y*y + z*z) - x*(y*vy + z*vz) ) / rrr;
-	m_H.m_Data[3][1] = ( vy*(x*x + z*z) - y*(x*vx + z*vz)) / rrr;
-	m_H.m_Data[3][2] = ( vz*(y*y + x*x) - z*(y*vy + x*vx)) / rrr;
+	if (r != 0)
+	{
+		m_H.m_Data[0][0] = x / r;   //	= dR / dX
+		m_H.m_Data[0][1] = y / r;	//	= dR / dY
+		m_H.m_Data[0][2] = z / r;	//	= dR / dZ
+	}
+	if (ro != 0)
+	{
+		m_H.m_Data[1][0] = -(y / ro);  //	dAz / dX	// ?
+		m_H.m_Data[1][1] = x / ro;  //	dAz / dY
+		m_H.m_Data[2][0] = (z * x) / (rr * sqrtro);  //  dEl / dX
+		m_H.m_Data[2][1] = (z * y) / (rr * sqrtro);  //  dEl / dY
+		m_H.m_Data[2][2] = -(sqrtro / rr); //  dEl / dZ
+	}
+
+	m_H.m_Data[3][0] = (vx*(y*y + z * z) - x * (y*vy + z * vz)) / rrr;
+	m_H.m_Data[3][1] = (vy*(x*x + z * z) - y * (x*vx + z * vz)) / rrr;
+	m_H.m_Data[3][2] = (vz*(y*y + x * x) - z * (y*vy + x * vx)) / rrr;
 	m_H.m_Data[3][3] = x / r;
 	m_H.m_Data[3][4] = y / r;
 	m_H.m_Data[3][5] = z / r;

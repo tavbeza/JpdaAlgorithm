@@ -179,9 +179,11 @@ void AssociationMatrix::CheckAssociation(DataTrack &track, const DataPlot &plot,
 	
 	Matrix49d temp_h;
 
-	SetTempH(track.m_pKalman->m_X_Predict, plot_pos, temp_h);
+	SetTempH(track.m_pKalman->m_X_Predict, temp_h);
 
-	Matrix94d temp1 = track.m_pKalman->m_P_Predict * Transpose(temp_h);
+	Matrix94d temp_h_transpose = Transpose(temp_h);
+	
+	Matrix94d temp1 = track.m_pKalman->m_P_Predict * temp_h_transpose;
 	//track.m_pKalman->m_S = track.m_pKalman->m_H * temp1 + track.m_pKalman->m_R;
 	Matrix4d new_S;
 
@@ -193,10 +195,10 @@ void AssociationMatrix::CheckAssociation(DataTrack &track, const DataPlot &plot,
 	double sigma_el_plot = plot.GetElevationAccuracy();
 	double sigma_v_plot = plot.GetVelocityAccuracy();
 
-	double sigma_r = SrvDspMath::pow(sigma_r_plot, 2) + SrvDspMath::pow(new_S.m_Data[0][0], 2);
-	double sigma_az = SrvDspMath::pow(sigma_az_plot, 2) + SrvDspMath::pow(new_S.m_Data[1][1], 2);
-	double sigma_el = SrvDspMath::pow(sigma_el_plot, 2) + SrvDspMath::pow(new_S.m_Data[2][2], 2);
-	double sigma_v = SrvDspMath::pow(sigma_v_plot, 2) + SrvDspMath::pow(new_S.m_Data[3][3], 2);
+	double sigma_r = SrvDspMath::pow(sigma_r_plot, 2) + abs(new_S.m_Data[0][0]); //SrvDspMath::pow(new_S.m_Data[0][0], 2);
+	double sigma_az = SrvDspMath::pow(sigma_az_plot, 2) + abs(new_S.m_Data[1][1]); //SrvDspMath::pow(new_S.m_Data[1][1], 2);
+	double sigma_el = SrvDspMath::pow(sigma_el_plot, 2) + abs(new_S.m_Data[2][2]); //SrvDspMath::pow(new_S.m_Data[2][2], 2);
+	double sigma_v = SrvDspMath::pow(sigma_v_plot, 2) + abs(new_S.m_Data[3][3]); //SrvDspMath::pow(new_S.m_Data[3][3], 2);
 		
 	// GateType='Rect'
 	// case 'nonlin'
@@ -220,10 +222,10 @@ void AssociationMatrix::CheckAssociation(DataTrack &track, const DataPlot &plot,
 	resZ.m_Data[1] = Mod7(resZ.m_Data[1]);
 
 	bool flagInGate = true;
-	flagInGate &= (abs(resZ.m_Data[0] <= kgl * gateR.m_Data[0]));
-	flagInGate &= (abs(resZ.m_Data[1] <= kgl * gateR.m_Data[1]));
-	flagInGate &= (abs(resZ.m_Data[2] <= kgl * gateR.m_Data[2]));
-	flagInGate &= (abs(resZ.m_Data[3] <= kgl * gateR.m_Data[3]));
+	flagInGate &= (abs(resZ.m_Data[0]) <= kgl * gateR.m_Data[0]);
+	flagInGate &= (abs(resZ.m_Data[1]) <= kgl * gateR.m_Data[1]);
+	flagInGate &= (abs(resZ.m_Data[2]) <= kgl * gateR.m_Data[2]);
+	flagInGate &= (abs(resZ.m_Data[3]) <= kgl * gateR.m_Data[3]);
 
 	if (flagInGate)
 	{
@@ -234,6 +236,8 @@ void AssociationMatrix::CheckAssociation(DataTrack &track, const DataPlot &plot,
 		new_S.m_Data[1][1] += sigma_az_plot;
 		new_S.m_Data[2][2] += sigma_el_plot;
 		new_S.m_Data[3][3] += sigma_v_plot;
+
+		m_MatS[track.m_Id][plot.m_seqNumber] = new_S;
 
 		Vector4d tempV = new_S.Inverse() * resZ;
 		double d2 = (resZ * tempV);
@@ -252,17 +256,18 @@ void AssociationMatrix::CheckAssociation(DataTrack &track, const DataPlot &plot,
 /// <summary>
 /// Set matrix H with difference between track and plot
 /// </summary>
-void AssociationMatrix::SetTempH(Vector9d track_pos, Vector9d plot_pos, Matrix49d &temp_h)
+void AssociationMatrix::SetTempH(Vector9d track_pos, Matrix49d &temp_h)
 {
-	double x = track_pos.m_Data[0] - plot_pos.m_Data[0];		// x
-	double y = track_pos.m_Data[1] - plot_pos.m_Data[1];		// y
-	double z = track_pos.m_Data[2] - plot_pos.m_Data[2];		// z
-	double vx = track_pos.m_Data[3] - plot_pos.m_Data[3];		// vx
-	double vy = track_pos.m_Data[4] - plot_pos.m_Data[4];		// vy
-	double vz = track_pos.m_Data[5] - plot_pos.m_Data[5];		// vz
-	double ax = track_pos.m_Data[6] - plot_pos.m_Data[6];		// ax
-	double ay = track_pos.m_Data[7] - plot_pos.m_Data[7];		// ay
-	double az = track_pos.m_Data[8] - plot_pos.m_Data[8];		// az
+	
+	double x = track_pos.m_Data[0];// -plot_pos.m_Data[0];		// x
+	double y = track_pos.m_Data[1];// - plot_pos.m_Data[1];		// y
+	double z = track_pos.m_Data[2];// - plot_pos.m_Data[2];		// z
+	double vx = track_pos.m_Data[3];// - plot_pos.m_Data[3];		// vx
+	double vy = track_pos.m_Data[4];// - plot_pos.m_Data[4];		// vy
+	double vz = track_pos.m_Data[5];// - plot_pos.m_Data[5];		// vz
+	double ax = track_pos.m_Data[6];// - plot_pos.m_Data[6];		// ax
+	double ay = track_pos.m_Data[7];// - plot_pos.m_Data[7];		// ay
+	double az = track_pos.m_Data[8];// - plot_pos.m_Data[8];		// az
 
 	double r = SrvDspMath::sqrt(x*x + y * y + z * z);
 	double rr = r * r;
@@ -288,12 +293,9 @@ void AssociationMatrix::SetTempH(Vector9d track_pos, Vector9d plot_pos, Matrix49
 		temp_h.m_Data[2][2] = -(sqrtro / rr); //  dEl / dZ
 	}
 	
-
-	//TODO:
-	// maybe lines 384 385 386 need to be in // 
-	temp_h.m_Data[3][0] = (vx*(y*y + z * z) - x * (y*vy + z * vz)) / rrr;
-	temp_h.m_Data[3][1] = (vy*(x*x + z * z) - y * (x*vx + z * vz)) / rrr;
-	temp_h.m_Data[3][2] = (vz*(y*y + x * x) - z * (y*vy + x * vx)) / rrr;
+	temp_h.m_Data[3][0] = ( vx*(y*y + z*z) - x*(y*vy +z*vz) ) / rrr;
+	temp_h.m_Data[3][1] = ( vy*(x*x + z*z) - y*(x*vx + z*vz) ) / rrr;
+	temp_h.m_Data[3][2] = ( vz*(y*y + x*x) - z*(y*vy + x*vx) ) / rrr;
 	temp_h.m_Data[3][3] = x / r;
 	temp_h.m_Data[3][4] = y / r;
 	temp_h.m_Data[3][5] = z / r;
