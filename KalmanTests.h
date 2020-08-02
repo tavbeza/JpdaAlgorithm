@@ -23,6 +23,9 @@
 #include "TwoDimensionalLine.h"
 #include "TwoDimensionalSquigglyLine.h"
 
+/// <summary>
+/// Class that execute methods of test cases
+/// </summary>
 class KalmanTests : public TestMethod
 {
 public:

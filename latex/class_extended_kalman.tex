@@ -1,0 +1,463 @@
+\hypertarget{class_extended_kalman}{}\doxysection{Extended\+Kalman Class Reference}
+\label{class_extended_kalman}\index{ExtendedKalman@{ExtendedKalman}}
+
+
+The \mbox{\hyperlink{class_kalman}{Kalman}} class encapsulates the extended kalman filter algorithm. It contains 2D and 3D implementation.  
+
+
+
+
+{\ttfamily \#include $<$Extended\+Kalman.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_extended_kalman_aa940cafe18557e4815c4fdbb89f3bba4}{Extended\+Kalman}} () noexcept
+\begin{DoxyCompactList}\small\item\em Default Constructor \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_extended_kalman_aa2d79022c685580c9b342bdb48e6cd76}{Extended\+Kalman}} (const \mbox{\hyperlink{class_data_plot}{Data\+Plot}} \&plot)
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_kalman}{Kalman}} 3D constructor \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{class_extended_kalman_a258a0635838b5babe5d8e18f4859d2c0}{$\sim$\+Extended\+Kalman}} ()
+\begin{DoxyCompactList}\small\item\em Virtual kalman destructor \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_extended_kalman_a97423f3e4ecbf0e0ff3eb26f1ef7e96f}{Init}} (\mbox{\hyperlink{class_vector}{Vector3d}} cartesian) noexcept
+\begin{DoxyCompactList}\small\item\em Initialize the kalman \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_vector}{Vector3d}} \mbox{\hyperlink{class_extended_kalman_a01e22b141a751dce276c4e3123ceb78c}{Predict}} ()
+\begin{DoxyCompactList}\small\item\em The algorithm works in a two-\/step process. In the prediction step, the \mbox{\hyperlink{class_kalman}{Kalman}} filter produces estimates of the current state variables, along with their uncertainties. Once the outcome of the next measurement (necessarily corrupted with some amount of error, including random noise) is observed, these estimates are updated using a weighted average, with more weight being given to estimates with higher certainty. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_extended_kalman_ac32649b38f843002dc47500977e647ca}{Update}} (\mbox{\hyperlink{class_data_plot}{Data\+Plot}} $\ast$p\+Plot)
+\begin{DoxyCompactList}\small\item\em The algorithm works in a two-\/step process. In the prediction step, the \mbox{\hyperlink{class_kalman}{Kalman}} filter produces estimates of the current state variables, along with their uncertainties. Once the outcome of the next measurement (necessarily corrupted with some amount of error, including random noise) is observed, ~\newline
+ \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{class_vector}{Vector3d}} \mbox{\hyperlink{class_extended_kalman_a46107634cbb0dc7557c61b8d90706a67}{Get\+Last\+Prediction}} () const
+\begin{DoxyCompactList}\small\item\em Returns the last predictions \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{class_vector}{Vector3d}} \mbox{\hyperlink{class_extended_kalman_a769068beb9af6baddb4ca83765b32527}{Get\+Last\+Location}} () const
+\begin{DoxyCompactList}\small\item\em Returns the last location \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_extended_kalman_aca743600fd970f8076a8a0360a7f52bf}{Set\+Dt}} (float dt)
+\begin{DoxyCompactList}\small\item\em Sets the delta time in the matrix A (Evolution state matrix) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_extended_kalman_aedccf32e7368643b67b09a6c81b6dae5}{SetS}} ()
+\begin{DoxyCompactList}\small\item\em Sets m\+\_\+S \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_extended_kalman_aa0c3e99dff35af339a48aa9693037231}{Set\+Q\+\_\+\+Singer}} (double tau, double sigma\+Maneuver2, \mbox{\hyperlink{class_matrix}{Matrix3d}} \&q)
+\begin{DoxyCompactList}\small\item\em Set Singer Model Process Noise Covariance matrix for state vector\+:\mbox{[}x Vx Ax\mbox{]}\textquotesingle{}; \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_extended_kalman_ab9a04904d6fde66d861bcc35133abf8c}{SetQ}} ()
+\begin{DoxyCompactList}\small\item\em Purpose\+: Set process noise covariance matrix Q algorithm\+: Based on Singer model Input\+: (1) Dt -\/ time interval \mbox{[}sec\mbox{]} (2) tau -\/ Assumed maneuver time constant \mbox{[}1X3\mbox{]} for each dimension \mbox{[}sec\mbox{]} (3) SigmaM -\/ Assumed maneuver time standard deviation \mbox{[}1X3\mbox{]} for each dimension \mbox{[}sec\mbox{]} (4) Amax -\/ Maximal target accelaeration with ability Pmax \mbox{[}1X3\mbox{]} for each dimension (5) Pmax -\/ Acceleration probability \mbox{[}1X3\mbox{]} for each dimension (6) P0 -\/ Probability that the target has no acceleration \mbox{[}1X3\mbox{]} for each dimension \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_extended_kalman_aa9239fba8a7a6b7832459d79be4f0f11}{Set\+F\+\_\+\+Singer}} (double tau, \mbox{\hyperlink{class_matrix}{Matrix3d}} \&f)
+\begin{DoxyCompactList}\small\item\em Set the matrix F \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_extended_kalman_ac0ed50b41a5183a492abd2097815f0ca}{SetF}} ()
+\begin{DoxyCompactList}\small\item\em Set the matrix F \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_extended_kalman_a1f80c51b494e2e018d1f49fd7b929da5}{SetH}} ()
+\begin{DoxyCompactList}\small\item\em Set measurement matrix H \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_extended_kalman_a500fb846c273486dff1e2f674066c64d}{Set\+Rdot}} ()
+\begin{DoxyCompactList}\small\item\em Convert cartesian velocity to R dot \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_extended_kalman_a869b9b06f85fcced40fc7e2758600cb0}{Set\+Predict\+Rdot}} ()
+\begin{DoxyCompactList}\small\item\em Convert cartesian velocity to R dot \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_extended_kalman_abb12d11ad6daf8e4124625249d41718f}{SetP}} (\mbox{\hyperlink{class_vector}{Vector3d}} spherical)
+\begin{DoxyCompactList}\small\item\em Set covariance matrix P \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_extended_kalman_ae1fc2b103e2dcc977e1f7a3e81c019cf}{SetR}} (double error\+\_\+x, double error\+\_\+y, double error\+\_\+z, double error\+\_\+v)
+\begin{DoxyCompactList}\small\item\em Set measurement covariance matrix \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_vector}{Vector9d}} \mbox{\hyperlink{class_extended_kalman_a98e2e4a7a1dadeb96f8bd9299943a205}{m\+\_\+X}}
+\begin{DoxyCompactList}\small\item\em The kalman state estimate vector of current track in enu\+\_\+0 coordinate axes\+: \mbox{[}x,Vx,Ax,y,Vy,Ay,z,Vz,Az\mbox{]} \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_matrix}{Matrix94d}} \mbox{\hyperlink{class_extended_kalman_a402da5f91393a13b27d6742d4f8218da}{m\+\_\+K}}
+\begin{DoxyCompactList}\small\item\em The kalman gain matrix \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_matrix}{Matrix9d}} \mbox{\hyperlink{class_extended_kalman_ad5beb43a6b179013486c6ef17b856624}{m\+\_\+P}}
+\begin{DoxyCompactList}\small\item\em The kalman error covariance matrix in E\+N\+U\+\_\+0 coordinate axes \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_matrix}{Matrix4d}} \mbox{\hyperlink{class_extended_kalman_a51743ddb2b637071602e484128c63c05}{m\+\_\+S}}
+\begin{DoxyCompactList}\small\item\em The kalman residual covariance matrix \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_matrix}{Matrix49d}} \mbox{\hyperlink{class_extended_kalman_a68bfcccdc6f1ff50a69e4158b05edb90}{m\+\_\+H}}
+\begin{DoxyCompactList}\small\item\em The kalman observation model \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_matrix}{Matrix4d}} \mbox{\hyperlink{class_extended_kalman_a7b769e2d2ebb9be5c95fafd6c6e743e0}{m\+\_\+R}}
+\begin{DoxyCompactList}\small\item\em The kalman covariance matrix of the observation noise \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_vector}{Vector9d}} \mbox{\hyperlink{class_extended_kalman_aa48ae46b572d094b716836940af2e806}{m\+\_\+\+X\+\_\+\+Predict}}
+\begin{DoxyCompactList}\small\item\em The kalman predicted (a prior) state estimate \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_matrix}{Matrix9d}} \mbox{\hyperlink{class_extended_kalman_a43881fcdec277f77a4301499799f9e44}{m\+\_\+\+P\+\_\+\+Predict}}
+\begin{DoxyCompactList}\small\item\em The kalman predicted (a prior) error covariance matrix \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_matrix}{Matrix9d}} \mbox{\hyperlink{class_extended_kalman_a6c5ac54f4499cc1a2d05a52649baa807}{m\+\_\+Q}}
+\begin{DoxyCompactList}\small\item\em The kalman process noise covariance matrix \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_matrix}{Matrix9d}} \mbox{\hyperlink{class_extended_kalman_aeff9afe273d53bc5bdfaab069f81983a}{m\+\_\+F}}
+\begin{DoxyCompactList}\small\item\em The kalman transition matrix for state vector \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_matrix}{Matrix9d}} \mbox{\hyperlink{class_extended_kalman_a8f58772f73adef653ec8d0af6089d6fc}{m\+\_\+I}}
+\begin{DoxyCompactList}\small\item\em Identity matrix 9x9 \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_vector}{Vector3d}} \mbox{\hyperlink{class_extended_kalman_a9348f3464fc3ebde7e5c326b1de0b014}{m\+\_\+last\+\_\+prediction}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_vector}{Vector}} of the last predicted position in cartesian coordinates (x,y,z) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_vector}{Vector3d}} \mbox{\hyperlink{class_extended_kalman_af2399fb5557ea5e447db06c79d160637}{m\+\_\+last\+\_\+speed\+\_\+cartesian}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_vector}{Vector}} of the velocity in cartesian coordinates (Vx,Vy,Vz) \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_extended_kalman_a15710cfa09fc3e0f0e78294d20af0b44}{m\+\_\+\+Dt}}
+\begin{DoxyCompactList}\small\item\em Delta time of dwell \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_extended_kalman_a31ecdeb85abbfe88079779a72e275a15}{m\+\_\+\+Rdot}}
+\begin{DoxyCompactList}\small\item\em The velocity in spherical coordinates \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_extended_kalman_ad5cc049dc927da892e55966e73fea7bd}{m\+\_\+\+Rdot\+\_\+\+Predict}}
+\begin{DoxyCompactList}\small\item\em The predicted velocity in spherical coordinates \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+The \mbox{\hyperlink{class_kalman}{Kalman}} class encapsulates the extended kalman filter algorithm. It contains 2D and 3D implementation. 
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_extended_kalman_aa940cafe18557e4815c4fdbb89f3bba4}\label{class_extended_kalman_aa940cafe18557e4815c4fdbb89f3bba4}} 
+\index{ExtendedKalman@{ExtendedKalman}!ExtendedKalman@{ExtendedKalman}}
+\index{ExtendedKalman@{ExtendedKalman}!ExtendedKalman@{ExtendedKalman}}
+\doxysubsubsection{\texorpdfstring{ExtendedKalman()}{ExtendedKalman()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Extended\+Kalman\+::\+Extended\+Kalman (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+
+
+Default Constructor 
+
+Default kalman Constructor\mbox{\Hypertarget{class_extended_kalman_aa2d79022c685580c9b342bdb48e6cd76}\label{class_extended_kalman_aa2d79022c685580c9b342bdb48e6cd76}} 
+\index{ExtendedKalman@{ExtendedKalman}!ExtendedKalman@{ExtendedKalman}}
+\index{ExtendedKalman@{ExtendedKalman}!ExtendedKalman@{ExtendedKalman}}
+\doxysubsubsection{\texorpdfstring{ExtendedKalman()}{ExtendedKalman()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Extended\+Kalman\+::\+Extended\+Kalman (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_data_plot}{Data\+Plot}} \&}]{plot }\end{DoxyParamCaption})}
+
+
+
+\mbox{\hyperlink{class_kalman}{Kalman}} 3D constructor 
+
+\mbox{\Hypertarget{class_extended_kalman_a258a0635838b5babe5d8e18f4859d2c0}\label{class_extended_kalman_a258a0635838b5babe5d8e18f4859d2c0}} 
+\index{ExtendedKalman@{ExtendedKalman}!````~ExtendedKalman@{$\sim$ExtendedKalman}}
+\index{````~ExtendedKalman@{$\sim$ExtendedKalman}!ExtendedKalman@{ExtendedKalman}}
+\doxysubsubsection{\texorpdfstring{$\sim$ExtendedKalman()}{~ExtendedKalman()}}
+{\footnotesize\ttfamily Extended\+Kalman\+::$\sim$\+Extended\+Kalman (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Virtual kalman destructor 
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_extended_kalman_a769068beb9af6baddb4ca83765b32527}\label{class_extended_kalman_a769068beb9af6baddb4ca83765b32527}} 
+\index{ExtendedKalman@{ExtendedKalman}!GetLastLocation@{GetLastLocation}}
+\index{GetLastLocation@{GetLastLocation}!ExtendedKalman@{ExtendedKalman}}
+\doxysubsubsection{\texorpdfstring{GetLastLocation()}{GetLastLocation()}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{class_vector}{Vector3d}} Extended\+Kalman\+::\+Get\+Last\+Location (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Returns the last location 
+
+\mbox{\Hypertarget{class_extended_kalman_a46107634cbb0dc7557c61b8d90706a67}\label{class_extended_kalman_a46107634cbb0dc7557c61b8d90706a67}} 
+\index{ExtendedKalman@{ExtendedKalman}!GetLastPrediction@{GetLastPrediction}}
+\index{GetLastPrediction@{GetLastPrediction}!ExtendedKalman@{ExtendedKalman}}
+\doxysubsubsection{\texorpdfstring{GetLastPrediction()}{GetLastPrediction()}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{class_vector}{Vector3d}} Extended\+Kalman\+::\+Get\+Last\+Prediction (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the last predictions 
+
+\mbox{\Hypertarget{class_extended_kalman_a97423f3e4ecbf0e0ff3eb26f1ef7e96f}\label{class_extended_kalman_a97423f3e4ecbf0e0ff3eb26f1ef7e96f}} 
+\index{ExtendedKalman@{ExtendedKalman}!Init@{Init}}
+\index{Init@{Init}!ExtendedKalman@{ExtendedKalman}}
+\doxysubsubsection{\texorpdfstring{Init()}{Init()}}
+{\footnotesize\ttfamily void Extended\+Kalman\+::\+Init (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_vector}{Vector3d}}}]{cartesian }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+
+
+Initialize the kalman 
+
+Init Extended \mbox{\hyperlink{class_kalman}{Kalman}} Filter\mbox{\Hypertarget{class_extended_kalman_a01e22b141a751dce276c4e3123ceb78c}\label{class_extended_kalman_a01e22b141a751dce276c4e3123ceb78c}} 
+\index{ExtendedKalman@{ExtendedKalman}!Predict@{Predict}}
+\index{Predict@{Predict}!ExtendedKalman@{ExtendedKalman}}
+\doxysubsubsection{\texorpdfstring{Predict()}{Predict()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_vector}{Vector3d}} Extended\+Kalman\+::\+Predict (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+The algorithm works in a two-\/step process. In the prediction step, the \mbox{\hyperlink{class_kalman}{Kalman}} filter produces estimates of the current state variables, along with their uncertainties. Once the outcome of the next measurement (necessarily corrupted with some amount of error, including random noise) is observed, these estimates are updated using a weighted average, with more weight being given to estimates with higher certainty. 
+
+\mbox{\Hypertarget{class_extended_kalman_aca743600fd970f8076a8a0360a7f52bf}\label{class_extended_kalman_aca743600fd970f8076a8a0360a7f52bf}} 
+\index{ExtendedKalman@{ExtendedKalman}!SetDt@{SetDt}}
+\index{SetDt@{SetDt}!ExtendedKalman@{ExtendedKalman}}
+\doxysubsubsection{\texorpdfstring{SetDt()}{SetDt()}}
+{\footnotesize\ttfamily void Extended\+Kalman\+::\+Set\+Dt (\begin{DoxyParamCaption}\item[{float}]{dt }\end{DoxyParamCaption})}
+
+
+
+Sets the delta time in the matrix A (Evolution state matrix) 
+
+\mbox{\Hypertarget{class_extended_kalman_ac0ed50b41a5183a492abd2097815f0ca}\label{class_extended_kalman_ac0ed50b41a5183a492abd2097815f0ca}} 
+\index{ExtendedKalman@{ExtendedKalman}!SetF@{SetF}}
+\index{SetF@{SetF}!ExtendedKalman@{ExtendedKalman}}
+\doxysubsubsection{\texorpdfstring{SetF()}{SetF()}}
+{\footnotesize\ttfamily void Extended\+Kalman\+::\+SetF (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Set the matrix F 
+
+Set the matrix F\mbox{\Hypertarget{class_extended_kalman_aa9239fba8a7a6b7832459d79be4f0f11}\label{class_extended_kalman_aa9239fba8a7a6b7832459d79be4f0f11}} 
+\index{ExtendedKalman@{ExtendedKalman}!SetF\_Singer@{SetF\_Singer}}
+\index{SetF\_Singer@{SetF\_Singer}!ExtendedKalman@{ExtendedKalman}}
+\doxysubsubsection{\texorpdfstring{SetF\_Singer()}{SetF\_Singer()}}
+{\footnotesize\ttfamily void Extended\+Kalman\+::\+Set\+F\+\_\+\+Singer (\begin{DoxyParamCaption}\item[{double}]{tau,  }\item[{\mbox{\hyperlink{class_matrix}{Matrix3d}} \&}]{f }\end{DoxyParamCaption})}
+
+
+
+Set the matrix F 
+
+\mbox{\Hypertarget{class_extended_kalman_a1f80c51b494e2e018d1f49fd7b929da5}\label{class_extended_kalman_a1f80c51b494e2e018d1f49fd7b929da5}} 
+\index{ExtendedKalman@{ExtendedKalman}!SetH@{SetH}}
+\index{SetH@{SetH}!ExtendedKalman@{ExtendedKalman}}
+\doxysubsubsection{\texorpdfstring{SetH()}{SetH()}}
+{\footnotesize\ttfamily void Extended\+Kalman\+::\+SetH (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Set measurement matrix H 
+
+\mbox{\Hypertarget{class_extended_kalman_abb12d11ad6daf8e4124625249d41718f}\label{class_extended_kalman_abb12d11ad6daf8e4124625249d41718f}} 
+\index{ExtendedKalman@{ExtendedKalman}!SetP@{SetP}}
+\index{SetP@{SetP}!ExtendedKalman@{ExtendedKalman}}
+\doxysubsubsection{\texorpdfstring{SetP()}{SetP()}}
+{\footnotesize\ttfamily void Extended\+Kalman\+::\+SetP (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_vector}{Vector3d}}}]{spherical }\end{DoxyParamCaption})}
+
+
+
+Set covariance matrix P 
+
+\mbox{\Hypertarget{class_extended_kalman_a869b9b06f85fcced40fc7e2758600cb0}\label{class_extended_kalman_a869b9b06f85fcced40fc7e2758600cb0}} 
+\index{ExtendedKalman@{ExtendedKalman}!SetPredictRdot@{SetPredictRdot}}
+\index{SetPredictRdot@{SetPredictRdot}!ExtendedKalman@{ExtendedKalman}}
+\doxysubsubsection{\texorpdfstring{SetPredictRdot()}{SetPredictRdot()}}
+{\footnotesize\ttfamily void Extended\+Kalman\+::\+Set\+Predict\+Rdot (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Convert cartesian velocity to R dot 
+
+\mbox{\Hypertarget{class_extended_kalman_ab9a04904d6fde66d861bcc35133abf8c}\label{class_extended_kalman_ab9a04904d6fde66d861bcc35133abf8c}} 
+\index{ExtendedKalman@{ExtendedKalman}!SetQ@{SetQ}}
+\index{SetQ@{SetQ}!ExtendedKalman@{ExtendedKalman}}
+\doxysubsubsection{\texorpdfstring{SetQ()}{SetQ()}}
+{\footnotesize\ttfamily void Extended\+Kalman\+::\+SetQ (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Purpose\+: Set process noise covariance matrix Q algorithm\+: Based on Singer model Input\+: (1) Dt -\/ time interval \mbox{[}sec\mbox{]} (2) tau -\/ Assumed maneuver time constant \mbox{[}1X3\mbox{]} for each dimension \mbox{[}sec\mbox{]} (3) SigmaM -\/ Assumed maneuver time standard deviation \mbox{[}1X3\mbox{]} for each dimension \mbox{[}sec\mbox{]} (4) Amax -\/ Maximal target accelaeration with ability Pmax \mbox{[}1X3\mbox{]} for each dimension (5) Pmax -\/ Acceleration probability \mbox{[}1X3\mbox{]} for each dimension (6) P0 -\/ Probability that the target has no acceleration \mbox{[}1X3\mbox{]} for each dimension 
+
+Purpose\+: Set process noise covariance matrix Q algorithm\+: Based on Singer model Input\+: (1) Dt -\/ time interval \mbox{[}sec\mbox{]} (2) tau -\/ Assumed maneuver time constant \mbox{[}1X3\mbox{]} for each dimension \mbox{[}sec\mbox{]} (3) SigmaM -\/ Assumed maneuver time standard deviation \mbox{[}1X3\mbox{]} for each dimension \mbox{[}sec\mbox{]} (4) Amax -\/ Maximal target accelaeration with probability Pmax \mbox{[}1X3\mbox{]} for each dimension (5) Pmax -\/ Acceleration probability \mbox{[}1X3\mbox{]} for each dimension (6) P0 -\/ Probability that the target has no acceleration \mbox{[}1X3\mbox{]} for each dimension
+
+for i=1\+:3 switch Sigma\+Mnvr\+Calc\+Mtd case \textquotesingle{}Direct\textquotesingle{} Sig\+Man2(i)=Sigma\+Maneuver2(i); /// Maneuver variance case \textquotesingle{}Acc\+Prob\textquotesingle{} Sig\+Man2(i)=Amax(i)$^\wedge$2/3$\ast$(1+4$\ast$\+Pmax(i)-\/P0(i)); /// Maneuver variance end q\{i\}=Set\+Q\+\_\+\+Singer(Dt,tau(i),Sig\+Man2(i)); end z3=zeros(3); Q = \mbox{[} q\{1\} z3 z3; z3 q\{2\} z3; z3 z3 q\{3\} \mbox{]};
+
+for i=1\+:3 switch Sigma\+Mnvr\+Calc\+Mtd case \textquotesingle{}Direct\textquotesingle{} Sig\+Man2(i)=Sigma\+Maneuver2(i); /// Maneuver variance case \textquotesingle{}Acc\+Prob\textquotesingle{} Sig\+Man2(i)=Amax(i)$^\wedge$2/3$\ast$(1+4$\ast$\+Pmax(i)-\/P0(i)); /// Maneuver variance end q\{i\}=Set\+Q\+\_\+\+Singer(Dt,tau(i),Sig\+Man2(i)); end z3=zeros(3); Q=\mbox{[}q\{1\} z3 z3; z3 q\{2\} z3; z3 z3 q\{3\}\mbox{]};\mbox{\Hypertarget{class_extended_kalman_aa0c3e99dff35af339a48aa9693037231}\label{class_extended_kalman_aa0c3e99dff35af339a48aa9693037231}} 
+\index{ExtendedKalman@{ExtendedKalman}!SetQ\_Singer@{SetQ\_Singer}}
+\index{SetQ\_Singer@{SetQ\_Singer}!ExtendedKalman@{ExtendedKalman}}
+\doxysubsubsection{\texorpdfstring{SetQ\_Singer()}{SetQ\_Singer()}}
+{\footnotesize\ttfamily void Extended\+Kalman\+::\+Set\+Q\+\_\+\+Singer (\begin{DoxyParamCaption}\item[{double}]{tau,  }\item[{double}]{sigma\+Maneuver2,  }\item[{\mbox{\hyperlink{class_matrix}{Matrix3d}} \&}]{q }\end{DoxyParamCaption})}
+
+
+
+Set Singer Model Process Noise Covariance matrix for state vector\+:\mbox{[}x Vx Ax\mbox{]}\textquotesingle{}; 
+
+\mbox{\Hypertarget{class_extended_kalman_ae1fc2b103e2dcc977e1f7a3e81c019cf}\label{class_extended_kalman_ae1fc2b103e2dcc977e1f7a3e81c019cf}} 
+\index{ExtendedKalman@{ExtendedKalman}!SetR@{SetR}}
+\index{SetR@{SetR}!ExtendedKalman@{ExtendedKalman}}
+\doxysubsubsection{\texorpdfstring{SetR()}{SetR()}}
+{\footnotesize\ttfamily void Extended\+Kalman\+::\+SetR (\begin{DoxyParamCaption}\item[{double}]{error\+\_\+range,  }\item[{double}]{error\+\_\+azimuth,  }\item[{double}]{error\+\_\+elevation,  }\item[{double}]{error\+\_\+rdot }\end{DoxyParamCaption})}
+
+
+
+Set measurement covariance matrix 
+
+\mbox{\Hypertarget{class_extended_kalman_a500fb846c273486dff1e2f674066c64d}\label{class_extended_kalman_a500fb846c273486dff1e2f674066c64d}} 
+\index{ExtendedKalman@{ExtendedKalman}!SetRdot@{SetRdot}}
+\index{SetRdot@{SetRdot}!ExtendedKalman@{ExtendedKalman}}
+\doxysubsubsection{\texorpdfstring{SetRdot()}{SetRdot()}}
+{\footnotesize\ttfamily void Extended\+Kalman\+::\+Set\+Rdot (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Convert cartesian velocity to R dot 
+
+\mbox{\Hypertarget{class_extended_kalman_aedccf32e7368643b67b09a6c81b6dae5}\label{class_extended_kalman_aedccf32e7368643b67b09a6c81b6dae5}} 
+\index{ExtendedKalman@{ExtendedKalman}!SetS@{SetS}}
+\index{SetS@{SetS}!ExtendedKalman@{ExtendedKalman}}
+\doxysubsubsection{\texorpdfstring{SetS()}{SetS()}}
+{\footnotesize\ttfamily void Extended\+Kalman\+::\+SetS (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Sets m\+\_\+S 
+
+Set m\+\_\+S\mbox{\Hypertarget{class_extended_kalman_ac32649b38f843002dc47500977e647ca}\label{class_extended_kalman_ac32649b38f843002dc47500977e647ca}} 
+\index{ExtendedKalman@{ExtendedKalman}!Update@{Update}}
+\index{Update@{Update}!ExtendedKalman@{ExtendedKalman}}
+\doxysubsubsection{\texorpdfstring{Update()}{Update()}}
+{\footnotesize\ttfamily void Extended\+Kalman\+::\+Update (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_data_plot}{Data\+Plot}} $\ast$}]{p\+Plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+The algorithm works in a two-\/step process. In the prediction step, the \mbox{\hyperlink{class_kalman}{Kalman}} filter produces estimates of the current state variables, along with their uncertainties. Once the outcome of the next measurement (necessarily corrupted with some amount of error, including random noise) is observed, ~\newline
+ 
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_extended_kalman_a15710cfa09fc3e0f0e78294d20af0b44}\label{class_extended_kalman_a15710cfa09fc3e0f0e78294d20af0b44}} 
+\index{ExtendedKalman@{ExtendedKalman}!m\_Dt@{m\_Dt}}
+\index{m\_Dt@{m\_Dt}!ExtendedKalman@{ExtendedKalman}}
+\doxysubsubsection{\texorpdfstring{m\_Dt}{m\_Dt}}
+{\footnotesize\ttfamily float Extended\+Kalman\+::m\+\_\+\+Dt}
+
+
+
+Delta time of dwell 
+
+\mbox{\Hypertarget{class_extended_kalman_aeff9afe273d53bc5bdfaab069f81983a}\label{class_extended_kalman_aeff9afe273d53bc5bdfaab069f81983a}} 
+\index{ExtendedKalman@{ExtendedKalman}!m\_F@{m\_F}}
+\index{m\_F@{m\_F}!ExtendedKalman@{ExtendedKalman}}
+\doxysubsubsection{\texorpdfstring{m\_F}{m\_F}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_matrix}{Matrix9d}} Extended\+Kalman\+::m\+\_\+F}
+
+
+
+The kalman transition matrix for state vector 
+
+\mbox{\Hypertarget{class_extended_kalman_a68bfcccdc6f1ff50a69e4158b05edb90}\label{class_extended_kalman_a68bfcccdc6f1ff50a69e4158b05edb90}} 
+\index{ExtendedKalman@{ExtendedKalman}!m\_H@{m\_H}}
+\index{m\_H@{m\_H}!ExtendedKalman@{ExtendedKalman}}
+\doxysubsubsection{\texorpdfstring{m\_H}{m\_H}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_matrix}{Matrix49d}} Extended\+Kalman\+::m\+\_\+H}
+
+
+
+The kalman observation model 
+
+\mbox{\Hypertarget{class_extended_kalman_a8f58772f73adef653ec8d0af6089d6fc}\label{class_extended_kalman_a8f58772f73adef653ec8d0af6089d6fc}} 
+\index{ExtendedKalman@{ExtendedKalman}!m\_I@{m\_I}}
+\index{m\_I@{m\_I}!ExtendedKalman@{ExtendedKalman}}
+\doxysubsubsection{\texorpdfstring{m\_I}{m\_I}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_matrix}{Matrix9d}} Extended\+Kalman\+::m\+\_\+I}
+
+
+
+Identity matrix 9x9 
+
+\mbox{\Hypertarget{class_extended_kalman_a402da5f91393a13b27d6742d4f8218da}\label{class_extended_kalman_a402da5f91393a13b27d6742d4f8218da}} 
+\index{ExtendedKalman@{ExtendedKalman}!m\_K@{m\_K}}
+\index{m\_K@{m\_K}!ExtendedKalman@{ExtendedKalman}}
+\doxysubsubsection{\texorpdfstring{m\_K}{m\_K}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_matrix}{Matrix94d}} Extended\+Kalman\+::m\+\_\+K}
+
+
+
+The kalman gain matrix 
+
+\mbox{\Hypertarget{class_extended_kalman_a9348f3464fc3ebde7e5c326b1de0b014}\label{class_extended_kalman_a9348f3464fc3ebde7e5c326b1de0b014}} 
+\index{ExtendedKalman@{ExtendedKalman}!m\_last\_prediction@{m\_last\_prediction}}
+\index{m\_last\_prediction@{m\_last\_prediction}!ExtendedKalman@{ExtendedKalman}}
+\doxysubsubsection{\texorpdfstring{m\_last\_prediction}{m\_last\_prediction}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_vector}{Vector3d}} Extended\+Kalman\+::m\+\_\+last\+\_\+prediction}
+
+
+
+\mbox{\hyperlink{class_vector}{Vector}} of the last predicted position in cartesian coordinates (x,y,z) 
+
+\mbox{\Hypertarget{class_extended_kalman_af2399fb5557ea5e447db06c79d160637}\label{class_extended_kalman_af2399fb5557ea5e447db06c79d160637}} 
+\index{ExtendedKalman@{ExtendedKalman}!m\_last\_speed\_cartesian@{m\_last\_speed\_cartesian}}
+\index{m\_last\_speed\_cartesian@{m\_last\_speed\_cartesian}!ExtendedKalman@{ExtendedKalman}}
+\doxysubsubsection{\texorpdfstring{m\_last\_speed\_cartesian}{m\_last\_speed\_cartesian}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_vector}{Vector3d}} Extended\+Kalman\+::m\+\_\+last\+\_\+speed\+\_\+cartesian}
+
+
+
+\mbox{\hyperlink{class_vector}{Vector}} of the velocity in cartesian coordinates (Vx,Vy,Vz) 
+
+\mbox{\Hypertarget{class_extended_kalman_ad5beb43a6b179013486c6ef17b856624}\label{class_extended_kalman_ad5beb43a6b179013486c6ef17b856624}} 
+\index{ExtendedKalman@{ExtendedKalman}!m\_P@{m\_P}}
+\index{m\_P@{m\_P}!ExtendedKalman@{ExtendedKalman}}
+\doxysubsubsection{\texorpdfstring{m\_P}{m\_P}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_matrix}{Matrix9d}} Extended\+Kalman\+::m\+\_\+P}
+
+
+
+The kalman error covariance matrix in E\+N\+U\+\_\+0 coordinate axes 
+
+\mbox{\Hypertarget{class_extended_kalman_a43881fcdec277f77a4301499799f9e44}\label{class_extended_kalman_a43881fcdec277f77a4301499799f9e44}} 
+\index{ExtendedKalman@{ExtendedKalman}!m\_P\_Predict@{m\_P\_Predict}}
+\index{m\_P\_Predict@{m\_P\_Predict}!ExtendedKalman@{ExtendedKalman}}
+\doxysubsubsection{\texorpdfstring{m\_P\_Predict}{m\_P\_Predict}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_matrix}{Matrix9d}} Extended\+Kalman\+::m\+\_\+\+P\+\_\+\+Predict}
+
+
+
+The kalman predicted (a prior) error covariance matrix 
+
+\mbox{\Hypertarget{class_extended_kalman_a6c5ac54f4499cc1a2d05a52649baa807}\label{class_extended_kalman_a6c5ac54f4499cc1a2d05a52649baa807}} 
+\index{ExtendedKalman@{ExtendedKalman}!m\_Q@{m\_Q}}
+\index{m\_Q@{m\_Q}!ExtendedKalman@{ExtendedKalman}}
+\doxysubsubsection{\texorpdfstring{m\_Q}{m\_Q}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_matrix}{Matrix9d}} Extended\+Kalman\+::m\+\_\+Q}
+
+
+
+The kalman process noise covariance matrix 
+
+\mbox{\Hypertarget{class_extended_kalman_a7b769e2d2ebb9be5c95fafd6c6e743e0}\label{class_extended_kalman_a7b769e2d2ebb9be5c95fafd6c6e743e0}} 
+\index{ExtendedKalman@{ExtendedKalman}!m\_R@{m\_R}}
+\index{m\_R@{m\_R}!ExtendedKalman@{ExtendedKalman}}
+\doxysubsubsection{\texorpdfstring{m\_R}{m\_R}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_matrix}{Matrix4d}} Extended\+Kalman\+::m\+\_\+R}
+
+
+
+The kalman covariance matrix of the observation noise 
+
+\mbox{\Hypertarget{class_extended_kalman_a31ecdeb85abbfe88079779a72e275a15}\label{class_extended_kalman_a31ecdeb85abbfe88079779a72e275a15}} 
+\index{ExtendedKalman@{ExtendedKalman}!m\_Rdot@{m\_Rdot}}
+\index{m\_Rdot@{m\_Rdot}!ExtendedKalman@{ExtendedKalman}}
+\doxysubsubsection{\texorpdfstring{m\_Rdot}{m\_Rdot}}
+{\footnotesize\ttfamily float Extended\+Kalman\+::m\+\_\+\+Rdot}
+
+
+
+The velocity in spherical coordinates 
+
+\mbox{\Hypertarget{class_extended_kalman_ad5cc049dc927da892e55966e73fea7bd}\label{class_extended_kalman_ad5cc049dc927da892e55966e73fea7bd}} 
+\index{ExtendedKalman@{ExtendedKalman}!m\_Rdot\_Predict@{m\_Rdot\_Predict}}
+\index{m\_Rdot\_Predict@{m\_Rdot\_Predict}!ExtendedKalman@{ExtendedKalman}}
+\doxysubsubsection{\texorpdfstring{m\_Rdot\_Predict}{m\_Rdot\_Predict}}
+{\footnotesize\ttfamily float Extended\+Kalman\+::m\+\_\+\+Rdot\+\_\+\+Predict}
+
+
+
+The predicted velocity in spherical coordinates 
+
+\mbox{\Hypertarget{class_extended_kalman_a51743ddb2b637071602e484128c63c05}\label{class_extended_kalman_a51743ddb2b637071602e484128c63c05}} 
+\index{ExtendedKalman@{ExtendedKalman}!m\_S@{m\_S}}
+\index{m\_S@{m\_S}!ExtendedKalman@{ExtendedKalman}}
+\doxysubsubsection{\texorpdfstring{m\_S}{m\_S}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_matrix}{Matrix4d}} Extended\+Kalman\+::m\+\_\+S}
+
+
+
+The kalman residual covariance matrix 
+
+\mbox{\Hypertarget{class_extended_kalman_a98e2e4a7a1dadeb96f8bd9299943a205}\label{class_extended_kalman_a98e2e4a7a1dadeb96f8bd9299943a205}} 
+\index{ExtendedKalman@{ExtendedKalman}!m\_X@{m\_X}}
+\index{m\_X@{m\_X}!ExtendedKalman@{ExtendedKalman}}
+\doxysubsubsection{\texorpdfstring{m\_X}{m\_X}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_vector}{Vector9d}} Extended\+Kalman\+::m\+\_\+X}
+
+
+
+The kalman state estimate vector of current track in enu\+\_\+0 coordinate axes\+: \mbox{[}x,Vx,Ax,y,Vy,Ay,z,Vz,Az\mbox{]} 
+
+\mbox{\Hypertarget{class_extended_kalman_aa48ae46b572d094b716836940af2e806}\label{class_extended_kalman_aa48ae46b572d094b716836940af2e806}} 
+\index{ExtendedKalman@{ExtendedKalman}!m\_X\_Predict@{m\_X\_Predict}}
+\index{m\_X\_Predict@{m\_X\_Predict}!ExtendedKalman@{ExtendedKalman}}
+\doxysubsubsection{\texorpdfstring{m\_X\_Predict}{m\_X\_Predict}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_vector}{Vector9d}} Extended\+Kalman\+::m\+\_\+\+X\+\_\+\+Predict}
+
+
+
+The kalman predicted (a prior) state estimate 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Extended\+Kalman.\+h\item 
+Extended\+Kalman.\+cpp\end{DoxyCompactItemize}

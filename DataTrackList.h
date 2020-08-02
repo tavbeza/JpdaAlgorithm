@@ -3,6 +3,10 @@
 
 #include "DataTrack.h"
 #define MAX_TRACKS 200
+
+/// <summary>
+/// Class with a list of DataTrack
+/// </summary>
 class DataTrackList
 {
 public:

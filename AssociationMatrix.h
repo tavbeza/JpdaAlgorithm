@@ -1,13 +1,6 @@
 #ifndef TRACKER_ASSOCIATIONMATRIX_H_
 #define TRACKER_ASSOCIATIONMATRIX_H_
 
-/*
-#include "DataTypes\DataPlot.h"
-include "InfraLayer\General\Matrix.h"
-#include "ServiceLayer\SrvNavigation.h"
-#include "Track.h"
-*/
-
 #include "DataPlot.h"
 #include "Matrix.h"
 #include "Tracker.h"

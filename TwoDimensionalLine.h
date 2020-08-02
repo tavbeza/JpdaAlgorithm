@@ -3,6 +3,10 @@
 
 #include "EquationOfMotion.h"
 
+/// <summary>
+/// Class that inherits from EquationOfMotion class and hold motion equation of two dimensional line 
+/// and method of motion calculate for two dimensional line test cases
+/// </summary>
 class TwoDimensionalLine : public EquationOfMotion
 {
 

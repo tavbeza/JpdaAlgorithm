@@ -6,7 +6,10 @@
 #include <time.h>
 
 
-
+/// <summary>
+/// Class that inherits from EquationOfMotion class and hold motion equation of two dimensional squiggly line 
+/// and method of motion calculate for two dimensional squiggly line test cases
+/// </summary>
 class TwoDimensionalSquigglyLine :
 	public EquationOfMotion
 {

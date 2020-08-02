@@ -1,0 +1,133 @@
+\hypertarget{class_equation_of_motion}{}\doxysection{Equation\+Of\+Motion Class Reference}
+\label{class_equation_of_motion}\index{EquationOfMotion@{EquationOfMotion}}
+
+
+Class that hold motion equation and method of motion calculate for test cases  
+
+
+
+
+{\ttfamily \#include $<$Equation\+Of\+Motion.\+h$>$}
+
+Inheritance diagram for Equation\+Of\+Motion\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_equation_of_motion}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_equation_of_motion_a34fa395dfb836b42919fdceb904f9870}\label{class_equation_of_motion_a34fa395dfb836b42919fdceb904f9870}} 
+{\bfseries Equation\+Of\+Motion} (float dt=0, float x0=0, float y0=0, float z0=0, float vx0=0, float vy0=0, float vz0=0)
+\item 
+\mbox{\Hypertarget{class_equation_of_motion_abdb918fefef2133d891d7240201cb5b6}\label{class_equation_of_motion_abdb918fefef2133d891d7240201cb5b6}} 
+virtual void {\bfseries Calculate\+Motion} (int dwell\+Count, \mbox{\hyperlink{class_vector}{Vector3f}} \&loc\+Vec, \mbox{\hyperlink{class_vector}{Vector3f}} \&vel\+Vec)=0
+\item 
+\mbox{\Hypertarget{class_equation_of_motion_a703f7f506ea9e802072a8aaa4541eb7c}\label{class_equation_of_motion_a703f7f506ea9e802072a8aaa4541eb7c}} 
+float {\bfseries get\+Mx} () const
+\item 
+\mbox{\Hypertarget{class_equation_of_motion_a8e25c15571638d331564ec58ea44b21c}\label{class_equation_of_motion_a8e25c15571638d331564ec58ea44b21c}} 
+void {\bfseries set\+Mx} (float mx)
+\item 
+\mbox{\Hypertarget{class_equation_of_motion_ac39cb313c79fdab2e92a0c6a4bdc6fba}\label{class_equation_of_motion_ac39cb313c79fdab2e92a0c6a4bdc6fba}} 
+float {\bfseries get\+My} () const
+\item 
+\mbox{\Hypertarget{class_equation_of_motion_ad931c81b6635ab5d338eca268beff0de}\label{class_equation_of_motion_ad931c81b6635ab5d338eca268beff0de}} 
+void {\bfseries set\+My} (float my)
+\item 
+\mbox{\Hypertarget{class_equation_of_motion_aa54eec1f82171eceaea69f981f7192f7}\label{class_equation_of_motion_aa54eec1f82171eceaea69f981f7192f7}} 
+float {\bfseries get\+Mz} () const
+\item 
+\mbox{\Hypertarget{class_equation_of_motion_a226e9d5bc87a7a111a1f43c8dad2843c}\label{class_equation_of_motion_a226e9d5bc87a7a111a1f43c8dad2843c}} 
+void {\bfseries set\+Mz} (float mz)
+\item 
+\mbox{\Hypertarget{class_equation_of_motion_a54ed52050a112b5736b255d6f2d63ee0}\label{class_equation_of_motion_a54ed52050a112b5736b255d6f2d63ee0}} 
+float {\bfseries get\+Mvx} () const
+\item 
+\mbox{\Hypertarget{class_equation_of_motion_a23f62e26c2259a27032fdc7c18e6db73}\label{class_equation_of_motion_a23f62e26c2259a27032fdc7c18e6db73}} 
+void {\bfseries set\+Mvx} (float mvx)
+\item 
+\mbox{\Hypertarget{class_equation_of_motion_aaa73eb060e5a0a0cea5d124935e1bcb4}\label{class_equation_of_motion_aaa73eb060e5a0a0cea5d124935e1bcb4}} 
+float {\bfseries get\+Mvy} () const
+\item 
+\mbox{\Hypertarget{class_equation_of_motion_a6d5dc8b30fc1984a37bf59342196f5ef}\label{class_equation_of_motion_a6d5dc8b30fc1984a37bf59342196f5ef}} 
+void {\bfseries set\+Mvy} (float mvy)
+\item 
+\mbox{\Hypertarget{class_equation_of_motion_aa86fe9aaa3c2503ee89b85221298bab1}\label{class_equation_of_motion_aa86fe9aaa3c2503ee89b85221298bab1}} 
+float {\bfseries get\+Mvz} () const
+\item 
+\mbox{\Hypertarget{class_equation_of_motion_a9eccddd7dfa9fbee1076c2229a7595eb}\label{class_equation_of_motion_a9eccddd7dfa9fbee1076c2229a7595eb}} 
+void {\bfseries set\+Mvz} (float mvz)
+\item 
+\mbox{\Hypertarget{class_equation_of_motion_a217b7107e7eaeb4a797cf3328c5e14c8}\label{class_equation_of_motion_a217b7107e7eaeb4a797cf3328c5e14c8}} 
+float {\bfseries get\+Mvx0} () const
+\item 
+\mbox{\Hypertarget{class_equation_of_motion_a3b45515919e55c52a529e0125d30f9cb}\label{class_equation_of_motion_a3b45515919e55c52a529e0125d30f9cb}} 
+float {\bfseries get\+Mvy0} () const
+\item 
+\mbox{\Hypertarget{class_equation_of_motion_a51d34b28cbcd5c5c2faa09305f518398}\label{class_equation_of_motion_a51d34b28cbcd5c5c2faa09305f518398}} 
+float {\bfseries get\+Mvz0} () const
+\item 
+\mbox{\Hypertarget{class_equation_of_motion_a312f239f3ed7e51ce3c6db811ee71dcf}\label{class_equation_of_motion_a312f239f3ed7e51ce3c6db811ee71dcf}} 
+float {\bfseries get\+Mdt} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_equation_of_motion_a0996235725e6535005cd00cdcbcc2195}\label{class_equation_of_motion_a0996235725e6535005cd00cdcbcc2195}} 
+float {\bfseries m\+\_\+x0}
+\item 
+\mbox{\Hypertarget{class_equation_of_motion_af2374c0a22eded0e29f9bc95d2038f74}\label{class_equation_of_motion_af2374c0a22eded0e29f9bc95d2038f74}} 
+float {\bfseries m\+\_\+y0}
+\item 
+\mbox{\Hypertarget{class_equation_of_motion_aa59e7c2064012733d27bafbdcfa9e6fb}\label{class_equation_of_motion_aa59e7c2064012733d27bafbdcfa9e6fb}} 
+float {\bfseries m\+\_\+z0}
+\item 
+\mbox{\Hypertarget{class_equation_of_motion_a339fb2a8d80f74570493c9c10f3c7a50}\label{class_equation_of_motion_a339fb2a8d80f74570493c9c10f3c7a50}} 
+float {\bfseries m\+\_\+x}
+\item 
+\mbox{\Hypertarget{class_equation_of_motion_a093628f57135006a8108078db547bac7}\label{class_equation_of_motion_a093628f57135006a8108078db547bac7}} 
+float {\bfseries m\+\_\+y}
+\item 
+\mbox{\Hypertarget{class_equation_of_motion_aa5c498bdfba15bb8ab907a7b4314e61c}\label{class_equation_of_motion_aa5c498bdfba15bb8ab907a7b4314e61c}} 
+float {\bfseries m\+\_\+z}
+\item 
+\mbox{\Hypertarget{class_equation_of_motion_a397a6463a3731640078d2d79edaf19c7}\label{class_equation_of_motion_a397a6463a3731640078d2d79edaf19c7}} 
+float {\bfseries m\+\_\+vx}
+\item 
+\mbox{\Hypertarget{class_equation_of_motion_afec18339aa6e2c20c02137a7629c9b1e}\label{class_equation_of_motion_afec18339aa6e2c20c02137a7629c9b1e}} 
+float {\bfseries m\+\_\+vy}
+\item 
+\mbox{\Hypertarget{class_equation_of_motion_a699391f59919995fef53a461aec5c75b}\label{class_equation_of_motion_a699391f59919995fef53a461aec5c75b}} 
+float {\bfseries m\+\_\+vz}
+\item 
+\mbox{\Hypertarget{class_equation_of_motion_aa7436a3dc2e50284782f6c4fc897da7e}\label{class_equation_of_motion_aa7436a3dc2e50284782f6c4fc897da7e}} 
+float {\bfseries m\+\_\+vx0}
+\item 
+\mbox{\Hypertarget{class_equation_of_motion_a07a03a4286d490882aecfc252d822a89}\label{class_equation_of_motion_a07a03a4286d490882aecfc252d822a89}} 
+float {\bfseries m\+\_\+vy0}
+\item 
+\mbox{\Hypertarget{class_equation_of_motion_a4b109c30455f341f0e6d9eb1db36c322}\label{class_equation_of_motion_a4b109c30455f341f0e6d9eb1db36c322}} 
+float {\bfseries m\+\_\+vz0}
+\item 
+\mbox{\Hypertarget{class_equation_of_motion_a32a236561e31061b5b09075d88810479}\label{class_equation_of_motion_a32a236561e31061b5b09075d88810479}} 
+float {\bfseries m\+\_\+dt}
+\end{DoxyCompactItemize}
+\doxysubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_equation_of_motion_a1d5d6185928581d3369bd7d341a15da1}\label{class_equation_of_motion_a1d5d6185928581d3369bd7d341a15da1}} 
+std\+::ofstream \& {\bfseries operator$<$$<$} (std\+::ofstream \&out, const \mbox{\hyperlink{class_equation_of_motion}{Equation\+Of\+Motion}} \&eom)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Class that hold motion equation and method of motion calculate for test cases 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Equation\+Of\+Motion.\+h\item 
+Equation\+Of\+Motion.\+cpp\end{DoxyCompactItemize}

@@ -209,10 +209,29 @@ public:
 	/// </summary>
 	Matrix9d m_I;
 
+	/// <summary>
+	/// Vector of the last predicted position in cartesian coordinates (x,y,z)
+	/// </summary>
 	Vector3d m_last_prediction;
+	
+	/// <summary>
+	/// Vector of the velocity in cartesian coordinates (Vx,Vy,Vz)
+	/// </summary>
 	Vector3d m_last_speed_cartesian;
+	
+	/// <summary>
+	/// Delta time of dwell
+	/// </summary>
 	float	 m_Dt;
+	
+	/// <summary>
+	/// The velocity in spherical coordinates
+	/// </summary>
 	float	 m_Rdot;
+	
+	/// <summary>
+	/// The predicted velocity in spherical coordinates
+	/// </summary>
 	float m_Rdot_Predict;
 
 };

@@ -39,10 +39,10 @@ ExtendedKalman::ExtendedKalman(const DataPlot &plot)	// plot in spherical model
 
 
 	// TODO: How from (r,th,phi) we get cartesian velocity ??
-	Vector3d cartVelocity;
-	cartVelocity.SphericalToCartVelocity(spherical);
+	//Vector3d cartVelocity;
+	//cartVelocity.SphericalToCartVelocity(spherical);
 
-	m_last_speed_cartesian = cartVelocity;
+	//m_last_speed_cartesian = cartVelocity;
 	SetRdot();
 	Init(
 		cartesian		// (x, y, z)

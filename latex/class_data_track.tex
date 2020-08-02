@@ -1,0 +1,157 @@
+\hypertarget{class_data_track}{}\doxysection{Data\+Track Class Reference}
+\label{class_data_track}\index{DataTrack@{DataTrack}}
+
+
+This class encpsulate the Track entity.  
+
+
+
+
+{\ttfamily \#include $<$Data\+Track.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_data_track_a1034d71180627c99cb4fc3f142bffa02}{Data\+Track}} (int id)
+\begin{DoxyCompactList}\small\item\em Track constractor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_data_track_a614194034fe7164b68e9d7be43e274f1}{Init\+Track}} (const \mbox{\hyperlink{class_data_plot}{Data\+Plot}} \&p\+Data\+Plot)
+\begin{DoxyCompactList}\small\item\em Track constractor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_data_track_a7db9dec80de1a47aee7a7ac210367702}{$\sim$\+Data\+Track}} ()
+\begin{DoxyCompactList}\small\item\em Tracl constractor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{class_data_track_a765b347a0def74efafbcd89fb46d5e76}{m\+\_\+\+Time\+Created}}
+\begin{DoxyCompactList}\small\item\em The time the track is created U\+N\+IX time stamp in milliseconds \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_data_track_a8025a0085dafe0bd6395a77647a20217}{m\+\_\+\+Time\+Updated}}
+\begin{DoxyCompactList}\small\item\em The time of the track last update U\+N\+IX time stamp in milliseconds \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_data_track_a906fab3d873176834d0e9949d5ad8222}{m\+\_\+\+Assoc\+Valid}}
+\begin{DoxyCompactList}\small\item\em Initiate the track m\+\_\+\+Assoc\+Valid in each Track to false-\/\+Not valid for association true-\/\+Valid for association \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_data_track_acca35937c0ee7de60fe258b115995652}\label{class_data_track_acca35937c0ee7de60fe258b115995652}} 
+int {\bfseries m\+\_\+n\+Updates}
+\item 
+int \mbox{\hyperlink{class_data_track_a167011e494c88cea283618e929d413e3}{m\+\_\+\+Type}}
+\begin{DoxyCompactList}\small\item\em 0 -\/ Tentative 1 -\/ System Track \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{class_data_track_a92bdeb9fea80c70245d5ceb00233a2c0}{m\+\_\+\+Priority}}
+\begin{DoxyCompactList}\small\item\em Contains the track priority \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_data_track_a240b0d35da602b800ad1e2e0fd52c0a4}\label{class_data_track_a240b0d35da602b800ad1e2e0fd52c0a4}} 
+int {\bfseries m\+\_\+n\+Dwells}
+\item 
+\mbox{\Hypertarget{class_data_track_a10767d00979efec941068b7a1429e058}\label{class_data_track_a10767d00979efec941068b7a1429e058}} 
+\mbox{\hyperlink{class_vector}{Vector3d}} {\bfseries m\+\_\+\+Pos\+Enulast}
+\item 
+\mbox{\Hypertarget{class_data_track_a55c3d746f77198062ed5519a59f02bb9}\label{class_data_track_a55c3d746f77198062ed5519a59f02bb9}} 
+int {\bfseries m\+\_\+\+Meas\+Ass\+Prob\+Hist}
+\item 
+\mbox{\Hypertarget{class_data_track_abb2429785517430d140bc7de8090bfdb}\label{class_data_track_abb2429785517430d140bc7de8090bfdb}} 
+int {\bfseries m\+\_\+\+Meas\+Ass\+Prob\+Last}
+\item 
+\mbox{\Hypertarget{class_data_track_a8cbb696b68e7fefba476a29da5dcfcf8}\label{class_data_track_a8cbb696b68e7fefba476a29da5dcfcf8}} 
+int {\bfseries m\+\_\+\+Id}
+\item 
+\mbox{\Hypertarget{class_data_track_abdcbbc469beff3f86641e879cceb50ca}\label{class_data_track_abdcbbc469beff3f86641e879cceb50ca}} 
+int {\bfseries m\+\_\+\+Color}
+\item 
+\mbox{\Hypertarget{class_data_track_a1585728ed1a925144a289e43b580f7e3}\label{class_data_track_a1585728ed1a925144a289e43b580f7e3}} 
+\mbox{\hyperlink{class_extended_kalman}{Extended\+Kalman}} $\ast$ {\bfseries m\+\_\+p\+Kalman}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This class encpsulate the Track entity. 
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_data_track_a1034d71180627c99cb4fc3f142bffa02}\label{class_data_track_a1034d71180627c99cb4fc3f142bffa02}} 
+\index{DataTrack@{DataTrack}!DataTrack@{DataTrack}}
+\index{DataTrack@{DataTrack}!DataTrack@{DataTrack}}
+\doxysubsubsection{\texorpdfstring{DataTrack()}{DataTrack()}}
+{\footnotesize\ttfamily Data\+Track\+::\+Data\+Track (\begin{DoxyParamCaption}\item[{int}]{id }\end{DoxyParamCaption})}
+
+
+
+Track constractor. 
+
+\mbox{\Hypertarget{class_data_track_a7db9dec80de1a47aee7a7ac210367702}\label{class_data_track_a7db9dec80de1a47aee7a7ac210367702}} 
+\index{DataTrack@{DataTrack}!````~DataTrack@{$\sim$DataTrack}}
+\index{````~DataTrack@{$\sim$DataTrack}!DataTrack@{DataTrack}}
+\doxysubsubsection{\texorpdfstring{$\sim$DataTrack()}{~DataTrack()}}
+{\footnotesize\ttfamily Data\+Track\+::$\sim$\+Data\+Track (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Tracl constractor. 
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_data_track_a614194034fe7164b68e9d7be43e274f1}\label{class_data_track_a614194034fe7164b68e9d7be43e274f1}} 
+\index{DataTrack@{DataTrack}!InitTrack@{InitTrack}}
+\index{InitTrack@{InitTrack}!DataTrack@{DataTrack}}
+\doxysubsubsection{\texorpdfstring{InitTrack()}{InitTrack()}}
+{\footnotesize\ttfamily void Data\+Track\+::\+Init\+Track (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_data_plot}{Data\+Plot}} \&}]{p\+Data\+Plot }\end{DoxyParamCaption})}
+
+
+
+Track constractor. 
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_data_track_a906fab3d873176834d0e9949d5ad8222}\label{class_data_track_a906fab3d873176834d0e9949d5ad8222}} 
+\index{DataTrack@{DataTrack}!m\_AssocValid@{m\_AssocValid}}
+\index{m\_AssocValid@{m\_AssocValid}!DataTrack@{DataTrack}}
+\doxysubsubsection{\texorpdfstring{m\_AssocValid}{m\_AssocValid}}
+{\footnotesize\ttfamily int Data\+Track\+::m\+\_\+\+Assoc\+Valid}
+
+
+
+Initiate the track m\+\_\+\+Assoc\+Valid in each Track to false-\/\+Not valid for association true-\/\+Valid for association 
+
+\mbox{\Hypertarget{class_data_track_a92bdeb9fea80c70245d5ceb00233a2c0}\label{class_data_track_a92bdeb9fea80c70245d5ceb00233a2c0}} 
+\index{DataTrack@{DataTrack}!m\_Priority@{m\_Priority}}
+\index{m\_Priority@{m\_Priority}!DataTrack@{DataTrack}}
+\doxysubsubsection{\texorpdfstring{m\_Priority}{m\_Priority}}
+{\footnotesize\ttfamily double Data\+Track\+::m\+\_\+\+Priority}
+
+
+
+Contains the track priority 
+
+\mbox{\Hypertarget{class_data_track_a765b347a0def74efafbcd89fb46d5e76}\label{class_data_track_a765b347a0def74efafbcd89fb46d5e76}} 
+\index{DataTrack@{DataTrack}!m\_TimeCreated@{m\_TimeCreated}}
+\index{m\_TimeCreated@{m\_TimeCreated}!DataTrack@{DataTrack}}
+\doxysubsubsection{\texorpdfstring{m\_TimeCreated}{m\_TimeCreated}}
+{\footnotesize\ttfamily int Data\+Track\+::m\+\_\+\+Time\+Created}
+
+
+
+The time the track is created U\+N\+IX time stamp in milliseconds 
+
+\mbox{\Hypertarget{class_data_track_a8025a0085dafe0bd6395a77647a20217}\label{class_data_track_a8025a0085dafe0bd6395a77647a20217}} 
+\index{DataTrack@{DataTrack}!m\_TimeUpdated@{m\_TimeUpdated}}
+\index{m\_TimeUpdated@{m\_TimeUpdated}!DataTrack@{DataTrack}}
+\doxysubsubsection{\texorpdfstring{m\_TimeUpdated}{m\_TimeUpdated}}
+{\footnotesize\ttfamily int Data\+Track\+::m\+\_\+\+Time\+Updated}
+
+
+
+The time of the track last update U\+N\+IX time stamp in milliseconds 
+
+\mbox{\Hypertarget{class_data_track_a167011e494c88cea283618e929d413e3}\label{class_data_track_a167011e494c88cea283618e929d413e3}} 
+\index{DataTrack@{DataTrack}!m\_Type@{m\_Type}}
+\index{m\_Type@{m\_Type}!DataTrack@{DataTrack}}
+\doxysubsubsection{\texorpdfstring{m\_Type}{m\_Type}}
+{\footnotesize\ttfamily int Data\+Track\+::m\+\_\+\+Type}
+
+
+
+0 -\/ Tentative 1 -\/ System Track 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Data\+Track.\+h\item 
+Data\+Track.\+cpp\end{DoxyCompactItemize}

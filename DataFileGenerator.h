@@ -17,7 +17,9 @@ using namespace std;
 static const string FOLDER_NAME("Resources/");
 static const string DEFAULT_FILE_NAME("dataTest.csv");
 
-
+/// <summary>
+/// Class that generate file of plots for testing
+/// </summary>
 class DataFileGenerator
 {
 

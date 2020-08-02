@@ -4,6 +4,9 @@
 #include "Vector.h"
 #include <fstream>
 
+/// <summary>
+/// Class that hold motion equation and method of motion calculate for test cases
+/// </summary>
 class EquationOfMotion
 {
 

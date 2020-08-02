@@ -6,6 +6,9 @@
 #include "TestMethod.h"
 #include "KalmanTests.h"
 
+/// <summary>
+/// Class that inherits from TestMethod class and responsible on the execute of all tests
+/// </summary>
 class TestsManager : public TestMethod
 {
 public:

@@ -1,0 +1,154 @@
+\hypertarget{class_geodetic_converter}{}\doxysection{Geodetic\+Converter Class Reference}
+\label{class_geodetic_converter}\index{GeodeticConverter@{GeodeticConverter}}
+
+
+Converts the class to do the geodetic transformation  
+
+
+
+
+{\ttfamily \#include $<$Geodetic\+Converter.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_geodetic_converter_a4ce758f02a2dee10bf5809df681f5496}{Geodetic\+Converter}} ()
+\begin{DoxyCompactList}\small\item\em Default Constructor \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_geodetic_converter_ab37ab0ab4cb9ca64908bfde6a15bb6e7}{$\sim$\+Geodetic\+Converter}} ()
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_geodetic_converter}{Geodetic\+Converter}} Destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{class_geodetic_converter_ab9c10b4e44793da0818ca69965bb408e}{V\+Ecef2\+Enu}} (const \mbox{\hyperlink{class_vector}{Vector3d}} \&vel\+\_\+ecef, const \mbox{\hyperlink{class_vector}{Vector3d}} \&pos\+\_\+enu\+\_\+0, \mbox{\hyperlink{class_vector}{Vector3d}} \&vel\+\_\+enu)
+\begin{DoxyCompactList}\small\item\em Performs the velocity (rotation only) transformation from E\+C\+EF to E\+NU coordinates for a given position vector and E\+NU frame location. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{class_geodetic_converter_a01304f93c1f878a8e8b90379a283ed78}{V\+Enu2\+Ecef}} (const \mbox{\hyperlink{class_vector}{Vector3d}} \&vel\+\_\+enu, const \mbox{\hyperlink{class_vector}{Vector3d}} \&pos\+\_\+enu\+\_\+0, \mbox{\hyperlink{class_vector}{Vector3d}} \&vel\+\_\+ecef)
+\begin{DoxyCompactList}\small\item\em Performs the velocity (rotation only) transformation from E\+NU to E\+C\+EF coordinates for a given position vector and E\+NU frame location. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{class_geodetic_converter_abd513437806f956527227ebf986e7ef7}{Enu2\+Ecef}} (const \mbox{\hyperlink{class_vector}{Vector3d}} \&pos\+\_\+enu, const \mbox{\hyperlink{class_vector}{Vector3d}} \&pos\+\_\+enu\+\_\+0, \mbox{\hyperlink{class_vector}{Vector3d}} \&pos\+\_\+ecef)
+\begin{DoxyCompactList}\small\item\em Rotate vector from E\+NU to local E\+C\+EF \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{class_geodetic_converter_a9881aef0e8c430c40184f29f52cd3481}{Ecef2\+Enu}} (const \mbox{\hyperlink{class_vector}{Vector3d}} \&pos\+\_\+ecef, const \mbox{\hyperlink{class_vector}{Vector3d}} \&pos\+\_\+enu\+\_\+0, \mbox{\hyperlink{class_vector}{Vector3d}} \&pos\+\_\+enu)
+\begin{DoxyCompactList}\small\item\em Rotate vector from E\+C\+EF to local E\+NU \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{class_geodetic_converter_ae8a08321e2cd3a29b70830a4e86d726b}{Init\+Rpsi}} (\mbox{\hyperlink{class_matrix}{Matrix3d}} \&C, double psi)
+\begin{DoxyCompactList}\small\item\em Initialize rotation matrix Rpsi (Rotation around z axis) \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{class_geodetic_converter_a0085d589beaa425acb8792f8882b82f5}{Init\+Rphi}} (\mbox{\hyperlink{class_matrix}{Matrix3d}} \&C, double phi)
+\begin{DoxyCompactList}\small\item\em Initialize rotation matrix Rphi (Rotation around x axis) \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{class_geodetic_converter_a33d222c13b5a1f4880646e41e2b92fcd}{Init\+Rtheta}} (\mbox{\hyperlink{class_matrix}{Matrix3d}} \&C, double theta)
+\begin{DoxyCompactList}\small\item\em Initialize rotation matrix Rtheta (Rotation around y axis) \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{class_geodetic_converter_a454c0ce661a76a280b923296e7b12fd0}{Init\+Tcb2p}} (\mbox{\hyperlink{class_matrix}{Matrix3d}} \&C, double psi, double theta, double phi)
+\begin{DoxyCompactList}\small\item\em Initialize rotation matrix psi\+\_\+theta\+\_\+phi cb2p -\/ Rphi$\ast$\+Rtheta$\ast$\+Rpsi \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Converts the class to do the geodetic transformation 
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_geodetic_converter_a4ce758f02a2dee10bf5809df681f5496}\label{class_geodetic_converter_a4ce758f02a2dee10bf5809df681f5496}} 
+\index{GeodeticConverter@{GeodeticConverter}!GeodeticConverter@{GeodeticConverter}}
+\index{GeodeticConverter@{GeodeticConverter}!GeodeticConverter@{GeodeticConverter}}
+\doxysubsubsection{\texorpdfstring{GeodeticConverter()}{GeodeticConverter()}}
+{\footnotesize\ttfamily Geodetic\+Converter\+::\+Geodetic\+Converter (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Default Constructor 
+
+\mbox{\Hypertarget{class_geodetic_converter_ab37ab0ab4cb9ca64908bfde6a15bb6e7}\label{class_geodetic_converter_ab37ab0ab4cb9ca64908bfde6a15bb6e7}} 
+\index{GeodeticConverter@{GeodeticConverter}!````~GeodeticConverter@{$\sim$GeodeticConverter}}
+\index{````~GeodeticConverter@{$\sim$GeodeticConverter}!GeodeticConverter@{GeodeticConverter}}
+\doxysubsubsection{\texorpdfstring{$\sim$GeodeticConverter()}{~GeodeticConverter()}}
+{\footnotesize\ttfamily Geodetic\+Converter\+::$\sim$\+Geodetic\+Converter (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\mbox{\hyperlink{class_geodetic_converter}{Geodetic\+Converter}} Destructor. 
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_geodetic_converter_a9881aef0e8c430c40184f29f52cd3481}\label{class_geodetic_converter_a9881aef0e8c430c40184f29f52cd3481}} 
+\index{GeodeticConverter@{GeodeticConverter}!Ecef2Enu@{Ecef2Enu}}
+\index{Ecef2Enu@{Ecef2Enu}!GeodeticConverter@{GeodeticConverter}}
+\doxysubsubsection{\texorpdfstring{Ecef2Enu()}{Ecef2Enu()}}
+{\footnotesize\ttfamily static void Geodetic\+Converter\+::\+Ecef2\+Enu (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_vector}{Vector3d}} \&}]{pos\+\_\+ecef,  }\item[{const \mbox{\hyperlink{class_vector}{Vector3d}} \&}]{pos\+\_\+enu\+\_\+0,  }\item[{\mbox{\hyperlink{class_vector}{Vector3d}} \&}]{pos\+\_\+enu }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Rotate vector from E\+C\+EF to local E\+NU 
+
+\mbox{\Hypertarget{class_geodetic_converter_abd513437806f956527227ebf986e7ef7}\label{class_geodetic_converter_abd513437806f956527227ebf986e7ef7}} 
+\index{GeodeticConverter@{GeodeticConverter}!Enu2Ecef@{Enu2Ecef}}
+\index{Enu2Ecef@{Enu2Ecef}!GeodeticConverter@{GeodeticConverter}}
+\doxysubsubsection{\texorpdfstring{Enu2Ecef()}{Enu2Ecef()}}
+{\footnotesize\ttfamily static void Geodetic\+Converter\+::\+Enu2\+Ecef (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_vector}{Vector3d}} \&}]{pos\+\_\+enu,  }\item[{const \mbox{\hyperlink{class_vector}{Vector3d}} \&}]{pos\+\_\+enu\+\_\+0,  }\item[{\mbox{\hyperlink{class_vector}{Vector3d}} \&}]{pos\+\_\+ecef }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Rotate vector from E\+NU to local E\+C\+EF 
+
+\mbox{\Hypertarget{class_geodetic_converter_a0085d589beaa425acb8792f8882b82f5}\label{class_geodetic_converter_a0085d589beaa425acb8792f8882b82f5}} 
+\index{GeodeticConverter@{GeodeticConverter}!InitRphi@{InitRphi}}
+\index{InitRphi@{InitRphi}!GeodeticConverter@{GeodeticConverter}}
+\doxysubsubsection{\texorpdfstring{InitRphi()}{InitRphi()}}
+{\footnotesize\ttfamily static void Geodetic\+Converter\+::\+Init\+Rphi (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_matrix}{Matrix3d}} \&}]{C,  }\item[{double}]{phi }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Initialize rotation matrix Rphi (Rotation around x axis) 
+
+\mbox{\Hypertarget{class_geodetic_converter_ae8a08321e2cd3a29b70830a4e86d726b}\label{class_geodetic_converter_ae8a08321e2cd3a29b70830a4e86d726b}} 
+\index{GeodeticConverter@{GeodeticConverter}!InitRpsi@{InitRpsi}}
+\index{InitRpsi@{InitRpsi}!GeodeticConverter@{GeodeticConverter}}
+\doxysubsubsection{\texorpdfstring{InitRpsi()}{InitRpsi()}}
+{\footnotesize\ttfamily static void Geodetic\+Converter\+::\+Init\+Rpsi (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_matrix}{Matrix3d}} \&}]{C,  }\item[{double}]{psi }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Initialize rotation matrix Rpsi (Rotation around z axis) 
+
+\mbox{\Hypertarget{class_geodetic_converter_a33d222c13b5a1f4880646e41e2b92fcd}\label{class_geodetic_converter_a33d222c13b5a1f4880646e41e2b92fcd}} 
+\index{GeodeticConverter@{GeodeticConverter}!InitRtheta@{InitRtheta}}
+\index{InitRtheta@{InitRtheta}!GeodeticConverter@{GeodeticConverter}}
+\doxysubsubsection{\texorpdfstring{InitRtheta()}{InitRtheta()}}
+{\footnotesize\ttfamily static void Geodetic\+Converter\+::\+Init\+Rtheta (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_matrix}{Matrix3d}} \&}]{C,  }\item[{double}]{theta }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Initialize rotation matrix Rtheta (Rotation around y axis) 
+
+\mbox{\Hypertarget{class_geodetic_converter_a454c0ce661a76a280b923296e7b12fd0}\label{class_geodetic_converter_a454c0ce661a76a280b923296e7b12fd0}} 
+\index{GeodeticConverter@{GeodeticConverter}!InitTcb2p@{InitTcb2p}}
+\index{InitTcb2p@{InitTcb2p}!GeodeticConverter@{GeodeticConverter}}
+\doxysubsubsection{\texorpdfstring{InitTcb2p()}{InitTcb2p()}}
+{\footnotesize\ttfamily static void Geodetic\+Converter\+::\+Init\+Tcb2p (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_matrix}{Matrix3d}} \&}]{C,  }\item[{double}]{psi,  }\item[{double}]{theta,  }\item[{double}]{phi }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Initialize rotation matrix psi\+\_\+theta\+\_\+phi cb2p -\/ Rphi$\ast$\+Rtheta$\ast$\+Rpsi 
+
+\mbox{\Hypertarget{class_geodetic_converter_ab9c10b4e44793da0818ca69965bb408e}\label{class_geodetic_converter_ab9c10b4e44793da0818ca69965bb408e}} 
+\index{GeodeticConverter@{GeodeticConverter}!VEcef2Enu@{VEcef2Enu}}
+\index{VEcef2Enu@{VEcef2Enu}!GeodeticConverter@{GeodeticConverter}}
+\doxysubsubsection{\texorpdfstring{VEcef2Enu()}{VEcef2Enu()}}
+{\footnotesize\ttfamily static void Geodetic\+Converter\+::\+V\+Ecef2\+Enu (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_vector}{Vector3d}} \&}]{vel\+\_\+ecef,  }\item[{const \mbox{\hyperlink{class_vector}{Vector3d}} \&}]{pos\+\_\+enu\+\_\+0,  }\item[{\mbox{\hyperlink{class_vector}{Vector3d}} \&}]{vel\+\_\+enu }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Performs the velocity (rotation only) transformation from E\+C\+EF to E\+NU coordinates for a given position vector and E\+NU frame location. 
+
+\mbox{\Hypertarget{class_geodetic_converter_a01304f93c1f878a8e8b90379a283ed78}\label{class_geodetic_converter_a01304f93c1f878a8e8b90379a283ed78}} 
+\index{GeodeticConverter@{GeodeticConverter}!VEnu2Ecef@{VEnu2Ecef}}
+\index{VEnu2Ecef@{VEnu2Ecef}!GeodeticConverter@{GeodeticConverter}}
+\doxysubsubsection{\texorpdfstring{VEnu2Ecef()}{VEnu2Ecef()}}
+{\footnotesize\ttfamily static void Geodetic\+Converter\+::\+V\+Enu2\+Ecef (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_vector}{Vector3d}} \&}]{vel\+\_\+enu,  }\item[{const \mbox{\hyperlink{class_vector}{Vector3d}} \&}]{pos\+\_\+enu\+\_\+0,  }\item[{\mbox{\hyperlink{class_vector}{Vector3d}} \&}]{vel\+\_\+ecef }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Performs the velocity (rotation only) transformation from E\+NU to E\+C\+EF coordinates for a given position vector and E\+NU frame location. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Geodetic\+Converter.\+h\item 
+Geodetic\+Converter.\+cpp\end{DoxyCompactItemize}
