@@ -26,9 +26,10 @@ void TrackerJpda::DoTrack(const DataPlotList &dataPlotList)
 {
 	// file pointer 
 	fstream fout;
+	//ofstream outfile("Resources/1-KalmanPredictions.csv");
 
 	// Create CSV file for Extended Kalman 3D test
-	string fileName = "dataPlots.csv";
+	string fileName = "DataPlots.csv";
 
 	// opens an existing csv file or creates a new file. 
 	fout.open(fileName, ios::out | ios::app);
@@ -115,11 +116,11 @@ void TrackerJpda::DoTrack(const DataPlotList &dataPlotList)
 			m_dataTrackList[i]->m_pKalman->GetLastLocation();
 			if (i == 1)
 			{
-				for (int h = 0; h < 2; h++)
-				{
-					fout << m_dataTrackList[i]->m_pKalman->m_X.m_Data[h] << ",";
-				}
-				fout << "\n";
+				//m_dataTrackList[i]->m_pKalman->GetLastLocation().PrintToFile(outfile);// << ",";
+				fout << m_dataTrackList[i]->m_pKalman->m_X.m_Data[0];
+				fout << ",";
+				fout << m_dataTrackList[i]->m_pKalman->m_X.m_Data[1];
+				fout << endl;
 			}
 			
 		}
