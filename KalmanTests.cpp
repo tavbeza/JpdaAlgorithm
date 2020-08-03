@@ -15,18 +15,17 @@ void KalmanTests::DoTrackTest()
 
 	//EquationOfMotion* eomList[5];
 	vector<EquationOfMotion*> eomVector;
-	int dis = 25;
-	for (int i = 0; i < 11; i+=10)
+	int dis = 1;
+	for (int i = 0; i < 10; i++)
 	{
-		//eomVector.push_back(new TwoDimensionalLine(dt, 0, i*2, 0, 5, 5, 0));
-		if(i == 10)
-			eomVector.push_back(new TwoDimensionalLine(dt, 0, i, 0, 5, -5, 0));
-		else
-			eomVector.push_back(new TwoDimensionalLine(dt, 0, i, 0, 5, 5, 0));
+		//for (int j = 0; j < 4; j++)
+		//{
+		eomVector.push_back(new TwoDimensionalLine(dt, (dis++) * 10, 0, 0, 10, 10, 0));
+		//}
 	}
 	//EquationOfMotion* eom = new TwoDimensionalLine(dt, 29, 5, 0, 5, 5, 0);
 	DataFileGenerator dfg = DataFileGenerator(eomVector, curTestID + "-DatasetForKalman.csv");	// Create "curTestID + "-DatasetForKalman.csv"" file
-	//dfg.GenerateDataFile();
+	dfg.GenerateDataFile();
 
 	DataPlotList plotsList;
 	DataPlotFileReader fileReader(dfg.GetFileName());

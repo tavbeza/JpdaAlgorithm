@@ -51,7 +51,7 @@ void DataFileGenerator::GenerateDataFile()
 
 	for (int dwellCount = 1; dwellCount <= maxDwell; dwellCount++)
 	{
-		seqNumber = 0;
+		seqNumber = 1;
 		for (EquationOfMotion* eom : m_movments)
 		{
 			WriteDwell(outfile, dwellCount, maxDwell, *eom, seqNumber);

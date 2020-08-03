@@ -223,12 +223,12 @@ void AssociationMatrix::CheckAssociation(DataTrack &track, const DataPlot &plot,
 
 
 	//  VG(M=4) = PI * SQRT(|S|) * SigmaG 
-	bool flagInGate = true;
-	// TODO: fix its.
-	flagInGate &= (pTrackerParams->m_Eliptic_Gate < M_PI * SrvDspMath::sqrt(new_S.Determinant()) * (SrvDspMath::pow(kgl * gateR.m_Data[0] - resZ.m_Data[0], 2) +
-		SrvDspMath::pow(kgl * gateR.m_Data[1] - resZ.m_Data[1], 2) +
-		SrvDspMath::pow(kgl * gateR.m_Data[2] - resZ.m_Data[2], 2));
 	//bool flagInGate = true;
+	// TODO: fix its.
+	/*flagInGate &= (pTrackerParams->m_Eliptic_Gate < M_PI * SrvDspMath::sqrt(new_S.Determinant()) * (SrvDspMath::pow(kgl * gateR.m_Data[0] - resZ.m_Data[0], 2) +
+		SrvDspMath::pow(kgl * gateR.m_Data[1] - resZ.m_Data[1], 2) +
+		SrvDspMath::pow(kgl * gateR.m_Data[2] - resZ.m_Data[2], 2));*/
+	bool flagInGate = true;
 	flagInGate &= (abs(resZ.m_Data[0]) <= kgl * gateR.m_Data[0]);
 	flagInGate &= (abs(resZ.m_Data[1]) <= kgl * gateR.m_Data[1]);
 	flagInGate &= (abs(resZ.m_Data[2]) <= kgl * gateR.m_Data[2]);
