@@ -18,18 +18,69 @@ TrackerJpda::~TrackerJpda()
 {
 }
 
+/// <summary>
+/// A gnn algorithm impementation
+/// The gnn update tracks and plots according to their gain in the association matrix
+/// </summary>
+void TrackerJpda::GnnAssociate(const DataPlotList &dataPlotList)
+{
+	int nTracks = m_dataTrackList.GetCount();
+	int nPlots = dataPlotList.GetCount();
+
+	AssociationMatrix *gAssociationMatrix = AssociationMatrix::GetInstance();
+
+	//printf("nTracks = %d\nPlots = %d\n", nTracks, nPlots);
+
+	int maxGain = -1, rowIndex = -1, colIndex = -1;
+
+	for (int i = 0; i < nTracks; i++)
+	{
+		for (int j = 0; j < nPlots; j++)
+		{
+			if (gAssociationMatrix->m_MatTracksPlots[i][j])
+			{
+				if (gAssociationMatrix->m_Gain[i][j] > maxGain)		// find and generate the maximum position
+				{
+					maxGain = gAssociationMatrix->m_Gain[i][j];
+					rowIndex = i;
+					colIndex = j;
+				}
+			}
+		}
+		if (maxGain != -1)
+		{
+			m_dataTrackList[i]->m_pKalman->m_S = 
+				gAssociationMatrix->m_MatS[m_dataTrackList[i]->m_Id][dataPlotList[colIndex]->m_seqNumber];
+			m_dataTrackList[i]->m_pKalman->Update(dataPlotList[colIndex]);
+			dataPlotList[colIndex]->m_isAssociate = true;
+		}
+		maxGain = -1;
+		rowIndex = -1;
+		colIndex = -1;
+	}
+
+	for (int j = 0; j < nPlots; j++)
+	{
+		if (!dataPlotList[j]->m_isAssociate)
+		{
+			DataTrack* pDataTrack = m_dataTrackList.CreateTrack();
+			pDataTrack->InitTrack(*dataPlotList[j]);
+		}
+	}
+}
+
 
 /// <summary>
 /// The function should receive plots  
 /// </summary>
-void TrackerJpda::DoTrack(const DataPlotList &dataPlotList)
+Vector3d TrackerJpda::DoTrack(const DataPlotList &dataPlotList)
 {
 	// file pointer 
 	fstream fout;
-	//ofstream outfile("Resources/1-KalmanPredictions.csv");
+	//ofstream outfile("temp-KalmanPredictions.csv");
 
 	// Create CSV file for Extended Kalman 3D test
-	string fileName = "DataPlots.csv";
+	string fileName = "dataPlots.csv";
 
 	// opens an existing csv file or creates a new file. 
 	fout.open(fileName, ios::out | ios::app);
@@ -56,7 +107,7 @@ void TrackerJpda::DoTrack(const DataPlotList &dataPlotList)
 		bool isAsocFlagVec;
 		double g;
 		int i, j, t;
-		//int counter;
+		int counter;
 
 		for (t = 0; t < nTracks; t++) //Predict all the tracks
 		{ 
@@ -65,7 +116,7 @@ void TrackerJpda::DoTrack(const DataPlotList &dataPlotList)
 
 		for (i = 0; i < nPlots; i++)
 		{	
-			//counter = 0;
+			counter = 0;
 			for (j = 0; j < nTracks; j++)
 			{
 				isAsocFlagVec = false;
@@ -74,47 +125,23 @@ void TrackerJpda::DoTrack(const DataPlotList &dataPlotList)
 				gAssociationMatrix->Associate(m_dataTrackList[j]->m_Id, dataPlotList[i]->m_seqNumber, isAsocFlagVec, g);
 			}
 
-			/*if (i == nPlots - 1)
+			/*if(!dataPlotList[i]->m_isAssociate)
 			{
-				cout << "m_MatTracksPlots:" << endl;
-				for (int k = 0; k < 6; k++)
-				{
-					for (int n = 0; n < 6; n++)
-					{
-						cout << gAssociationMatrix->m_MatTracksPlots[k][n] << "  ";
-					}
-					cout << endl;
-				}
-
-				cout << "\nm_Gain:" << endl;
-				for (int k = 0; k < 6; k++)
-				{
-					for (int n = 0; n < 6; n++)
-					{
-						cout << gAssociationMatrix->m_Gain[k][n] << "  ";
-					}
-					cout << endl;
-				}
-
-				//cout << "Done" << endl;
-
-
-				//cout << "Done2";
+				DataTrack* pDataTrack = m_dataTrackList.CreateTrack();
+				pDataTrack->InitTrack(*dataPlotList[i]);
 			}*/
-
-			//if(counter == nTracks)
-			//{
-			//	DataTrack* pDataTrack = m_dataTrackList.CreateTrack();
-			//	pDataTrack->InitTrack(*dataPlotList[i]);
-			//}
 		}
 
+		//GnnAssociate(dataPlotList);
+		
 		for (i = 0; i < nTracks; i++)
 		{
-			m_dataTrackList[i]->m_pKalman->m_S = gAssociationMatrix->m_MatS[m_dataTrackList[i]->m_Id][i+1];
+			m_dataTrackList[i]->m_pKalman->m_S = gAssociationMatrix->m_MatS[m_dataTrackList[i]->m_Id][dataPlotList[i]->m_seqNumber];
 			m_dataTrackList[i]->m_pKalman->Update(dataPlotList[i]);
-			m_dataTrackList[i]->m_pKalman->GetLastLocation();
-			if (i == 1)
+			//m_dataTrackList[i]->m_pKalman->GetLastLocation();
+			
+			// Choose which track to print
+			if (i == 0)
 			{
 				//m_dataTrackList[i]->m_pKalman->GetLastLocation().PrintToFile(outfile);// << ",";
 				fout << m_dataTrackList[i]->m_pKalman->m_X.m_Data[0];
@@ -153,4 +180,6 @@ void TrackerJpda::DoTrack(const DataPlotList &dataPlotList)
 		}
 		*/
 	}
+	Vector3d q;
+	return q;
 }

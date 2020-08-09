@@ -24,9 +24,17 @@ public:
 	virtual ~TrackerJpda();
 
 	/// <summary>
-	// The function should receive plots  
+	/// The function should receive plots  
 	/// </summary>
-	virtual void DoTrack(const DataPlotList &dataPlotList);
+	virtual Vector3d DoTrack(const DataPlotList &dataPlotList);
+
+	/// <summary>
+	/// A gnn algorithm impementation
+	/// The gnn update tracks and plots according to their gain in the association matrix
+	/// </summary>
+	void GnnAssociate(const DataPlotList &dataPlotList);
+
+
 
 private:
 	

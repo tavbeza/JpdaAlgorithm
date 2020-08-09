@@ -36,9 +36,7 @@ public:
 	double m_SigmaAxt = 0.1;
 	double m_SigmaAyt = 0.1;
 	double m_SigmaAzt = 0.1;
-	double m_Sensor_Theta = 0.1;
-	double m_Sensor_Psi = 0.1;
-	double  m_Sensor_Phi = 0.1;
+	
 	Vector3d m_TauAcc = Vector3d(0.1, 0.1, 0.1);
 	Vector3d m_Amax = Vector3d(0.1, 0.1, 0.1);
 	Vector3d m_Pmax = Vector3d(0.1, 0.1, 0.1);

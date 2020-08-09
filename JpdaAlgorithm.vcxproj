@@ -179,6 +179,7 @@
     <ClInclude Include="Tracker.h" />
     <ClInclude Include="TrackerJpda.h" />
     <ClInclude Include="TrackerParams.h" />
+    <ClInclude Include="Tracking_Hypothesis.h" />
     <ClInclude Include="TreeNode.h" />
     <ClInclude Include="TwoDimensionalLine.h" />
     <ClInclude Include="TwoDimensionalSquigglyLine.h" />

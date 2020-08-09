@@ -6,7 +6,6 @@
 /// </summary>
 NavPlatStatusStruct::NavPlatStatusStruct()
 {
-	// TODO:
 	velENU.SetZero();
 	posENU.SetZero();
 }

@@ -47,9 +47,6 @@ public:
 
 	//int m_Dwell_IDs[MAX_DWELL_HISTORY];
 	int m_nDwells;
-	Vector3d m_PosEnulast;
-	int m_MeasAssProbHist;
-	int m_MeasAssProbLast;
 
 	/// <summary>
 	/// Track constractor.
@@ -70,7 +67,6 @@ public:
 public:
 
 	int m_Id;
-	int m_Color;
 	ExtendedKalman* m_pKalman;
 };
 

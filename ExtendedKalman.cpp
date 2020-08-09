@@ -25,7 +25,6 @@ ExtendedKalman::ExtendedKalman(const DataPlot &plot)	// plot in spherical model
 	//Vector3d errorCartesian;
 	//errorCartesian.ErrorSphericalToCart(spherical, errorSpherical);
 	
-	// TODO: check if spherical or cartesian
 	SetR(errorSpherical.m_Data[0], errorSpherical.m_Data[1], errorSpherical.m_Data[2], plot.GetVelocityAccuracy());
 
 	float dt = 93.0 / 1000;
@@ -37,12 +36,6 @@ ExtendedKalman::ExtendedKalman(const DataPlot &plot)	// plot in spherical model
 	SetP(spherical);
 	m_I = m_I.Identity();
 
-
-	// TODO: How from (r,th,phi) we get cartesian velocity ??
-	//Vector3d cartVelocity;
-	//cartVelocity.SphericalToCartVelocity(spherical);
-
-	//m_last_speed_cartesian = cartVelocity;
 	SetRdot();
 	Init(
 		cartesian		// (x, y, z)
@@ -152,11 +145,9 @@ void ExtendedKalman::Update(DataPlot* pPlot)
 
 	Vector4d y = Zk - z_pred;
 
-	// TODO: Should be zPredict instead m_X_Predict ?
 	m_X = m_X_Predict + (m_K * y);
 		
 	// m_P_Predict = P(k,k-1)
-	// TODO: Ask Israel
 	Matrix9d tempKH = m_K * m_H;
 	Matrix9d tempIkh = m_I - tempKH;
 	m_P = tempIkh * m_P_Predict;
@@ -210,56 +201,7 @@ void ExtendedKalman::SetS()
 /// </summary>
 void ExtendedKalman::SetQ()
 {
-	// TODO: m_Q = 0 only without acceleration
 	m_Q.Zero();
-	/*TrackerParams *pTrakerParams = new TrackerParams;
-	Matrix3d temp[3];
-	Vector3d sigMan2;
-	for (int i = 0; i < 3; i++)
-	{
-		if (0 == pTrakerParams->m_SigmaMnvrCalcMtd)
-		{
-			//Direct
-			//Maneuver variance
-			sigMan2.m_Data[i] = pTrakerParams->m_SigmaManeuver2.m_Data[i];
-		}
-		else
-		{
-			//AccProb
-			//Maneuver variance
-			sigMan2.m_Data[i] = pow(pTrakerParams->m_Amax.m_Data[i], 2) / 3 * (1 + 4 * pTrakerParams->m_Pmax.m_Data[i] - pTrakerParams->m_P0.m_Data[i]);
-		}
-		SetQ_Singer(pTrakerParams->m_TauAcc.m_Data[i], sigMan2.m_Data[i], temp[i]);
-	}
-	m_Q.Zero();
-	m_Q.m_Data[0][0] = temp[0].m_Data[0][0];
-	m_Q.m_Data[0][1] = temp[0].m_Data[0][1];
-	m_Q.m_Data[0][2] = temp[0].m_Data[0][2];
-	m_Q.m_Data[1][0] = temp[0].m_Data[1][0];
-	m_Q.m_Data[1][1] = temp[0].m_Data[1][1];
-	m_Q.m_Data[1][2] = temp[0].m_Data[1][2];
-	m_Q.m_Data[2][0] = temp[0].m_Data[2][0];
-	m_Q.m_Data[2][1] = temp[0].m_Data[2][1];
-	m_Q.m_Data[2][2] = temp[0].m_Data[2][2];
-	m_Q.m_Data[3][3] = temp[1].m_Data[0][0];
-	m_Q.m_Data[3][4] = temp[1].m_Data[0][1];
-	m_Q.m_Data[3][5] = temp[1].m_Data[0][2];
-	m_Q.m_Data[4][3] = temp[1].m_Data[1][0];
-	m_Q.m_Data[4][4] = temp[1].m_Data[1][1];
-	m_Q.m_Data[4][5] = temp[1].m_Data[1][2];
-	m_Q.m_Data[5][3] = temp[1].m_Data[2][0];
-	m_Q.m_Data[5][4] = temp[1].m_Data[2][1];
-	m_Q.m_Data[5][5] = temp[1].m_Data[2][2];
-	m_Q.m_Data[6][6] = temp[2].m_Data[0][0];
-	m_Q.m_Data[6][7] = temp[2].m_Data[0][1];
-	m_Q.m_Data[6][8] = temp[2].m_Data[0][2];
-	m_Q.m_Data[7][6] = temp[2].m_Data[1][0];
-	m_Q.m_Data[7][7] = temp[2].m_Data[1][1];
-	m_Q.m_Data[7][8] = temp[2].m_Data[1][2];
-	m_Q.m_Data[8][6] = temp[2].m_Data[2][0];
-	m_Q.m_Data[8][7] = temp[2].m_Data[2][1];
-	m_Q.m_Data[8][8] = temp[2].m_Data[2][2];
-	*/
 }
 
 /// <summary>
@@ -319,43 +261,6 @@ void ExtendedKalman::SetF()
 	m_F.m_Data[0][3] = m_Dt;
 	m_F.m_Data[1][4] = m_Dt;
 	m_F.m_Data[2][5] = m_Dt;
-	
-	
-	/*m_F.Zero();
-	TrackerParams *pTrakerParams = new TrackerParams;
-	Matrix3d fx, fy, fz;
-	SetF_Singer(pTrakerParams->m_TauAcc.m_Data[0], fx);
-	SetF_Singer(pTrakerParams->m_TauAcc.m_Data[1], fy);
-	SetF_Singer(pTrakerParams->m_TauAcc.m_Data[2], fz);
-	// TODO:
-	m_F.m_Data[0][0] = fx.m_Data[0][0];
-	m_F.m_Data[0][1] = fx.m_Data[0][1];
-	m_F.m_Data[0][2] = fx.m_Data[0][2];
-	m_F.m_Data[1][0] = fx.m_Data[1][0];
-	m_F.m_Data[1][1] = fx.m_Data[1][1];
-	m_F.m_Data[1][2] = fx.m_Data[1][2];
-	m_F.m_Data[2][0] = fx.m_Data[2][0];
-	m_F.m_Data[2][1] = fx.m_Data[2][1];
-	m_F.m_Data[2][2] = fx.m_Data[2][2];
-	m_F.m_Data[3][3] = fy.m_Data[0][0];
-	m_F.m_Data[3][4] = fy.m_Data[0][1];
-	m_F.m_Data[3][5] = fy.m_Data[0][2];
-	m_F.m_Data[4][3] = fy.m_Data[1][0];
-	m_F.m_Data[4][4] = fy.m_Data[1][1];
-	m_F.m_Data[4][5] = fy.m_Data[1][2];
-	m_F.m_Data[5][3] = fy.m_Data[2][0];
-	m_F.m_Data[5][4] = fy.m_Data[2][1];
-	m_F.m_Data[5][5] = fy.m_Data[2][2];
-	m_F.m_Data[6][6] = fz.m_Data[0][0];
-	m_F.m_Data[6][7] = fz.m_Data[0][1];
-	m_F.m_Data[6][8] = fz.m_Data[0][2];
-	m_F.m_Data[7][6] = fz.m_Data[1][0];
-	m_F.m_Data[7][7] = fz.m_Data[1][1];
-	m_F.m_Data[7][8] = fz.m_Data[1][2];
-	m_F.m_Data[8][6] = fz.m_Data[2][0];
-	m_F.m_Data[8][7] = fz.m_Data[2][1];
-	m_F.m_Data[8][8] = fz.m_Data[2][2];
-	*/
 }
 
 /// <summary>
@@ -387,6 +292,14 @@ void ExtendedKalman::SetH()
 		m_H.m_Data[0][0] = x / r;   //	= dR / dX
 		m_H.m_Data[0][1] = y / r;	//	= dR / dY
 		m_H.m_Data[0][2] = z / r;	//	= dR / dZ
+
+		m_H.m_Data[3][3] = x / r;
+		m_H.m_Data[3][4] = y / r;
+		m_H.m_Data[3][5] = z / r;
+
+		m_H.m_Data[3][0] = (vx*(y*y + z * z) - x * (y*vy + z * vz)) / rrr;
+		m_H.m_Data[3][1] = (vy*(x*x + z * z) - y * (x*vx + z * vz)) / rrr;
+		m_H.m_Data[3][2] = (vz*(y*y + x * x) - z * (y*vy + x * vx)) / rrr;
 	}
 	if (ro != 0)
 	{
@@ -397,12 +310,8 @@ void ExtendedKalman::SetH()
 		m_H.m_Data[2][2] = -(sqrtro / rr); //  dEl / dZ
 	}
 
-	m_H.m_Data[3][0] = (vx*(y*y + z * z) - x * (y*vy + z * vz)) / rrr;
-	m_H.m_Data[3][1] = (vy*(x*x + z * z) - y * (x*vx + z * vz)) / rrr;
-	m_H.m_Data[3][2] = (vz*(y*y + x * x) - z * (y*vy + x * vx)) / rrr;
-	m_H.m_Data[3][3] = x / r;
-	m_H.m_Data[3][4] = y / r;
-	m_H.m_Data[3][5] = z / r;
+	
+	
 }
 
 /// <summary>
@@ -461,7 +370,6 @@ void ExtendedKalman::SetP(Vector3d spherical)
 	m_P.m_Data[2][1] = p_k.m_Data[2][1];
 	m_P.m_Data[2][2] = p_k.m_Data[2][2];
 	// v
-	// TODO: Check if we should dismantle VelocityAccuracy to components of (x,y,z) insteed
 	m_P.m_Data[3][3] = pow(pTrakerParams->m_SigmaVxs, 2);
 	m_P.m_Data[4][4] = pow(pTrakerParams->m_SigmaVys, 2);
 	m_P.m_Data[5][5] = pow(pTrakerParams->m_SigmaVzs, 2);

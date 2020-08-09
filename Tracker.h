@@ -25,7 +25,7 @@ public:
 	/// <summary>
 	/// Preform the tracking of the current duell.
 	/// </summary>
-	virtual void DoTrack(const DataPlotList &dataPlotList) = 0;
+	virtual Vector3d DoTrack(const DataPlotList &dataPlotList) = 0;
 
 	/// <summary>
 	/// Returns all tracks in the system.

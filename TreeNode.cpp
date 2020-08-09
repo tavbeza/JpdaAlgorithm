@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "pch.h"
 #include "TreeNode.h"
 #include "stdio.h"
 #include<iostream>
@@ -17,7 +17,7 @@ TreeNode::TreeNode()
 /// <summary>
 /// Copy constructor
 /// </summary>
-TreeNode::TreeNode(const TreeNode &old_obj) {
+TreeNode::TreeNode(const TreeNode& old_obj) {
 	//this->m_pParent = old_obj.m_pParent;
 	this->SetParent(old_obj.m_pParent);
 	this->m_nChilds = old_obj.m_nChilds;
@@ -39,7 +39,7 @@ TreeNode::~TreeNode()
 /// <summary>
 /// Sets the node parent
 /// </summary>
-void TreeNode::SetParent(TreeNode *pParent)
+void TreeNode::SetParent(TreeNode* pParent)
 {
 	m_pParent = pParent;
 }
@@ -53,9 +53,33 @@ TreeNode* TreeNode::getParent()
 }
 
 /// <summary>
+/// Get m_i
+/// </summary>
+int TreeNode::getM_I()
+{
+	return m_i;
+}
+
+/// <summary>
+/// Get m_j
+/// </summary>
+int TreeNode::getM_J()
+{
+	return m_j;
+}
+
+/// <summary>
+	/// Get data  // 1 = assosiated with prior target  , 0 = false alarm
+	/// </summary>
+int TreeNode::getAssociationData()
+{
+	return m_association_data;
+}
+
+/// <summary>
 /// Add child to the tree
 /// </summary>
-void TreeNode::AddChild(TreeNode *pChild)
+void TreeNode::AddChild(TreeNode* pChild)
 {
 	m_children[m_nChilds] = pChild;
 	m_nChilds++;
@@ -64,13 +88,13 @@ void TreeNode::AddChild(TreeNode *pChild)
 /// <summary>
 /// Check if the track is already exist: return true if exist, else return false
 /// </summary>
-bool TreeNode::hasTrackParent(TreeNode *pParent, int track)
+bool TreeNode::hasTrackParent(TreeNode* pParent, int track)
 {
 	if (pParent->m_j == track)
 		return true;
 	else
 	{
-		if(pParent->m_pParent != 0)
+		if (pParent->m_pParent != 0)
 			return hasTrackParent(pParent->m_pParent, track);
 		else
 			return false;
@@ -96,4 +120,3 @@ void TreeNode::PrintPathToRoot()
 		//cout << " ( " << counter << " )" <<endl;
 	}
 }
-

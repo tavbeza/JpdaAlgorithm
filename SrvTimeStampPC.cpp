@@ -11,7 +11,6 @@ double SrvTimeStamp::m_Frequency = 0;
 SrvTimeStamp::SrvTimeStamp()
 {
 	initService();
-	// TODO Auto-generated constructor stub
 }
 
 

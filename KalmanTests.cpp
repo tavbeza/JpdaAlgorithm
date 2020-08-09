@@ -33,6 +33,7 @@ void KalmanTests::DoTrackTest()
 	ofstream outfile("Resources/" + curTestID + "-KalmanPredictions.csv");
 
 	TrackerJpda tracker;
+	Vector3d l;
 
 	for (int i = 1; i <= NUMBER_DWELL; i++)
 	{

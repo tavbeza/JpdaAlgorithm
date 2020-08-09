@@ -25,9 +25,7 @@ DataPlot::DataPlot(float range, float rangeAccuracy, float velocity, float veloc
 	m_SNR = SNR;
 	m_magnitude = magnitude;
 	m_seqNumber = seqNumber;
-	m_PolarEnu0.m_Data[0] = range;
-	m_PolarEnu0.m_Data[1] = azimuth;
-	m_PolarEnu0.m_Data[2] = elevation;
+	m_isAssociate = false;
 }
 
 /// <summary>
@@ -43,6 +41,14 @@ DataPlot::~DataPlot()
 float DataPlot::GetRange() const 
 {
 	return m_range;
+}
+
+/// <summary>
+/// Set isAssociate
+/// </summary>
+void DataPlot::SetIsAssociate(bool value)
+{
+	this->m_isAssociate = value;
 }
 
 /// <summary>

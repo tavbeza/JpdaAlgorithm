@@ -31,6 +31,11 @@ public:
 	float GetRange() const;
 
 	/// <summary>
+	/// Set isAssociate
+	/// </summary>
+	void SetIsAssociate(bool value);
+
+	/// <summary>
 	/// Get velocity of the plot
 	/// </summary>
 	float GetVelocity() const;
@@ -79,8 +84,7 @@ public:
 	float m_SNR;
 	float m_magnitude;
 	unsigned int m_seqNumber;
-	Vector3d m_CartEnu0;
-	Vector3d m_PolarEnu0;
+	bool m_isAssociate;
 };
 
 #endif //_DATA_PLOT_H_

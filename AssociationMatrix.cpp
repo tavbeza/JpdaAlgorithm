@@ -41,6 +41,11 @@ void AssociationMatrix::Clean()
 	memset(&m_TrkIds, 0, sizeof(m_TrkIds));
 	memset(&m_nPlots, 0, sizeof(m_nPlots));
 	memset(&m_Gain, 0, sizeof(m_Gain));
+	
+	for (int i = 0; i < sizeof(m_MatS[0]); i++)
+	{
+		m_MatS[i]->Zero();
+	}
 }
 
 /// <summary>
@@ -157,9 +162,23 @@ void AssociationMatrix::CheckAssociation(DataTrack &track, const DataPlot &plot,
 	double rPredict = SrvDspMath::sqrt(SrvDspMath::pow(xPredict,2)+
 										SrvDspMath::pow(yPredict, 2)+ 
 										SrvDspMath::pow(zPredict, 2));
-	double azPredict = SrvDspMath::atan(yPredict/xPredict);
-	double elPredict = SrvDspMath::acos(zPredict/rPredict);
-	double rrPredict = (xPredict*VxPredict + yPredict * VyPredict + zPredict * VzPredict) / rPredict;
+	double azPredict;
+	if (xPredict != 0)
+		azPredict = SrvDspMath::atan(yPredict / xPredict);
+	else
+		azPredict = 0;
+	
+	double elPredict, rrPredict;
+	if (rPredict != 0) {
+		elPredict = SrvDspMath::acos(zPredict / rPredict);
+		rrPredict = (xPredict*VxPredict + yPredict * VyPredict + zPredict * VzPredict) / rPredict;
+	}
+	else
+	{
+		elPredict = PI_VALUE / 2;
+		rrPredict = 0;
+	}
+	
 	Vector4d z_Predict;
 	z_Predict.m_Data[0] = rPredict;
 	z_Predict.m_Data[1] = azPredict;
@@ -204,7 +223,7 @@ void AssociationMatrix::CheckAssociation(DataTrack &track, const DataPlot &plot,
 	// case 'nonlin'
 	// Rectangular gating coefficient
 	TrackerParams *pTrackerParams = new TrackerParams();
-	double kgl = 4;	//pTrackerParams->m_Kgl;
+	double kgl = 100;	//pTrackerParams->m_Kgl;
 	Vector4d gateR;
 	gateR.m_Data[0] = SrvDspMath::sqrt(sigma_r);
 	gateR.m_Data[1] = SrvDspMath::sqrt(sigma_az);
@@ -223,8 +242,6 @@ void AssociationMatrix::CheckAssociation(DataTrack &track, const DataPlot &plot,
 
 
 	//  VG(M=4) = PI * SQRT(|S|) * SigmaG 
-	//bool flagInGate = true;
-	// TODO: fix its.
 	/*flagInGate &= (pTrackerParams->m_Eliptic_Gate < M_PI * SrvDspMath::sqrt(new_S.Determinant()) * (SrvDspMath::pow(kgl * gateR.m_Data[0] - resZ.m_Data[0], 2) +
 		SrvDspMath::pow(kgl * gateR.m_Data[1] - resZ.m_Data[1], 2) +
 		SrvDspMath::pow(kgl * gateR.m_Data[2] - resZ.m_Data[2], 2));*/
@@ -232,13 +249,14 @@ void AssociationMatrix::CheckAssociation(DataTrack &track, const DataPlot &plot,
 	flagInGate &= (abs(resZ.m_Data[0]) <= kgl * gateR.m_Data[0]);
 	flagInGate &= (abs(resZ.m_Data[1]) <= kgl * gateR.m_Data[1]);
 	flagInGate &= (abs(resZ.m_Data[2]) <= kgl * gateR.m_Data[2]);
-	flagInGate &= (abs(resZ.m_Data[3]) <= kgl * gateR.m_Data[3]);
+	flagInGate &= (abs(resZ.m_Data[3]) <= 1000 * gateR.m_Data[3]);
 
 	if (flagInGate)
 	{
 		// Update Track
 		// case 'nonlin'
 		isAsocFlagVec = true;
+		
 		new_S.m_Data[0][0] += sigma_r_plot;
 		new_S.m_Data[1][1] += sigma_az_plot;
 		new_S.m_Data[2][2] += sigma_el_plot;
@@ -256,6 +274,12 @@ void AssociationMatrix::CheckAssociation(DataTrack &track, const DataPlot &plot,
 		{
 			g = x1 / x2;
 		}
+	}
+	else
+	{
+		/*Matrix4d zero;
+		zero.Zero();
+		m_MatS[track.m_Id][plot.m_seqNumber] = zero;*/
 	}
 }
 

@@ -73,7 +73,7 @@ public:
 	void PrintToFile(std::ofstream& fileStream) const
 	{
 
-		for (int i = 0; i < _Rows; i++)
+		for (int i = 0; i < _Rows - 1; i++)
 		{
 			fileStream << m_Data[i];
 			if (i < _Rows - 1)

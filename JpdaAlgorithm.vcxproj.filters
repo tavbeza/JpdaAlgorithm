@@ -248,5 +248,8 @@
     <ClInclude Include="Tracker.h">
       <Filter>Header Files\Jpda</Filter>
     </ClInclude>
+    <ClInclude Include="Tracking_Hypothesis.h">
+      <Filter>Header Files\Jpda</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
